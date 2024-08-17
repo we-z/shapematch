@@ -14,6 +14,8 @@
 		7639F9712C713D8200E2B371 /* shapematchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F9702C713D8200E2B371 /* shapematchTests.swift */; };
 		7639F97B2C713D8200E2B371 /* shapematchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F97A2C713D8200E2B371 /* shapematchUITests.swift */; };
 		7639F97D2C713D8200E2B371 /* shapematchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F97C2C713D8200E2B371 /* shapematchUITestsLaunchTests.swift */; };
+		7639F98A2C71460D00E2B371 /* Tempview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F9892C71460D00E2B371 /* Tempview.swift */; };
+		7639F98C2C7146AF00E2B371 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F98B2C7146AF00E2B371 /* AppModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		7639F9762C713D8200E2B371 /* shapematchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = shapematchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7639F97A2C713D8200E2B371 /* shapematchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shapematchUITests.swift; sourceTree = "<group>"; };
 		7639F97C2C713D8200E2B371 /* shapematchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shapematchUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7639F9892C71460D00E2B371 /* Tempview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tempview.swift; sourceTree = "<group>"; };
+		7639F98B2C7146AF00E2B371 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,8 @@
 			children = (
 				7639F95E2C713D8100E2B371 /* shapematchApp.swift */,
 				7639F9602C713D8100E2B371 /* ContentView.swift */,
+				7639F98B2C7146AF00E2B371 /* AppModel.swift */,
+				7639F9892C71460D00E2B371 /* Tempview.swift */,
 				7639F9622C713D8200E2B371 /* Assets.xcassets */,
 				7639F9642C713D8200E2B371 /* shapematch.entitlements */,
 				7639F9652C713D8200E2B371 /* Preview Content */,
@@ -261,6 +267,8 @@
 			files = (
 				7639F9612C713D8100E2B371 /* ContentView.swift in Sources */,
 				7639F95F2C713D8100E2B371 /* shapematchApp.swift in Sources */,
+				7639F98A2C71460D00E2B371 /* Tempview.swift in Sources */,
+				7639F98C2C7146AF00E2B371 /* AppModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
