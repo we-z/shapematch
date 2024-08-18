@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 
+let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
+
 struct RandomGradientView: View {
     // Define a state for the gradient to trigger updates
     @State private var gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: backgroundColors.randomElement(randomCount: 3).map { Color(hex: $0)! }), startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 1, y: 1))
@@ -299,7 +301,27 @@ struct CustomTextStrokeModifier: ViewModifier {
 }
 
 extension View {
-    func customTextStroke(color: Color = .black, width: CGFloat = 1) -> some View {
+    func customTextStroke(color: Color = .black, width: CGFloat = 2.1) -> some View {
         self.modifier(CustomTextStrokeModifier(strokeSize: width, strokeColor: color))
     }
 }
+
+extension ButtonStyle where Self == RoundedAndShadowButtonStyle6 {
+    static var roundedAndShadow6:RoundedAndShadowButtonStyle6 {
+        RoundedAndShadowButtonStyle6()
+    }
+}
+
+struct RoundedAndShadowButtonStyle6:ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .compositingGroup()
+            .shadow(color: .black, radius: 0.1, x: configuration.isPressed ? 0 : -6, y: configuration.isPressed ? 0 : 6)
+            .offset(x: configuration.isPressed ? -6 : 0, y: configuration.isPressed ? 6 : 0)
+            .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
+            .onChange(of: configuration.isPressed) { newPressSetting in
+                impactHeavy.impactOccurred()
+            }
+    }
+}
+

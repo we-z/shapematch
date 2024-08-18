@@ -23,17 +23,48 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
+            
 //            RandomGradientView()
             VStack {
+                HStack{
+                    Button {
+                    } label: {
+                        HStack{
+                            Text("Moves: 7")
+                                .bold()
+                                .italic()
+                                .customTextStroke()
+                                .font(.system(size: 30))
+                        }
+                        .padding(.horizontal, 21)
+                        .padding(.vertical, 6)
+                        .frame(height: 70)
+                        .background{
+                            Color.blue
+                        }
+                        .cornerRadius(50)
+                        .overlay{
+                            RoundedRectangle(cornerRadius: 50)
+                                .stroke(Color.black, lineWidth: 4)
+                                .padding(1)
+                        }
+                        .padding()
+                    }
+                    .buttonStyle(.roundedAndShadow6)
+                    .padding(.leading, 6)
+                    Spacer()
+                }
                 Text("Level: 107")
                     .italic()
                     .bold()
                     .font(.system(size: deviceWidth/9))
+                    .customTextStroke()
                     .padding()
                 Text("Moves Left: 3")
                     .italic()
                     .bold()
                     .font(.system(size: deviceWidth/12))
+                    .customTextStroke()
                     .padding()
                 Spacer()
                 ForEach(0..<3) { row in
@@ -51,6 +82,7 @@ struct ContentView: View {
                                         .onEnded { gesture in
                                             handleSwipeGesture(gesture: gesture, row: row, col: column)
                                             checkWinCondition()
+                                            impactHeavy.impactOccurred()
                                         }
                                 )
                         }
