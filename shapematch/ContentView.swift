@@ -23,13 +23,18 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
-            RandomGradientView()
+//            RandomGradientView()
             VStack {
                 Text("Level: 107")
                     .italic()
                     .bold()
                     .font(.system(size: deviceWidth/9))
-                    .padding(.top, 60)
+                    .padding()
+                Text("Moves Left: 3")
+                    .italic()
+                    .bold()
+                    .font(.system(size: deviceWidth/12))
+                    .padding()
                 Spacer()
                 ForEach(0..<3) { row in
                     HStack {
