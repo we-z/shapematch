@@ -4,13 +4,13 @@ let deviceHeight = UIScreen.main.bounds.height
 let deviceWidth = UIScreen.main.bounds.width
 
 struct ContentView: View {
-    @State private var grid: [[ShapeType]] = [
+    @State var grid: [[ShapeType]] = [
         [.circle, .circle, .circle],
         [.square, .triangle, .square],
         [.triangle, .square, .triangle]
     ]
     
-    let targetGrid: [[ShapeType]] = [
+    @State var targetGrid: [[ShapeType]] = [
         [.circle, .circle, .circle],
         [.square, .square, .square],
         [.triangle, .triangle, .triangle]
@@ -27,7 +27,6 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
-//            RandomGradientView()
             Color.white
                 .ignoresSafeArea()
             VStack {
@@ -147,7 +146,6 @@ struct ContentView: View {
                         ForEach(0..<3) { column in
                             LargeShapeView(shapeType: grid[row][column])
                                 .frame(width: deviceWidth / 4.5, height: deviceWidth / 4.5)
-//                                .stroke(.black, lineWidth: 6)
                                 .padding()
                                 .offset(offsets[row][column])
                                 .gesture(
@@ -197,29 +195,55 @@ struct ContentView: View {
     
     func swapShapes(start: (row: Int, col: Int), end: (row: Int, col: Int), offset: CGSize) {
         withAnimation(.linear(duration: 0.1)) {
-            // Apply offset animation
             offsets[start.row][start.col] = offset
             offsets[end.row][end.col] = CGSize(width: -offset.width, height: -offset.height)
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            // Perform the swap
             let temp = grid[start.row][start.col]
             grid[start.row][start.col] = grid[end.row][end.col]
             grid[end.row][end.col] = temp
             
-            // Reset offsets
-                offsets[start.row][start.col] = .zero
-                offsets[end.row][end.col] = .zero
+            offsets[start.row][start.col] = .zero
+            offsets[end.row][end.col] = .zero
             checkWinCondition()
         }
     }
     
     func checkWinCondition() {
         if grid == targetGrid {
-            self.showCelebration = true
+            showCelebration = true
             print("You win!")
+            level += 1
+            setupLevel()
+        } else if swipesLeft <= 0 {
+            print("Level failed")
         }
+    }
+    
+    func setupLevel() {
+        let shapes: [ShapeType] = [.circle, .square, .triangle]
+        
+        // Create a grid with each shape repeated enough times and then shuffled
+        let randomizedShapes = (shapes + shapes + shapes).shuffled()
+        
+        // Populate the grid by taking the first 9 elements
+        for i in 0..<3 {
+            grid[i] = Array(randomizedShapes[(i * 3)..<(i * 3 + 3)])
+        }
+        
+        // Shuffle the target grid to create a different target pattern
+        targetGrid = grid.shuffled()
+        
+        // Determine the number of swipes needed
+        swipesLeft = calculateSwipesNeeded()
+    }
+    
+    func calculateSwipesNeeded() -> Int {
+        // This function should determine the exact number of swipes needed to solve the grid
+        // For simplicity, we're assigning a random number between 3 and 10, but you could implement
+        // a more sophisticated logic to count the real swipes needed.
+        return Int.random(in: 3...10)
     }
 }
 
