@@ -34,7 +34,7 @@ struct ContentView: View {
                         
                     } label: {
                         HStack{
-                            Text("Lives: 1")
+                            Text("💙 Lives: 1")
                                 .bold()
                                 .italic()
                                 .customTextStroke(width: 1.5)
