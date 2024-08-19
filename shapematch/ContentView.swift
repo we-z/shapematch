@@ -23,6 +23,8 @@ struct ContentView: View {
     
     @State var showCelebration = false
     
+    @State var swipesLeft = 1
+    
     var body: some View {
         ZStack{
 //            RandomGradientView()
@@ -86,16 +88,9 @@ struct ContentView: View {
                 Text("Level: 1")
                     .italic()
                     .bold()
-                    .font(.system(size: deviceWidth/12))
-                    .customTextStroke(width: 1.5)
-                    .padding(.top)
+                    .font(.system(size: deviceWidth/9))
+                    .customTextStroke(width: 1.8)
                 HStack{
-                    Spacer()
-                    Text("Moves\nLeft: 1")
-                        .italic()
-                        .bold()
-                        .font(.system(size: deviceWidth/8))
-                        .customTextStroke()
                     Spacer()
                     VStack{
                         Text("Goal 🎯")
@@ -122,7 +117,22 @@ struct ContentView: View {
                             .padding(1)
                     }
                     Spacer()
+                    VStack{
+                        Text("Swipes ↔️")
+                            .multilineTextAlignment(.center)
+                            .italic()
+                            .bold()
+                            .font(.system(size: deviceWidth/18))
+                            .customTextStroke(width: 1.2)
+                        Text("\(swipesLeft)")
+                            .italic()
+                            .bold()
+                            .font(.system(size: deviceWidth/3))
+                            .customTextStroke(width: 3)
+                    }
+                    Spacer()
                 }
+                .padding()
                 ForEach(0..<3) { row in
                     HStack {
                         ForEach(0..<3) { column in
@@ -138,14 +148,13 @@ struct ContentView: View {
                                         }
                                         .onEnded { gesture in
                                             handleSwipeGesture(gesture: gesture, row: row, col: column)
-                                            checkWinCondition()
+                                            swipesLeft -= 1
                                             impactHeavy.impactOccurred()
                                         }
                                 )
                         }
                     }
                 }
-                Spacer()
             }
             if self.showCelebration {
                 CelebrationEffect()
@@ -192,6 +201,7 @@ struct ContentView: View {
             // Reset offsets
                 offsets[start.row][start.col] = .zero
                 offsets[end.row][end.col] = .zero
+            checkWinCondition()
         }
     }
     
