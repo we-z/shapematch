@@ -54,7 +54,7 @@ struct ContentView: View {
                                 .stroke(Color.black, lineWidth: 4)
                                 .padding(1)
                         }
-                        .padding()
+                        .padding(.leading)
                     }
                     .buttonStyle(.roundedAndShadow6)
                     .padding(.leading, 6)
@@ -90,6 +90,7 @@ struct ContentView: View {
                     .bold()
                     .font(.system(size: deviceWidth/9))
                     .customTextStroke(width: 1.8)
+                Spacer()
                 HStack{
                     Spacer()
                     VStack{
@@ -110,9 +111,9 @@ struct ContentView: View {
                     }
                     .padding()
                     .background(.yellow)
-                    .cornerRadius(30)
+                    .cornerRadius(15)
                     .overlay{
-                        RoundedRectangle(cornerRadius: 30)
+                        RoundedRectangle(cornerRadius: 15)
                             .stroke(Color.black, lineWidth: 4)
                             .padding(1)
                     }
@@ -127,12 +128,20 @@ struct ContentView: View {
                         Text("\(swipesLeft)")
                             .italic()
                             .bold()
-                            .font(.system(size: deviceWidth/3))
-                            .customTextStroke(width: 3)
+                            .font(.system(size: deviceWidth/4))
+                            .customTextStroke(width: 2.4)
+                    }
+                    .padding()
+                    .background(Color.mint)
+                    .cornerRadius(15)
+                    .overlay{
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color.black, lineWidth: 4)
+                            .padding(1)
                     }
                     Spacer()
                 }
-                .padding()
+                .padding(.bottom)
                 ForEach(0..<3) { row in
                     HStack {
                         ForEach(0..<3) { column in
@@ -155,6 +164,7 @@ struct ContentView: View {
                         }
                     }
                 }
+                Spacer()
             }
             if self.showCelebration {
                 CelebrationEffect()

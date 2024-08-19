@@ -38,7 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7639F95B2C713D8100E2B371 /* shapematch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shapematch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7639F95B2C713D8100E2B371 /* shape match.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "shape match.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7639F95E2C713D8100E2B371 /* shapematchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shapematchApp.swift; sourceTree = "<group>"; };
 		7639F9602C713D8100E2B371 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7639F9622C713D8200E2B371 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 		7639F95C2C713D8100E2B371 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7639F95B2C713D8100E2B371 /* shapematch.app */,
+				7639F95B2C713D8100E2B371 /* shape match.app */,
 				7639F96C2C713D8200E2B371 /* shapematchTests.xctest */,
 				7639F9762C713D8200E2B371 /* shapematchUITests.xctest */,
 			);
@@ -143,9 +143,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7639F95A2C713D8100E2B371 /* shapematch */ = {
+		7639F95A2C713D8100E2B371 /* shape match */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7639F9802C713D8200E2B371 /* Build configuration list for PBXNativeTarget "shapematch" */;
+			buildConfigurationList = 7639F9802C713D8200E2B371 /* Build configuration list for PBXNativeTarget "shape match" */;
 			buildPhases = (
 				7639F9572C713D8100E2B371 /* Sources */,
 				7639F9582C713D8100E2B371 /* Frameworks */,
@@ -155,12 +155,12 @@
 			);
 			dependencies = (
 			);
-			name = shapematch;
+			name = "shape match";
 			packageProductDependencies = (
 				7639F9902C72C47A00E2B371 /* Vortex */,
 			);
 			productName = shapematch;
-			productReference = 7639F95B2C713D8100E2B371 /* shapematch.app */;
+			productReference = 7639F95B2C713D8100E2B371 /* shape match.app */;
 			productType = "com.apple.product-type.application";
 		};
 		7639F96B2C713D8200E2B371 /* shapematchTests */ = {
@@ -238,7 +238,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7639F95A2C713D8100E2B371 /* shapematch */,
+				7639F95A2C713D8100E2B371 /* shape match */,
 				7639F96B2C713D8200E2B371 /* shapematchTests */,
 				7639F9752C713D8200E2B371 /* shapematchUITests */,
 			);
@@ -306,12 +306,12 @@
 /* Begin PBXTargetDependency section */
 		7639F96E2C713D8200E2B371 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7639F95A2C713D8100E2B371 /* shapematch */;
+			target = 7639F95A2C713D8100E2B371 /* shape match */;
 			targetProxy = 7639F96D2C713D8200E2B371 /* PBXContainerItemProxy */;
 		};
 		7639F9782C713D8200E2B371 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7639F95A2C713D8100E2B371 /* shapematch */;
+			target = 7639F95A2C713D8100E2B371 /* shape match */;
 			targetProxy = 7639F9772C713D8200E2B371 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -459,7 +459,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.endlessfall.shapematch;
+				PRODUCT_BUNDLE_IDENTIFIER = io.shapematch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -497,7 +497,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.endlessfall.shapematch;
+				PRODUCT_BUNDLE_IDENTIFIER = io.shapematch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -609,7 +609,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7639F9802C713D8200E2B371 /* Build configuration list for PBXNativeTarget "shapematch" */ = {
+		7639F9802C713D8200E2B371 /* Build configuration list for PBXNativeTarget "shape match" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7639F9812C713D8200E2B371 /* Debug */,

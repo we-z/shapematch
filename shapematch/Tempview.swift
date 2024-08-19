@@ -9,9 +9,9 @@ import SwiftUI
 
 struct TempView: View {
     @State private var grid: [[ShapeType]] = [
-        [.circle, .circle, .circle],
-        [.square, .square, .square],
-        [.triangle, .triangle, .triangle]
+        [.circle, .square, .triangle],
+        [.circle, .square, .triangle],
+        [.circle, .square, .triangle]
     ]
     
     let targetGrid: [[ShapeType]] = [
@@ -32,25 +32,7 @@ struct TempView: View {
                 }
             }
         }
-        .gesture(
-            DragGesture()
-                .onEnded { gesture in
-                    if abs(gesture.translation.width) > abs(gesture.translation.height) {
-                        if gesture.translation.width < 0 {
-                            swipeLeft()
-                        } else {
-                            swipeRight()
-                        }
-                    } else {
-                        if gesture.translation.height < 0 {
-                            swipeUp()
-                        } else {
-                            swipeDown()
-                        }
-                    }
-                    checkWinCondition()
-                }
-        )
+        .scaleEffect(0.8)
     }
     
     func swipeLeft() {
