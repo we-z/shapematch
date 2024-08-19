@@ -22,8 +22,8 @@ struct ContentView: View {
     )
     
     @State var showCelebration = false
-    
     @State var swipesLeft = 1
+    @State var level = 1
     
     var body: some View {
         ZStack{
@@ -85,7 +85,7 @@ struct ContentView: View {
                     }
                     .buttonStyle(.roundedAndShadow6)
                 }
-                Text("Level: 1")
+                Text("Level: \(level)")
                     .italic()
                     .bold()
                     .font(.system(size: deviceWidth/9))
@@ -132,7 +132,7 @@ struct ContentView: View {
                             .customTextStroke(width: 2.4)
                     }
                     .padding()
-                    .background(Color.mint)
+                    .background(Color.green)
                     .cornerRadius(15)
                     .overlay{
                         RoundedRectangle(cornerRadius: 15)
