@@ -223,7 +223,7 @@ enum ShapeType: Int, Identifiable, Equatable {
     var id: Int { rawValue }
 }
 
-struct ShapeView: View {
+struct LargeShapeView: View {
     let shapeType: ShapeType
     
     var body: some View {
@@ -237,6 +237,24 @@ struct ShapeView: View {
         case .triangle:
             Triangle().fill(Color.green)
                 .stroke(.black, lineWidth: 6)
+        }
+    }
+}
+
+struct smallShapeView: View {
+    let shapeType: ShapeType
+    
+    var body: some View {
+        switch shapeType {
+        case .circle:
+            Circle().fill(Color.blue)
+                .stroke(.black, lineWidth: 2)
+        case .square:
+            Rectangle().fill(Color.red)
+                .stroke(.black, lineWidth: 2)
+        case .triangle:
+            Triangle().fill(Color.green)
+                .stroke(.black, lineWidth: 2)
         }
     }
 }

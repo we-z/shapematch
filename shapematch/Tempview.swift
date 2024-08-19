@@ -25,7 +25,7 @@ struct TempView: View {
             ForEach(0..<3) { row in
                 HStack {
                     ForEach(0..<3) { column in
-                        ShapeView(shapeType: grid[row][column])
+                        LargeShapeView(shapeType: grid[row][column])
                             .frame(width: deviceWidth / 4.5, height: deviceWidth / 4.5)
                             .padding()
                     }

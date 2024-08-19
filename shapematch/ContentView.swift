@@ -5,9 +5,9 @@ let deviceWidth = UIScreen.main.bounds.width
 
 struct ContentView: View {
     @State private var grid: [[ShapeType]] = [
-        [.circle, .square, .triangle],
-        [.triangle, .circle, .square],
-        [.square, .triangle, .circle]
+        [.circle, .circle, .circle],
+        [.square, .triangle, .square],
+        [.triangle, .square, .triangle]
     ]
     
     let targetGrid: [[ShapeType]] = [
@@ -21,30 +21,34 @@ struct ContentView: View {
         count: 3
     )
     
+    @State var showCelebration = false
+    
     var body: some View {
         ZStack{
-            
 //            RandomGradientView()
+            Color.white
+                .ignoresSafeArea()
             VStack {
                 HStack{
                     Button {
+                        
                     } label: {
                         HStack{
-                            Text("Moves: 7")
+                            Text("Lives: 1")
                                 .bold()
                                 .italic()
-                                .customTextStroke()
-                                .font(.system(size: 30))
+                                .customTextStroke(width: 1.5)
+                                .font(.system(size: 21))
                         }
                         .padding(.horizontal, 21)
                         .padding(.vertical, 6)
-                        .frame(height: 70)
+                        .frame(height: 60)
                         .background{
                             Color.blue
                         }
-                        .cornerRadius(50)
+                        .cornerRadius(15)
                         .overlay{
-                            RoundedRectangle(cornerRadius: 50)
+                            RoundedRectangle(cornerRadius: 15)
                                 .stroke(Color.black, lineWidth: 4)
                                 .padding(1)
                         }
@@ -53,25 +57,78 @@ struct ContentView: View {
                     .buttonStyle(.roundedAndShadow6)
                     .padding(.leading, 6)
                     Spacer()
+                    Button {
+                    } label: {
+                        HStack{
+                            Image(systemName: "arrow.counterclockwise")
+                                .bold()
+                                .italic()
+                                .customTextStroke(width: 1.5)
+                                .font(.system(size: 21))
+                                .padding(.horizontal, 6)
+                        }
+                        .padding(.horizontal, 21)
+                        .padding(.vertical, 6)
+                        .frame(height: 60)
+                        .background{
+                            Color.red
+                        }
+                        .cornerRadius(15)
+                        .overlay{
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(Color.black, lineWidth: 4)
+                                .padding(1)
+                        }
+                        .padding([.trailing, .leading])
+                    }
+                    .buttonStyle(.roundedAndShadow6)
                 }
-                Text("Level: 107")
-                    .italic()
-                    .bold()
-                    .font(.system(size: deviceWidth/9))
-                    .customTextStroke()
-                    .padding()
-                Text("Moves Left: 3")
+                Text("Level: 1")
                     .italic()
                     .bold()
                     .font(.system(size: deviceWidth/12))
-                    .customTextStroke()
+                    .customTextStroke(width: 1.5)
+                    .padding(.top)
+                HStack{
+                    Spacer()
+                    Text("Moves\nLeft: 1")
+                        .italic()
+                        .bold()
+                        .font(.system(size: deviceWidth/8))
+                        .customTextStroke()
+                    Spacer()
+                    VStack{
+                        Text("Goal 🎯")
+                            .italic()
+                            .bold()
+                            .font(.system(size: deviceWidth/15))
+                            .customTextStroke(width: 1.5)
+                        ForEach(0..<3) { row in
+                            HStack {
+                                ForEach(0..<3) { column in
+                                    smallShapeView(shapeType: targetGrid[row][column])
+                                        .frame(width: deviceWidth / 18, height: deviceWidth / 18)
+                                        .padding(3)
+                                }
+                            }
+                        }
+                    }
                     .padding()
-                Spacer()
+                    .background(.yellow)
+                    .cornerRadius(30)
+                    .overlay{
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(Color.black, lineWidth: 4)
+                            .padding(1)
+                    }
+                    Spacer()
+                }
                 ForEach(0..<3) { row in
                     HStack {
                         ForEach(0..<3) { column in
-                            ShapeView(shapeType: grid[row][column])
+                            LargeShapeView(shapeType: grid[row][column])
                                 .frame(width: deviceWidth / 4.5, height: deviceWidth / 4.5)
+//                                .stroke(.black, lineWidth: 6)
                                 .padding()
                                 .offset(offsets[row][column])
                                 .gesture(
@@ -89,6 +146,9 @@ struct ContentView: View {
                     }
                 }
                 Spacer()
+            }
+            if self.showCelebration {
+                CelebrationEffect()
             }
         }
     }
@@ -137,6 +197,7 @@ struct ContentView: View {
     
     func checkWinCondition() {
         if grid == targetGrid {
+            self.showCelebration = true
             print("You win!")
         }
     }
