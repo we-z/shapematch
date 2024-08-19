@@ -196,13 +196,13 @@ struct ContentView: View {
     }
     
     func swapShapes(start: (row: Int, col: Int), end: (row: Int, col: Int), offset: CGSize) {
-        withAnimation(.linear(duration: 0.3)) {
+        withAnimation(.linear(duration: 0.1)) {
             // Apply offset animation
             offsets[start.row][start.col] = offset
             offsets[end.row][end.col] = CGSize(width: -offset.width, height: -offset.height)
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             // Perform the swap
             let temp = grid[start.row][start.col]
             grid[start.row][start.col] = grid[end.row][end.col]
