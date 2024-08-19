@@ -166,6 +166,11 @@ struct ContentView: View {
             }
             if self.showCelebration {
                 CelebrationEffect()
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                            self.showCelebration = false
+                        }
+                    }
             }
         }
     }
