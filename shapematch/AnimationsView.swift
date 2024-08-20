@@ -27,19 +27,19 @@ struct  CelebrationEffect: View {
                 VortexView(.confetti) {
                     Rectangle()
                         .fill(.white)
-                        .frame(width: 16, height: 16)
+                        .frame(width: 30, height: 30)
                         .tag("square")
                     
                     Circle()
                         .fill(.white)
-                        .frame(width: 16)
+                        .frame(width: 30)
                         .tag("circle")
                 }
                 .onAppear {
                     // Start a timer when the view appears
                     proxy.burst()
                     Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-                        if burstCount < 3 {
+                        if burstCount < 0 {
                             // Call proxy.burst() every second
                             proxy.burst()
                             burstCount += 1

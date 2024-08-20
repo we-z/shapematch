@@ -167,8 +167,10 @@ struct ContentView: View {
             if self.showCelebration {
                 CelebrationEffect()
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             self.showCelebration = false
+                            level += 1
+                            setupLevel()
                         }
                     }
             }
@@ -219,8 +221,6 @@ struct ContentView: View {
         if grid == targetGrid {
             showCelebration = true
             print("You win!")
-            level += 1
-            setupLevel()
         } else if swipesLeft <= 0 {
             print("Level failed")
         }
