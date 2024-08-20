@@ -245,20 +245,51 @@ struct ContentView: View {
         
         initialGrid = grid
         
-        // Shuffle the target grid to create a different target pattern
-        targetGrid = grid.shuffled()
+        // Copy the initial grid to the targetGrid
+        targetGrid = grid
         
-        // Determine the number of swipes needed
-        swipesLeft = calculateSwipesNeeded()
-        initialSwipes = swipesLeft
+        // Set swipesLeft equal to the current level
+        swipesLeft = level
+        
+        // Perform a series of valid adjacent swaps to create a targetGrid that requires exactly `level` moves to solve
+        for _ in 0..<level {
+            var row1: Int
+            var col1: Int
+            var row2: Int
+            var col2: Int
+            
+            repeat {
+                // Randomly select a starting position
+                row1 = Int.random(in: 0..<3)
+                col1 = Int.random(in: 0..<3)
+                
+                // Randomly select a direction to swap with an adjacent position
+                let direction = Int.random(in: 0..<3)
+                
+                switch direction {
+                case 0: // Left
+                    row2 = row1
+                    col2 = col1 > 0 ? col1 - 1 : col1 + 1
+                case 1: // Right
+                    row2 = row1
+                    col2 = col1 < 2 ? col1 + 1 : col1 - 1
+                case 2: // Up
+                    row2 = row1 > 0 ? row1 - 1 : row1 + 1
+                    col2 = col1
+                default: // Down
+                    row2 = row1 < 2 ? row1 + 1 : row1 - 1
+                    col2 = col1
+                }
+            } while (row1 == row2 && col1 == col2) // Ensure they are adjacent and not the same position
+            
+            // Swap the shapes in the targetGrid
+            let temp = targetGrid[row1][col1]
+            targetGrid[row1][col1] = targetGrid[row2][col2]
+            targetGrid[row2][col2] = temp
+        }
     }
-    
-    func calculateSwipesNeeded() -> Int {
-        // This function should determine the exact number of swipes needed to solve the grid
-        // For simplicity, we're assigning a random number between 3 and 10, but you could implement
-        // a more sophisticated logic to count the real swipes needed.
-        return Int.random(in: 3...10)
-    }
+
+
     
     func resetLevel() {
             // Reset the grid to its initial configuration
