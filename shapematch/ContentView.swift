@@ -21,6 +21,8 @@ struct ContentView: View {
         count: 3
     )
     
+    @State var initialGrid: [[ShapeType]] = [[]]
+    @State var initialSwipes = 0
     @State var showCelebration = false
     @State var swipesLeft = 1
     @State var level = 1
@@ -59,6 +61,7 @@ struct ContentView: View {
                     .padding(.leading, 6)
                     Spacer()
                     Button {
+                        resetLevel()
                     } label: {
                         HStack{
                             Image(systemName: "arrow.counterclockwise")
@@ -237,11 +240,14 @@ struct ContentView: View {
             grid[i] = Array(randomizedShapes[(i * 3)..<(i * 3 + 3)])
         }
         
+        initialGrid = grid
+        
         // Shuffle the target grid to create a different target pattern
         targetGrid = grid.shuffled()
         
         // Determine the number of swipes needed
         swipesLeft = calculateSwipesNeeded()
+        initialSwipes = swipesLeft
     }
     
     func calculateSwipesNeeded() -> Int {
@@ -250,6 +256,21 @@ struct ContentView: View {
         // a more sophisticated logic to count the real swipes needed.
         return Int.random(in: 3...10)
     }
+    
+    func resetLevel() {
+            // Reset the grid to its initial configuration
+            grid = initialGrid
+            
+            // Reset offsets to zero
+            offsets = Array(
+                repeating: Array(repeating: .zero, count: 3),
+                count: 3
+            )
+            
+            // Reset the swipes left to the initial calculated value
+            swipesLeft = initialSwipes
+        }
+    
 }
 
 #Preview {
