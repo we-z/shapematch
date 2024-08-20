@@ -70,7 +70,7 @@ struct NoMoreSwipesView: View {
                 .stroke(Color.black, lineWidth: 7)
                 .padding(1)
         }
-        .padding(.horizontal)
+        .padding()
         
     }
 }

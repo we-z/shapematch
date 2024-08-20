@@ -165,6 +165,12 @@ struct ContentView: View {
                 }
                 Spacer()
             }
+            if swipesLeft == 0 {
+                VStack{
+                    Spacer()
+                    NoMoreSwipesView()
+                }
+            }
             CelebrationEffect()
         }
         .onAppear {
@@ -380,18 +386,18 @@ struct ContentView: View {
 
     
     func resetLevel() {
-            // Reset the grid to its initial configuration
-            grid = initialGrid
-            
-            // Reset offsets to zero
-            offsets = Array(
-                repeating: Array(repeating: .zero, count: 3),
-                count: 3
-            )
-            
-            // Reset the swipes left to the initial calculated value
-            swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
-        }
+        // Reset the grid to its initial configuration
+        grid = initialGrid
+        
+        // Reset offsets to zero
+        offsets = Array(
+            repeating: Array(repeating: .zero, count: 3),
+            count: 3
+        )
+        
+        // Reset the swipes left to the initial calculated value
+        swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
+    }
     
 }
 
