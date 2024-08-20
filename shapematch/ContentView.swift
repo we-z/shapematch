@@ -157,8 +157,6 @@ struct ContentView: View {
                                         .onEnded { gesture in
                                             if swipesLeft > 0 {
                                                 handleSwipeGesture(gesture: gesture, row: row, col: column)
-                                                swipesLeft -= 1
-                                                impactHeavy.impactOccurred()
                                             }
                                         }
                                 )
@@ -199,6 +197,11 @@ struct ContentView: View {
     }
     
     func swapShapes(start: (row: Int, col: Int), end: (row: Int, col: Int), offset: CGSize) {
+        if grid[start.row][start.col] == grid[end.row][end.col] {
+                // If they are the same, do nothing
+                return
+        }
+        
         withAnimation(.linear(duration: 0.1)) {
             offsets[start.row][start.col] = offset
             offsets[end.row][end.col] = CGSize(width: -offset.width, height: -offset.height)
@@ -211,6 +214,8 @@ struct ContentView: View {
             
             offsets[start.row][start.col] = .zero
             offsets[end.row][end.col] = .zero
+            swipesLeft -= 1
+            impactHeavy.impactOccurred()
             checkWinCondition()
         }
     }
