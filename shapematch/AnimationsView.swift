@@ -21,7 +21,7 @@ struct AnimationsView: View {
 struct NoMoreSwipesView: View {
     var body: some View {
         VStack{
-            Text("😢")
+            Text("✋")
                 .font(.system(size: deviceWidth/3))
                 .customTextStroke(width: 4)
                 .padding(.bottom, 0)
