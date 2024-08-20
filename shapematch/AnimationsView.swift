@@ -57,8 +57,8 @@ struct NoMoreSwipesView: View {
             } label: {
                 Text("Try again 🔁")
                     .bold()
-                    .font(.system(size: deviceWidth/18))
-                    .customTextStroke(width: 1.2)
+                    .font(.system(size: deviceWidth/15))
+                    .customTextStroke(width: 1.5)
                     .padding()
             }
         }
