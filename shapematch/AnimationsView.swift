@@ -18,9 +18,9 @@ struct AnimationsView: View {
     AnimationsView()
 }
 
-struct  CelebrationEffect: View {
-    @State private var burstCount = 0
 
+struct CelebrationEffect: View {
+    @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
         VStack{
             VortexViewReader { proxy in
@@ -35,19 +35,8 @@ struct  CelebrationEffect: View {
                         .frame(width: 30)
                         .tag("circle")
                 }
-                .onAppear {
-                    // Start a timer when the view appears
+                .onChange(of: appModel.shouldBurst) { newValue in
                     proxy.burst()
-                    Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-                        if burstCount < 0 {
-                            // Call proxy.burst() every second
-                            proxy.burst()
-                            burstCount += 1
-                        } else {
-                            // Invalidate the timer after bursting 3 times
-                            timer.invalidate()
-                        }
-                    }
                 }
             }
         }

@@ -8,6 +8,11 @@
 import Foundation
 import SwiftUI
 
+class AppModel: ObservableObject {
+    static let sharedAppModel = AppModel()
+    @Published var shouldBurst = false
+}
+
 let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
 
 enum SwipeDirection {

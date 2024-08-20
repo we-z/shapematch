@@ -22,10 +22,11 @@ struct ContentView: View {
     )
     
     @State var initialGrid: [[ShapeType]] = [[]]
-    @State var showCelebration = false
     @State var freezeGame = false
     @State var swipesLeft = 1
     @State var level = 1
+    
+    @ObservedObject private var appModel = AppModel.sharedAppModel
     
     var body: some View {
         ZStack{
@@ -166,16 +167,7 @@ struct ContentView: View {
                 }
                 Spacer()
             }
-            if self.showCelebration {
-                CelebrationEffect()
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            self.showCelebration = false
-                            level += 1
-                            setupLevel()
-                        }
-                    }
-            }
+            CelebrationEffect()
         }
         .allowsHitTesting(!self.freezeGame)
     }
@@ -222,10 +214,12 @@ struct ContentView: View {
     
     func checkWinCondition() {
         if grid == targetGrid {
-            showCelebration = true
+            appModel.shouldBurst.toggle()
             self.freezeGame = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.freezeGame = false
+                    level += 1
+                    setupLevel()
             }
             print("You win!")
         } else if swipesLeft <= 0 {
