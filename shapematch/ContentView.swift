@@ -4,28 +4,7 @@ let deviceHeight = UIScreen.main.bounds.height
 let deviceWidth = UIScreen.main.bounds.width
 
 struct ContentView: View {
-    @State var grid: [[ShapeType]] = [
-        [.circle, .circle, .circle],
-        [.square, .triangle, .square],
-        [.triangle, .square, .triangle]
-    ]
-    
-    @State var targetGrid: [[ShapeType]] = [
-        [.circle, .circle, .circle],
-        [.square, .square, .square],
-        [.triangle, .triangle, .triangle]
-    ]
-    
-    @State private var offsets: [[CGSize]] = Array(
-        repeating: Array(repeating: .zero, count: 3),
-        count: 3
-    )
-    
-    @State var initialGrid: [[ShapeType]] = [[]]
-    @State var freezeGame = false
-    @State var swipesLeft = 1
-    @State var level = 1
-    
+
     @ObservedObject private var appModel = AppModel.sharedAppModel
     
     var body: some View {
@@ -62,7 +41,7 @@ struct ContentView: View {
                     .padding(.leading, 6)
                     Spacer()
                     Button {
-                        resetLevel()
+                        appModel.resetLevel()
                     } label: {
                         HStack{
                             Image(systemName: "arrow.counterclockwise")
@@ -89,7 +68,7 @@ struct ContentView: View {
                     .buttonStyle(.roundedAndShadow6)
                 }
                 Spacer()
-                Text("Level: \(level)")
+                Text("Level: \(appModel.level)")
                     .bold()
                     .font(.system(size: deviceWidth/9))
                     .customTextStroke()
@@ -104,7 +83,7 @@ struct ContentView: View {
                         ForEach(0..<3) { row in
                             HStack {
                                 ForEach(0..<3) { column in
-                                    smallShapeView(shapeType: targetGrid[row][column])
+                                    smallShapeView(shapeType: appModel.targetGrid[row][column])
                                         .frame(width: deviceWidth / 18, height: deviceWidth / 18)
                                         .padding(3)
                                 }
@@ -126,7 +105,7 @@ struct ContentView: View {
                             .bold()
                             .font(.system(size: deviceWidth/18))
                             .customTextStroke(width: 1.2)
-                        Text("\(swipesLeft)")
+                        Text("\(appModel.swipesLeft)")
                             .bold()
                             .font(.system(size: deviceWidth/4))
                             .customTextStroke(width: 2.4)
@@ -145,18 +124,18 @@ struct ContentView: View {
                 ForEach(0..<3) { row in
                     HStack {
                         ForEach(0..<3) { column in
-                            LargeShapeView(shapeType: grid[row][column])
+                            LargeShapeView(shapeType: appModel.grid[row][column])
                                 .frame(width: deviceWidth / 4.5, height: deviceWidth / 4.5)
                                 .padding()
-                                .offset(offsets[row][column])
+                                .offset(appModel.offsets[row][column])
                                 .gesture(
                                     DragGesture()
                                         .onChanged { _ in
                                             // No change needed here for offset handling
                                         }
                                         .onEnded { gesture in
-                                            if swipesLeft > 0 {
-                                                handleSwipeGesture(gesture: gesture, row: row, col: column)
+                                            if appModel.swipesLeft > 0 {
+                                                appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
                                             }
                                         }
                                 )
@@ -165,7 +144,7 @@ struct ContentView: View {
                 }
                 Spacer()
             }
-            if swipesLeft == 0 {
+            if appModel.swipesLeft == 0 {
                 VStack{
                     Spacer()
                     NoMoreSwipesView()
@@ -174,230 +153,11 @@ struct ContentView: View {
             CelebrationEffect()
         }
         .onAppear {
-            initialGrid = grid
+            appModel.initialGrid = appModel.grid
         }
-        .allowsHitTesting(!self.freezeGame)
+        .allowsHitTesting(!appModel.freezeGame)
     }
     
-    func handleSwipeGesture(gesture: DragGesture.Value, row: Int, col: Int) {
-        let direction: SwipeDirection
-        
-        if abs(gesture.translation.width) > abs(gesture.translation.height) {
-            direction = gesture.translation.width < 0 ? .left : .right
-        } else {
-            direction = gesture.translation.height < 0 ? .up : .down
-        }
-        
-        switch direction {
-        case .left where col > 0:
-            swapShapes(start: (row, col), end: (row, col - 1), offset: CGSize(width: -deviceWidth / 3, height: 0))
-        case .right where col < 2:
-            swapShapes(start: (row, col), end: (row, col + 1), offset: CGSize(width: deviceWidth / 3, height: 0))
-        case .up where row > 0:
-            swapShapes(start: (row, col), end: (row - 1, col), offset: CGSize(width: 0, height: -deviceWidth / 3))
-        case .down where row < 2:
-            swapShapes(start: (row, col), end: (row + 1, col), offset: CGSize(width: 0, height: deviceWidth / 3))
-        default:
-            break
-        }
-    }
-    
-    func swapShapes(start: (row: Int, col: Int), end: (row: Int, col: Int), offset: CGSize) {
-        if grid[start.row][start.col] == grid[end.row][end.col] {
-                // If they are the same, do nothing
-                return
-        }
-        
-        withAnimation(.linear(duration: 0.1)) {
-            offsets[start.row][start.col] = offset
-            offsets[end.row][end.col] = CGSize(width: -offset.width, height: -offset.height)
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            let temp = grid[start.row][start.col]
-            grid[start.row][start.col] = grid[end.row][end.col]
-            grid[end.row][end.col] = temp
-            
-            offsets[start.row][start.col] = .zero
-            offsets[end.row][end.col] = .zero
-            swipesLeft -= 1
-            impactHeavy.impactOccurred()
-            checkWinCondition()
-        }
-    }
-    
-    func checkWinCondition() {
-        if grid == targetGrid {
-            appModel.shouldBurst.toggle()
-            self.freezeGame = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.freezeGame = false
-                    level += 1
-                    setupLevel()
-                    swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
-            }
-            print("You win!")
-        } else if swipesLeft <= 0 {
-            print("Level failed")
-        }
-    }
-    
-    func setupLevel() {
-        let shapes: [ShapeType] = [.circle, .square, .triangle]
-        
-        // Create a grid with each shape repeated enough times and then shuffled
-        var randomizedShapes = (shapes + shapes + shapes).shuffled()
-        
-        // Populate the grid by taking the first 9 elements
-        for i in 0..<3 {
-            grid[i] = Array(randomizedShapes[(i * 3)..<(i * 3 + 3)])
-        }
-        
-        initialGrid = grid
-        var successfulSetup = false
-        
-        while !successfulSetup {
-            // Copy the initial grid to the targetGrid
-            targetGrid = grid
-            
-            // Set swipesLeft equal to the current level
-            swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
-            
-            // Perform a series of valid adjacent swaps to create a targetGrid that requires exactly `level` moves to solve
-            var previousSwap: ((Int, Int), (Int, Int))? = nil
-            for _ in 0..<level {
-                var row1: Int
-                var col1: Int
-                var row2: Int
-                var col2: Int
-                
-                repeat {
-                    // Randomly select a starting position
-                    row1 = Int.random(in: 0..<3)
-                    col1 = Int.random(in: 0..<3)
-                    
-                    // Randomly select a direction to swap with an adjacent position
-                    let direction = Int.random(in: 0..<4)
-                    
-                    switch direction {
-                    case 0: // Left
-                        row2 = row1
-                        col2 = col1 > 0 ? col1 - 1 : col1 + 1
-                    case 1: // Right
-                        row2 = row1
-                        col2 = col1 < 2 ? col1 + 1 : col1 - 1
-                    case 2: // Up
-                        row2 = row1 > 0 ? row1 - 1 : row1 + 1
-                        col2 = col1
-                    default: // Down
-                        row2 = row1 < 2 ? row1 + 1 : row1 - 1
-                        col2 = col1
-                    }
-                } while (row1 == row2 && col1 == col2) ||
-                         (previousSwap != nil && previousSwap!.0 == (row2, col2) && previousSwap!.1 == (row1, col1)) ||
-                         (targetGrid[row1][col1] == targetGrid[row2][col2])  // Check if the shapes are the same
-                
-                // Swap the shapes in the targetGrid
-                let temp = targetGrid[row1][col1]
-                targetGrid[row1][col1] = targetGrid[row2][col2]
-                targetGrid[row2][col2] = temp
-                
-                // Store the swap to prevent an immediate reverse
-                previousSwap = ((row1, col1), (row2, col2))
-            }
-            
-            // Check if the grid and targetGrid are different
-            if grid != targetGrid {
-                successfulSetup = true
-            } else {
-                // If they are the same, shuffle and try again
-                randomizedShapes.shuffle()
-                for i in 0..<3 {
-                    grid[i] = Array(randomizedShapes[(i * 3)..<(i * 3 + 3)])
-                }
-            }
-        }
-    }
-    
-    func calculateMinimumSwipes(from startGrid: [[ShapeType]], to targetGrid: [[ShapeType]]) -> Int {
-        // Convert grid to a one-dimensional array for easier comparison and manipulation
-        let startState = startGrid.flatMap { $0 }
-        let targetState = targetGrid.flatMap { $0 }
-        
-        if startState == targetState {
-            return 0
-        }
-        
-        // BFS setup
-        var visited = Set<[ShapeType]>()
-        var queue: [([ShapeType], Int)] = [(startState, 0)]
-        visited.insert(startState)
-        
-        // BFS loop
-        while !queue.isEmpty {
-            let (currentState, depth) = queue.removeFirst()
-            
-            // Generate all possible adjacent swaps
-            let neighbors = generateNeighbors(for: currentState)
-            
-            for neighbor in neighbors {
-                if neighbor == targetState {
-                    return depth + 1
-                }
-                
-                if !visited.contains(neighbor) {
-                    visited.insert(neighbor)
-                    queue.append((neighbor, depth + 1))
-                }
-            }
-        }
-        
-        // If no solution is found, return an impossible number
-        return Int.max
-    }
-
-    func generateNeighbors(for state: [ShapeType]) -> [[ShapeType]] {
-        var neighbors = [[ShapeType]]()
-        
-        // We need to swap adjacent positions in the grid
-        let gridSize = 3
-        for row in 0..<gridSize {
-            for col in 0..<gridSize {
-                let index = row * gridSize + col
-                
-                // Swap with the right neighbor
-                if col < gridSize - 1 {
-                    var newState = state
-                    newState.swapAt(index, index + 1)
-                    neighbors.append(newState)
-                }
-                
-                // Swap with the bottom neighbor
-                if row < gridSize - 1 {
-                    var newState = state
-                    newState.swapAt(index, index + gridSize)
-                    neighbors.append(newState)
-                }
-            }
-        }
-        
-        return neighbors
-    }
-
-    
-    func resetLevel() {
-        // Reset the grid to its initial configuration
-        grid = initialGrid
-        
-        // Reset offsets to zero
-        offsets = Array(
-            repeating: Array(repeating: .zero, count: 3),
-            count: 3
-        )
-        
-        // Reset the swipes left to the initial calculated value
-        swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
-    }
     
 }
 
