@@ -87,17 +87,16 @@ struct ContentView: View {
                     }
                     .buttonStyle(.roundedAndShadow6)
                 }
+                Spacer()
                 Text("Level: \(level)")
-                    .italic()
                     .bold()
                     .font(.system(size: deviceWidth/9))
                     .customTextStroke(width: 1.8)
-                Spacer()
+                
                 HStack{
                     Spacer()
                     VStack{
                         Text("Goal 🎯")
-                            .italic()
                             .bold()
                             .font(.system(size: deviceWidth/15))
                             .customTextStroke(width: 1.5)
@@ -123,12 +122,10 @@ struct ContentView: View {
                     VStack{
                         Text("Swipes ↔️")
                             .multilineTextAlignment(.center)
-                            .italic()
                             .bold()
                             .font(.system(size: deviceWidth/18))
                             .customTextStroke(width: 1.2)
                         Text("\(swipesLeft)")
-                            .italic()
                             .bold()
                             .font(.system(size: deviceWidth/4))
                             .customTextStroke(width: 2.4)
