@@ -169,6 +169,9 @@ struct ContentView: View {
             }
             CelebrationEffect()
         }
+        .onAppear {
+            initialGrid = grid
+        }
         .allowsHitTesting(!self.freezeGame)
     }
     
