@@ -25,7 +25,7 @@ struct NoMoreSwipesView: View {
                 .font(.system(size: deviceWidth/3))
                 .customTextStroke(width: 4)
                 .padding(.bottom, 0)
-            Text("No more swipes")
+            Text("NO MORE SWIPES!")
                 .italic()
                 .bold()
                 .font(.system(size: deviceWidth/15))
@@ -60,7 +60,16 @@ struct NoMoreSwipesView: View {
                     .font(.system(size: deviceWidth/15))
                     .customTextStroke(width: 1.5)
                     .padding()
+                    .background(.green)
+                    .cornerRadius(15)
+                    .overlay{
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color.black, lineWidth: 4)
+                            .padding(1)
+                    }
+                    .padding()
             }
+            .buttonStyle(.roundedAndShadow6)
         }
         .padding()
         .background(.red)
@@ -70,8 +79,7 @@ struct NoMoreSwipesView: View {
                 .stroke(Color.black, lineWidth: 7)
                 .padding(1)
         }
-        .padding()
-        
+        .padding(.horizontal)
     }
 }
 
