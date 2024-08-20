@@ -223,6 +223,7 @@ struct ContentView: View {
                 self.freezeGame = false
                     level += 1
                     setupLevel()
+                    swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
             }
             print("You win!")
         } else if swipesLeft <= 0 {
@@ -249,7 +250,7 @@ struct ContentView: View {
             targetGrid = grid
             
             // Set swipesLeft equal to the current level
-            swipesLeft = level
+            swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
             
             // Perform a series of valid adjacent swaps to create a targetGrid that requires exactly `level` moves to solve
             var previousSwap: ((Int, Int), (Int, Int))? = nil
@@ -306,7 +307,71 @@ struct ContentView: View {
             }
         }
     }
+    
+    func calculateMinimumSwipes(from startGrid: [[ShapeType]], to targetGrid: [[ShapeType]]) -> Int {
+        // Convert grid to a one-dimensional array for easier comparison and manipulation
+        let startState = startGrid.flatMap { $0 }
+        let targetState = targetGrid.flatMap { $0 }
+        
+        if startState == targetState {
+            return 0
+        }
+        
+        // BFS setup
+        var visited = Set<[ShapeType]>()
+        var queue: [([ShapeType], Int)] = [(startState, 0)]
+        visited.insert(startState)
+        
+        // BFS loop
+        while !queue.isEmpty {
+            let (currentState, depth) = queue.removeFirst()
+            
+            // Generate all possible adjacent swaps
+            let neighbors = generateNeighbors(for: currentState)
+            
+            for neighbor in neighbors {
+                if neighbor == targetState {
+                    return depth + 1
+                }
+                
+                if !visited.contains(neighbor) {
+                    visited.insert(neighbor)
+                    queue.append((neighbor, depth + 1))
+                }
+            }
+        }
+        
+        // If no solution is found, return an impossible number
+        return Int.max
+    }
 
+    func generateNeighbors(for state: [ShapeType]) -> [[ShapeType]] {
+        var neighbors = [[ShapeType]]()
+        
+        // We need to swap adjacent positions in the grid
+        let gridSize = 3
+        for row in 0..<gridSize {
+            for col in 0..<gridSize {
+                let index = row * gridSize + col
+                
+                // Swap with the right neighbor
+                if col < gridSize - 1 {
+                    var newState = state
+                    newState.swapAt(index, index + 1)
+                    neighbors.append(newState)
+                }
+                
+                // Swap with the bottom neighbor
+                if row < gridSize - 1 {
+                    var newState = state
+                    newState.swapAt(index, index + gridSize)
+                    neighbors.append(newState)
+                }
+            }
+        }
+        
+        return neighbors
+    }
 
     
     func resetLevel() {
@@ -320,7 +385,7 @@ struct ContentView: View {
             )
             
             // Reset the swipes left to the initial calculated value
-            swipesLeft = level
+            swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
         }
     
 }
