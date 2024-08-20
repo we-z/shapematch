@@ -284,7 +284,9 @@ struct ContentView: View {
                         row2 = row1 < 2 ? row1 + 1 : row1 - 1
                         col2 = col1
                     }
-                } while (row1 == row2 && col1 == col2) || (previousSwap != nil && previousSwap!.0 == (row2, col2) && previousSwap!.1 == (row1, col1))
+                } while (row1 == row2 && col1 == col2) ||
+                         (previousSwap != nil && previousSwap!.0 == (row2, col2) && previousSwap!.1 == (row1, col1)) ||
+                         (targetGrid[row1][col1] == targetGrid[row2][col2])  // Check if the shapes are the same
                 
                 // Swap the shapes in the targetGrid
                 let temp = targetGrid[row1][col1]
@@ -307,6 +309,7 @@ struct ContentView: View {
             }
         }
     }
+
 
     
     func resetLevel() {
