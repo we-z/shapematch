@@ -22,7 +22,6 @@ struct ContentView: View {
     )
     
     @State var initialGrid: [[ShapeType]] = [[]]
-    @State var initialSwipes = 0
     @State var showCelebration = false
     @State var freezeGame = false
     @State var swipesLeft = 1
@@ -155,9 +154,11 @@ struct ContentView: View {
                                             // No change needed here for offset handling
                                         }
                                         .onEnded { gesture in
-                                            handleSwipeGesture(gesture: gesture, row: row, col: column)
-                                            swipesLeft -= 1
-                                            impactHeavy.impactOccurred()
+                                            if swipesLeft > 0 {
+                                                handleSwipeGesture(gesture: gesture, row: row, col: column)
+                                                swipesLeft -= 1
+                                                impactHeavy.impactOccurred()
+                                            }
                                         }
                                 )
                         }
@@ -302,7 +303,7 @@ struct ContentView: View {
             )
             
             // Reset the swipes left to the initial calculated value
-            swipesLeft = initialSwipes
+            swipesLeft = level
         }
     
 }
