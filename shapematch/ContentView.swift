@@ -24,6 +24,7 @@ struct ContentView: View {
     @State var initialGrid: [[ShapeType]] = [[]]
     @State var initialSwipes = 0
     @State var showCelebration = false
+    @State var freezeGame = false
     @State var swipesLeft = 1
     @State var level = 1
     
@@ -91,7 +92,7 @@ struct ContentView: View {
                 Text("Level: \(level)")
                     .bold()
                     .font(.system(size: deviceWidth/9))
-                    .customTextStroke(width: 1.8)
+                    .customTextStroke()
                 
                 HStack{
                     Spacer()
@@ -175,6 +176,7 @@ struct ContentView: View {
                     }
             }
         }
+        .allowsHitTesting(!self.freezeGame)
     }
     
     func handleSwipeGesture(gesture: DragGesture.Value, row: Int, col: Int) {
@@ -220,6 +222,10 @@ struct ContentView: View {
     func checkWinCondition() {
         if grid == targetGrid {
             showCelebration = true
+            self.freezeGame = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.freezeGame = false
+            }
             print("You win!")
         } else if swipesLeft <= 0 {
             print("Level failed")
