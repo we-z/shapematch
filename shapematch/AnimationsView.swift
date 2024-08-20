@@ -10,7 +10,7 @@ import Vortex
 
 struct AnimationsView: View {
     var body: some View {
-        CelebrationEffect()
+        NoMoreSwipesView()
     }
 }
 
@@ -18,6 +18,62 @@ struct AnimationsView: View {
     AnimationsView()
 }
 
+struct NoMoreSwipesView: View {
+    var body: some View {
+        VStack{
+            Text("😢")
+                .font(.system(size: deviceWidth/3))
+                .customTextStroke(width: 4)
+                .padding(.bottom, 0)
+            Text("No more swipes")
+                .italic()
+                .bold()
+                .font(.system(size: deviceWidth/15))
+                .customTextStroke(width: 1.5)
+            Button {
+                
+            } label: {
+                HStack{
+                    Spacer()
+                    Text("Use 1 Live 💙")
+                        .bold()
+                        .font(.system(size: deviceWidth/15))
+                        .customTextStroke(width: 1.5)
+                    Spacer()
+                }
+                .padding()
+                .background(.blue)
+                .cornerRadius(15)
+                .overlay{
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(Color.black, lineWidth: 4)
+                        .padding(1)
+                }
+                .padding(.horizontal)
+            }
+            .buttonStyle(.roundedAndShadow6)
+            Button {
+                
+            } label: {
+                Text("Try again 🔁")
+                    .bold()
+                    .font(.system(size: deviceWidth/18))
+                    .customTextStroke(width: 1.2)
+                    .padding()
+            }
+        }
+        .padding()
+        .background(.red)
+        .cornerRadius(30)
+        .overlay{
+            RoundedRectangle(cornerRadius: 30)
+                .stroke(Color.black, lineWidth: 7)
+                .padding(1)
+        }
+        .padding(.horizontal)
+        
+    }
+}
 
 struct CelebrationEffect: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
