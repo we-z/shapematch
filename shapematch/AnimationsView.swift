@@ -19,6 +19,9 @@ struct AnimationsView: View {
 }
 
 struct NoMoreSwipesView: View {
+    
+    @ObservedObject private var appModel = AppModel.sharedAppModel
+    
     var body: some View {
         VStack{
             Text("✋")
@@ -31,7 +34,7 @@ struct NoMoreSwipesView: View {
                 .font(.system(size: deviceWidth/15))
                 .customTextStroke(width: 1.5)
             Button {
-                
+                appModel.showNoMoreSwipesView = false
             } label: {
                 HStack{
                     Spacer()
@@ -53,7 +56,8 @@ struct NoMoreSwipesView: View {
             }
             .buttonStyle(.roundedAndShadow6)
             Button {
-                
+                appModel.resetLevel()
+                appModel.showNoMoreSwipesView = false
             } label: {
                 Text("Try again 🔁")
                     .bold()

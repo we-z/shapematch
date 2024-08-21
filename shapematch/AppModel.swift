@@ -32,6 +32,7 @@ class AppModel: ObservableObject {
     @Published var swipesLeft = 1
     @Published var freezeGame = false
     @Published var level = 1
+    @Published var showNoMoreSwipesView = false
     
     func handleSwipeGesture(gesture: DragGesture.Value, row: Int, col: Int) {
         let direction: SwipeDirection
