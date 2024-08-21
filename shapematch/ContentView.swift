@@ -8,7 +8,8 @@ struct ContentView: View {
 
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @StateObject var audioController = AudioManager.sharedAudioManager
-    
+    @State var firstGamePlayed = false
+    let rect = CGRect(x: 0, y: 0, width: 300, height: 100)
     var body: some View {
         ZStack{
             Color.white
@@ -179,6 +180,19 @@ struct ContentView: View {
                 Color.gray.opacity(0.7)
                     .ignoresSafeArea()
             }
+            if !firstGamePlayed {
+                Color.gray.opacity(0.7)
+                    .reverseMask{
+                        VStack{
+                            Spacer()
+                            Rectangle()
+                                .frame(width: deviceHeight/6.3, height: deviceHeight/3.2)
+                                .cornerRadius(30)
+                                .padding()
+                        }
+                    }
+                    .ignoresSafeArea()
+            }
             VStack{
                 Spacer()
                 if appModel.showNoMoreSwipesView {
@@ -196,6 +210,11 @@ struct ContentView: View {
         }
     }
     
+    func HoleShapeMask(in rect: CGRect) -> Path {
+        var shape = Rectangle().path(in: rect)
+        shape.addPath(Circle().path(in: rect))
+        return shape
+    }
     
 }
 
