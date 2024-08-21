@@ -17,6 +17,7 @@
 		7639F98C2C7146AF00E2B371 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F98B2C7146AF00E2B371 /* AppModel.swift */; };
 		7639F98E2C72C42E00E2B371 /* AnimationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F98D2C72C42E00E2B371 /* AnimationsView.swift */; };
 		7639F9912C72C47A00E2B371 /* Vortex in Frameworks */ = {isa = PBXBuildFile; productRef = 7639F9902C72C47A00E2B371 /* Vortex */; };
+		7639F9CA2C7587C800E2B371 /* NoMoreSwipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F9C92C7587C800E2B371 /* NoMoreSwipesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		7639F9892C71460D00E2B371 /* Tempview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tempview.swift; sourceTree = "<group>"; };
 		7639F98B2C7146AF00E2B371 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		7639F98D2C72C42E00E2B371 /* AnimationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsView.swift; sourceTree = "<group>"; };
+		7639F9C92C7587C800E2B371 /* NoMoreSwipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMoreSwipesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				7639F9602C713D8100E2B371 /* ContentView.swift */,
 				7639F98B2C7146AF00E2B371 /* AppModel.swift */,
 				7639F98D2C72C42E00E2B371 /* AnimationsView.swift */,
+				7639F9C92C7587C800E2B371 /* NoMoreSwipesView.swift */,
 				7639F9892C71460D00E2B371 /* Tempview.swift */,
 				7639F9622C713D8200E2B371 /* Assets.xcassets */,
 				7639F9642C713D8200E2B371 /* shapematch.entitlements */,
@@ -232,6 +235,7 @@
 				7639F98E2C72C42E00E2B371 /* AnimationsView.swift in Sources */,
 				7639F9612C713D8100E2B371 /* ContentView.swift in Sources */,
 				7639F95F2C713D8100E2B371 /* shapematchApp.swift in Sources */,
+				7639F9CA2C7587C800E2B371 /* NoMoreSwipesView.swift in Sources */,
 				7639F98A2C71460D00E2B371 /* Tempview.swift in Sources */,
 				7639F98C2C7146AF00E2B371 /* AppModel.swift in Sources */,
 			);

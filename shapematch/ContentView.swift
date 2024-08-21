@@ -136,8 +136,6 @@ struct ContentView: View {
                                         .onEnded { gesture in
                                             if appModel.swipesLeft > 0 {
                                                 appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
-                                            } else if appModel.grid != appModel.targetGrid {
-                                                appModel.showNoMoreSwipesView = true
                                             }
                                         }
                                 )

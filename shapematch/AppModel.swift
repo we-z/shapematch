@@ -76,6 +76,9 @@ class AppModel: ObservableObject {
             offsets[start.row][start.col] = .zero
             offsets[end.row][end.col] = .zero
             swipesLeft -= 1
+            if grid != targetGrid && swipesLeft == 0 {
+                showNoMoreSwipesView = true
+            }
             impactHeavy.impactOccurred()
             checkWinCondition()
         }
