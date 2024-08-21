@@ -31,7 +31,6 @@ struct LevelDoneView: View {
                 HStack{
                     Spacer()
                     Text("Go Level \(appModel.level + 1) ➡️")
-                        .italic()
                         .bold()
                         .font(.system(size: deviceWidth/12))
                         .customTextStroke(width: 2.1)

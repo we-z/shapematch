@@ -15,7 +15,38 @@ class AudioManager: ObservableObject {
     @Published var musicPlayer: AVAudioPlayer!
     
     init() {
+        getAudioSetting()
         setUpAudioFiles()
+        setAllAudioVolume()
+    }
+    
+    @Published var mute: Bool = false {
+        didSet{
+            saveAudiotSetting()
+        }
+    }
+    
+    func saveAudiotSetting() {
+        if let muteSetting = try? JSONEncoder().encode(mute){
+            UserDefaults.standard.set(muteSetting, forKey: muteKey)
+        }
+    }
+    
+    func getAudioSetting(){
+        guard
+            let muteData = UserDefaults.standard.data(forKey: muteKey),
+            let savedMuteSetting = try? JSONDecoder().decode(Bool.self, from: muteData)
+        else {return}
+        
+        self.mute = savedMuteSetting
+    }
+    
+    func setAllAudioVolume() {
+        if mute == true {
+            self.musicPlayer.setVolume(0, fadeDuration: 0)
+        } else {
+            self.musicPlayer.setVolume(1, fadeDuration: 0)
+        }
     }
     
     func setUpAudioFiles() {

@@ -386,3 +386,22 @@ struct RoundedAndShadowButtonStyle6:ButtonStyle {
     }
 }
 
+extension ButtonStyle where Self == RoundedAndShadowButtonStyle3 {
+    static var roundedAndShadow3:RoundedAndShadowButtonStyle3 {
+        RoundedAndShadowButtonStyle3()
+    }
+}
+
+struct RoundedAndShadowButtonStyle3:ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .compositingGroup()
+            .shadow(color: .black, radius: 0.1, x: configuration.isPressed ? 0 : -3, y: configuration.isPressed ? 0 : 3)
+            .offset(x: configuration.isPressed ? -3 : 0, y: configuration.isPressed ? 3 : 0)
+            .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
+            .onChange(of: configuration.isPressed) { newPressSetting in
+                impactHeavy.impactOccurred()
+            }
+    }
+}
+
