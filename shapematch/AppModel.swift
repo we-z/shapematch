@@ -37,6 +37,7 @@ class AppModel: ObservableObject {
     @Published var level = 1
     @Published var showNoMoreSwipesView = false
     @Published var showLevelDoneView = false
+    @Published var firstGamePlayed = false
     
     @ObservedObject var audioController = AudioManager.sharedAudioManager
     
@@ -93,6 +94,7 @@ class AppModel: ObservableObject {
     func checkWinCondition() {
         if grid == targetGrid {
             shouldBurst.toggle()
+            firstGamePlayed = true
             self.freezeGame = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 self.showLevelDoneView = true
@@ -423,4 +425,28 @@ extension View {
         }
     }
   }
+}
+
+struct AnimatedOffsetModifier: ViewModifier {
+    let speed: CGFloat
+    var distance: CGFloat
+    @State private var offsetAmount: CGFloat = 30
+
+    func body(content: Content) -> some View {
+        content
+            .offset(y: -offsetAmount)
+            .onAppear {
+                DispatchQueue.main.async {
+                    withAnimation(Animation.easeInOut(duration: speed).repeatForever(autoreverses: true)) {
+                        offsetAmount = distance
+                    }
+                }
+            }
+    }
+}
+
+extension View {
+    func animatedOffset(speed amount: CGFloat, distance: CGFloat = -30) -> some View {
+        self.modifier(AnimatedOffsetModifier(speed: amount, distance: distance))
+    }
 }

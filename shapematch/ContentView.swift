@@ -8,7 +8,7 @@ struct ContentView: View {
 
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @StateObject var audioController = AudioManager.sharedAudioManager
-    @State var firstGamePlayed = false
+    
     let rect = CGRect(x: 0, y: 0, width: 300, height: 100)
     var body: some View {
         ZStack{
@@ -180,7 +180,7 @@ struct ContentView: View {
                 Color.gray.opacity(0.7)
                     .ignoresSafeArea()
             }
-            if !firstGamePlayed {
+            if !appModel.firstGamePlayed {
                 Color.gray.opacity(0.7)
                     .reverseMask{
                         VStack{
@@ -192,6 +192,16 @@ struct ContentView: View {
                         }
                     }
                     .ignoresSafeArea()
+                    .allowsHitTesting(false)
+                VStack{
+                    Spacer()
+                    Text("👆")
+                        .font(.system(size: deviceWidth/5))
+                        .customTextStroke()
+                        .offset(x: deviceWidth / 30, y: deviceWidth / 9)
+                        .animatedOffset(speed: 1.5, distance: deviceWidth/2.4)
+                }
+                .allowsHitTesting(false)
             }
             VStack{
                 Spacer()
