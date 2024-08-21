@@ -193,7 +193,7 @@ class AppModel: ObservableObject {
         
         // Reset the swipes left to the initial calculated value
         swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
-        swipesLeft = initialSwipes
+        initialSwipes = swipesLeft
     }
     
     func calculateMinimumSwipes(from startGrid: [[ShapeType]], to targetGrid: [[ShapeType]]) -> Int {
