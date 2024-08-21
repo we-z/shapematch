@@ -17,17 +17,15 @@ struct NoMoreSwipesView: View {
                 .font(.system(size: deviceWidth/3))
                 .customTextStroke(width: 4)
                 .padding(.bottom, 0)
-            Text("NO MORE SWIPES!")
-                .italic()
+            Text("No more swipes!")
                 .bold()
-                .font(.system(size: deviceWidth/15))
+                .font(.system(size: deviceWidth/12 ))
                 .customTextStroke(width: 1.8)
             Button {
-                appModel.showNoMoreSwipesView = false
             } label: {
                 HStack{
                     Spacer()
-                    Text("Use 1 Live 💙")
+                    Text("Use 1 Gem 💎")
                         .bold()
                         .font(.system(size: deviceWidth/15))
                         .customTextStroke(width: 1.5)
