@@ -10,7 +10,7 @@ import Vortex
 
 struct AnimationsView: View {
     var body: some View {
-        NoMoreSwipesView()
+        CelebrationEffect()
     }
 }
 
