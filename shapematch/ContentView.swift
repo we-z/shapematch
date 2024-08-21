@@ -23,7 +23,7 @@ struct ContentView: View {
                                 .bold()
                                 .italic()
                                 .customTextStroke()
-                                .font(.system(size: deviceWidth/9))
+                                .font(.system(size: deviceWidth/11))
                                 
                         }
                         .padding(.horizontal)
@@ -73,7 +73,7 @@ struct ContentView: View {
                                 .font(.system(size: deviceWidth/18))
                                 .padding(.horizontal)
                         }
-                        .padding(.horizontal, 27)
+                        .padding(.horizontal, 21)
                         .padding(.vertical, 6)
                         .frame(height: deviceWidth/6.3)
                         .background{
@@ -102,10 +102,12 @@ struct ContentView: View {
                 HStack{
                     Spacer()
                     VStack{
-                        Text("Goal 🎯")
+                        Text("🎯")
                             .bold()
                             .font(.system(size: deviceWidth/15))
                             .customTextStroke(width: 1.5)
+                            .scaleEffect(1.5)
+                            .offset(y:-3)
                         ForEach(0..<3) { row in
                             HStack {
                                 ForEach(0..<3) { column in
@@ -117,6 +119,7 @@ struct ContentView: View {
                         }
                     }
                     .padding()
+                    .frame(width: deviceWidth / 2.7)
                     .background(.yellow)
                     .cornerRadius(15)
                     .overlay{
@@ -124,9 +127,10 @@ struct ContentView: View {
                             .stroke(Color.black, lineWidth: 4)
                             .padding(1)
                     }
+                    
                     Spacer()
                     VStack{
-                        Text("Swipes ↔️")
+                        Text("⬅️ ⬆️ ⬇️ ➡️")
                             .multilineTextAlignment(.center)
                             .bold()
                             .font(.system(size: deviceWidth/18))
@@ -135,8 +139,10 @@ struct ContentView: View {
                             .bold()
                             .font(.system(size: deviceWidth/4))
                             .customTextStroke(width: 2.4)
+                            .fixedSize()
                     }
                     .padding()
+                    .frame(width: deviceWidth / 2.7)
                     .background(Color.green)
                     .cornerRadius(15)
                     .overlay{
@@ -156,7 +162,7 @@ struct ContentView: View {
                                 .offset(appModel.offsets[row][column])
                                 .gesture(
                                     DragGesture()
-                                        .onChanged { _ in
+                                        .onChanged { gesture in
                                             // No change needed here for offset handling
                                         }
                                         .onEnded { gesture in
