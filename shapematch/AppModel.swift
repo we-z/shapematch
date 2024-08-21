@@ -88,7 +88,8 @@ class AppModel: ObservableObject {
     func checkWinCondition() {
         if grid == targetGrid {
             shouldBurst.toggle()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.freezeGame = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.showLevelDoneView = true
             }
             print("You win!")
