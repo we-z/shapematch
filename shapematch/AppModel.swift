@@ -37,6 +37,8 @@ class AppModel: ObservableObject {
     @Published var showNoMoreSwipesView = false
     @Published var showLevelDoneView = false
     
+    @ObservedObject var audioController = AudioManager.sharedAudioManager
+    
     func handleSwipeGesture(gesture: DragGesture.Value, row: Int, col: Int) {
         let direction: SwipeDirection
         

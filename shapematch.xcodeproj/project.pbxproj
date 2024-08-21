@@ -19,6 +19,8 @@
 		7639F9912C72C47A00E2B371 /* Vortex in Frameworks */ = {isa = PBXBuildFile; productRef = 7639F9902C72C47A00E2B371 /* Vortex */; };
 		7639F9CA2C7587C800E2B371 /* NoMoreSwipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F9C92C7587C800E2B371 /* NoMoreSwipesView.swift */; };
 		7639F9CC2C758AC400E2B371 /* LevelDoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F9CB2C758AC400E2B371 /* LevelDoneView.swift */; };
+		7639F9CE2C759A2E00E2B371 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F9CD2C759A2E00E2B371 /* AudioManager.swift */; };
+		7639F9D02C759B2100E2B371 /* ShapeMatchMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		7639F98D2C72C42E00E2B371 /* AnimationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsView.swift; sourceTree = "<group>"; };
 		7639F9C92C7587C800E2B371 /* NoMoreSwipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMoreSwipesView.swift; sourceTree = "<group>"; };
 		7639F9CB2C758AC400E2B371 /* LevelDoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDoneView.swift; sourceTree = "<group>"; };
+		7639F9CD2C759A2E00E2B371 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = ShapeMatchMusic.mp3; path = ../../../../Downloads/ShapeMatchMusic.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,8 @@
 			children = (
 				7639F95E2C713D8100E2B371 /* shapematchApp.swift */,
 				7639F98B2C7146AF00E2B371 /* AppModel.swift */,
+				7639F9CD2C759A2E00E2B371 /* AudioManager.swift */,
+				7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */,
 				7639F98D2C72C42E00E2B371 /* AnimationsView.swift */,
 				7639F9602C713D8100E2B371 /* ContentView.swift */,
 				7639F9CB2C758AC400E2B371 /* LevelDoneView.swift */,
@@ -218,6 +224,7 @@
 			files = (
 				7639F9672C713D8200E2B371 /* Preview Assets.xcassets in Resources */,
 				7639F9632C713D8200E2B371 /* Assets.xcassets in Resources */,
+				7639F9D02C759B2100E2B371 /* ShapeMatchMusic.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +244,7 @@
 			files = (
 				7639F98E2C72C42E00E2B371 /* AnimationsView.swift in Sources */,
 				7639F9CC2C758AC400E2B371 /* LevelDoneView.swift in Sources */,
+				7639F9CE2C759A2E00E2B371 /* AudioManager.swift in Sources */,
 				7639F9612C713D8100E2B371 /* ContentView.swift in Sources */,
 				7639F95F2C713D8100E2B371 /* shapematchApp.swift in Sources */,
 				7639F9CA2C7587C800E2B371 /* NoMoreSwipesView.swift in Sources */,

@@ -154,9 +154,6 @@ struct ContentView: View {
                 Spacer()
                 if appModel.showNoMoreSwipesView {
                     NoMoreSwipesView()
-                        .onAppear {
-                            AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
-                        }
                 }
                 if appModel.showLevelDoneView {
                     LevelDoneView()
