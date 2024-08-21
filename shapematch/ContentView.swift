@@ -42,6 +42,21 @@ struct ContentView: View {
                     .buttonStyle(.roundedAndShadow6)
                     .padding(.leading, 6)
                     Spacer()
+                    Button{
+                        audioController.mute.toggle()
+                        } label: {
+                            Image(systemName: audioController.mute ? "speaker.slash.fill" : "speaker.wave.2.fill") // Replace with your image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width:  deviceWidth/9, height:  deviceWidth/9)
+                                .foregroundColor(.white)
+                                .customTextStroke(width: 1)
+                                .padding(.leading)
+                        }
+                        .buttonStyle(.roundedAndShadow3)
+                        .onChange(of: audioController.mute) { newSetting in
+                            audioController.setAllAudioVolume()
+                        }
                     Button {
                         appModel.resetLevel()
                     } label: {
@@ -73,27 +88,9 @@ struct ContentView: View {
                 ZStack{
                     Text("Level: \(appModel.level)")
                         .bold()
-                        .font(.system(size: deviceWidth/9))
-                        .customTextStroke()
-                    
-                    HStack {
-                        Button{
-                            audioController.mute.toggle()
-                            } label: {
-                                Image(systemName: audioController.mute ? "speaker.slash.fill" : "speaker.wave.2.fill") // Replace with your image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 40, height: 40)
-                                    .foregroundColor(.white)
-                                    .customTextStroke(width: 1)
-                                    .padding(.leading)
-                            }
-                            .buttonStyle(.roundedAndShadow3)
-                            .onChange(of: audioController.mute) { newSetting in
-                                audioController.setAllAudioVolume()
-                            }
-                        Spacer()
-                    }
+                        .font(.system(size: deviceWidth/6))
+                        .customTextStroke(width: 2.4)
+                        .padding()
                 }
                 
                 HStack{
@@ -165,7 +162,7 @@ struct ContentView: View {
                         }
                     }
                 }
-                Spacer()
+//                Spacer()
             }
             .allowsHitTesting(!appModel.freezeGame)
             if appModel.showLevelDoneView || appModel.showNoMoreSwipesView {
