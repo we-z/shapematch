@@ -23,7 +23,8 @@ struct ContentView: View {
                                 .bold()
                                 .italic()
                                 .customTextStroke(width: 1.5)
-                                .font(.system(size: 21))
+                                .font(.system(size: deviceWidth/18))
+                                
                         }
                         .padding(.horizontal, 21)
                         .padding(.vertical, 6)
@@ -37,37 +38,23 @@ struct ContentView: View {
                                 .stroke(Color.black, lineWidth: 4)
                                 .padding(1)
                         }
+                        .fixedSize()
                         .padding(.leading)
+                        
                     }
                     .buttonStyle(.roundedAndShadow6)
                     .padding(.leading, 6)
-                    Spacer()
-                    Button{
-                        audioController.mute.toggle()
-                    } label: {
-                        Image(systemName: audioController.mute ? "speaker.slash.fill" : "speaker.wave.2.fill") // Replace with your image
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width:  deviceWidth/7, height:  deviceWidth/7)
-                            .foregroundColor(.white)
-                            .customTextStroke(width: 2.1)
-                            .padding(.leading)
-                    }
-                    .buttonStyle(.roundedAndShadow3)
-                    .onChange(of: audioController.mute) { newSetting in
-                        audioController.setAllAudioVolume()
-                    }
-                    Spacer()
                     Button {
                         appModel.resetLevel()
                     } label: {
                         HStack{
+                            Spacer()
                             Image(systemName: "arrow.counterclockwise")
                                 .bold()
                                 .italic()
                                 .customTextStroke(width: 1.5)
-                                .font(.system(size: 21))
-                                .padding(.horizontal, 6)
+                                .font(.system(size: deviceWidth/18))
+                            Spacer()
                         }
                         .padding(.horizontal, 21)
                         .padding(.vertical, 6)
@@ -81,9 +68,25 @@ struct ContentView: View {
                                 .stroke(Color.black, lineWidth: 4)
                                 .padding(1)
                         }
-                        .padding([.trailing, .leading])
+                        .padding(.leading, 10)
                     }
                     .buttonStyle(.roundedAndShadow6)
+                    Spacer()
+                    Button{
+                        audioController.mute.toggle()
+                    } label: {
+                        Image(systemName: audioController.mute ? "speaker.slash.fill" : "speaker.wave.2.fill") // Replace with your image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width:  deviceWidth/7, height:  deviceWidth/7)
+                            .foregroundColor(.white)
+                            .customTextStroke(width: 2.1 )
+                            .padding(.trailing)
+                    }
+                    .buttonStyle(.roundedAndShadow3)
+                    .onChange(of: audioController.mute) { newSetting in
+                        audioController.setAllAudioVolume()
+                    }
                 }
                 Spacer()
                 ZStack{
