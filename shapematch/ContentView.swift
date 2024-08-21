@@ -95,7 +95,7 @@ struct ContentView: View {
                     Text("Level : \(appModel.level)")
                         .bold()
                         .font(.system(size: deviceWidth/6))
-                        .customTextStroke(width: 2.7)
+                        .customTextStroke(width: 3)
                         .padding()
                 }
                 
