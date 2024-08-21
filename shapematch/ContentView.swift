@@ -145,6 +145,10 @@ struct ContentView: View {
                 Spacer()
             }
             .allowsHitTesting(!appModel.freezeGame)
+            if appModel.showLevelDoneView || appModel.showNoMoreSwipesView {
+                Color.gray.opacity(0.7)
+                    .ignoresSafeArea()
+            }
             VStack{
                 Spacer()
                 if appModel.showNoMoreSwipesView {
