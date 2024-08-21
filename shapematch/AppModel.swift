@@ -284,13 +284,13 @@ struct LargeShapeView: View {
         switch shapeType {
         case .circle:
             Circle().fill(Color.blue)
-                .stroke(.black, lineWidth: 6)
+                .stroke(.black, lineWidth: 9)
         case .square:
             Rectangle().fill(Color.red)
-                .stroke(.black, lineWidth: 6)
+                .stroke(.black, lineWidth: 9)
         case .triangle:
             Triangle().fill(Color.green)
-                .stroke(.black, lineWidth: 6)
+                .stroke(.black, lineWidth: 9)
         }
     }
 }
