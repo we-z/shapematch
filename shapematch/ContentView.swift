@@ -44,19 +44,20 @@ struct ContentView: View {
                     Spacer()
                     Button{
                         audioController.mute.toggle()
-                        } label: {
-                            Image(systemName: audioController.mute ? "speaker.slash.fill" : "speaker.wave.2.fill") // Replace with your image
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width:  deviceWidth/9, height:  deviceWidth/9)
-                                .foregroundColor(.white)
-                                .customTextStroke(width: 1)
-                                .padding(.leading)
-                        }
-                        .buttonStyle(.roundedAndShadow3)
-                        .onChange(of: audioController.mute) { newSetting in
-                            audioController.setAllAudioVolume()
-                        }
+                    } label: {
+                        Image(systemName: audioController.mute ? "speaker.slash.fill" : "speaker.wave.2.fill") // Replace with your image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width:  deviceWidth/7, height:  deviceWidth/7)
+                            .foregroundColor(.white)
+                            .customTextStroke(width: 1.8)
+                            .padding(.leading)
+                    }
+                    .buttonStyle(.roundedAndShadow3)
+                    .onChange(of: audioController.mute) { newSetting in
+                        audioController.setAllAudioVolume()
+                    }
+                    Spacer()
                     Button {
                         appModel.resetLevel()
                     } label: {
