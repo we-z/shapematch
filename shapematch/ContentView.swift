@@ -91,13 +91,10 @@ struct ContentView: View {
                 }
                 .padding(.top)
                 Spacer()
-                ZStack{
-                    Text("Level : \(appModel.level)")
-                        .bold()
-                        .font(.system(size: deviceWidth/6))
-                        .customTextStroke(width: 3)
-                        .padding()
-                }
+                Text("Level : \(appModel.level)")
+                    .bold()
+                    .font(.system(size: deviceWidth/6))
+                    .customTextStroke(width: 3)
                 
                 HStack{
                     Spacer()
@@ -152,7 +149,9 @@ struct ContentView: View {
                     }
                     Spacer()
                 }
-                .padding(.bottom)
+//                .frame(height: deviceHeight/7)
+//                .scaleEffect(0.6)
+                
                 ForEach(0..<3) { row in
                     HStack {
                         ForEach(0..<3) { column in
@@ -174,7 +173,6 @@ struct ContentView: View {
                         }
                     }
                 }
-//                Spacer()
             }
             .allowsHitTesting(!appModel.freezeGame)
             if appModel.showLevelDoneView || appModel.showNoMoreSwipesView {
