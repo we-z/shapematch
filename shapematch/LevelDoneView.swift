@@ -22,7 +22,9 @@ struct LevelDoneView: View {
                 .font(.system(size: deviceWidth/12))
                 .customTextStroke(width: 2.1)
             Button {
-                appModel.showNoMoreSwipesView = false
+                appModel.level += 1
+                appModel.setupLevel()
+                appModel.swipesLeft =  appModel.calculateMinimumSwipes(from:  appModel.grid, to:  appModel.targetGrid)
             } label: {
                 HStack{
                     Spacer()

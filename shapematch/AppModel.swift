@@ -87,13 +87,7 @@ class AppModel: ObservableObject {
     func checkWinCondition() {
         if grid == targetGrid {
             shouldBurst.toggle()
-            self.freezeGame = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-                self.freezeGame = false
-                    level += 1
-                    setupLevel()
-                    swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
-            }
+            
             print("You win!")
         } else if swipesLeft <= 0 {
             print("Level failed")
