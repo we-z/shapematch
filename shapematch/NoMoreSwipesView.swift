@@ -25,10 +25,10 @@ struct NoMoreSwipesView: View {
             } label: {
                 HStack{
                     Spacer()
-                    Text("Use 1 Gem 💎")
+                    Text("Use Gem 💎")
                         .bold()
                         .font(.system(size: deviceWidth/15))
-                        .customTextStroke(width: 1.5)
+                        .customTextStroke(width: 1.8)
                     Spacer()
                 }
                 .padding()
@@ -46,21 +46,29 @@ struct NoMoreSwipesView: View {
                 appModel.resetLevel()
                 appModel.showNoMoreSwipesView = false
             } label: {
-                Text("Try again 🔁")
-                    .bold()
-                    .font(.system(size: deviceWidth/15))
-                    .customTextStroke(width: 1.5)
-                    .padding()
-                    .background(.green)
-                    .cornerRadius(15)
-                    .overlay{
-                        RoundedRectangle(cornerRadius: 15)
-                            .stroke(Color.black, lineWidth: 4)
-                            .padding(1)
-                    }
-                    .padding()
+                HStack{
+                    Image(systemName: "arrow.counterclockwise")
+                        .bold()
+                        .italic()
+                        .customTextStroke(width: 1.5)
+                        .font(.system(size: deviceWidth/18))
+                        .padding(.horizontal)
+                }
+                .padding(.horizontal, 21)
+                .padding(.vertical, 6)
+                .frame(height: deviceWidth/6.3)
+                .background{
+                    Color.red
+                }
+                .cornerRadius(15)
+                .overlay{
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(Color.black, lineWidth: 4)
+                        .padding(1)
+                }
             }
             .buttonStyle(.roundedAndShadow6)
+            .padding(.vertical)
         }
         .padding()
         .background(.red)
