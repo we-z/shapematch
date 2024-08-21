@@ -8,6 +8,7 @@ struct ContentView: View {
 
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @StateObject var audioController = AudioManager.sharedAudioManager
+    @State private var hasSwiped = false
     
     let rect = CGRect(x: 0, y: 0, width: 300, height: 100)
     var body: some View {
@@ -96,7 +97,6 @@ struct ContentView: View {
                     .bold()
                     .font(.system(size: deviceWidth/6))
                     .customTextStroke(width: 3)
-                
                 HStack{
                     Spacer()
                     VStack{
@@ -150,6 +150,7 @@ struct ContentView: View {
                     }
                     Spacer()
                 }
+                .padding(0)
 //                .frame(height: deviceHeight/7)
 //                .scaleEffect(0.6)
                 
@@ -163,12 +164,17 @@ struct ContentView: View {
                                 .gesture(
                                     DragGesture()
                                         .onChanged { gesture in
-                                            // No change needed here for offset handling
-                                        }
-                                        .onEnded { gesture in
-                                            if appModel.swipesLeft > 0 {
-                                                appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
+                                            if appModel.swipesLeft > 0 && !hasSwiped {
+                                                let threshold: CGFloat = deviceWidth / 6 // Adjust threshold if needed
+                                                
+                                                if abs(gesture.translation.width) > threshold || abs(gesture.translation.height) > threshold {
+                                                    appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
+                                                    hasSwiped = true
+                                                }
                                             }
+                                        }
+                                        .onEnded { _ in
+                                            hasSwiped = false // Reset after gesture ends
                                         }
                                 )
                         }
