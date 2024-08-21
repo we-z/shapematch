@@ -1,4 +1,5 @@
 import SwiftUI
+import AVFoundation
 
 let deviceHeight = UIScreen.main.bounds.height
 let deviceWidth = UIScreen.main.bounds.width
@@ -153,6 +154,9 @@ struct ContentView: View {
                 Spacer()
                 if appModel.showNoMoreSwipesView {
                     NoMoreSwipesView()
+                        .onAppear {
+                            AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
+                        }
                 }
                 if appModel.showLevelDoneView {
                     LevelDoneView()

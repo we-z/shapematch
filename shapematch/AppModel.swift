@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftUI
+import GameKit
+
 
 class AppModel: ObservableObject {
     static let sharedAppModel = AppModel()
@@ -68,7 +70,7 @@ class AppModel: ObservableObject {
             offsets[start.row][start.col] = offset
             offsets[end.row][end.col] = CGSize(width: -offset.width, height: -offset.height)
         }
-        
+        AudioServicesPlaySystemSound(1104)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
             let temp = grid[start.row][start.col]
             grid[start.row][start.col] = grid[end.row][end.col]
