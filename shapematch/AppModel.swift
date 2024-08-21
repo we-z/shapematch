@@ -93,7 +93,7 @@ class AppModel: ObservableObject {
         if grid == targetGrid {
             shouldBurst.toggle()
             self.freezeGame = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 self.showLevelDoneView = true
             }
             print("You win!")
