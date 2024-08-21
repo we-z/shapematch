@@ -186,7 +186,7 @@ struct ContentView: View {
                         VStack{
                             Spacer()
                             Rectangle()
-                                .frame(width: deviceHeight/6.3, height: deviceHeight/3.2)
+                                .frame(width: deviceWidth/3, height: deviceWidth/1.5)
                                 .cornerRadius(30)
                                 .padding()
                         }
