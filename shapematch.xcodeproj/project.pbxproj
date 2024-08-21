@@ -21,6 +21,7 @@
 		7639F9CC2C758AC400E2B371 /* LevelDoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F9CB2C758AC400E2B371 /* LevelDoneView.swift */; };
 		7639F9CE2C759A2E00E2B371 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F9CD2C759A2E00E2B371 /* AudioManager.swift */; };
 		7639F9D02C759B2100E2B371 /* ShapeMatchMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */; };
+		76ADAF042C76A92C006B2844 /* OverlaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ADAF032C76A92B006B2844 /* OverlaysView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		7639F9CB2C758AC400E2B371 /* LevelDoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDoneView.swift; sourceTree = "<group>"; };
 		7639F9CD2C759A2E00E2B371 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = ShapeMatchMusic.mp3; path = ../../../../Downloads/ShapeMatchMusic.mp3; sourceTree = "<group>"; };
+		76ADAF032C76A92B006B2844 /* OverlaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlaysView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				7639F9CB2C758AC400E2B371 /* LevelDoneView.swift */,
 				7639F9892C71460D00E2B371 /* Tempview.swift */,
 				7639F9C92C7587C800E2B371 /* NoMoreSwipesView.swift */,
+				76ADAF032C76A92B006B2844 /* OverlaysView.swift */,
 				7639F9622C713D8200E2B371 /* Assets.xcassets */,
 				7639F9642C713D8200E2B371 /* shapematch.entitlements */,
 				7639F9652C713D8200E2B371 /* Preview Content */,
@@ -247,6 +250,7 @@
 				7639F9CE2C759A2E00E2B371 /* AudioManager.swift in Sources */,
 				7639F9612C713D8100E2B371 /* ContentView.swift in Sources */,
 				7639F95F2C713D8100E2B371 /* shapematchApp.swift in Sources */,
+				76ADAF042C76A92C006B2844 /* OverlaysView.swift in Sources */,
 				7639F9CA2C7587C800E2B371 /* NoMoreSwipesView.swift in Sources */,
 				7639F98A2C71460D00E2B371 /* Tempview.swift in Sources */,
 				7639F98C2C7146AF00E2B371 /* AppModel.swift in Sources */,
