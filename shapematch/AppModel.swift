@@ -31,6 +31,7 @@ class AppModel: ObservableObject {
     )
     
     @Published var initialGrid: [[ShapeType]] = [[]]
+    @Published var initialSwipes = 1
     @Published var swipesLeft = 1
     @Published var freezeGame = false
     @Published var level = 1
@@ -122,6 +123,7 @@ class AppModel: ObservableObject {
             
             // Set swipesLeft equal to the current level
             swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
+            initialSwipes = swipesLeft
             
             // Perform a series of valid adjacent swaps to create a targetGrid that requires exactly `level` moves to solve
             var previousSwap: ((Int, Int), (Int, Int))? = nil
@@ -191,6 +193,7 @@ class AppModel: ObservableObject {
         
         // Reset the swipes left to the initial calculated value
         swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
+        swipesLeft = initialSwipes
     }
     
     func calculateMinimumSwipes(from startGrid: [[ShapeType]], to targetGrid: [[ShapeType]]) -> Int {

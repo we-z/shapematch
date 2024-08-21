@@ -25,7 +25,8 @@ struct NoMoreSwipesView: View {
             } label: {
                 HStack{
                     Spacer()
-                    Text("Use Gem 💎")
+                    Text("💎 + \(appModel.initialSwipes) swipes")
+                        .italic()
                         .bold()
                         .font(.system(size: deviceWidth/15))
                         .customTextStroke(width: 1.8)
