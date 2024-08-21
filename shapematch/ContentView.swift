@@ -144,6 +144,7 @@ struct ContentView: View {
                 }
                 Spacer()
             }
+            .allowsHitTesting(!appModel.freezeGame)
             VStack{
                 Spacer()
                 if appModel.showNoMoreSwipesView {
@@ -159,7 +160,6 @@ struct ContentView: View {
         .onAppear {
             appModel.initialGrid = appModel.grid
         }
-        .allowsHitTesting(!appModel.freezeGame)
     }
     
     
