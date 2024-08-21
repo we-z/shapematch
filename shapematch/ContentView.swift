@@ -19,7 +19,7 @@ struct ContentView: View {
                         
                     } label: {
                         HStack{
-                            Text("💎 Gems: 1")
+                            Text("💎 Gems : 1")
                                 .bold()
                                 .italic()
                                 .customTextStroke(width: 1.5)
@@ -50,7 +50,7 @@ struct ContentView: View {
                             .scaledToFit()
                             .frame(width:  deviceWidth/7, height:  deviceWidth/7)
                             .foregroundColor(.white)
-                            .customTextStroke(width: 1.8)
+                            .customTextStroke(width: 2.1)
                             .padding(.leading)
                     }
                     .buttonStyle(.roundedAndShadow3)
@@ -87,10 +87,10 @@ struct ContentView: View {
                 }
                 Spacer()
                 ZStack{
-                    Text("Level: \(appModel.level)")
+                    Text("Level : \(appModel.level)")
                         .bold()
                         .font(.system(size: deviceWidth/6))
-                        .customTextStroke(width: 2.4)
+                        .customTextStroke(width: 2.7)
                         .padding()
                 }
                 
