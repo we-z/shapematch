@@ -19,16 +19,16 @@ struct ContentView: View {
                         
                     } label: {
                         HStack{
-                            Text("💎 Gems : 1")
+                            Text("💎 0")
                                 .bold()
                                 .italic()
-                                .customTextStroke(width: 1.5)
-                                .font(.system(size: deviceWidth/18))
+                                .customTextStroke()
+                                .font(.system(size: deviceWidth/9))
                                 
                         }
-                        .padding(.horizontal, 21)
+                        .padding(.horizontal)
                         .padding(.vertical, 6)
-                        .frame(height: 60)
+                        .frame(height: deviceWidth/6)
                         .background{
                             Color.blue
                         }
@@ -44,33 +44,6 @@ struct ContentView: View {
                     }
                     .buttonStyle(.roundedAndShadow6)
                     .padding(.leading, 6)
-                    Button {
-                        appModel.resetLevel()
-                    } label: {
-                        HStack{
-                            Spacer()
-                            Image(systemName: "arrow.counterclockwise")
-                                .bold()
-                                .italic()
-                                .customTextStroke(width: 1.5)
-                                .font(.system(size: deviceWidth/18))
-                            Spacer()
-                        }
-                        .padding(.horizontal, 21)
-                        .padding(.vertical, 6)
-                        .frame(height: 60)
-                        .background{
-                            Color.red
-                        }
-                        .cornerRadius(15)
-                        .overlay{
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(Color.black, lineWidth: 4)
-                                .padding(1)
-                        }
-                        .padding(.leading, 10)
-                    }
-                    .buttonStyle(.roundedAndShadow6)
                     Spacer()
                     Button{
                         audioController.mute.toggle()
@@ -80,14 +53,43 @@ struct ContentView: View {
                             .scaledToFit()
                             .frame(width:  deviceWidth/7, height:  deviceWidth/7)
                             .foregroundColor(.white)
-                            .customTextStroke(width: 2.1 )
-                            .padding(.trailing)
+                            .customTextStroke(width: 1.8 )
+                            .padding(.horizontal)
+                            .offset(y:1)
                     }
                     .buttonStyle(.roundedAndShadow3)
                     .onChange(of: audioController.mute) { newSetting in
                         audioController.setAllAudioVolume()
                     }
+                    Spacer()
+                    Button {
+                        appModel.resetLevel()
+                    } label: {
+                        HStack{
+                            Image(systemName: "arrow.counterclockwise")
+                                .bold()
+                                .italic()
+                                .customTextStroke(width: 1.5)
+                                .font(.system(size: deviceWidth/18))
+                                .padding(.horizontal)
+                        }
+                        .padding(.horizontal, 27)
+                        .padding(.vertical, 6)
+                        .frame(height: deviceWidth/6.3)
+                        .background{
+                            Color.red
+                        }
+                        .cornerRadius(15)
+                        .overlay{
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(Color.black, lineWidth: 4)
+                                .padding(1)
+                        }
+                        .padding(.trailing)
+                    }
+                    .buttonStyle(.roundedAndShadow6)
                 }
+                .padding(.top)
                 Spacer()
                 ZStack{
                     Text("Level : \(appModel.level)")
