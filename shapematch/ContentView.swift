@@ -144,13 +144,17 @@ struct ContentView: View {
                 }
                 Spacer()
             }
-            if appModel.showNoMoreSwipesView {
-                VStack{
-                    Spacer()
+            VStack{
+                Spacer()
+                if appModel.showNoMoreSwipesView {
                     NoMoreSwipesView()
+                }
+                if appModel.showLevelDoneView {
+                    LevelDoneView()
                 }
             }
             CelebrationEffect()
+            
         }
         .onAppear {
             appModel.initialGrid = appModel.grid

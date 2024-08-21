@@ -21,7 +21,7 @@ struct NoMoreSwipesView: View {
                 .italic()
                 .bold()
                 .font(.system(size: deviceWidth/15))
-                .customTextStroke(width: 1.5)
+                .customTextStroke(width: 1.8)
             Button {
                 appModel.showNoMoreSwipesView = false
             } label: {

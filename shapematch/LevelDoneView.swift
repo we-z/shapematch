@@ -15,6 +15,7 @@ struct LevelDoneView: View {
             Text("✅")
                 .font(.system(size: deviceWidth/3))
                 .customTextStroke(width: 4)
+                .padding(.bottom, 9)
             Text("LEVEL \(appModel.level)\n🎉 COMPLETE 🎊")
                 .multilineTextAlignment(.center)
                 .italic()
@@ -25,6 +26,7 @@ struct LevelDoneView: View {
                 appModel.level += 1
                 appModel.setupLevel()
                 appModel.swipesLeft =  appModel.calculateMinimumSwipes(from:  appModel.grid, to:  appModel.targetGrid)
+                appModel.showLevelDoneView = false
             } label: {
                 HStack{
                     Spacer()
@@ -46,6 +48,7 @@ struct LevelDoneView: View {
                 .padding([.bottom, .horizontal])
             }
             .buttonStyle(.roundedAndShadow6)
+            .padding(.top, 9)
         }
         .padding()
         .background(.blue)

@@ -33,6 +33,7 @@ class AppModel: ObservableObject {
     @Published var freezeGame = false
     @Published var level = 1
     @Published var showNoMoreSwipesView = false
+    @Published var showLevelDoneView = false
     
     func handleSwipeGesture(gesture: DragGesture.Value, row: Int, col: Int) {
         let direction: SwipeDirection
@@ -87,7 +88,9 @@ class AppModel: ObservableObject {
     func checkWinCondition() {
         if grid == targetGrid {
             shouldBurst.toggle()
-            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.showLevelDoneView = true
+            }
             print("You win!")
         } else if swipesLeft <= 0 {
             print("Level failed")
