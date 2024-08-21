@@ -25,6 +25,7 @@ struct LevelDoneView: View {
                 appModel.level += 1
                 appModel.setupLevel()
                 appModel.swipesLeft =  appModel.calculateMinimumSwipes(from:  appModel.grid, to:  appModel.targetGrid)
+                appModel.initialSwipes = appModel.calculateMinimumSwipes(from:  appModel.grid, to:  appModel.targetGrid)
                 appModel.showLevelDoneView = false
                 appModel.freezeGame = false
             } label: {

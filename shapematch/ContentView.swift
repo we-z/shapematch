@@ -130,7 +130,7 @@ struct ContentView: View {
                     
                     Spacer()
                     VStack{
-                        Text("⬅️ ⬆️ ⬇️ ➡️")
+                        Text("↕️ ↔️")
                             .multilineTextAlignment(.center)
                             .bold()
                             .font(.system(size: deviceWidth/18))
