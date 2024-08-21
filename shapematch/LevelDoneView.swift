@@ -16,9 +16,8 @@ struct LevelDoneView: View {
                 .font(.system(size: deviceWidth/3))
                 .customTextStroke(width: 4)
                 .padding(.bottom, 9)
-            Text("LEVEL \(appModel.level)\n🎉 COMPLETE 🎊")
+            Text("Level \(appModel.level)\nComplete")
                 .multilineTextAlignment(.center)
-                .italic()
                 .bold()
                 .font(.system(size: deviceWidth/12))
                 .customTextStroke(width: 2.1)
@@ -31,7 +30,7 @@ struct LevelDoneView: View {
             } label: {
                 HStack{
                     Spacer()
-                    Text("GO LEVEL \(appModel.level + 1) ➡️")
+                    Text("Go Level \(appModel.level + 1) ➡️")
                         .italic()
                         .bold()
                         .font(.system(size: deviceWidth/12))
