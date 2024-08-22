@@ -35,7 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7639F95B2C713D8100E2B371 /* Shape Swap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shape Swap.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7639F95B2C713D8100E2B371 /* Shape Shuffle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shape Shuffle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7639F95E2C713D8100E2B371 /* shapematchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shapematchApp.swift; sourceTree = "<group>"; };
 		7639F9602C713D8100E2B371 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7639F9622C713D8200E2B371 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 		7639F95C2C713D8100E2B371 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7639F95B2C713D8100E2B371 /* Shape Swap.app */,
+				7639F95B2C713D8100E2B371 /* Shape Shuffle.app */,
 				7639F9762C713D8200E2B371 /* shapematchUITests.xctest */,
 			);
 			name = Products;
@@ -141,9 +141,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7639F95A2C713D8100E2B371 /* Shape Swap */ = {
+		7639F95A2C713D8100E2B371 /* Shape Shuffle */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7639F9802C713D8200E2B371 /* Build configuration list for PBXNativeTarget "Shape Swap" */;
+			buildConfigurationList = 7639F9802C713D8200E2B371 /* Build configuration list for PBXNativeTarget "Shape Shuffle" */;
 			buildPhases = (
 				7639F9572C713D8100E2B371 /* Sources */,
 				7639F9582C713D8100E2B371 /* Frameworks */,
@@ -153,12 +153,12 @@
 			);
 			dependencies = (
 			);
-			name = "Shape Swap";
+			name = "Shape Shuffle";
 			packageProductDependencies = (
 				7639F9902C72C47A00E2B371 /* Vortex */,
 			);
 			productName = shapematch;
-			productReference = 7639F95B2C713D8100E2B371 /* Shape Swap.app */;
+			productReference = 7639F95B2C713D8100E2B371 /* Shape Shuffle.app */;
 			productType = "com.apple.product-type.application";
 		};
 		7639F9752C713D8200E2B371 /* shapematchUITests */ = {
@@ -214,7 +214,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7639F95A2C713D8100E2B371 /* Shape Swap */,
+				7639F95A2C713D8100E2B371 /* Shape Shuffle */,
 				7639F9752C713D8200E2B371 /* shapematchUITests */,
 			);
 		};
@@ -271,7 +271,7 @@
 /* Begin PBXTargetDependency section */
 		7639F9782C713D8200E2B371 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7639F95A2C713D8100E2B371 /* Shape Swap */;
+			target = 7639F95A2C713D8100E2B371 /* Shape Shuffle */;
 			targetProxy = 7639F9772C713D8200E2B371 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -523,7 +523,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7639F9802C713D8200E2B371 /* Build configuration list for PBXNativeTarget "Shape Swap" */ = {
+		7639F9802C713D8200E2B371 /* Build configuration list for PBXNativeTarget "Shape Shuffle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7639F9812C713D8200E2B371 /* Debug */,

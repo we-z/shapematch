@@ -57,8 +57,9 @@ struct CelebrationEffect: View {
                             animateMessage = true
                             currentMessage = messages.randomElement() ?? "Well Done!"
                         }
-                        
-                        proxy.burst()
+                        DispatchQueue.main.async {
+                            proxy.burst()
+                        }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
                             withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                                 animateMessage = false
@@ -75,7 +76,7 @@ struct CelebrationEffect: View {
                     .bold()
                     .italic()
                     .font(.system(size: deviceWidth / 9))
-                    .customTextStroke()
+                    .customTextStroke(width: 2.4)
                     .rotationEffect(.degrees(animateMessage ? 0 : -180))
                     .scaleEffect(animateMessage ? 1 : 0.1)
                     .offset(y: animateMessage ? 0 : -(deviceHeight/2))
