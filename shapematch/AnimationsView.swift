@@ -85,7 +85,8 @@ struct CelebrationEffect: View {
 
 struct HandSwipeView: View {
 
-    @State private var animateMessage = false
+    @State private var offsetAmount: CGFloat = 30
+    @State private var isAnimating = false
 
     var body: some View {
         VStack{
@@ -95,42 +96,24 @@ struct HandSwipeView: View {
                 .font(.system(size: deviceWidth/3))
                 .customTextStroke()
                 .offset(x: deviceWidth / 9, y: deviceWidth / 6)
-                .animatedOffset(speed: 1.5, distance: deviceWidth/3.3)
-        }
-        .allowsHitTesting(false)
-    }
-}
-
-
-struct AnimatedOffsetModifier: ViewModifier {
-    let speed: CGFloat
-        var distance: CGFloat
-        @State private var offsetAmount: CGFloat = 30
-        @State private var isAnimating = false
-
-        func body(content: Content) -> some View {
-            content
                 .offset(y: offsetAmount)
                 .onAppear {
                     animate()
                 }
         }
-
-        private func animate() {
-            DispatchQueue.main.async{
-                offsetAmount = 0
-                withAnimation(Animation.easeInOut(duration: speed)) {
-                    offsetAmount = -distance
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + speed + 1) {
-                    animate()
-                }
+        .allowsHitTesting(false)
+    }
+    
+    func animate() {
+        DispatchQueue.main.async{
+            offsetAmount = 0
+            withAnimation(Animation.easeInOut(duration: 1.5)) {
+                offsetAmount = -(deviceWidth/3.3)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                animate()
             }
         }
-}
-
-extension View {
-    func animatedOffset(speed amount: CGFloat, distance: CGFloat = -30) -> some View {
-        self.modifier(AnimatedOffsetModifier(speed: amount, distance: distance))
     }
+    
 }
