@@ -15,18 +15,6 @@ struct OverlaysView: View {
                 .ignoresSafeArea()
         }
         if !appModel.firstGamePlayed {
-//            Color.gray.opacity(0.7)
-//                .reverseMask{
-//                    VStack{
-//                        Spacer()
-//                        Rectangle()
-//                            .frame(width: deviceWidth/3, height: deviceWidth/1.5)
-//                            .cornerRadius(30)
-//                            .padding()
-//                    }
-//                }
-//                .ignoresSafeArea()
-//                .allowsHitTesting(false)
             VStack{
                 Spacer()
                 Text("👆")

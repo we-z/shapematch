@@ -96,8 +96,12 @@ class AppModel: ObservableObject {
             shouldBurst.toggle()
             firstGamePlayed = true
             self.freezeGame = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                self.showLevelDoneView = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
+                level += 1
+                setupLevel()
+                swipesLeft =  calculateMinimumSwipes(from:  grid, to:  targetGrid)
+                initialSwipes = calculateMinimumSwipes(from:  grid, to:  targetGrid)
+                self.freezeGame = false
             }
             print("You win!")
         } else if swipesLeft <= 0 {
