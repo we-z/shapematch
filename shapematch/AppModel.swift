@@ -285,14 +285,14 @@ struct LargeShapeView: View {
         case .circle:
             Circle().fill(Color.blue)
                 .background(Circle().style(
-                    withStroke: Color.primary,
+                    withStroke: Color.black,
                     lineWidth: 18,
                     fill: Color.blue
                 ))
         case .square:
             Rectangle().fill(Color.red)
                 .background(Rectangle().style(
-                    withStroke: Color.primary,
+                    withStroke: Color.black,
                     lineWidth: 18,
                     fill: Color.red
                 ))
@@ -300,7 +300,7 @@ struct LargeShapeView: View {
             Triangle()
                 .foregroundColor(.green)
                 .background(Triangle().style(
-                    withStroke: Color.primary,
+                    withStroke: Color.black,
                     lineWidth: 18,
                     fill: Color.green
                 ))
@@ -316,14 +316,14 @@ struct smallShapeView: View {
         case .circle:
             Circle().fill(Color.blue)
                 .background(Circle().style(
-                    withStroke: Color.primary,
+                    withStroke: Color.black,
                     lineWidth: 6,
                     fill: Color.blue
                 ))
         case .square:
             Rectangle().fill(Color.red)
                 .background(Rectangle().style(
-                    withStroke: Color.primary,
+                    withStroke: Color.black,
                     lineWidth: 6,
                     fill: Color.red
                 ))
@@ -331,7 +331,7 @@ struct smallShapeView: View {
             Triangle()
                 .foregroundColor(.green)
                 .background(Triangle().style(
-                    withStroke: Color.primary,
+                    withStroke: Color.black,
                     lineWidth: 6,
                     fill: Color.green
                 ))
