@@ -85,25 +85,37 @@ struct CelebrationEffect: View {
 
 struct HandSwipeView: View {
 
-    @State private var offsetAmount: CGFloat = 30
+    @State private var offsetAmount: CGFloat = 0
     @State private var rotateHand = false
     @State private var fade = true
     @State private var isAnimating = false
 
     var body: some View {
-        VStack{
-            Spacer()
-            Text("👆")
-                .rotationEffect(.degrees(rotateHand ? -40 : -30))
-                .font(.system(size: deviceWidth/3))
-                .customTextStroke(width: 3)
-                .offset(x: deviceWidth / 7, y: deviceWidth / 7)
-                .offset(y: offsetAmount)
-                .opacity(fade ? 0 : 1)
-                .scaleEffect(fade ? 0.9 : 1)
-                .onAppear {
-                    animate()
-                }
+        
+        ZStack{
+            VStack{
+                Spacer()
+                Circle()
+                    .stroke(lineWidth: 9.0 - -(offsetAmount/30))
+                    .frame(width: (deviceWidth/5))
+                    .opacity(fade ? 0 : 0.5)
+                    .padding(30)
+                    .scaleEffect(1 - (offsetAmount/60))
+            }
+            VStack{
+                Spacer()
+                Text("👆")
+                    .rotationEffect(.degrees(rotateHand ? -40 : -30))
+                    .font(.system(size: deviceWidth/3))
+                    .customTextStroke(width: 3)
+                    .offset(x: deviceWidth / 7, y: deviceWidth / 7)
+                    .offset(y: offsetAmount)
+                    .opacity(fade ? 0 : 1)
+                    .scaleEffect(fade ? 0.9 : 1)
+                    .onAppear {
+                        animate()
+                    }
+            }
         }
         .allowsHitTesting(false)
     }

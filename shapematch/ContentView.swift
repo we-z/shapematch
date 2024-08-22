@@ -33,7 +33,7 @@ struct ContentView: View {
                                 .italic()
                                 .font(.system(size: deviceWidth/15))
                                 .fixedSize()
-                                .customTextStroke(width: 1.2)
+                                .customTextStroke(width: 1.5)
                             Spacer()
                                 
                         }
@@ -134,7 +134,7 @@ struct ContentView: View {
                             .bold()
                             .font(.system(size: deviceWidth/15))
                             .fixedSize()
-                            .customTextStroke(width: 1.2)
+                            .customTextStroke(width: 1.8)
                         VStack{
                             ForEach(0..<3) { row in
                                 HStack {
