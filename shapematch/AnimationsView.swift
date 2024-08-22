@@ -10,7 +10,9 @@ import Vortex
 
 struct AnimationsView: View {
     var body: some View {
-        HandSwipeView()
+        Rectangle()
+            .frame(width: 100, height: 100)
+            .scalingEffect()
     }
 }
 
@@ -88,7 +90,6 @@ struct HandSwipeView: View {
     @State private var offsetAmount: CGFloat = 0
     @State private var rotateHand = false
     @State private var fade = true
-    @State private var isAnimating = false
 
     var body: some View {
         
@@ -152,4 +153,55 @@ struct HandSwipeView: View {
         }
     }
     
+}
+
+struct ScalingModifier: ViewModifier {
+    @State private var scale: CGFloat = 1.0
+    @State private var repeatAnimation = false
+    @ObservedObject private var appModel = AppModel.sharedAppModel
+    func body(content: Content) -> some View {
+        content
+            .scaleEffect(scale)
+            .onAppear {
+                if !appModel.firstGamePlayed{
+                    runAnimation()
+                }
+            }
+    }
+
+    private func runAnimation() {
+        withAnimation(.easeInOut(duration: 1)) {
+            scale = 1.1
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            withAnimation(.easeInOut(duration: 1)) {
+                scale = 1.0
+            }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            withAnimation(.easeInOut(duration: 1)) {
+                scale = 1.1
+            }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            withAnimation(.easeInOut(duration: 1)) {
+                scale = 1.0
+            }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+            if !appModel.firstGamePlayed{
+                runAnimation()
+            }
+        }
+    }
+}
+
+extension View {
+    func scalingEffect() -> some View {
+        self.modifier(ScalingModifier())
+    }
 }
