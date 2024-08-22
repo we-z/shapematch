@@ -97,7 +97,7 @@ struct HandSwipeView: View {
                 .rotationEffect(.degrees(rotateHand ? -40 : -30))
                 .font(.system(size: deviceWidth/3))
                 .customTextStroke(width: 3)
-                .offset(x: deviceWidth / 9, y: deviceWidth / 6)
+                .offset(x: deviceWidth / 7, y: deviceWidth / 7)
                 .offset(y: offsetAmount)
                 .opacity(fade ? 0 : 1)
                 .scaleEffect(fade ? 0.9 : 1)
@@ -114,24 +114,20 @@ struct HandSwipeView: View {
                 fade = false
             }
             offsetAmount = 0
-            withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                rotateHand = true
-            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                    rotateHand = false
+                    rotateHand = true
                 }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 withAnimation(Animation.easeInOut(duration: 1.5)) {
                     offsetAmount = -(deviceWidth/3.3)
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                        rotateHand = true
+                        rotateHand = false
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                            rotateHand = false
-                        }
                         withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                             fade = true
                         }
