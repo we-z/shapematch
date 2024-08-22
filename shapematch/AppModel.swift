@@ -96,7 +96,7 @@ class AppModel: ObservableObject {
             shouldBurst.toggle()
             firstGamePlayed = true
             self.freezeGame = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
                 level += 1
                 setupLevel()
                 swipesLeft =  calculateMinimumSwipes(from:  grid, to:  targetGrid)
