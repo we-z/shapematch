@@ -122,7 +122,7 @@ struct ContentView: View {
                             .customTextStroke(width: 3)
                     }
                     .padding()
-                    .frame(width: deviceWidth / 3.3)
+                    .frame(width: deviceWidth / 3.5)
                     .background(Color.green)
                     .cornerRadius(15)
                     .overlay{
@@ -130,6 +130,7 @@ struct ContentView: View {
                             .stroke(Color.black, lineWidth: 6)
                             .padding(1)
                     }
+                    .padding(6)
                     
                     VStack{
                         Text("Goal 🎯")
@@ -137,12 +138,13 @@ struct ContentView: View {
                             .font(.system(size: deviceWidth/15))
                             .fixedSize()
                             .customTextStroke(width: 1.5)
+                            .padding(.bottom, 24)
                         VStack{
                             ForEach(0..<3) { row in
                                 HStack {
                                     ForEach(0..<3) { column in
                                         smallShapeView(shapeType: appModel.targetGrid[row][column])
-                                            .frame(width: deviceWidth / 18, height: deviceWidth / 18)
+                                            .frame(width: deviceWidth / 21, height: deviceWidth / 21)
                                             .padding(3)
                                     }
                                 }
@@ -150,7 +152,7 @@ struct ContentView: View {
                         }
                     }
                     .padding()
-                    .frame(width: deviceWidth / 3.3)
+                    .frame(width: deviceWidth / 3.5)
                     .background(Color.yellow)
                     .cornerRadius(15)
                     .overlay{
@@ -158,6 +160,7 @@ struct ContentView: View {
                             .stroke(Color.black, lineWidth: 6)
                             .padding(1)
                     }
+                    .padding(6)
                     
                     VStack{
                         HStack{
@@ -174,7 +177,7 @@ struct ContentView: View {
                             .customTextStroke(width: 3)
                     }
                     .padding()
-                    .frame(width: deviceWidth / 3.3)
+                    .frame(width: deviceWidth / 3.5)
                     .background(Color.blue)
                     .cornerRadius(15)
                     .overlay{
@@ -182,7 +185,7 @@ struct ContentView: View {
                             .stroke(Color.black, lineWidth: 6)
                             .padding(1)
                     }
-                    
+                    .padding(6)
                     
                     
                     
