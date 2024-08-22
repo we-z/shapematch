@@ -21,16 +21,16 @@ struct ContentView: View {
                         
                     } label: {
                         HStack{
+                            Spacer()
                             Text("💎 0")
                                 .bold()
                                 .italic()
                                 .customTextStroke()
-                                .font(.system(size: deviceWidth/11))
+                                .font(.system(size: deviceWidth/15))
+                            Spacer()
                                 
                         }
-                        .padding(.horizontal)
-                        .padding(.vertical, 6)
-                        .frame(height: deviceWidth/6)
+                        .padding()
                         .background{
                             Color.blue
                         }
@@ -40,42 +40,54 @@ struct ContentView: View {
                                 .stroke(Color.black, lineWidth: 4)
                                 .padding(1)
                         }
-                        .fixedSize()
-                        .padding(.leading)
-                        
+                        .padding(6)
                     }
                     .buttonStyle(.roundedAndShadow6)
-                    .padding(.leading, 6)
-                    Spacer()
+                    
                     Button{
                         audioController.mute.toggle()
                     } label: {
-                        Image(systemName: audioController.mute ? "speaker.slash.fill" : "speaker.wave.2.fill") // Replace with your image
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width:  deviceWidth/7, height:  deviceWidth/7)
-                            .foregroundColor(.white)
-                            .customTextStroke(width: 1.8 )
-                            .padding(.horizontal)
-                            .offset(y:1)
+                        HStack{
+                            Spacer()
+                            Text(audioController.mute ? "🔇" : "🔊")
+                                .bold()
+                                .italic()
+                                .customTextStroke()
+                                .font(.system(size: deviceWidth/15))
+                            Spacer()
+                                
+                        }
+                        .padding()
+                        .background{
+                            Color.green
+                        }
+                        .cornerRadius(15)
+                        .overlay{
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(Color.black, lineWidth: 4)
+                                .padding(1)
+                        }
+                        .padding(6)
                     }
-                    .buttonStyle(.roundedAndShadow3)
+                    .buttonStyle(.roundedAndShadow6)
                     .onChange(of: audioController.mute) { newSetting in
                         audioController.setAllAudioVolume()
                     }
-                    Spacer()
+                    
                     Button {
                         appModel.resetLevel()
                     } label: {
                         HStack{
+                            Spacer()
                             Text("🔄")
-                                .font(.system(size: deviceWidth/12))
-                                .customTextStroke(width: 1.5)
-                                .padding(.horizontal)
+                                .bold()
+                                .italic()
+                                .customTextStroke()
+                                .font(.system(size: deviceWidth/15))
+                            Spacer()
+                                
                         }
-                        .padding(.horizontal, 21)
-                        .padding(.vertical, 6)
-                        .frame(height: deviceWidth/6.3)
+                        .padding()
                         .background{
                             Color.red
                         }
@@ -85,10 +97,11 @@ struct ContentView: View {
                                 .stroke(Color.black, lineWidth: 4)
                                 .padding(1)
                         }
-                        .padding(.trailing)
+                        .padding(6)
                     }
                     .buttonStyle(.roundedAndShadow6)
                 }
+                .padding(.leading, 6)
                 Spacer()
                 Text("Level : \(appModel.level)")
                     .bold()
