@@ -140,7 +140,7 @@ struct ContentView: View {
                                 HStack {
                                     ForEach(0..<3) { column in
                                         smallShapeView(shapeType: appModel.targetGrid[row][column])
-                                            .frame(width: deviceWidth / 18, height: deviceWidth / 18)
+                                            .frame(width: deviceWidth / 15, height: deviceWidth / 15)
                                             .padding(3)
                                     }
                                 }
@@ -154,9 +154,6 @@ struct ContentView: View {
                         RoundedRectangle(cornerRadius: 15)
                             .stroke(Color.black, lineWidth: 6)
                             .padding(1)
-                    }
-                    .onTapGesture {
-                        AudioServicesPlaySystemSound(1054)
                     }
                     Spacer()
                     VStack{
