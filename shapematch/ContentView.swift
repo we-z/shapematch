@@ -108,7 +108,7 @@ struct ContentView: View {
                 .padding(.leading, 6)
                 Spacer()
                 HStack{
-                    
+                    Spacer()
                     VStack{
                         Text("🕹️")
                             .bold()
@@ -125,8 +125,7 @@ struct ContentView: View {
                             .font(.system(size: deviceWidth/5))
                             .customTextStroke(width: 3)
                     }
-                    .padding()
-                    
+                    Spacer()
                     VStack{
                         Text("Goal 🎯")
                             .bold()
@@ -153,7 +152,7 @@ struct ContentView: View {
                             .stroke(Color.black, lineWidth: 6)
                             .padding(1)
                     }
-                    
+                    Spacer()
                     VStack{
                         Text("↔️")
                             .bold()
@@ -171,9 +170,7 @@ struct ContentView: View {
                             .font(.system(size: deviceWidth/5))
                             .customTextStroke(width: 3)
                     }
-                    .padding()
-                    
-                    
+                    Spacer()
                     
                 }
                 Spacer()
