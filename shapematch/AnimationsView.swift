@@ -98,8 +98,8 @@ struct HandSwipeView: View {
                 Circle()
                     .stroke(lineWidth: 9.0 - -(offsetAmount/30))
                     .frame(width: (deviceWidth/5))
-                    .opacity(fade ? 0 : 0.5)
-                    .padding(30)
+                    .opacity(rotateHand ? 0.5 : 0)
+                    .padding(21)
                     .scaleEffect(1 - (offsetAmount/60))
             }
             VStack{
