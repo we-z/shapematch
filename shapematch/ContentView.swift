@@ -115,7 +115,7 @@ struct ContentView: View {
                                 .bold()
                                 .font(.system(size: deviceWidth/15))
                                 .fixedSize()
-                                .customTextStroke(width: 1.5)
+                                .customTextStroke(width: 1.8)
                         }
                         Text("\(appModel.level)")
                             .bold()
@@ -128,7 +128,7 @@ struct ContentView: View {
                             .bold()
                             .font(.system(size: deviceWidth/15))
                             .fixedSize()
-                            .customTextStroke(width: 1.5)
+                            .customTextStroke(width: 1.8)
                         VStack{
                             ForEach(0..<3) { row in
                                 HStack {
@@ -142,7 +142,6 @@ struct ContentView: View {
                         }
                     }
                     .padding()
-                    .frame(width: deviceWidth / 3.5)
                     .background(Color.yellow)
                     .cornerRadius(15)
                     .overlay{
@@ -158,7 +157,7 @@ struct ContentView: View {
                                 .bold()
                                 .font(.system(size: deviceWidth/18))
                                 .fixedSize()
-                                .customTextStroke(width: 1.5)
+                                .customTextStroke(width: 1.8)
                         }
                         Text("\(appModel.swipesLeft)")
                             .bold()
