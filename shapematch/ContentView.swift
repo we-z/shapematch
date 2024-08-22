@@ -105,29 +105,24 @@ struct ContentView: View {
                 }
                 .padding(.leading, 6)
                 Spacer()
-                Text("Level : \(appModel.level)")
-                    .bold()
-                    .font(.system(size: deviceWidth/6))
-                    .customTextStroke(width: 3)
-                Spacer()
                 HStack{
-                    Spacer()
                     
-                    HStack{
-                        Text("⬆️\n➡️\n⬅️\n⬇️")
-                            .multilineTextAlignment(.center)
-                            .font(.system(size: deviceWidth/21))
-                            .fixedSize()
-                        Spacer()
-                        Text("\(appModel.swipesLeft)")
+                    VStack{
+                        HStack{
+                            Spacer()
+                            Text("Level 🔋")
+                                .bold()
+                                .font(.system(size: deviceWidth/18))
+                                .fixedSize()
+                                .customTextStroke(width: 1.5)
+                        }
+                        Text("\(appModel.level)")
                             .bold()
                             .font(.system(size: deviceWidth/4))
-                            .customTextStroke(width: 2.4)
-                            .fixedSize()
-                        Spacer()
+                            .customTextStroke(width: 3)
                     }
                     .padding()
-                    .frame(width: deviceWidth / 2.4, height: deviceWidth / 3.3)
+                    .frame(width: deviceWidth / 3.3)
                     .background(Color.green)
                     .cornerRadius(15)
                     .overlay{
@@ -135,15 +130,13 @@ struct ContentView: View {
                             .stroke(Color.black, lineWidth: 6)
                             .padding(1)
                     }
-                    Spacer()
                     
-                    HStack{
-                        Text("🎯")
+                    VStack{
+                        Text("Goal  🎯")
                             .bold()
-                            .font(.system(size: deviceWidth/15))
-                            .scaleEffect(1.5)
+                            .font(.system(size: deviceWidth/18))
                             .fixedSize()
-                            .offset(y: -6)
+                            .customTextStroke(width: 1.5)
                         VStack{
                             ForEach(0..<3) { row in
                                 HStack {
@@ -157,8 +150,32 @@ struct ContentView: View {
                         }
                     }
                     .padding()
-                    .frame(width: deviceWidth / 2.4, height: deviceWidth / 3.3)
-                    .background(.yellow)
+                    .frame(width: deviceWidth / 3.3)
+                    .background(Color.yellow)
+                    .cornerRadius(15)
+                    .overlay{
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color.black, lineWidth: 6)
+                            .padding(1)
+                    }
+                    
+                    VStack{
+                        HStack{
+                            Spacer()
+                            Text("Swaps  ↔️ ")
+                                .bold()
+                                .font(.system(size: deviceWidth/18))
+                                .fixedSize()
+                                .customTextStroke(width: 1.5)
+                        }
+                        Text("\(appModel.swipesLeft)")
+                            .bold()
+                            .font(.system(size: deviceWidth/4))
+                            .customTextStroke(width: 3)
+                    }
+                    .padding()
+                    .frame(width: deviceWidth / 3.3)
+                    .background(Color.blue)
                     .cornerRadius(15)
                     .overlay{
                         RoundedRectangle(cornerRadius: 15)
@@ -167,7 +184,7 @@ struct ContentView: View {
                     }
                     
                     
-                    Spacer()
+                    
                     
                 }
                 Spacer()
