@@ -69,8 +69,6 @@ struct ContentView: View {
                     } label: {
                         HStack{
                             Image(systemName: "arrow.counterclockwise")
-                                .bold()
-                                .italic()
                                 .customTextStroke(width: 1.5)
                                 .font(.system(size: deviceWidth/18))
                                 .padding(.horizontal)
@@ -103,7 +101,6 @@ struct ContentView: View {
                     HStack{
                         Text("⬆️\n➡️\n⬅️\n⬇️")
                             .multilineTextAlignment(.center)
-                            .bold()
                             .font(.system(size: deviceWidth/21))
                             .fixedSize()
                         Spacer()
@@ -129,7 +126,6 @@ struct ContentView: View {
                         Text("🎯")
                             .bold()
                             .font(.system(size: deviceWidth/15))
-//                            .customTextStroke(width: 1.5)
                             .scaleEffect(1.5)
                             .fixedSize()
                             .offset(y: -6)

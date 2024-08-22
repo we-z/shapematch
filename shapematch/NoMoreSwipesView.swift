@@ -49,8 +49,6 @@ struct NoMoreSwipesView: View {
             } label: {
                 HStack{
                     Image(systemName: "arrow.counterclockwise")
-                        .bold()
-                        .italic()
                         .customTextStroke(width: 1.5)
                         .font(.system(size: deviceWidth/18))
                         .padding(.horizontal)

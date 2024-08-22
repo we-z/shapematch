@@ -17,8 +17,8 @@ struct LevelDoneView: View {
                 .customTextStroke(width: 4)
                 .padding(.bottom, 9)
             Text("Level \(appModel.level)\nComplete")
-                .multilineTextAlignment(.center)
                 .bold()
+                .multilineTextAlignment(.center)
                 .font(.system(size: deviceWidth/12))
                 .customTextStroke(width: 2.1)
             Button {
