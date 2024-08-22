@@ -110,19 +110,22 @@ struct ContentView: View {
                 HStack{
                     
                     VStack{
-                        HStack{
-                            Text("Level 🔋")
-                                .bold()
-                                .font(.system(size: deviceWidth/15))
-                                .fixedSize()
-                                .customTextStroke(width: 1.5)
-                        }
+                        Text("🕹️")
+                            .bold()
+                            .font(.system(size: deviceWidth/12))
+                            .fixedSize()
+                            .customTextStroke(width: 1.8)
+                        Text("Level")
+                            .bold()
+                            .font(.system(size: deviceWidth/12))
+                            .fixedSize()
+                            .customTextStroke(width: 1.8)
                         Text("\(appModel.level)")
                             .bold()
                             .font(.system(size: deviceWidth/5))
-                            .customTextStroke(width: 2.1)
+                            .customTextStroke(width: 3)
                     }
-                    .padding(6)
+                    .padding()
                     
                     VStack{
                         Text("Goal 🎯")
@@ -152,19 +155,23 @@ struct ContentView: View {
                     }
                     
                     VStack{
-                        HStack{
-                            Text("Swaps ↔️ ")
-                                .bold()
-                                .font(.system(size: deviceWidth/18))
-                                .fixedSize()
-                                .customTextStroke(width: 1.5)
-                        }
+                        Text("↔️")
+                            .bold()
+                            .font(.system(size: deviceWidth/12))
+                            .fixedSize()
+                            .customTextStroke(width: 1.8)
+                        Text("Swaps")
+                            .bold()
+                            .multilineTextAlignment(.center)
+                            .font(.system(size: deviceWidth/15))
+                            .fixedSize()
+                            .customTextStroke(width: 1.8)
                         Text("\(appModel.swipesLeft)")
                             .bold()
                             .font(.system(size: deviceWidth/5))
-                            .customTextStroke(width: 2.1)
+                            .customTextStroke(width: 3)
                     }
-                    .padding(6)
+                    .padding()
                     
                     
                     
