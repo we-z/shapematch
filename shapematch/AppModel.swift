@@ -302,13 +302,13 @@ struct smallShapeView: View {
         switch shapeType {
         case .circle:
             Circle().fill(Color.blue)
-                .stroke(.black, lineWidth: 2)
+                .stroke(.black, lineWidth: 3)
         case .square:
             Rectangle().fill(Color.red)
-                .stroke(.black, lineWidth: 2)
+                .stroke(.black, lineWidth: 3)
         case .triangle:
             Triangle().fill(Color.green)
-                .stroke(.black, lineWidth: 2)
+                .stroke(.black, lineWidth: 3)
         }
     }
 }

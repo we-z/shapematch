@@ -99,56 +99,62 @@ struct ContentView: View {
                     .customTextStroke(width: 3)
                 HStack{
                     Spacer()
-                    VStack{
-                        Text("🎯")
-                            .bold()
-                            .font(.system(size: deviceWidth/15))
-                            .customTextStroke(width: 1.5)
-                            .scaleEffect(1.5)
-                            .offset(y:-3)
-                        ForEach(0..<3) { row in
-                            HStack {
-                                ForEach(0..<3) { column in
-                                    smallShapeView(shapeType: appModel.targetGrid[row][column])
-                                        .frame(width: deviceWidth / 18, height: deviceWidth / 18)
-                                        .padding(3)
-                                }
-                            }
-                        }
-                    }
-                    .padding()
-                    .frame(width: deviceWidth / 2.7)
-                    .background(.yellow)
-                    .cornerRadius(15)
-                    .overlay{
-                        RoundedRectangle(cornerRadius: 15)
-                            .stroke(Color.black, lineWidth: 4)
-                            .padding(1)
-                    }
                     
-                    Spacer()
-                    VStack{
-                        Text("↕️ ↔️")
+                    HStack{
+                        Text("⬆️\n➡️\n⬅️\n⬇️")
                             .multilineTextAlignment(.center)
                             .bold()
-                            .font(.system(size: deviceWidth/18))
-                            .customTextStroke(width: 1.2)
+                            .font(.system(size: deviceWidth/21))
+                        Spacer()
                         Text("\(appModel.swipesLeft)")
                             .bold()
                             .font(.system(size: deviceWidth/4))
                             .customTextStroke(width: 2.4)
                             .fixedSize()
+                        Spacer()
                     }
                     .padding()
-                    .frame(width: deviceWidth / 2.7)
+                    .frame(width: deviceWidth / 2.4, height: deviceWidth / 3.3)
                     .background(Color.green)
                     .cornerRadius(15)
                     .overlay{
                         RoundedRectangle(cornerRadius: 15)
-                            .stroke(Color.black, lineWidth: 4)
+                            .stroke(Color.black, lineWidth: 6)
                             .padding(1)
                     }
                     Spacer()
+                    
+                    HStack{
+                        Text("🎯")
+                            .bold()
+                            .font(.system(size: deviceWidth/15))
+//                            .customTextStroke(width: 1.5)
+                            .scaleEffect(1.5)
+                        VStack{
+                            ForEach(0..<3) { row in
+                                HStack {
+                                    ForEach(0..<3) { column in
+                                        smallShapeView(shapeType: appModel.targetGrid[row][column])
+                                            .frame(width: deviceWidth / 18, height: deviceWidth / 18)
+                                            .padding(3)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .padding()
+                    .frame(width: deviceWidth / 2.4, height: deviceWidth / 3.3)
+                    .background(.yellow)
+                    .cornerRadius(15)
+                    .overlay{
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color.black, lineWidth: 6)
+                            .padding(1)
+                    }
+                    
+                    
+                    Spacer()
+                    
                 }
                 .padding(0)
 //                .frame(height: deviceHeight/7)
