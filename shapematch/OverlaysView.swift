@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct OverlaysView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
@@ -15,12 +16,17 @@ struct OverlaysView: View {
                 Color.gray.opacity(0.7)
                     .ignoresSafeArea()
             }
-            HandSwipeView()
+            if !appModel.firstGamePlayed{
+                HandSwipeView()
+            }
             VStack{
                 Spacer()
                 if appModel.showNoMoreSwipesView {
                     NoMoreSwipesView()
                         .padding(.bottom)
+                        .onAppear{
+                            AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
+                        }
                 }
                 if appModel.showLevelDoneView {
                     LevelDoneView()
