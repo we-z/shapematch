@@ -39,7 +39,7 @@ struct ContentView: View {
                         .cornerRadius(15)
                         .overlay{
                             RoundedRectangle(cornerRadius: 15)
-                                .stroke(Color.black, lineWidth: 4)
+                                .stroke(Color.black, lineWidth: 5)
                                 .padding(1)
                         }
                         .padding(6)
@@ -66,7 +66,7 @@ struct ContentView: View {
                         .cornerRadius(15)
                         .overlay{
                             RoundedRectangle(cornerRadius: 15)
-                                .stroke(Color.black, lineWidth: 4)
+                                .stroke(Color.black, lineWidth: 5)
                                 .padding(1)
                         }
                         .padding(6)
@@ -96,7 +96,7 @@ struct ContentView: View {
                         .cornerRadius(15)
                         .overlay{
                             RoundedRectangle(cornerRadius: 15)
-                                .stroke(Color.black, lineWidth: 4)
+                                .stroke(Color.black, lineWidth: 5)
                                 .padding(1)
                         }
                         .padding(6)
@@ -112,7 +112,7 @@ struct ContentView: View {
                             Spacer()
                             Text("Level 🔋")
                                 .bold()
-                                .font(.system(size: deviceWidth/18))
+                                .font(.system(size: deviceWidth/15))
                                 .fixedSize()
                                 .customTextStroke(width: 1.5)
                         }
@@ -132,9 +132,9 @@ struct ContentView: View {
                     }
                     
                     VStack{
-                        Text("Goal  🎯")
+                        Text("Goal 🎯")
                             .bold()
-                            .font(.system(size: deviceWidth/18))
+                            .font(.system(size: deviceWidth/15))
                             .fixedSize()
                             .customTextStroke(width: 1.5)
                         VStack{
@@ -162,7 +162,7 @@ struct ContentView: View {
                     VStack{
                         HStack{
                             Spacer()
-                            Text("Swaps  ↔️ ")
+                            Text("Swaps ↔️ ")
                                 .bold()
                                 .font(.system(size: deviceWidth/18))
                                 .fixedSize()
@@ -188,8 +188,6 @@ struct ContentView: View {
                     
                 }
                 Spacer()
-//                .frame(height: deviceHeight/7)
-//                .scaleEffect(0.6)
                 VStack {
                     ForEach(0..<3) { row in
                         HStack {

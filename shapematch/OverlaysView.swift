@@ -31,10 +31,10 @@ struct OverlaysView: View {
                 Spacer()
                 Text("👆")
                     .rotationEffect(.degrees(-30))
-                    .font(.system(size: deviceWidth/5))
+                    .font(.system(size: deviceWidth/3))
                     .customTextStroke()
-                    .offset(x: deviceWidth / 13, y: deviceWidth / 21)
-                    .animatedOffset(speed: 1.5, distance: deviceWidth/3.1)
+                    .offset(x: deviceWidth / 9, y: deviceWidth / 15)
+                    .animatedOffset(speed: 1.5, distance: deviceWidth/3)
             }
             .allowsHitTesting(false)
         }
