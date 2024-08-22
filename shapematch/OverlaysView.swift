@@ -33,8 +33,8 @@ struct OverlaysView: View {
                     .rotationEffect(.degrees(-30))
                     .font(.system(size: deviceWidth/5))
                     .customTextStroke()
-                    .offset(x: deviceWidth / 12)
-                    .animatedOffset(speed: 1.5, distance: deviceWidth/3)
+                    .offset(x: deviceWidth / 13, y: deviceWidth / 21)
+                    .animatedOffset(speed: 1.5, distance: deviceWidth/3.1)
             }
             .allowsHitTesting(false)
         }
