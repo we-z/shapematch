@@ -15,25 +15,26 @@ struct OverlaysView: View {
                 .ignoresSafeArea()
         }
         if !appModel.firstGamePlayed {
-            Color.gray.opacity(0.7)
-                .reverseMask{
-                    VStack{
-                        Spacer()
-                        Rectangle()
-                            .frame(width: deviceWidth/3, height: deviceWidth/1.5)
-                            .cornerRadius(30)
-                            .padding()
-                    }
-                }
-                .ignoresSafeArea()
-                .allowsHitTesting(false)
+//            Color.gray.opacity(0.7)
+//                .reverseMask{
+//                    VStack{
+//                        Spacer()
+//                        Rectangle()
+//                            .frame(width: deviceWidth/3, height: deviceWidth/1.5)
+//                            .cornerRadius(30)
+//                            .padding()
+//                    }
+//                }
+//                .ignoresSafeArea()
+//                .allowsHitTesting(false)
             VStack{
                 Spacer()
                 Text("👆")
+                    .rotationEffect(.degrees(-30))
                     .font(.system(size: deviceWidth/5))
                     .customTextStroke()
-                    .offset(x: deviceWidth / 30, y: deviceWidth / 9)
-                    .animatedOffset(speed: 1.5, distance: deviceWidth/2.4)
+                    .offset(x: deviceWidth / 12)
+                    .animatedOffset(speed: 1.5, distance: deviceWidth/3)
             }
             .allowsHitTesting(false)
         }
