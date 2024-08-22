@@ -27,13 +27,16 @@ struct ContentView: View {
                                 .italic()
                                 .font(.system(size: deviceWidth/15))
                                 .fixedSize()
-                                .customTextStroke(width: 1.2)
+                                .customTextStroke(width: 1.5)
+                                .scaleEffect(1.5)
+                                .padding(.trailing)
                             Text("0")
                                 .bold()
                                 .italic()
                                 .font(.system(size: deviceWidth/15))
                                 .fixedSize()
                                 .customTextStroke(width: 1.5)
+                                .scaleEffect(1.2)
                             Spacer()
                                 
                         }
@@ -47,7 +50,7 @@ struct ContentView: View {
                                 .stroke(Color.black, lineWidth: 5)
                                 .padding(1)
                         }
-                        .padding(6)
+                        .padding(3)
                     }
                     .buttonStyle(.roundedAndShadow6)
                     
@@ -74,7 +77,7 @@ struct ContentView: View {
                                 .stroke(Color.black, lineWidth: 5)
                                 .padding(1)
                         }
-                        .padding(6)
+                        .padding(3)
                     }
                     .buttonStyle(.roundedAndShadow6)
                     
@@ -101,14 +104,14 @@ struct ContentView: View {
                                 .stroke(Color.black, lineWidth: 5)
                                 .padding(1)
                         }
-                        .padding(6)
+                        .padding(3)
                     }
                     .buttonStyle(.roundedAndShadow6)
                     .onChange(of: audioController.mute) { newSetting in
                         audioController.setAllAudioVolume()
                     }
                 }
-                .padding(.leading, 6)
+                .padding(.horizontal, 9)
                 Spacer()
                 HStack{
                     Spacer()
@@ -122,11 +125,11 @@ struct ContentView: View {
                             .bold()
                             .font(.system(size: deviceWidth/12))
                             .fixedSize()
-                            .customTextStroke(width: 1.8)
+                            .customTextStroke(width: 1.5)
                         Text("\(appModel.level)")
                             .bold()
                             .font(.system(size: deviceWidth/5))
-                            .customTextStroke(width: 3)
+                            .customTextStroke(width: 2.7)
                     }
                     Spacer()
                     VStack{
@@ -168,11 +171,11 @@ struct ContentView: View {
                             .multilineTextAlignment(.center)
                             .font(.system(size: deviceWidth/15))
                             .fixedSize()
-                            .customTextStroke(width: 1.8)
+                            .customTextStroke(width: 1.5)
                         Text("\(appModel.swipesLeft)")
                             .bold()
                             .font(.system(size: deviceWidth/5))
-                            .customTextStroke(width: 3)
+                            .customTextStroke(width: 2.7)
                     }
                     Spacer()
                     
