@@ -41,9 +41,11 @@ struct OverlaysView: View {
             Spacer()
             if appModel.showNoMoreSwipesView {
                 NoMoreSwipesView()
+                    .padding(.bottom)
             }
             if appModel.showLevelDoneView {
                 LevelDoneView()
+                    .padding(.bottom)
             }
         }
         CelebrationEffect()

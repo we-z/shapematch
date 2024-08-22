@@ -15,7 +15,7 @@ struct ContentView: View {
         ZStack{
             Color.white
                 .ignoresSafeArea()
-            VStack {
+            VStack(spacing: 0) {
                 HStack{
                     Button {
                         
@@ -91,12 +91,12 @@ struct ContentView: View {
                     }
                     .buttonStyle(.roundedAndShadow6)
                 }
-                .padding(.top)
                 Spacer()
                 Text("Level : \(appModel.level)")
                     .bold()
                     .font(.system(size: deviceWidth/6))
                     .customTextStroke(width: 3)
+                Spacer()
                 HStack{
                     Spacer()
                     
@@ -105,6 +105,7 @@ struct ContentView: View {
                             .multilineTextAlignment(.center)
                             .bold()
                             .font(.system(size: deviceWidth/21))
+                            .fixedSize()
                         Spacer()
                         Text("\(appModel.swipesLeft)")
                             .bold()
@@ -130,6 +131,8 @@ struct ContentView: View {
                             .font(.system(size: deviceWidth/15))
 //                            .customTextStroke(width: 1.5)
                             .scaleEffect(1.5)
+                            .fixedSize()
+                            .offset(y: -6)
                         VStack{
                             ForEach(0..<3) { row in
                                 HStack {
@@ -156,33 +159,34 @@ struct ContentView: View {
                     Spacer()
                     
                 }
-                .padding(0)
+                Spacer()
 //                .frame(height: deviceHeight/7)
 //                .scaleEffect(0.6)
-                
-                ForEach(0..<3) { row in
-                    HStack {
-                        ForEach(0..<3) { column in
-                            LargeShapeView(shapeType: appModel.grid[row][column])
-                                .frame(width: deviceWidth / 4.5, height: deviceWidth / 4.5)
-                                .padding()
-                                .offset(appModel.offsets[row][column])
-                                .gesture(
-                                    DragGesture()
-                                        .onChanged { gesture in
-                                            if appModel.swipesLeft > 0 && !hasSwiped {
-                                                let threshold: CGFloat = deviceWidth / 12 // Adjust threshold if needed
-                                                
-                                                if abs(gesture.translation.width) > threshold || abs(gesture.translation.height) > threshold {
-                                                    appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
-                                                    hasSwiped = true
+                VStack {
+                    ForEach(0..<3) { row in
+                        HStack {
+                            ForEach(0..<3) { column in
+                                LargeShapeView(shapeType: appModel.grid[row][column])
+                                    .frame(width: deviceWidth / 4.5, height: deviceWidth / 4.5)
+                                    .padding()
+                                    .offset(appModel.offsets[row][column])
+                                    .gesture(
+                                        DragGesture()
+                                            .onChanged { gesture in
+                                                if appModel.swipesLeft > 0 && !hasSwiped {
+                                                    let threshold: CGFloat = deviceWidth / 12 // Adjust threshold if needed
+                                                    
+                                                    if abs(gesture.translation.width) > threshold || abs(gesture.translation.height) > threshold {
+                                                        appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
+                                                        hasSwiped = true
+                                                    }
                                                 }
                                             }
-                                        }
-                                        .onEnded { _ in
-                                            hasSwiped = false // Reset after gesture ends
-                                        }
-                                )
+                                            .onEnded { _ in
+                                                hasSwiped = false // Reset after gesture ends
+                                            }
+                                    )
+                            }
                         }
                     }
                 }
