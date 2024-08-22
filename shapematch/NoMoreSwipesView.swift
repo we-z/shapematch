@@ -17,7 +17,7 @@ struct NoMoreSwipesView: View {
                 .font(.system(size: deviceWidth/3))
                 .customTextStroke(width: 4)
                 .padding(.bottom, 0)
-            Text("No more swipes!")
+            Text("No more swaps!")
                 .bold()
                 .font(.system(size: deviceWidth/12 ))
                 .customTextStroke(width: 1.8)

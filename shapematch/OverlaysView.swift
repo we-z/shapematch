@@ -12,9 +12,13 @@ struct OverlaysView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
         ZStack {
-            if appModel.showLevelDoneView || appModel.showNoMoreSwipesView {
+            if appModel.showNoMoreSwipesView {
                 Color.gray.opacity(0.7)
                     .ignoresSafeArea()
+                    .onTapGesture {
+                        appModel.resetLevel()
+                        appModel.showNoMoreSwipesView = false
+                    }
             }
             if !appModel.firstGamePlayed{
                 HandSwipeView()

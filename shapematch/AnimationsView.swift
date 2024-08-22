@@ -127,7 +127,7 @@ struct HandSwipeView: View {
             }
             offsetAmount = 0
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 5.0, initialVelocity: 0.0)) {
                     rotateHand = true
                 }
             }
