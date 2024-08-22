@@ -92,8 +92,10 @@ class AppModel: ObservableObject {
     }
     
     func checkWinCondition() {
+        let hapticManager = HapticManager.instance
         if grid == targetGrid {
             shouldBurst.toggle()
+            hapticManager.notification(type: .error)
             firstGamePlayed = true
             self.freezeGame = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
@@ -267,6 +269,21 @@ class AppModel: ObservableObject {
         return neighbors
     }
     
+}
+
+class HapticManager {
+    static let instance = HapticManager()
+    private init() {}
+    
+    func notification(type: UINotificationFeedbackGenerator.FeedbackType) {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(type)
+    }
+    
+    func impact(style: UIImpactFeedbackGenerator.FeedbackStyle) {
+        let generator = UIImpactFeedbackGenerator(style: style)
+        generator.impactOccurred()
+    }
 }
 
 let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
