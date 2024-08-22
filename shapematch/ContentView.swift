@@ -25,8 +25,10 @@ struct ContentView: View {
                             Text("💎 0")
                                 .bold()
                                 .italic()
-                                .customTextStroke()
                                 .font(.system(size: deviceWidth/15))
+                                .minimumScaleFactor(0.5)
+                                .fixedSize()
+                                .customTextStroke()
                             Spacer()
                                 
                         }
