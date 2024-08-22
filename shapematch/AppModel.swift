@@ -96,6 +96,7 @@ class AppModel: ObservableObject {
         if grid == targetGrid {
             shouldBurst.toggle()
             hapticManager.notification(type: .error)
+            AudioServicesPlaySystemSound(1054)
             firstGamePlayed = true
             self.freezeGame = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in

@@ -155,6 +155,9 @@ struct ContentView: View {
                             .stroke(Color.black, lineWidth: 6)
                             .padding(1)
                     }
+                    .onTapGesture {
+                        AudioServicesPlaySystemSound(1054)
+                    }
                     Spacer()
                     VStack{
                         Text("↔️")
