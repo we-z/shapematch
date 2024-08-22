@@ -284,13 +284,26 @@ struct LargeShapeView: View {
         switch shapeType {
         case .circle:
             Circle().fill(Color.blue)
-                .stroke(.black, lineWidth: 9)
+                .background(Circle().style(
+                    withStroke: Color.primary,
+                    lineWidth: 18,
+                    fill: Color.blue
+                ))
         case .square:
             Rectangle().fill(Color.red)
-                .stroke(.black, lineWidth: 9)
+                .background(Rectangle().style(
+                    withStroke: Color.primary,
+                    lineWidth: 18,
+                    fill: Color.red
+                ))
         case .triangle:
-            Triangle().fill(Color.green)
-                .stroke(.black, lineWidth: 9)
+            Triangle()
+                .foregroundColor(.green)
+                .background(Triangle().style(
+                    withStroke: Color.primary,
+                    lineWidth: 18,
+                    fill: Color.green
+                ))
         }
     }
 }
@@ -302,14 +315,38 @@ struct smallShapeView: View {
         switch shapeType {
         case .circle:
             Circle().fill(Color.blue)
-                .stroke(.black, lineWidth: 3)
+                .background(Circle().style(
+                    withStroke: Color.primary,
+                    lineWidth: 6,
+                    fill: Color.blue
+                ))
         case .square:
             Rectangle().fill(Color.red)
-                .stroke(.black, lineWidth: 3)
+                .background(Rectangle().style(
+                    withStroke: Color.primary,
+                    lineWidth: 6,
+                    fill: Color.red
+                ))
         case .triangle:
-            Triangle().fill(Color.green)
-                .stroke(.black, lineWidth: 3)
+            Triangle()
+                .foregroundColor(.green)
+                .background(Triangle().style(
+                    withStroke: Color.primary,
+                    lineWidth: 6,
+                    fill: Color.green
+                ))
         }
+    }
+}
+
+extension Shape {
+    func style<S: ShapeStyle, F: ShapeStyle>(
+        withStroke strokeContent: S,
+        lineWidth: CGFloat = 1,
+        fill fillContent: F
+    ) -> some View {
+        self.stroke(strokeContent, lineWidth: lineWidth)
+    .background(fill(fillContent))
     }
 }
 
