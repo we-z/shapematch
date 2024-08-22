@@ -468,35 +468,3 @@ extension View {
   }
 }
 
-struct AnimatedOffsetModifier: ViewModifier {
-    let speed: CGFloat
-        var distance: CGFloat
-        @State private var offsetAmount: CGFloat = 30
-        @State private var isAnimating = false
-
-        func body(content: Content) -> some View {
-            content
-                .offset(y: offsetAmount)
-                .onAppear {
-                    animate()
-                }
-        }
-
-        private func animate() {
-            DispatchQueue.main.async{
-                offsetAmount = 0
-                withAnimation(Animation.easeInOut(duration: speed)) {
-                    offsetAmount = -distance
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + speed + 1) {
-                    animate()
-                }
-            }
-        }
-}
-
-extension View {
-    func animatedOffset(speed amount: CGFloat, distance: CGFloat = -30) -> some View {
-        self.modifier(AnimatedOffsetModifier(speed: amount, distance: distance))
-    }
-}

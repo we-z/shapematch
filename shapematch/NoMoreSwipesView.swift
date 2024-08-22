@@ -25,11 +25,16 @@ struct NoMoreSwipesView: View {
             } label: {
                 HStack{
                     Spacer()
-                    Text("💎 + \(appModel.initialSwipes) swipes")
+                    Text("💎")
+                        .italic()
+                        .bold()
+                        .font(.system(size: deviceWidth/12))
+                        .customTextStroke()
+                    Text("+ \(appModel.initialSwipes) Swaps")
                         .italic()
                         .bold()
                         .font(.system(size: deviceWidth/15))
-                        .customTextStroke(width: 1.8)
+                        .customTextStroke(width: 1.5)
                     Spacer()
                 }
                 .padding()

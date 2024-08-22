@@ -22,13 +22,18 @@ struct ContentView: View {
                     } label: {
                         HStack{
                             Spacer()
-                            Text("💎 0")
+                            Text("💎")
                                 .bold()
                                 .italic()
                                 .font(.system(size: deviceWidth/15))
-                                .minimumScaleFactor(0.5)
                                 .fixedSize()
-                                .customTextStroke()
+                                .customTextStroke(width: 1.2)
+                            Text("0")
+                                .bold()
+                                .italic()
+                                .font(.system(size: deviceWidth/15))
+                                .fixedSize()
+                                .customTextStroke(width: 1.2)
                             Spacer()
                                 
                         }
@@ -54,9 +59,7 @@ struct ContentView: View {
                         HStack{
                             Spacer()
                             Text("🔄")
-                                .bold()
-                                .italic()
-                                .customTextStroke()
+                                .customTextStroke(width: 1.2)
                                 .font(.system(size: deviceWidth/15))
                             Spacer()
                                 
@@ -83,7 +86,7 @@ struct ContentView: View {
                             Text(audioController.mute ? "🔇" : "🔊")
                                 .bold()
                                 .italic()
-                                .customTextStroke()
+                                .customTextStroke(width: 1.2)
                                 .font(.system(size: deviceWidth/15))
                             Spacer()
                                 
@@ -131,7 +134,7 @@ struct ContentView: View {
                             .bold()
                             .font(.system(size: deviceWidth/15))
                             .fixedSize()
-                            .customTextStroke(width: 1.8)
+                            .customTextStroke(width: 1.2)
                         VStack{
                             ForEach(0..<3) { row in
                                 HStack {
