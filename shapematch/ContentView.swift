@@ -115,13 +115,14 @@ struct ContentView: View {
                                 .bold()
                                 .font(.system(size: deviceWidth/15))
                                 .fixedSize()
-                                .customTextStroke(width: 1.8)
+                                .customTextStroke(width: 1.5)
                         }
                         Text("\(appModel.level)")
                             .bold()
-                            .font(.system(size: deviceWidth/4))
-                            .customTextStroke(width: 3)
+                            .font(.system(size: deviceWidth/5))
+                            .customTextStroke(width: 2.1)
                     }
+                    .padding(6)
                     
                     VStack{
                         Text("Goal 🎯")
@@ -149,7 +150,6 @@ struct ContentView: View {
                             .stroke(Color.black, lineWidth: 6)
                             .padding(1)
                     }
-                    .padding()
                     
                     VStack{
                         HStack{
@@ -157,13 +157,14 @@ struct ContentView: View {
                                 .bold()
                                 .font(.system(size: deviceWidth/18))
                                 .fixedSize()
-                                .customTextStroke(width: 1.8)
+                                .customTextStroke(width: 1.5)
                         }
                         Text("\(appModel.swipesLeft)")
                             .bold()
-                            .font(.system(size: deviceWidth/4))
-                            .customTextStroke(width: 3)
+                            .font(.system(size: deviceWidth/5))
+                            .customTextStroke(width: 2.1)
                     }
+                    .padding(6)
                     
                     
                     

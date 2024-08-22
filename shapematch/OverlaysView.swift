@@ -22,7 +22,7 @@ struct OverlaysView: View {
                     .font(.system(size: deviceWidth/3))
                     .customTextStroke()
                     .offset(x: deviceWidth / 9, y: deviceWidth / 6)
-                    .animatedOffset(speed: 1.5, distance: deviceWidth/3)
+                    .animatedOffset(speed: 1.5, distance: deviceWidth/3.3)
             }
             .allowsHitTesting(false)
         }
