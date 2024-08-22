@@ -86,17 +86,21 @@ struct CelebrationEffect: View {
 struct HandSwipeView: View {
 
     @State private var offsetAmount: CGFloat = 30
+    @State private var rotateHand = false
+    @State private var fade = true
     @State private var isAnimating = false
 
     var body: some View {
         VStack{
             Spacer()
             Text("👆")
-                .rotationEffect(.degrees(-30))
+                .rotationEffect(.degrees(rotateHand ? -40 : -30))
                 .font(.system(size: deviceWidth/3))
-                .customTextStroke()
+                .customTextStroke(width: 3)
                 .offset(x: deviceWidth / 9, y: deviceWidth / 6)
                 .offset(y: offsetAmount)
+                .opacity(fade ? 0 : 1)
+                .scaleEffect(fade ? 0.9 : 1)
                 .onAppear {
                     animate()
                 }
@@ -106,11 +110,35 @@ struct HandSwipeView: View {
     
     func animate() {
         DispatchQueue.main.async{
-            offsetAmount = 0
-            withAnimation(Animation.easeInOut(duration: 1.5)) {
-                offsetAmount = -(deviceWidth/3.3)
+            withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                fade = false
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            offsetAmount = 0
+            withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                rotateHand = true
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                    rotateHand = false
+                }
+                withAnimation(Animation.easeInOut(duration: 1.5)) {
+                    offsetAmount = -(deviceWidth/3.3)
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                        rotateHand = true
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                            rotateHand = false
+                        }
+                        withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                            fade = true
+                        }
+                    }
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 animate()
             }
         }
