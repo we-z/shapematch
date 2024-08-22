@@ -130,11 +130,8 @@ class AppModel: ObservableObject {
             // Copy the initial grid to the targetGrid
             targetGrid = grid
             
-            // Set swipesLeft equal to the current level
-            swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
-            initialSwipes = swipesLeft
-            
-            // Perform a series of valid adjacent swaps to create a targetGrid that requires exactly `level` moves to solve
+            // Perform a series of valid adjacent swaps to create a targetGrid
+            // Ensure the targetGrid requires exactly `level` moves to solve or more than the previous level
             var previousSwap: ((Int, Int), (Int, Int))? = nil
             for _ in 0..<level {
                 var row1: Int
@@ -180,6 +177,18 @@ class AppModel: ObservableObject {
             // Check if the grid and targetGrid are different
             if grid != targetGrid {
                 successfulSetup = true
+                
+                // Calculate the minimum swipes needed to solve the puzzle
+                let calculatedSwipes = calculateMinimumSwipes(from: grid, to: targetGrid)
+                
+                // Ensure swipesLeft is not less than the previous level's swipesLeft
+                if calculatedSwipes >= initialSwipes {
+                    swipesLeft = calculatedSwipes
+                    initialSwipes = swipesLeft
+                } else {
+                    // If calculated swipes are less than the previous level, retry with different randomization
+                    successfulSetup = false
+                }
             } else {
                 // If they are the same, shuffle and try again
                 randomizedShapes.shuffle()
@@ -189,6 +198,7 @@ class AppModel: ObservableObject {
             }
         }
     }
+
     
     func resetLevel() {
         // Reset the grid to its initial configuration
