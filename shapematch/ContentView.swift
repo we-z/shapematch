@@ -194,7 +194,7 @@ struct ContentView: View {
                                         DragGesture()
                                             .onChanged { gesture in
                                                 if appModel.swipesLeft > 0 && !hasSwiped {
-                                                    let threshold: CGFloat = deviceWidth / 15 // Adjust threshold if needed
+                                                    let threshold: CGFloat = deviceWidth / 27 // Adjust threshold if needed
                                                     
                                                     if abs(gesture.translation.width) > threshold || abs(gesture.translation.height) > threshold {
                                                         appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
