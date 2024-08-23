@@ -42,6 +42,7 @@
 		761A44482C78E7DB0017B53B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		761A444A2C78E8320017B53B /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
 		761A444C2C78EFA40017B53B /* ProductList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProductList.plist; sourceTree = "<group>"; };
+		761A444E2C78F03B0017B53B /* products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = products.storekit; sourceTree = "<group>"; };
 		7639F95B2C713D8100E2B371 /* Shape Swap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shape Swap.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7639F95E2C713D8100E2B371 /* shapematchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shapematchApp.swift; sourceTree = "<group>"; };
 		7639F9602C713D8100E2B371 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -121,6 +122,8 @@
 				7639F9C92C7587C800E2B371 /* NoMoreSwipesView.swift */,
 				76ADAF032C76A92B006B2844 /* OverlaysView.swift */,
 				7639F9652C713D8200E2B371 /* Preview Content */,
+				761A444C2C78EFA40017B53B /* ProductList.plist */,
+				761A444E2C78F03B0017B53B /* products.storekit */,
 				7639F9642C713D8200E2B371 /* shapematch.entitlements */,
 				7639F95E2C713D8100E2B371 /* shapematchApp.swift */,
 				7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */,
@@ -134,7 +137,6 @@
 			isa = PBXGroup;
 			children = (
 				7639F9662C713D8200E2B371 /* Preview Assets.xcassets */,
-				761A444C2C78EFA40017B53B /* ProductList.plist */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";

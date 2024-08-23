@@ -1,0 +1,110 @@
+{
+  "identifier" : "055B1563",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "4D73A35F",
+      "localizations" : [
+        {
+          "description" : "GemPack10",
+          "displayName" : "GemPack10",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "GemPack10",
+      "referenceName" : "GemPack10",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "19.99",
+      "familyShareable" : false,
+      "internalID" : "14D6B3CD",
+      "localizations" : [
+        {
+          "description" : "GemPack100",
+          "displayName" : "GemPack100",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "GemPack100",
+      "referenceName" : "GemPack100",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "99.99",
+      "familyShareable" : false,
+      "internalID" : "D2105E89",
+      "localizations" : [
+        {
+          "description" : "GemPack1000",
+          "displayName" : "GemPack1000",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "GemPack1000",
+      "referenceName" : "GemPack1000",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}
