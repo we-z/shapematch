@@ -168,7 +168,7 @@ struct GemMenuView: View {
                     }
                     .padding(.bottom, 30)
                 }
-                .background(.blue)
+                .background(.cyan)
                 .cornerRadius(30)
                 .overlay{
                     RoundedRectangle(cornerRadius: 30)
