@@ -77,10 +77,10 @@ class StoreKitManager: ObservableObject {
     
     
     // call the product purchase and returns an optional transaction
-    func purchase(bundleID: String) async throws -> Transaction? {
+    func purchase(packID: String) async throws -> Transaction? {
         // Find the product that matches the characterID
-        guard let product = storeProducts.first(where: { $0.matchesBundleID(bundleID) }) else {
-            print("Product not found for bundleID: \(bundleID)")
+        guard let product = storeProducts.first(where: { $0.matchesBundleID(packID) }) else {
+            print("Product not found for bundleID: \(packID)")
             return nil
         }
         //make a purchase request - optional parameters available

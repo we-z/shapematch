@@ -9,6 +9,21 @@ import SwiftUI
 
 struct GemMenuView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
+    @StateObject var storeKit = StoreKitManager()
+    
+    @MainActor
+    func buyGems(pack: GemPacks) async {
+        do {
+            if (try await storeKit.purchase(packID: pack.packID)) != nil{
+//                DispatchQueue.main.async {
+//                    userPersistedData.incrementBalance(amount: bundle.amount)
+//                }
+            }
+        } catch {
+            print("Purchase failed: \(error)")
+        }
+    }
+    
     var body: some View {
         ZStack {
             Color.gray.opacity(0.7)
@@ -183,4 +198,20 @@ struct GemMenuView: View {
 
 #Preview {
     GemMenuView()
+}
+
+struct GemPacks: Hashable {
+    let amount: Int
+    let cost: String
+    let packID: String
+
+    func hash(into hasher: inout Hasher) {
+        // Implement a custom hash function that combines the hash values of properties that uniquely identify a character
+        hasher.combine(packID)
+    }
+
+    static func ==(lhs: GemPacks, rhs: GemPacks) -> Bool {
+        // Implement the equality operator to compare characters based on their unique identifier
+        return lhs.packID == rhs.packID
+    }
 }

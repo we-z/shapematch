@@ -112,21 +112,21 @@
 		7639F95D2C713D8100E2B371 /* shapematch */ = {
 			isa = PBXGroup;
 			children = (
-				7639F95E2C713D8100E2B371 /* shapematchApp.swift */,
-				7639F98B2C7146AF00E2B371 /* AppModel.swift */,
-				7639F9CD2C759A2E00E2B371 /* AudioManager.swift */,
 				7639F98D2C72C42E00E2B371 /* AnimationsView.swift */,
-				7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */,
+				7639F98B2C7146AF00E2B371 /* AppModel.swift */,
+				7639F9622C713D8200E2B371 /* Assets.xcassets */,
+				7639F9CD2C759A2E00E2B371 /* AudioManager.swift */,
 				7639F9602C713D8100E2B371 /* ContentView.swift */,
-				7639F9CB2C758AC400E2B371 /* LevelDoneView.swift */,
 				761A44452C7841A30017B53B /* GemMenuView.swift */,
-				7639F9892C71460D00E2B371 /* Tempview.swift */,
+				7639F9CB2C758AC400E2B371 /* LevelDoneView.swift */,
 				7639F9C92C7587C800E2B371 /* NoMoreSwipesView.swift */,
 				76ADAF032C76A92B006B2844 /* OverlaysView.swift */,
-				761A444A2C78E8320017B53B /* StoreKitManager.swift */,
-				7639F9622C713D8200E2B371 /* Assets.xcassets */,
-				7639F9642C713D8200E2B371 /* shapematch.entitlements */,
 				7639F9652C713D8200E2B371 /* Preview Content */,
+				7639F9642C713D8200E2B371 /* shapematch.entitlements */,
+				7639F95E2C713D8100E2B371 /* shapematchApp.swift */,
+				7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */,
+				761A444A2C78E8320017B53B /* StoreKitManager.swift */,
+				7639F9892C71460D00E2B371 /* Tempview.swift */,
 			);
 			path = shapematch;
 			sourceTree = "<group>";
