@@ -112,6 +112,7 @@ struct ContentView: View {
                     }
                 }
                 .padding(.horizontal, 9)
+//                .padding(.leading, 3)
                 Spacer()
                 HStack{
                     Spacer()

@@ -32,7 +32,7 @@ struct GemMenuView: View {
                     }
                     Text("💎 Gems 💎")
                         .bold()
-                        .font(.system(size: deviceWidth/8))
+                        .font(.system(size: deviceWidth/9))
                         .customTextStroke()
                     
                     //            Spacer()

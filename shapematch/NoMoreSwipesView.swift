@@ -25,7 +25,8 @@ struct NoMoreSwipesView: View {
                     Text("0 Swaps ✋")
                         .bold()
                         .font(.system(size: deviceWidth/9))
-                        .customTextStroke()
+                        .customTextStroke(width: 2.4)
+                        .offset(y: 6)
                     Button {
                         appModel.showGemMenu = true
                     } label: {
@@ -38,13 +39,14 @@ struct NoMoreSwipesView: View {
                                 .fixedSize()
                                 .scaleEffect(1.5)
                                 .customTextStroke(width: 1.8)
-                            Text("Buy \(appModel.initialSwipes) Swaps")
+                            
+                            Text("+3 Swaps")
                                 .bold()
-                                .font(.system(size: deviceWidth/15))
+                                .font(.system(size: deviceWidth/12))
                                 .customTextStroke(width: 1.5)
                                 .lineLimit(1)
                                 .fixedSize()
-                                .padding(9)
+                                .padding(.horizontal, 9)
                             Text("↔️")
                                 .bold()
                                 .italic()
@@ -71,13 +73,12 @@ struct NoMoreSwipesView: View {
                     } label: {
                         HStack{
                             Text("🔄")
-                                .font(.system(size: deviceWidth/12))
-                                .customTextStroke(width: 1.5)
+                                .font(.system(size: deviceWidth/15))
+                                .customTextStroke(width: 1.2)
                                 .padding(.horizontal)
                         }
-                        .padding(.horizontal, 21)
-                        .padding(.vertical, 6)
-                        .frame(height: deviceWidth/6.3)
+                        .padding(.vertical, 14)
+                        .frame(width: deviceWidth/3.3)
                         .background{
                             Color.red
                         }
