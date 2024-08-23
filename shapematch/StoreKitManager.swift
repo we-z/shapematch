@@ -35,6 +35,10 @@ class StoreKitManager: ObservableObject {
         //Start a transaction listener as close to the app launch as possible so you don't miss any transaction
         updateListenerTask = listenForTransactions()
         
+        Task {
+            await requestProducts()
+        }
+        
     }
     
     //denit transaction listener on exit or app close
