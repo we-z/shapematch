@@ -11,8 +11,12 @@ struct GemMenuView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @StateObject var storeKit = StoreKitManager()
     
+    @State var GemPack10: GemPack = GemPack(amount: 10, cost: "1.99", packID: "GemPack10")
+    @State var GemPack100: GemPack = GemPack(amount: 100, cost: "14.99", packID: "GemPack100")
+    @State var GemPack1000: GemPack = GemPack(amount: 1000, cost: "99.99", packID: "GemPack1000")
+    
     @MainActor
-    func buyGems(pack: GemPacks) async {
+    func buyGems(pack: GemPack) async {
         do {
             if (try await storeKit.purchase(packID: pack.packID)) != nil{
 //                DispatchQueue.main.async {
@@ -53,6 +57,9 @@ struct GemMenuView: View {
                     //            Spacer()
                     VStack(spacing: 21) {
                         Button {
+                            Task {
+                                await buyGems(pack: GemPack10)
+                            }
                         } label: {
                             HStack{
                                 Text("🐟")
@@ -95,6 +102,9 @@ struct GemMenuView: View {
                         }
                         .buttonStyle(.roundedAndShadow6)
                         Button {
+                            Task {
+                                await buyGems(pack: GemPack100)
+                            }
                         } label: {
                             HStack{
                                 Text("🐬")
@@ -138,6 +148,9 @@ struct GemMenuView: View {
                         }
                         .buttonStyle(.roundedAndShadow6)
                         Button {
+                            Task {
+                                await buyGems(pack: GemPack1000)
+                            }
                         } label: {
                             HStack{
                                 Text("🐳")
@@ -200,7 +213,7 @@ struct GemMenuView: View {
     GemMenuView()
 }
 
-struct GemPacks: Hashable {
+struct GemPack: Hashable {
     let amount: Int
     let cost: String
     let packID: String
@@ -210,7 +223,7 @@ struct GemPacks: Hashable {
         hasher.combine(packID)
     }
 
-    static func ==(lhs: GemPacks, rhs: GemPacks) -> Bool {
+    static func ==(lhs: GemPack, rhs: GemPack) -> Bool {
         // Implement the equality operator to compare characters based on their unique identifier
         return lhs.packID == rhs.packID
     }
