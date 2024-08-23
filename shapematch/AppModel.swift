@@ -36,7 +36,6 @@ class AppModel: ObservableObject {
     @Published var freezeGame = false
     @Published var level = 1
     @Published var showNoMoreSwipesView = false
-    @Published var showLevelDoneView = false
     @Published var firstGamePlayed = false
     @Published var showGemMenu = false
     

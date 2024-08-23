@@ -61,6 +61,19 @@ class StoreKitManager: ObservableObject {
         }
     }
     
+    // request the products in the background
+    @MainActor
+    func requestProducts() async {
+        do {
+            //using the Product static method products to retrieve the list of products
+            storeProducts = try await Product.products(for: productDict.values)
+            
+            // iterate the "type" if there are multiple product types.
+        } catch {
+            print("Failed - error retrieving products \(error)")
+        }
+    }
+    
     
     //Generics - check the verificationResults
     func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
