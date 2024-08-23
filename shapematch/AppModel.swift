@@ -38,6 +38,7 @@ class AppModel: ObservableObject {
     @Published var showNoMoreSwipesView = false
     @Published var showLevelDoneView = false
     @Published var firstGamePlayed = false
+    @Published var showGemMenu = false
     
     @ObservedObject var audioController = AudioManager.sharedAudioManager
     

@@ -18,7 +18,7 @@ struct ContentView: View {
             VStack(spacing: 0) {
                 HStack{
                     Button {
-                        
+                        appModel.showGemMenu = true
                     } label: {
                         HStack{
                             Spacer()

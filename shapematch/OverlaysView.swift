@@ -12,30 +12,16 @@ struct OverlaysView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
         ZStack {
-            if appModel.showNoMoreSwipesView {
-                Color.gray.opacity(0.7)
-                    .ignoresSafeArea()
-                    .onTapGesture {
-                        appModel.resetLevel()
-                        appModel.showNoMoreSwipesView = false
-                    }
-            }
             if !appModel.firstGamePlayed{
                 HandSwipeView()
             }
-            VStack{
-                Spacer()
-                if appModel.showNoMoreSwipesView {
-                    NoMoreSwipesView()
-                        .padding(.bottom)
-                        .onAppear{
-                            AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
-                        }
-                }
-                if appModel.showLevelDoneView {
-                    LevelDoneView()
-                        .padding(.bottom)
-                }
+            if appModel.showGemMenu {
+                GemMenuView()
+            } else if appModel.showNoMoreSwipesView {
+                NoMoreSwipesView()
+                    .onAppear{
+                        AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
+                    }
             }
             CelebrationEffect()
         }
