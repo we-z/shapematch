@@ -27,6 +27,7 @@ struct NoMoreSwipesView: View {
                         .font(.system(size: deviceWidth/9))
                         .customTextStroke()
                     Button {
+                        appModel.showGemMenu = true
                     } label: {
                         HStack{
                             Spacer()
