@@ -52,20 +52,21 @@ struct CelebrationEffect: View {
                             .tag("circle")
                     }
                     .onChange(of: appModel.shouldBurst) { newValue in
-                        showMessage = true
-                        withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                            animateMessage = true
-                            currentMessage = messages.randomElement() ?? "Well Done!"
-                        }
                         DispatchQueue.main.async {
-                            proxy.burst()
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
+                            showMessage = true
                             withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                                animateMessage = false
+                                animateMessage = true
+                                currentMessage = messages.randomElement() ?? "Well Done!"
                             }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
-                                showMessage = false
+                            
+                            proxy.burst()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
+                                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                                    animateMessage = false
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
+                                    showMessage = false
+                                }
                             }
                         }
                     }
