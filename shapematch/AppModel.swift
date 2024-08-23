@@ -86,6 +86,7 @@ class AppModel: ObservableObject {
             swipesLeft -= 1
             if grid != targetGrid && swipesLeft == 0 {
                 showNoMoreSwipesView = true
+                AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
             }
             impactHeavy.impactOccurred()
             checkWinCondition()

@@ -19,9 +19,6 @@ struct OverlaysView: View {
                 GemMenuView()
             } else if appModel.showNoMoreSwipesView {
                 NoMoreSwipesView()
-                    .onAppear{
-                        AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
-                    }
             }
             CelebrationEffect()
         }
