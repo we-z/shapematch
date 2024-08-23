@@ -93,11 +93,8 @@ class AppModel: ObservableObject {
     }
     
     func checkWinCondition() {
-        let hapticManager = HapticManager.instance
         if grid == targetGrid {
             shouldBurst.toggle()
-            hapticManager.notification(type: .error)
-//            AudioServicesPlaySystemSound(1009)
             firstGamePlayed = true
             self.freezeGame = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
