@@ -10,6 +10,7 @@
 		761A44462C7841A30017B53B /* GemMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A44452C7841A30017B53B /* GemMenuView.swift */; };
 		761A44492C78E7DB0017B53B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 761A44482C78E7DB0017B53B /* StoreKit.framework */; };
 		761A444B2C78E8320017B53B /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A444A2C78E8320017B53B /* StoreKitManager.swift */; };
+		761A444D2C78EFA40017B53B /* ProductList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 761A444C2C78EFA40017B53B /* ProductList.plist */; };
 		7639F95F2C713D8100E2B371 /* shapematchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F95E2C713D8100E2B371 /* shapematchApp.swift */; };
 		7639F9612C713D8100E2B371 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F9602C713D8100E2B371 /* ContentView.swift */; };
 		7639F9632C713D8200E2B371 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7639F9622C713D8200E2B371 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 		761A44452C7841A30017B53B /* GemMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemMenuView.swift; sourceTree = "<group>"; };
 		761A44482C78E7DB0017B53B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		761A444A2C78E8320017B53B /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
+		761A444C2C78EFA40017B53B /* ProductList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProductList.plist; sourceTree = "<group>"; };
 		7639F95B2C713D8100E2B371 /* Shape Swap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shape Swap.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7639F95E2C713D8100E2B371 /* shapematchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shapematchApp.swift; sourceTree = "<group>"; };
 		7639F9602C713D8100E2B371 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				7639F9662C713D8200E2B371 /* Preview Assets.xcassets */,
+				761A444C2C78EFA40017B53B /* ProductList.plist */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				761A444D2C78EFA40017B53B /* ProductList.plist in Resources */,
 				7639F9672C713D8200E2B371 /* Preview Assets.xcassets in Resources */,
 				7639F9632C713D8200E2B371 /* Assets.xcassets in Resources */,
 				7639F9D02C759B2100E2B371 /* ShapeMatchMusic.mp3 in Resources */,
