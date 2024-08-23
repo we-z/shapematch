@@ -40,10 +40,10 @@ struct NoMoreSwipesView: View {
                                 .scaleEffect(1.5)
                                 .customTextStroke(width: 1.8)
                             
-                            Text("+3 Swaps")
+                            Text("+\(appModel.swapsToSell) Swaps")
                                 .bold()
                                 .font(.system(size: deviceWidth/12))
-                                .customTextStroke(width: 1.5)
+                                .customTextStroke(width: 1.8)
                                 .lineLimit(1)
                                 .fixedSize()
                                 .padding(.horizontal, 9)

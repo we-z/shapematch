@@ -35,6 +35,7 @@ class AppModel: ObservableObject {
     @Published var swipesLeft = 1
     @Published var freezeGame = false
     @Published var level = 1
+    @Published var swapsToSell = 1
     @Published var showNoMoreSwipesView = false
     @Published var firstGamePlayed = false
     @Published var showGemMenu = false
@@ -85,6 +86,7 @@ class AppModel: ObservableObject {
             swipesLeft -= 1
             if grid != targetGrid && swipesLeft == 0 {
                 showNoMoreSwipesView = true
+                swapsToSell = calculateMinimumSwipes(from: grid, to: targetGrid)
                 AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
             }
             impactHeavy.impactOccurred()
