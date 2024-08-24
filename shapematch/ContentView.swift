@@ -36,7 +36,7 @@ struct ContentView: View {
                                 .font(.system(size: deviceWidth/15))
                                 .fixedSize()
                                 .customTextStroke(width: 1.5)
-                                .scaleEffect(1.2)
+                                .scaleEffect(1.5)
                             Spacer()
                                 
                         }

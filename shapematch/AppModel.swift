@@ -38,6 +38,7 @@ class AppModel: ObservableObject {
     @Published var swapsToSell = 1
     @Published var showNoMoreSwipesView = false
     @Published var firstGamePlayed = false
+    @Published var secondGamePlayed = false
     @Published var showGemMenu = false
     
     @ObservedObject var audioController = AudioManager.sharedAudioManager
@@ -98,6 +99,9 @@ class AppModel: ObservableObject {
         if grid == targetGrid {
             shouldBurst.toggle()
             firstGamePlayed = true
+            if level == 2 {
+                secondGamePlayed = true
+            }
             self.freezeGame = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
                 level += 1
