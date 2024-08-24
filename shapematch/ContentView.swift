@@ -189,6 +189,7 @@ struct ContentView: View {
                                 LargeShapeView(shapeType: appModel.grid[row][column])
                                     .frame(width: deviceWidth / 4.5, height: deviceWidth / 4.5)
                                     .padding()
+                                    .background(.white)
                                     .offset(appModel.offsets[row][column])
                                     .gesture(
                                         DragGesture()
