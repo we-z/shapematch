@@ -9,10 +9,12 @@ import SwiftUI
 import Vortex
 
 struct AnimationsView: View {
+    @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        Rectangle()
-            .frame(width: 100, height: 100)
-            .pulsingEffect()
+        CelebrationEffect()
+            .onAppear{
+                appModel.shouldBurst.toggle()
+            }
     }
 }
 
@@ -56,7 +58,7 @@ struct CelebrationEffect: View {
                         DispatchQueue.main.async {
                             showMessage = true
                             hapticManager.notification(type: .error)
-                            withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                            withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 200.0, damping: 13.0, initialVelocity: -10.0)) {
                                 animateMessage = true
                                 currentMessage = messages.randomElement() ?? "Well Done!"
                             }
