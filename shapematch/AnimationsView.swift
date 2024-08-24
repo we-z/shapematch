@@ -12,7 +12,7 @@ struct AnimationsView: View {
     var body: some View {
         Rectangle()
             .frame(width: 100, height: 100)
-            .scalingEffect()
+            .pulsingEffect()
     }
 }
 
@@ -197,7 +197,7 @@ struct ScalingModifier: ViewModifier {
             }
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             if !appModel.secondGamePlayed{
                 runAnimation()
             }
@@ -206,7 +206,7 @@ struct ScalingModifier: ViewModifier {
 }
 
 extension View {
-    func scalingEffect() -> some View {
+    func pulsingEffect() -> some View {
         self.modifier(ScalingModifier())
     }
 }
