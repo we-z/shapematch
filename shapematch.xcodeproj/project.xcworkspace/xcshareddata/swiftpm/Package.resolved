@@ -1,6 +1,15 @@
 {
-  "originHash" : "0e844115085a29c3fe2066b46b8b0b09e696f718ae4b9efc9e5d1c127ae09559",
+  "originHash" : "e7b04ee35ceaf5be6d56f395f6a624b752e20369cd096d49d3e3ea0d1e9dbccd",
   "pins" : [
+    {
+      "identity" : "cloudstorage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nonstrict-hq/CloudStorage.git",
+      "state" : {
+        "revision" : "35700218d35579df091974b6e7765db94c83448b",
+        "version" : "0.4.0"
+      }
+    },
     {
       "identity" : "vortex",
       "kind" : "remoteSourceControl",

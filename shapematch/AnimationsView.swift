@@ -200,7 +200,7 @@ struct ScalingModifier: ViewModifier {
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-            if !appModel.secondGamePlayed{
+            if appModel.level <= 2 {
                 runAnimation()
             }
         }

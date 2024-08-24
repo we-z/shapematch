@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		760776152C7A18C7003E2AD2 /* UserPersistedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760776142C7A18C7003E2AD2 /* UserPersistedData.swift */; };
+		760776182C7A1A17003E2AD2 /* CloudStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 760776172C7A1A17003E2AD2 /* CloudStorage */; };
 		761A44462C7841A30017B53B /* GemMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A44452C7841A30017B53B /* GemMenuView.swift */; };
 		761A44492C78E7DB0017B53B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 761A44482C78E7DB0017B53B /* StoreKit.framework */; };
 		761A444B2C78E8320017B53B /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A444A2C78E8320017B53B /* StoreKitManager.swift */; };
@@ -38,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		760776142C7A18C7003E2AD2 /* UserPersistedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPersistedData.swift; sourceTree = "<group>"; };
 		761A44452C7841A30017B53B /* GemMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemMenuView.swift; sourceTree = "<group>"; };
 		761A44482C78E7DB0017B53B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		761A444A2C78E8320017B53B /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
@@ -68,6 +71,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7639F9912C72C47A00E2B371 /* Vortex in Frameworks */,
+				760776182C7A1A17003E2AD2 /* CloudStorage in Frameworks */,
 				761A44492C78E7DB0017B53B /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -129,6 +133,7 @@
 				7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */,
 				761A444A2C78E8320017B53B /* StoreKitManager.swift */,
 				7639F9892C71460D00E2B371 /* Tempview.swift */,
+				760776142C7A18C7003E2AD2 /* UserPersistedData.swift */,
 			);
 			path = shapematch;
 			sourceTree = "<group>";
@@ -176,6 +181,7 @@
 			name = "Shape Swap";
 			packageProductDependencies = (
 				7639F9902C72C47A00E2B371 /* Vortex */,
+				760776172C7A1A17003E2AD2 /* CloudStorage */,
 			);
 			productName = shapematch;
 			productReference = 7639F95B2C713D8100E2B371 /* Shape Swap.app */;
@@ -229,6 +235,7 @@
 			mainGroup = 7639F9522C713D8100E2B371;
 			packageReferences = (
 				7639F98F2C72C47A00E2B371 /* XCRemoteSwiftPackageReference "Vortex" */,
+				760776162C7A1A17003E2AD2 /* XCRemoteSwiftPackageReference "CloudStorage" */,
 			);
 			productRefGroup = 7639F95C2C713D8100E2B371 /* Products */;
 			projectDirPath = "";
@@ -276,6 +283,7 @@
 				7639F9CA2C7587C800E2B371 /* NoMoreSwipesView.swift in Sources */,
 				7639F98A2C71460D00E2B371 /* Tempview.swift in Sources */,
 				7639F98C2C7146AF00E2B371 /* AppModel.swift in Sources */,
+				760776152C7A18C7003E2AD2 /* UserPersistedData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,6 +574,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		760776162C7A1A17003E2AD2 /* XCRemoteSwiftPackageReference "CloudStorage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nonstrict-hq/CloudStorage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.0;
+			};
+		};
 		7639F98F2C72C47A00E2B371 /* XCRemoteSwiftPackageReference "Vortex" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twostraws/Vortex";
@@ -577,6 +593,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		760776172C7A1A17003E2AD2 /* CloudStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 760776162C7A1A17003E2AD2 /* XCRemoteSwiftPackageReference "CloudStorage" */;
+			productName = CloudStorage;
+		};
 		7639F9902C72C47A00E2B371 /* Vortex */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7639F98F2C72C47A00E2B371 /* XCRemoteSwiftPackageReference "Vortex" */;
