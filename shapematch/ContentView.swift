@@ -8,6 +8,7 @@ struct ContentView: View {
 
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @StateObject var audioController = AudioManager.sharedAudioManager
+    @ObservedObject var userPersistedData = UserPersistedData()
     @State private var hasSwiped = false
     
     let rect = CGRect(x: 0, y: 0, width: 300, height: 100)
@@ -30,7 +31,7 @@ struct ContentView: View {
                                 .scaleEffect(1.5)
                                 .padding(.trailing)
                                 .customTextStroke(width: 1.8)
-                            Text("0")
+                            Text("\(userPersistedData.gemBalance)")
                                 .bold()
                                 .italic()
                                 .font(.system(size: deviceWidth/15))

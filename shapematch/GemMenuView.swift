@@ -10,6 +10,7 @@ import SwiftUI
 struct GemMenuView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @StateObject var storeKit = StoreKitManager()
+    @ObservedObject var userPersistedData = UserPersistedData()
     
     @State var GemPack10: GemPack = GemPack(amount: 10, cost: "1.99", packID: "GemPack10")
     @State var GemPack100: GemPack = GemPack(amount: 100, cost: "14.99", packID: "GemPack100")
@@ -19,9 +20,9 @@ struct GemMenuView: View {
     func buyGems(pack: GemPack) async {
         do {
             if (try await storeKit.purchase(packID: pack.packID)) != nil{
-//                DispatchQueue.main.async {
-//                    userPersistedData.incrementBalance(amount: bundle.amount)
-//                }
+                DispatchQueue.main.async {
+                    userPersistedData.incrementBalance(amount: pack.amount)
+                }
             }
         } catch {
             print("Purchase failed: \(error)")
