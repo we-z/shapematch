@@ -203,7 +203,7 @@ struct ScalingText: ViewModifier {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + speed * 4) {
             pulseCount += 1
-            if pulseCount < 2 {
+            if pulseCount < 1 {
                 runAnimation()
             }
         }
