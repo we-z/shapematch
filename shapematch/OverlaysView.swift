@@ -47,7 +47,7 @@ struct InstructionView: View {
                     .stroke(Color.black, lineWidth: 6)
                     .padding(1)
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 6)
             .offset(y: cardOffset)
             
             Spacer()
