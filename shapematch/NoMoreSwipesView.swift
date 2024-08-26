@@ -105,6 +105,7 @@ struct NoMoreSwipesView: View {
                 .font(.system(size: deviceWidth/9))
                 .customTextStroke(width: 2.4)
                 .pulsingText()
+                .allowsHitTesting(false)
                 
             
         }
