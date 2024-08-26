@@ -160,7 +160,8 @@ struct ContentView: View {
                             .stroke(Color.black, lineWidth: 6)
                             .padding(1)
                     }
-                    .pulsingEffect()
+                    .pulsingPlaque()
+                    
                     Spacer()
                     VStack{
                         Text("↔️")

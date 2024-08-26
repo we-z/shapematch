@@ -11,6 +11,7 @@ struct NoMoreSwipesView: View {
     
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @State var cardOffset = deviceWidth
+    @State var pulseText = true
     
     var body: some View {
         ZStack {
@@ -103,7 +104,8 @@ struct NoMoreSwipesView: View {
                 .bold()
                 .font(.system(size: deviceWidth/9))
                 .customTextStroke(width: 2.4)
-                .pulsingEffect()
+                .pulsingText()
+                
             
         }
         .onAppear {

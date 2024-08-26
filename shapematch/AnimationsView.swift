@@ -13,7 +13,6 @@ struct AnimationsView: View {
     var body: some View {
         Rectangle()
             .frame(width: 100, height: 100)
-            .pulsingEffect(speed: 0.5, size: 3)
     }
 }
 
@@ -161,7 +160,57 @@ struct HandSwipeView: View {
     
 }
 
-struct ScalingModifier: ViewModifier {
+struct ScalingText: ViewModifier {
+    
+    var speed: CGFloat = 1
+    var size: CGFloat = 1.1
+    
+    @State private var scale: CGFloat = 1.0
+    @State private var repeatAnimation = false
+    @ObservedObject private var appModel = AppModel.sharedAppModel
+    @State var pulseCount = 0
+    
+    func body(content: Content) -> some View {
+        content
+            .scaleEffect(scale)
+            .onAppear {
+                runAnimation()
+            }
+    }
+
+    private func runAnimation() {
+        withAnimation(.easeInOut(duration: speed)) {
+            scale = size
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + speed) {
+            withAnimation(.easeInOut(duration: speed)) {
+                scale = 1.0
+            }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 2) {
+            withAnimation(.easeInOut(duration: speed)) {
+                scale = size
+            }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 3) {
+            withAnimation(.easeInOut(duration: speed)) {
+                scale = 1.0
+            }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 4) {
+            pulseCount += 1
+            if pulseCount < 2 {
+                runAnimation()
+            }
+        }
+    }
+}
+
+struct ScalingPlaque: ViewModifier {
     
     var speed: CGFloat = 1
     var size: CGFloat = 1.1
@@ -212,7 +261,13 @@ struct ScalingModifier: ViewModifier {
 }
 
 extension View {
-    func pulsingEffect(speed: CGFloat = 1, size: CGFloat = 1.1) -> some View {
-        self.modifier(ScalingModifier(speed: speed, size: size))
+    func pulsingText(speed: CGFloat = 0.6, size: CGFloat = 1.1) -> some View {
+        self.modifier(ScalingText(speed: speed, size: size))
+    }
+}
+
+extension View {
+    func pulsingPlaque(speed: CGFloat = 1, size: CGFloat = 1.1) -> some View {
+        self.modifier(ScalingPlaque(speed: speed, size: size))
     }
 }
