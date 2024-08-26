@@ -33,10 +33,10 @@ struct InstructionView: View {
         VStack{
             HStack{
                 Spacer()
-                Text("↘️ Copy Goal ↙️")
+                Text("↘️ Copy the patern ↙️")
                     .bold()
                     .font(.system(size: deviceWidth / 12))
-                    .customTextStroke(width: 1.2)
+                    .customTextStroke()
                 Spacer()
             }
             .padding()
@@ -55,7 +55,7 @@ struct InstructionView: View {
         .onAppear{
             DispatchQueue.main.async {
                 cardOffset = -(deviceWidth/2)
-                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 15.0, initialVelocity: 0.0)) {
                     cardOffset = 0
                 }
             }
