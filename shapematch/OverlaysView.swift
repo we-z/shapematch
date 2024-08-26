@@ -34,10 +34,10 @@ struct InstructionView: View {
         VStack{
             HStack{
                 Spacer()
-                Text("↘️ Copy The Goal ↙️")
+                Text("↘️  Copy the pattern  ↙️")
                     .bold()
-                    .font(.system(size: deviceWidth / 12))
-                    .customTextStroke()
+                    .font(.system(size: deviceWidth / 15))
+                    .customTextStroke(width: 1.5)
                 Spacer()
             }
             .padding()
