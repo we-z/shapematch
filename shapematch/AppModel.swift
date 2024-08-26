@@ -86,9 +86,9 @@ class AppModel: ObservableObject {
             offsets[end.row][end.col] = .zero
             swipesLeft -= 1
             if grid != targetGrid && swipesLeft == 0 {
-                showNoMoreSwipesView = true
                 swapsToSell = calculateMinimumSwipes(from: grid, to: targetGrid)
                 AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
+                showNoMoreSwipesView = true
             }
             impactHeavy.impactOccurred()
             checkWinCondition()

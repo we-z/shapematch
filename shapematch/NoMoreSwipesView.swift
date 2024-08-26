@@ -10,6 +10,7 @@ import SwiftUI
 struct NoMoreSwipesView: View {
     
     @ObservedObject private var appModel = AppModel.sharedAppModel
+    @State var cardOffset = deviceWidth
     
     var body: some View {
         ZStack {
@@ -22,11 +23,6 @@ struct NoMoreSwipesView: View {
             VStack {
                 Spacer()
                 VStack{
-                    Text("0 Swaps ✋")
-                        .bold()
-                        .font(.system(size: deviceWidth/9))
-                        .customTextStroke(width: 2.4)
-                        .offset(y: 6)
                     Button {
                         appModel.showGemMenu = true
                     } label: {
@@ -64,7 +60,7 @@ struct NoMoreSwipesView: View {
                                 .stroke(Color.black, lineWidth: 4)
                                 .padding(1)
                         }
-                        .padding(.horizontal)
+                        .padding()
                     }
                     .buttonStyle(.roundedAndShadow6)
                     Button {
@@ -90,7 +86,7 @@ struct NoMoreSwipesView: View {
                         }
                     }
                     .buttonStyle(.roundedAndShadow6)
-                    .padding(.vertical)
+                    .padding(.bottom)
                 }
                 .padding()
                 .background(.red)
@@ -101,6 +97,20 @@ struct NoMoreSwipesView: View {
                         .padding(1)
                 }
                 .padding()
+                .offset(y: cardOffset)
+            }
+            Text("0 Swaps ✋")
+                .bold()
+                .font(.system(size: deviceWidth/9))
+                .customTextStroke(width: 2.4)
+                .pulsingEffect()
+            
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                    cardOffset = 0
+                }
             }
         }
     }
