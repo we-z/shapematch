@@ -11,6 +11,7 @@ struct GemMenuView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @StateObject var storeKit = StoreKitManager()
     @ObservedObject var userPersistedData = UserPersistedData()
+    @State var cardOffset: CGFloat = deviceWidth * 2
     
     @State var GemPack10: GemPack = GemPack(amount: 10, cost: "1.99", packID: "GemPack10")
     @State var GemPack100: GemPack = GemPack(amount: 100, cost: "14.99", packID: "GemPack100")
@@ -42,6 +43,7 @@ struct GemMenuView: View {
                     HStack{
                         Spacer()
                         Button {
+                            impactHeavy.impactOccurred()
                             appModel.showGemMenu = false
                         } label: {
                             Text("❌")
@@ -205,6 +207,15 @@ struct GemMenuView: View {
                         .padding(1)
                 }
                 .padding()
+                .offset(y: cardOffset)
+                
+            }
+        }
+        .onAppear {
+            DispatchQueue.main.async {
+                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                    cardOffset = 0
+                }
             }
         }
     }
