@@ -20,9 +20,7 @@ struct OverlaysView: View {
             } else if appModel.showNoMoreSwipesView {
                 NoMoreSwipesView()
             }
-            if appModel.level == 1 {
-                InstructionView()
-            }
+            InstructionView()
             CelebrationEffect()
         }
     }
@@ -49,7 +47,7 @@ struct InstructionView: View {
                     .stroke(Color.black, lineWidth: 6)
                     .padding(1)
             }
-            .padding(.horizontal)
+            .padding()
             .offset(y: cardOffset)
             
             Spacer()
