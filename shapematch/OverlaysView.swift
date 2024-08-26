@@ -35,8 +35,8 @@ struct InstructionView: View {
                 Spacer()
                 Text("↘️ Copy Goal ↙️")
                     .bold()
-                    .font(.system(size: deviceWidth / 9))
-                    .customTextStroke()
+                    .font(.system(size: deviceWidth / 12))
+                    .customTextStroke(width: 1.2)
                 Spacer()
             }
             .padding()
@@ -55,7 +55,7 @@ struct InstructionView: View {
         .onAppear{
             DispatchQueue.main.async {
                 cardOffset = -(deviceWidth/2)
-                withAnimation(.interpolatingSpring(mass: 2.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                     cardOffset = 0
                 }
             }
@@ -63,7 +63,7 @@ struct InstructionView: View {
         .onChange(of: appModel.level) { level in
             if level > 1 {
                 DispatchQueue.main.async {
-                    withAnimation(.interpolatingSpring(mass: 2.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                    withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                         cardOffset = -(deviceWidth/2)
                     }
                 }
