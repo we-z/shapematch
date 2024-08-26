@@ -33,10 +33,10 @@ struct InstructionView: View {
         VStack{
             HStack{
                 Spacer()
-                Text("↘️  Copy the pattern  ↙️")
+                Text("↘️ Copy Goal ↙️")
                     .bold()
-                    .font(.system(size: deviceWidth / 15))
-                    .customTextStroke(width: 1.5)
+                    .font(.system(size: deviceWidth / 9))
+                    .customTextStroke()
                 Spacer()
             }
             .padding()
@@ -47,7 +47,7 @@ struct InstructionView: View {
                     .stroke(Color.black, lineWidth: 6)
                     .padding(1)
             }
-            .padding()
+            .padding(.horizontal)
             .offset(y: cardOffset)
             
             Spacer()
