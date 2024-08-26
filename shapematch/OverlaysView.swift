@@ -30,6 +30,7 @@ struct OverlaysView: View {
 
 struct InstructionView: View {
     @State var cardOffset: CGFloat = 0
+    @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
         VStack{
             HStack{
@@ -58,6 +59,15 @@ struct InstructionView: View {
                 cardOffset = -(deviceWidth/2)
                 withAnimation(.interpolatingSpring(mass: 2.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                     cardOffset = 0
+                }
+            }
+        }
+        .onChange(of: appModel.level) { level in
+            if level > 1 {
+                DispatchQueue.main.async {
+                    withAnimation(.interpolatingSpring(mass: 2.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                        cardOffset = -(deviceWidth/2)
+                    }
                 }
             }
         }
