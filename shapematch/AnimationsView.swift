@@ -11,10 +11,9 @@ import Vortex
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        CelebrationEffect()
-            .onAppear{
-                appModel.shouldBurst.toggle()
-            }
+        Rectangle()
+            .frame(width: 100, height: 100)
+            .pulsingEffect(speed: 0.5, size: 3)
     }
 }
 
@@ -163,9 +162,14 @@ struct HandSwipeView: View {
 }
 
 struct ScalingModifier: ViewModifier {
+    
+    var speed: CGFloat = 1
+    var size: CGFloat = 1.1
+    
     @State private var scale: CGFloat = 1.0
     @State private var repeatAnimation = false
     @ObservedObject private var appModel = AppModel.sharedAppModel
+    
     func body(content: Content) -> some View {
         content
             .scaleEffect(scale)
@@ -177,29 +181,29 @@ struct ScalingModifier: ViewModifier {
     }
 
     private func runAnimation() {
-        withAnimation(.easeInOut(duration: 1)) {
-            scale = 1.1
+        withAnimation(.easeInOut(duration: speed)) {
+            scale = size
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            withAnimation(.easeInOut(duration: 1)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + speed) {
+            withAnimation(.easeInOut(duration: speed)) {
                 scale = 1.0
             }
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            withAnimation(.easeInOut(duration: 1)) {
-                scale = 1.1
+        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 2) {
+            withAnimation(.easeInOut(duration: speed)) {
+                scale = size
             }
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            withAnimation(.easeInOut(duration: 1)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 3) {
+            withAnimation(.easeInOut(duration: speed)) {
                 scale = 1.0
             }
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 4) {
             if appModel.level <= 2 {
                 runAnimation()
             }
@@ -208,7 +212,7 @@ struct ScalingModifier: ViewModifier {
 }
 
 extension View {
-    func pulsingEffect() -> some View {
-        self.modifier(ScalingModifier())
+    func pulsingEffect(speed: CGFloat = 1, size: CGFloat = 1.1) -> some View {
+        self.modifier(ScalingModifier(speed: speed, size: size))
     }
 }
