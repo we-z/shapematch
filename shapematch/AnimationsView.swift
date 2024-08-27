@@ -13,6 +13,7 @@ struct AnimationsView: View {
     var body: some View {
         Rectangle()
             .frame(width: 100, height: 100)
+            .pulsingPlaque()
     }
 }
 
@@ -241,18 +242,6 @@ struct ScalingPlaque: ViewModifier {
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + speed * 2) {
-            withAnimation(.easeInOut(duration: speed)) {
-                scale = size
-            }
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 3) {
-            withAnimation(.easeInOut(duration: speed)) {
-                scale = 1.0
-            }
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 4) {
             if appModel.level < 2 {
                 runAnimation()
             }
