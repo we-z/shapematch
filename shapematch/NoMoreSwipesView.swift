@@ -12,7 +12,7 @@ struct NoMoreSwipesView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @State var cardOffset = deviceWidth
     @State var pulseText = true
-    
+    @ObservedObject var userPersistedData = UserPersistedData()
     var body: some View {
         ZStack {
             Color.gray.opacity(0.7)
@@ -25,7 +25,13 @@ struct NoMoreSwipesView: View {
                 Spacer()
                 VStack{
                     Button {
-                        appModel.showGemMenu = true
+                        if appModel.swapsToSell > userPersistedData.gemBalance {
+                            appModel.showGemMenu = true
+                        } else {
+                            userPersistedData.decrementBalance(amount: appModel.swapsToSell)
+                            appModel.swipesLeft += appModel.swapsToSell
+                            appModel.showNoMoreSwipesView = false
+                        }
                     } label: {
                         HStack{
                             Spacer()
@@ -40,9 +46,8 @@ struct NoMoreSwipesView: View {
                             Text("+ \(appModel.swapsToSell) Swaps")
                                 .bold()
                                 .font(.system(size: deviceWidth/12))
-                                .customTextStroke(width: 1.8)
-                                .lineLimit(1)
                                 .fixedSize()
+                                .customTextStroke(width: 1.8)
                                 .padding(.horizontal, 9)
                             Text("↔️")
                                 .bold()

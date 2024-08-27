@@ -174,10 +174,6 @@ class AppModel: ObservableObject {
             }
         }
     }
-
-
-
-
     
     func resetLevel() {
         // Reset the grid to its initial configuration
