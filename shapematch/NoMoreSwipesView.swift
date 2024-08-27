@@ -21,6 +21,12 @@ struct NoMoreSwipesView: View {
                     appModel.resetLevel()
                     appModel.showNoMoreSwipesView = false
                 }
+            Text("0 Swaps ✋")
+                .bold()
+                .font(.system(size: deviceWidth/9))
+                .customTextStroke(width: 2.4)
+                .pulsingText()
+                .allowsHitTesting(false)
             VStack {
                 Spacer()
                 VStack{
@@ -105,13 +111,6 @@ struct NoMoreSwipesView: View {
                 .padding()
                 .offset(y: cardOffset)
             }
-            Text("0 Swaps ✋")
-                .bold()
-                .font(.system(size: deviceWidth/9))
-                .customTextStroke(width: 2.4)
-                .pulsingText()
-                .allowsHitTesting(false)
-                
             
         }
         .onAppear {
