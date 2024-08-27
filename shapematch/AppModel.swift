@@ -118,90 +118,65 @@ class AppModel: ObservableObject {
     
     func setupLevel() {
         let shapes: [ShapeType] = [.circle, .square, .triangle]
-        
-        // Create a grid with each shape repeated enough times and then shuffled
         var randomizedShapes = (shapes + shapes + shapes).shuffled()
-        
-        // Populate the grid by taking the first 9 elements
+
+        // Populate the grid with randomized shapes
         for i in 0..<3 {
             grid[i] = Array(randomizedShapes[(i * 3)..<(i * 3 + 3)])
         }
         
         initialGrid = grid
-        var successfulSetup = false
+        targetGrid = grid
+        var swapsNeeded = 2
         
-        while !successfulSetup {
-            // Copy the initial grid to the targetGrid
-            targetGrid = grid
+        switch level {
+        case 1...5: swapsNeeded = 2
+        case 6...15: swapsNeeded = 3
+        case 16...30: swapsNeeded = 4
+        case 31...50: swapsNeeded = 5
+        case 51...75: swapsNeeded = 6
+        case 76...105: swapsNeeded = 7
+        case 106...140: swapsNeeded = 8
+        default: swapsNeeded = 9
+        }
+        
+        var successfulSetup = false
             
-            // Perform a series of valid adjacent swaps to create a targetGrid
-            // Ensure the targetGrid requires exactly `level` moves to solve or more than the previous level
-            var previousSwap: ((Int, Int), (Int, Int))? = nil
-            for _ in 0..<level {
-                var row1: Int
-                var col1: Int
-                var row2: Int
-                var col2: Int
-                
+        while !successfulSetup {
+            // Create a target grid that requires the correct number of swaps to solve
+            for _ in 0..<swapsNeeded {
+                var (row1, col1, row2, col2) = (0, 0, 0, 0)
                 repeat {
-                    // Randomly select a starting position
                     row1 = Int.random(in: 0..<3)
                     col1 = Int.random(in: 0..<3)
-                    
-                    // Randomly select a direction to swap with an adjacent position
                     let direction = Int.random(in: 0..<4)
-                    
-                    switch direction {
-                    case 0: // Left
-                        row2 = row1
-                        col2 = col1 > 0 ? col1 - 1 : col1 + 1
-                    case 1: // Right
-                        row2 = row1
-                        col2 = col1 < 2 ? col1 + 1 : col1 - 1
-                    case 2: // Up
-                        row2 = row1 > 0 ? row1 - 1 : row1 + 1
-                        col2 = col1
-                    default: // Down
-                        row2 = row1 < 2 ? row1 + 1 : row1 - 1
-                        col2 = col1
-                    }
-                } while (row1 == row2 && col1 == col2) ||
-                         (previousSwap != nil && previousSwap!.0 == (row2, col2) && previousSwap!.1 == (row1, col1)) ||
-                         (targetGrid[row1][col1] == targetGrid[row2][col2])  // Check if the shapes are the same
+                    (row2, col2) = direction == 0 ? (row1, col1 > 0 ? col1 - 1 : col1 + 1) :
+                                   direction == 1 ? (row1, col1 < 2 ? col1 + 1 : col1 - 1) :
+                                   direction == 2 ? (row1 > 0 ? row1 - 1 : row1 + 1, col1) :
+                                   (row1 < 2 ? row1 + 1 : row1 - 1, col1)
+                } while (row1 == row2 && col1 == col2) || targetGrid[row1][col1] == targetGrid[row2][col2]
                 
-                // Swap the shapes in the targetGrid
+                // Perform the swap
                 let temp = targetGrid[row1][col1]
                 targetGrid[row1][col1] = targetGrid[row2][col2]
                 targetGrid[row2][col2] = temp
-                
-                // Store the swap to prevent an immediate reverse
-                previousSwap = ((row1, col1), (row2, col2))
             }
             
-            // Check if the grid and targetGrid are different
-            if grid != targetGrid {
+            // Check if the grid requires exactly `swapsNeeded` to solve
+            let calculatedSwipes = calculateMinimumSwipes(from: grid, to: targetGrid)
+            if calculatedSwipes == swapsNeeded {
                 successfulSetup = true
-                
-                // Calculate the minimum swipes needed to solve the puzzle
-                let calculatedSwipes = calculateMinimumSwipes(from: grid, to: targetGrid)
-                
-                // Ensure swipesLeft is not less than the previous level's swipesLeft
-                if calculatedSwipes >= initialSwipes {
-                    swipesLeft = calculatedSwipes
-                    initialSwipes = swipesLeft
-                } else {
-                    // If calculated swipes are less than the previous level, retry with different randomization
-                    successfulSetup = false
-                }
+                swipesLeft = swapsNeeded
+                initialSwipes = swipesLeft
             } else {
-                // If they are the same, shuffle and try again
-                randomizedShapes.shuffle()
-                for i in 0..<3 {
-                    grid[i] = Array(randomizedShapes[(i * 3)..<(i * 3 + 3)])
-                }
+                // If the calculated swipes do not match, reset and try again
+                targetGrid = grid
             }
         }
     }
+
+
+
 
     
     func resetLevel() {
