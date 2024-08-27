@@ -9,7 +9,6 @@ struct ContentView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @StateObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData()
-    @State private var hasSwiped = false
     
     let rect = CGRect(x: 0, y: 0, width: 300, height: 100)
     var body: some View {
@@ -195,14 +194,10 @@ struct ContentView: View {
                                     .offset(appModel.offsets[row][column])
                                     .gesture(
                                         DragGesture(minimumDistance: 1)
-                                            .onChanged { gesture in
-                                                if appModel.swipesLeft > 0 && !hasSwiped {
+                                            .onEnded { gesture in
+                                                if appModel.swipesLeft > 0 {
                                                     appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
-                                                    hasSwiped = true
                                                 }
-                                            }
-                                            .onEnded { _ in
-                                                hasSwiped = false // Reset after gesture ends
                                             }
                                     )
                             }
