@@ -97,7 +97,9 @@ class AppModel: ObservableObject {
     
     func checkWinCondition() {
         if grid == targetGrid {
-            shouldBurst.toggle()
+            DispatchQueue.main.async { [self] in
+                shouldBurst.toggle()
+            }
             firstGamePlayed = true
             if level == 2 {
                 secondGamePlayed = true
