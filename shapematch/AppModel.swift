@@ -120,7 +120,7 @@ class AppModel: ObservableObject {
     
     func setupLevel() {
         let shapes: [ShapeType] = [.circle, .square, .triangle]
-        var randomizedShapes = (shapes + shapes + shapes).shuffled()
+        let randomizedShapes = (shapes + shapes + shapes).shuffled()
 
         // Populate the grid with randomized shapes
         for i in 0..<3 {
