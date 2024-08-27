@@ -9,9 +9,9 @@ import SwiftUI
 
 struct TempView: View {
     @State private var grid: [[ShapeType]] = [
-        [.circle, .square, .triangle],
-        [.circle, .square, .triangle],
-        [.circle, .square, .triangle]
+        [.square, .square, .triangle],
+        [.circle, .triangle, .square],
+        [.triangle, .circle, .circle]
     ]
     
     let targetGrid: [[ShapeType]] = [
@@ -21,18 +21,21 @@ struct TempView: View {
     ]
     
     var body: some View {
-        VStack {
-            ForEach(0..<3) { row in
-                HStack {
-                    ForEach(0..<3) { column in
-                        LargeShapeView(shapeType: grid[row][column])
-                            .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-                            .padding(30)
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [.green,.orange,.cyan]), startPoint: UnitPoint(x: 0, y: 0.6), endPoint: UnitPoint(x: 0.6, y: 0.2))
+            VStack {
+                ForEach(0..<3) { row in
+                    HStack {
+                        ForEach(0..<3) { column in
+                            LargeShapeView(shapeType: grid[row][column])
+                                .frame(width: deviceWidth / 6, height: deviceWidth / 6)
+                                .padding(30)
+                        }
                     }
                 }
             }
+            .scaleEffect(0.85)
         }
-        .scaleEffect(0.8)
     }
     
     func swipeLeft() {
