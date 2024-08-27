@@ -194,7 +194,7 @@ struct ContentView: View {
                                     .background(.white.opacity(0.01))
                                     .offset(appModel.offsets[row][column])
                                     .gesture(
-                                        DragGesture()
+                                        DragGesture(minimumDistance: 1)
                                             .onChanged { gesture in
                                                 if appModel.swipesLeft > 0 && !hasSwiped {
                                                     appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
