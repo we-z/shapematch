@@ -39,8 +39,8 @@ struct InstructionView: View {
                     .customTextStroke()
                 Spacer()
             }
-            .padding()
-            .background(.yellow)
+            .padding(18)
+            .background(.blue)
             .cornerRadius(15)
             .overlay{
                 RoundedRectangle(cornerRadius: 15)
