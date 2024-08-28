@@ -27,7 +27,7 @@ struct NoMoreSwipesView: View {
                 .onTapGesture {
                     resetGame()
                 }
-            Text("0 Swaps ✋")
+            Text("0 Swaps left ✋")
                 .bold()
                 .font(.system(size: deviceWidth/9))
                 .customTextStroke(width: 2.4)

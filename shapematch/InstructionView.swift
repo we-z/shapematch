@@ -14,10 +14,13 @@ struct InstructionView: View {
         VStack{
             HStack{
                 Spacer()
-                Text("↘️ Match the goal pattern ↙️")
-                    .bold()
-                    .font(.system(size: deviceWidth / 15))
-                    .customTextStroke(width: 1.2)
+                VStack(spacing: 5){
+                    Text("↘️ Match the goal pattern ↙️")
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .font(.system(size: deviceWidth / 15))
+                        .customTextStroke(width: 1.2)
+                }
                 Spacer()
             }
             .padding(.vertical, 21)
@@ -67,6 +70,51 @@ struct InstructionView: View {
         }
     }
 }
+
+struct NewGoalView: View {
+    @State var cardOffset: CGFloat = -(deviceWidth/2)
+    @ObservedObject private var appModel = AppModel.sharedAppModel
+    var body: some View {
+        VStack{
+            HStack{
+                Spacer()
+                VStack(spacing: 5){
+                    Text("↘️ New Goal ↙️")
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .font(.system(size: deviceWidth / 9))
+                        .customTextStroke(width: 1.5)
+                }
+                Spacer()
+            }
+            .padding(.vertical, 10)
+            .background(.blue)
+            .cornerRadius(15)
+            .overlay{
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(Color.black, lineWidth: 6)
+                    .padding(1)
+            }
+            .padding(.horizontal, 6)
+            .offset(y: cardOffset)
+            
+            Spacer()
+        }
+        .onChange(of: appModel.showNewGoal) { _ in
+            DispatchQueue.main.async {
+                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 15.0, initialVelocity: 0.0)) {
+                    cardOffset = 0
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [self] in
+                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                    cardOffset = -(deviceWidth/2)
+                }
+            }
+        }
+    }
+}
+
 #Preview {
-    InstructionView()
+    NewGoalView()
 }

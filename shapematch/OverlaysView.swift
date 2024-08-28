@@ -21,6 +21,7 @@ struct OverlaysView: View {
                 NoMoreSwipesView()
             }
             InstructionView()
+            NewGoalView()
             CelebrationEffect()
         }
     }

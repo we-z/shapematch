@@ -41,6 +41,7 @@ class AppModel: ObservableObject {
     @Published var secondGamePlayed = false
     @Published var showGemMenu = false
     @Published var showInstruction = false
+    @Published var showNewGoal = false
     
     @ObservedObject var audioController = AudioManager.sharedAudioManager
     
@@ -108,6 +109,9 @@ class AppModel: ObservableObject {
             self.freezeGame = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
                 level += 1
+                if level == 2 {
+                    showNewGoal.toggle()
+                }
                 setupLevel()
                 swipesLeft =  calculateMinimumSwipes(from:  grid, to:  targetGrid)
                 initialSwipes = calculateMinimumSwipes(from:  grid, to:  targetGrid)
