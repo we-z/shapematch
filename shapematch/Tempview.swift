@@ -9,32 +9,53 @@ import SwiftUI
 
 struct TempView: View {
     @State private var grid: [[ShapeType]] = [
-        [.square, .square, .triangle],
-        [.circle, .triangle, .square],
-        [.triangle, .circle, .circle]
+        [.square, .circle, .square],
+        [.triangle, .triangle, .circle],
+        [.square, .circle, .triangle]
     ]
     
-    let targetGrid: [[ShapeType]] = [
-        [.circle, .circle, .circle],
-        [.square, .square, .square],
-        [.triangle, .triangle, .triangle]
-    ]
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.green,.orange,.cyan]), startPoint: UnitPoint(x: 0, y: 0.6), endPoint: UnitPoint(x: 0.6, y: 0.2))
             VStack {
-                ForEach(0..<3) { row in
-                    HStack {
-                        ForEach(0..<3) { column in
-                            LargeShapeView(shapeType: grid[row][column])
-                                .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-                                .padding(30)
-                        }
-                    }
+//                ForEach(0..<3) { row in
+//                    HStack {
+//                        ForEach(0..<3) { column in
+//                            LargeShapeView(shapeType: grid[row][column])
+//                                .frame(width: deviceWidth / 6, height: deviceWidth / 6)
+//                                .padding(15)
+//                        }
+//                    }
+//                }
+                Triangle()
+                    .foregroundColor(.green)
+                    .background(Triangle().style(
+                        withStroke: Color.black,
+                        lineWidth: 27,
+                        fill: Color.green
+                    ))
+                    .frame(width: deviceWidth / 3, height: deviceWidth / 3)
+                    .padding(21)
+                HStack{
+                    Circle().fill(Color.blue)
+                        .background(Circle().style(
+                            withStroke: Color.black,
+                            lineWidth: 27,
+                            fill: Color.blue
+                        ))
+                        .frame(width: deviceWidth / 3, height: deviceWidth / 3)
+                        .padding(30)
+                    Rectangle().fill(Color.red)
+                        .background(Rectangle().style(
+                            withStroke: Color.black,
+                            lineWidth: 27,
+                            fill: Color.red
+                        ))
+                        .frame(width: deviceWidth / 3, height: deviceWidth / 3)
+                        .padding(30)
                 }
             }
-            .scaleEffect(0.85)
+            .scaleEffect(0.9)
         }
     }
     
@@ -82,11 +103,6 @@ struct TempView: View {
         return newArray
     }
     
-    func checkWinCondition() {
-        if grid == targetGrid {
-            print("You win!")
-        }
-    }
 }
 
 
