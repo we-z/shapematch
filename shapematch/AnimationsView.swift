@@ -257,7 +257,7 @@ struct ScalingPlaque: ViewModifier {
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + speed * 2) {
-            if appModel.level == 1 {
+            if appModel.level < 3 {
                 runAnimation()
             }
         }
