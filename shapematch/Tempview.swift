@@ -9,51 +9,51 @@ import SwiftUI
 
 struct TempView: View {
     @State private var grid: [[ShapeType]] = [
-        [.square, .circle, .square],
-        [.triangle, .triangle, .circle],
-        [.square, .circle, .triangle]
+        [.triangle, .circle, .triangle],
+        [.square, .triangle, .circle],
+        [.square, .circle, .square]
     ]
     
     
     var body: some View {
         ZStack {
             VStack {
-//                ForEach(0..<3) { row in
-//                    HStack {
-//                        ForEach(0..<3) { column in
-//                            LargeShapeView(shapeType: grid[row][column])
-//                                .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-//                                .padding(15)
-//                        }
-//                    }
-//                }
-                Triangle()
-                    .foregroundColor(.green)
-                    .background(Triangle().style(
-                        withStroke: Color.black,
-                        lineWidth: 27,
-                        fill: Color.green
-                    ))
-                    .frame(width: deviceWidth / 3, height: deviceWidth / 3)
-                    .padding(21)
-                HStack{
-                    Circle().fill(Color.blue)
-                        .background(Circle().style(
-                            withStroke: Color.black,
-                            lineWidth: 27,
-                            fill: Color.blue
-                        ))
-                        .frame(width: deviceWidth / 3, height: deviceWidth / 3)
-                        .padding(30)
-                    Rectangle().fill(Color.red)
-                        .background(Rectangle().style(
-                            withStroke: Color.black,
-                            lineWidth: 27,
-                            fill: Color.red
-                        ))
-                        .frame(width: deviceWidth / 3, height: deviceWidth / 3)
-                        .padding(30)
+                ForEach(0..<3) { row in
+                    HStack {
+                        ForEach(0..<3) { column in
+                            LargeShapeView(shapeType: grid[row][column])
+                                .frame(width: deviceWidth / 5, height: deviceWidth / 5)
+                                .padding(18)
+                        }
+                    }
                 }
+//                Triangle()
+//                    .foregroundColor(.green)
+//                    .background(Triangle().style(
+//                        withStroke: Color.black,
+//                        lineWidth: 27,
+//                        fill: Color.green
+//                    ))
+//                    .frame(width: deviceWidth / 3, height: deviceWidth / 3)
+//                    .padding(21)
+//                HStack{
+//                    Circle().fill(Color.blue)
+//                        .background(Circle().style(
+//                            withStroke: Color.black,
+//                            lineWidth: 27,
+//                            fill: Color.blue
+//                        ))
+//                        .frame(width: deviceWidth / 3, height: deviceWidth / 3)
+//                        .padding(30)
+//                    Rectangle().fill(Color.red)
+//                        .background(Rectangle().style(
+//                            withStroke: Color.black,
+//                            lineWidth: 27,
+//                            fill: Color.red
+//                        ))
+//                        .frame(width: deviceWidth / 3, height: deviceWidth / 3)
+//                        .padding(30)
+//                }
             }
             .scaleEffect(0.9)
         }

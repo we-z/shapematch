@@ -15,11 +15,11 @@ struct InstructionView: View {
             HStack{
                 Spacer()
                 VStack(spacing: 5){
-                    Text("↘️ Match the Goal pattern ↙️")
+                    Text("↘️ Match the goal pattern ↙️")
                         .bold()
                         .multilineTextAlignment(.center)
                         .font(.system(size: deviceWidth / 15))
-                        .customTextStroke(width: 1.5)
+                        .customTextStroke(width: 1.8)
                 }
                 Spacer()
             }
@@ -79,15 +79,15 @@ struct NewGoalView: View {
             HStack{
                 Spacer()
                 VStack(spacing: 5){
-                    Text("↘️ New Goal ↙️")
+                    Text("↘️ New goal pattern ↙️")
                         .bold()
                         .multilineTextAlignment(.center)
-                        .font(.system(size: deviceWidth / 9))
-                        .customTextStroke()
+                        .font(.system(size: deviceWidth / 12))
+                        .customTextStroke(width: 1.8)
                 }
                 Spacer()
             }
-            .padding(.vertical, 10)
+            .padding(.vertical, 18)
             .background(.blue)
             .cornerRadius(15)
             .overlay{
