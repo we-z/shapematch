@@ -44,8 +44,8 @@ struct InstructionView: View {
                 }
             }
         }
-        .onChange(of: appModel.level) { level in
-            if level > 1 {
+        .onChange(of: appModel.firstGamePlayed) { firstGamePlayed in
+            if firstGamePlayed {
                 DispatchQueue.main.async {
                     withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                         cardOffset = -(deviceWidth/2)
@@ -83,7 +83,7 @@ struct NewGoalView: View {
                         .bold()
                         .multilineTextAlignment(.center)
                         .font(.system(size: deviceWidth / 9))
-                        .customTextStroke(width: 1.5)
+                        .customTextStroke()
                 }
                 Spacer()
             }
