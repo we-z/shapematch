@@ -27,6 +27,7 @@
 		7639F9CE2C759A2E00E2B371 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F9CD2C759A2E00E2B371 /* AudioManager.swift */; };
 		7639F9D02C759B2100E2B371 /* ShapeMatchMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */; };
 		766EF08D2C7E2EEA00B2C380 /* RandomGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766EF08C2C7E2EEA00B2C380 /* RandomGradientView.swift */; };
+		766EF08F2C7EB1C500B2C380 /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766EF08E2C7EB1C500B2C380 /* InstructionView.swift */; };
 		76ADAF042C76A92C006B2844 /* OverlaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ADAF032C76A92B006B2844 /* OverlaysView.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		7639F9CD2C759A2E00E2B371 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = ShapeMatchMusic.mp3; path = ../../../../Downloads/ShapeMatchMusic.mp3; sourceTree = "<group>"; };
 		766EF08C2C7E2EEA00B2C380 /* RandomGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGradientView.swift; sourceTree = "<group>"; };
+		766EF08E2C7EB1C500B2C380 /* InstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionView.swift; sourceTree = "<group>"; };
 		76ADAF032C76A92B006B2844 /* OverlaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlaysView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,7 @@
 				761A44452C7841A30017B53B /* GemMenuView.swift */,
 				7639F9C92C7587C800E2B371 /* NoMoreSwipesView.swift */,
 				76ADAF032C76A92B006B2844 /* OverlaysView.swift */,
+				766EF08E2C7EB1C500B2C380 /* InstructionView.swift */,
 				7639F9652C713D8200E2B371 /* Preview Content */,
 				761A444E2C78F03B0017B53B /* products.storekit */,
 				761A444C2C78EFA40017B53B /* ProductList.plist */,
@@ -278,6 +281,7 @@
 			files = (
 				7639F98E2C72C42E00E2B371 /* AnimationsView.swift in Sources */,
 				761A44462C7841A30017B53B /* GemMenuView.swift in Sources */,
+				766EF08F2C7EB1C500B2C380 /* InstructionView.swift in Sources */,
 				7639F9CE2C759A2E00E2B371 /* AudioManager.swift in Sources */,
 				7639F9612C713D8100E2B371 /* ContentView.swift in Sources */,
 				7639F95F2C713D8100E2B371 /* shapematchApp.swift in Sources */,

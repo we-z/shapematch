@@ -26,51 +26,7 @@ struct OverlaysView: View {
     }
 }
 
-struct InstructionView: View {
-    @State var cardOffset: CGFloat = 0
-    @ObservedObject private var appModel = AppModel.sharedAppModel
-    var body: some View {
-        VStack{
-            HStack{
-                Spacer()
-                Text("↘️ Copy the pattern ↙️")
-                    .bold()
-                    .font(.system(size: deviceWidth / 13))
-                    .customTextStroke()
-                Spacer()
-            }
-            .padding(18)
-            .background(.blue)
-            .cornerRadius(15)
-            .overlay{
-                RoundedRectangle(cornerRadius: 15)
-                    .stroke(Color.black, lineWidth: 6)
-                    .padding(1)
-            }
-            .padding(.horizontal, 6)
-            .offset(y: cardOffset)
-            
-            Spacer()
-        }
-        .onAppear{
-            DispatchQueue.main.async {
-                cardOffset = -(deviceWidth/2)
-                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 15.0, initialVelocity: 0.0)) {
-                    cardOffset = 0
-                }
-            }
-        }
-        .onChange(of: appModel.level) { level in
-            if level > 1 {
-                DispatchQueue.main.async {
-                    withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                        cardOffset = -(deviceWidth/2)
-                    }
-                }
-            }
-        }
-    }
-}
+
 
 #Preview {
     OverlaysView()

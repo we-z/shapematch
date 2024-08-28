@@ -78,6 +78,7 @@ struct NoMoreSwipesView: View {
                     Button {
                         appModel.resetLevel()
                         appModel.showNoMoreSwipesView = false
+                        appModel.showInstruction.toggle()
                     } label: {
                         HStack{
                             Text("🔄")
