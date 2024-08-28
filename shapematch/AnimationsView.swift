@@ -228,6 +228,9 @@ struct ScalingPlaque: ViewModifier {
                     runAnimation()
                 }
             }
+            .onChange(of: appModel.showInstruction) { _ in
+                runAnimation()
+            }
     }
 
     private func runAnimation() {
@@ -236,6 +239,18 @@ struct ScalingPlaque: ViewModifier {
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + speed) {
+            withAnimation(.easeInOut(duration: speed)) {
+                scale = 1.0
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 2) {
+            withAnimation(.easeInOut(duration: speed)) {
+                scale = 1.1
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 3) {
             withAnimation(.easeInOut(duration: speed)) {
                 scale = 1.0
             }

@@ -40,6 +40,7 @@ class AppModel: ObservableObject {
     @Published var firstGamePlayed = false
     @Published var secondGamePlayed = false
     @Published var showGemMenu = false
+    @Published var showInstruction = false
     
     @ObservedObject var audioController = AudioManager.sharedAudioManager
     
