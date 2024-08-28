@@ -13,13 +13,19 @@ struct NoMoreSwipesView: View {
     @State var cardOffset = deviceWidth
     @State var pulseText = true
     @ObservedObject var userPersistedData = UserPersistedData()
+    
+    func resetGame() {
+        appModel.resetLevel()
+        appModel.showNoMoreSwipesView = false
+        appModel.showInstruction.toggle()
+    }
+    
     var body: some View {
         ZStack {
             Color.gray.opacity(0.7)
                 .ignoresSafeArea()
                 .onTapGesture {
-                    appModel.resetLevel()
-                    appModel.showNoMoreSwipesView = false
+                    resetGame()
                 }
             Text("0 Swaps ✋")
                 .bold()
@@ -76,9 +82,7 @@ struct NoMoreSwipesView: View {
                     }
                     .buttonStyle(.roundedAndShadow6)
                     Button {
-                        appModel.resetLevel()
-                        appModel.showNoMoreSwipesView = false
-                        appModel.showInstruction.toggle()
+                        resetGame()
                     } label: {
                         HStack{
                             Text("🔄")
