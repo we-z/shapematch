@@ -15,11 +15,11 @@ struct InstructionView: View {
             HStack{
                 Spacer()
                 VStack(spacing: 5){
-                    Text("↘️ Match the goal pattern ↙️")
+                    Text("↘️ Match the Goal pattern ↙️")
                         .bold()
                         .multilineTextAlignment(.center)
                         .font(.system(size: deviceWidth / 15))
-                        .customTextStroke(width: 1.2)
+                        .customTextStroke(width: 1.5)
                 }
                 Spacer()
             }
@@ -116,5 +116,5 @@ struct NewGoalView: View {
 }
 
 #Preview {
-    NewGoalView()
+    InstructionView()
 }
