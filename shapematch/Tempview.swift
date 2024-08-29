@@ -9,9 +9,9 @@ import SwiftUI
 
 struct TempView: View {
     @State private var grid: [[ShapeType]] = [
-        [.triangle, .circle, .triangle],
         [.square, .triangle, .circle],
-        [.square, .circle, .square]
+        [.triangle, .square, .circle],
+        [.square, .circle, .triangle]
     ]
     
     
@@ -22,8 +22,8 @@ struct TempView: View {
                     HStack {
                         ForEach(0..<3) { column in
                             LargeShapeView(shapeType: grid[row][column])
-                                .frame(width: deviceWidth / 5, height: deviceWidth / 5)
-                                .padding(18)
+                                .frame(width: deviceWidth / 6, height: deviceWidth / 6)
+                                .padding(21)
                         }
                     }
                 }
