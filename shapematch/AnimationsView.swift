@@ -11,9 +11,7 @@ import Vortex
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        Rectangle()
-            .frame(width: 100, height: 100)
-            .pulsingPlaque()
+        CelebrationEffect()
     }
 }
 
@@ -62,7 +60,10 @@ struct CelebrationEffect: View {
                                 currentMessage = messages.randomElement() ?? "Well Done!"
                             }
                             
+                            // Ensure particles are emitting before the burst
+                            proxy.particleSystem?.isEmitting = true
                             proxy.burst()
+                            
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
                                 hapticManager.notification(type: .error)
                                 withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {

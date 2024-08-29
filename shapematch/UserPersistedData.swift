@@ -27,7 +27,7 @@ class UserPersistedData: ObservableObject {
 //    @Published var level: Int = 1
 //    @Published var firstGamePlayed: Bool = false
 //    @Published var gridData: String = ""
-//    @Published) var targetGridData: String = ""
+//    @Published var targetGridData: String = ""
     
     
     var grid: [[ShapeType]] {
