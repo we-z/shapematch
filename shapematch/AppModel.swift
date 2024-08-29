@@ -69,8 +69,22 @@ class AppModel: ObservableObject {
     }
     
     func swapShapes(start: (row: Int, col: Int), end: (row: Int, col: Int), offset: CGSize) {
+        let hapticManager = HapticManager.instance
         if grid[start.row][start.col] == grid[end.row][end.col] {
                 // If they are the same, do nothing
+            hapticManager.notification(type: .error)
+            withAnimation(.linear(duration: 0.1)) {
+                offsets[start.row][start.col] = offset
+                offsets[end.row][end.col] = CGSize(width: -offset.width, height: -offset.height)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
+                let temp = grid[start.row][start.col]
+                grid[start.row][start.col] = grid[end.row][end.col]
+                grid[end.row][end.col] = temp
+                
+                offsets[start.row][start.col] = .zero
+                offsets[end.row][end.col] = .zero
+            }
                 return
         }
         
