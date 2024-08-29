@@ -11,13 +11,13 @@ import CloudStorage
 
 class UserPersistedData: ObservableObject {
     @CloudStorage("gemBalance") var gemBalance: Int = 0
-    @CloudStorage("leveltest3") var level: Int = 1
+    @CloudStorage("level") var level: Int = 1
     @CloudStorage("lastLaunch") var lastLaunch: String = ""
-    @CloudStorage("firstGamePlayedtest") var firstGamePlayed: Bool = false
+    @CloudStorage("firstGamePlayed") var firstGamePlayed: Bool = false
     @CloudStorage("hasSharedShapeSwap") var hasSharedShapeSwap: Bool = false
     
-    @CloudStorage("gridDatatest") var gridData: String = ""
-    @CloudStorage("targetGridDatatest") var targetGridData: String = ""
+    @CloudStorage("gridData") var gridData: String = ""
+    @CloudStorage("targetGridData") var targetGridData: String = ""
     
     var grid: [[ShapeType]] {
         get { decodeGrid(from: gridData) }
