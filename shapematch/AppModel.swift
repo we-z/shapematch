@@ -57,6 +57,8 @@ class AppModel: ObservableObject {
             [.square, .square, .square],
             [.triangle, .triangle, .triangle]
         ] : userPersistedData.targetGrid
+        
+        swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
     }
     
     func handleSwipeGesture(gesture: DragGesture.Value, row: Int, col: Int) {
