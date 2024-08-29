@@ -12,12 +12,12 @@ import CloudStorage
 class UserPersistedData: ObservableObject {
     @CloudStorage("gemBalance") var gemBalance: Int = 0
     @CloudStorage("level") var level: Int = 1
-    @CloudStorage("lastLaunch") var lastLaunch: String = ""
     @CloudStorage("firstGamePlayed") var firstGamePlayed: Bool = false
-    @CloudStorage("hasSharedShapeSwap") var hasSharedShapeSwap: Bool = false
-    
     @CloudStorage("gridData") var gridData: String = ""
     @CloudStorage("targetGridData") var targetGridData: String = ""
+    
+//    @CloudStorage("hasSharedShapeSwap") var hasSharedShapeSwap: Bool = false
+//    @CloudStorage("lastLaunch") var lastLaunch: String = ""
     
     var grid: [[ShapeType]] {
         get { decodeGrid(from: gridData) }
@@ -47,9 +47,9 @@ class UserPersistedData: ObservableObject {
         gemBalance -= amount
     }
     
-    func updateLastLaunch(date: String) {
-        lastLaunch = date
-    }
+//    func updateLastLaunch(date: String) {
+//        lastLaunch = date
+//    }
 
 }
 
