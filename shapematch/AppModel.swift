@@ -14,15 +14,15 @@ class AppModel: ObservableObject {
     static let sharedAppModel = AppModel()
     @Published var shouldBurst = false
     @Published var grid: [[ShapeType]] = [
-        [.circle, .circle, .circle],
-        [.square, .triangle, .square],
-        [.triangle, .square, .triangle]
+        [.square, .triangle, .circle],
+        [.triangle, .circle, .circle],
+        [.square, .square, .triangle]
     ]
     
     @Published var targetGrid: [[ShapeType]] = [
-        [.circle, .circle, .circle],
-        [.square, .square, .square],
-        [.triangle, .triangle, .triangle]
+        [.square, .triangle, .circle],
+        [.triangle, .square, .circle],
+        [.square, .circle, .triangle]
     ]
     
     @Published var offsets: [[CGSize]] = Array(
@@ -47,15 +47,15 @@ class AppModel: ObservableObject {
     init() {
         // Initialize the grids from persisted data
         grid = userPersistedData.grid.isEmpty ? [
-            [.circle, .circle, .circle],
-            [.square, .triangle, .square],
-            [.triangle, .square, .triangle]
+            [.square, .triangle, .circle],
+            [.triangle, .circle, .circle],
+            [.square, .square, .triangle]
         ] : userPersistedData.grid
         
         targetGrid = userPersistedData.targetGrid.isEmpty ? [
-            [.circle, .circle, .circle],
-            [.square, .square, .square],
-            [.triangle, .triangle, .triangle]
+            [.square, .triangle, .circle],
+            [.triangle, .square, .circle],
+            [.square, .circle, .triangle]
         ] : userPersistedData.targetGrid
         
         swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
