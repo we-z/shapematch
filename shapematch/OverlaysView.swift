@@ -22,7 +22,9 @@ struct OverlaysView: View {
                 NoMoreSwipesView()
             }
             InstructionView()
+                .padding(.top, idiom == .pad ? 30 : 0)
             NewGoalView()
+                .padding(.top, idiom == .pad ? 30 : 0)
             CelebrationEffect()
         }
     }

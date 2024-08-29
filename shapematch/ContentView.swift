@@ -3,6 +3,7 @@ import AVFoundation
 
 let deviceHeight = UIScreen.main.bounds.height
 let deviceWidth = UIScreen.main.bounds.width
+var idiom : UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
 
 struct ContentView: View {
 
@@ -207,8 +208,10 @@ struct ContentView: View {
                 }
             }
             .allowsHitTesting(!appModel.freezeGame)
+            .scaleEffect(idiom == .pad ? 0.9 : 1)
             OverlaysView()
         }
+        
         .onAppear {
             appModel.initialGrid = appModel.grid
         }

@@ -444,7 +444,7 @@ struct CustomTextStrokeModifier: ViewModifier {
         } symbols: {
             content
                 .tag(id)
-                .blur(radius: strokeSize)
+                .blur(radius: idiom == .pad ? strokeSize * 2 : strokeSize)
         }
     }
 }
