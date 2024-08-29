@@ -219,6 +219,7 @@ struct ScalingPlaque: ViewModifier {
     @State private var scale: CGFloat = 1.0
     @State private var repeatAnimation = false
     @ObservedObject private var appModel = AppModel.sharedAppModel
+    @ObservedObject var userPersistedData = UserPersistedData()
     
     func body(content: Content) -> some View {
         content
@@ -257,7 +258,7 @@ struct ScalingPlaque: ViewModifier {
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + speed * 2) {
-            if appModel.level < 3 {
+            if userPersistedData.level < 3 {
                 runAnimation()
             }
         }

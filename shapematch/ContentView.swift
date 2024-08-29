@@ -128,7 +128,7 @@ struct ContentView: View {
                             .font(.system(size: deviceWidth/12))
                             .fixedSize()
                             .customTextStroke(width: 1.5)
-                        Text("\(appModel.level)")
+                        Text("\(userPersistedData.level)")
                             .bold()
                             .font(.system(size: deviceWidth/5))
                             .customTextStroke(width: 2.7)

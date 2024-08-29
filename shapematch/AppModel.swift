@@ -34,7 +34,6 @@ class AppModel: ObservableObject {
     @Published var initialSwipes = 1
     @Published var swipesLeft = 1
     @Published var freezeGame = false
-    @Published var level = 1
     @Published var swapsToSell = 1
     @Published var showNoMoreSwipesView = false
     @Published var firstGamePlayed = false
@@ -44,6 +43,7 @@ class AppModel: ObservableObject {
     @Published var showNewGoal = false
     
     @ObservedObject var audioController = AudioManager.sharedAudioManager
+    @ObservedObject var userPersistedData = UserPersistedData()
     
     func handleSwipeGesture(gesture: DragGesture.Value, row: Int, col: Int) {
         let direction: SwipeDirection
@@ -117,13 +117,13 @@ class AppModel: ObservableObject {
                 shouldBurst.toggle()
             }
             firstGamePlayed = true
-            if level == 2 {
+            if userPersistedData.level == 2 {
                 secondGamePlayed = true
             }
             self.freezeGame = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
-                level += 1
-                if level == 2 {
+                userPersistedData.level += 1
+                if userPersistedData.level == 2 {
                     showNewGoal.toggle()
                 }
                 setupLevel()
@@ -150,7 +150,7 @@ class AppModel: ObservableObject {
         targetGrid = grid
         var swapsNeeded = 2
         
-        switch level {
+        switch userPersistedData.level {
         case 1...5: swapsNeeded = 2
         case 6...15: swapsNeeded = 3
         case 16...30: swapsNeeded = 4
