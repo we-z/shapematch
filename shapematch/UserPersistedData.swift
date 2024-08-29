@@ -18,17 +18,14 @@ class UserPersistedData: ObservableObject {
     @CloudStorage("gridData") var gridData: String = ""
     @CloudStorage("targetGridData") var targetGridData: String = ""
     
-//    @CloudStorage("hasSharedShapeSwap") var hasSharedShapeSwap: Bool = false
-//    @CloudStorage("lastLaunch") var lastLaunch: String = ""
-    
-    // Test code ready
-    
 //    @Published var gemBalance: Int = 0
 //    @Published var level: Int = 1
 //    @Published var firstGamePlayed: Bool = false
 //    @Published var gridData: String = ""
 //    @Published var targetGridData: String = ""
     
+//    @CloudStorage("hasSharedShapeSwap") var hasSharedShapeSwap: Bool = false
+//    @CloudStorage("lastLaunch") var lastLaunch: String = ""
     
     var grid: [[ShapeType]] {
         get { decodeGrid(from: gridData) }
