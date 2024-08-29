@@ -225,7 +225,7 @@ struct ScalingPlaque: ViewModifier {
         content
             .scaleEffect(scale)
             .onAppear {
-                if !appModel.firstGamePlayed{
+                if !userPersistedData.firstGamePlayed{
                     runAnimation()
                 }
             }

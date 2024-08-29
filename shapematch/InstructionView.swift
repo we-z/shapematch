@@ -45,7 +45,7 @@ struct InstructionView: View {
                 }
             }
         }
-        .onChange(of: appModel.firstGamePlayed) { firstGamePlayed in
+        .onChange(of: userPersistedData.firstGamePlayed) { firstGamePlayed in
             if firstGamePlayed {
                 DispatchQueue.main.async {
                     withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {

@@ -36,7 +36,6 @@ class AppModel: ObservableObject {
     @Published var freezeGame = false
     @Published var swapsToSell = 1
     @Published var showNoMoreSwipesView = false
-    @Published var firstGamePlayed = false
     @Published var secondGamePlayed = false
     @Published var showGemMenu = false
     @Published var showInstruction = false
@@ -44,6 +43,21 @@ class AppModel: ObservableObject {
     
     @ObservedObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData()
+    
+    init() {
+        // Initialize the grids from persisted data
+        grid = userPersistedData.grid.isEmpty ? [
+            [.circle, .circle, .circle],
+            [.square, .triangle, .square],
+            [.triangle, .square, .triangle]
+        ] : userPersistedData.grid
+        
+        targetGrid = userPersistedData.targetGrid.isEmpty ? [
+            [.circle, .circle, .circle],
+            [.square, .square, .square],
+            [.triangle, .triangle, .triangle]
+        ] : userPersistedData.targetGrid
+    }
     
     func handleSwipeGesture(gesture: DragGesture.Value, row: Int, col: Int) {
         let direction: SwipeDirection
@@ -116,7 +130,7 @@ class AppModel: ObservableObject {
             DispatchQueue.main.async { [self] in
                 shouldBurst.toggle()
             }
-            firstGamePlayed = true
+            userPersistedData.firstGamePlayed = true
             if userPersistedData.level == 2 {
                 secondGamePlayed = true
             }
@@ -189,6 +203,8 @@ class AppModel: ObservableObject {
                 successfulSetup = true
                 swipesLeft = swapsNeeded
                 initialSwipes = swipesLeft
+                userPersistedData.grid = grid
+                userPersistedData.targetGrid = targetGrid
             } else {
                 // If the calculated swipes do not match, reset and try again
                 targetGrid = grid

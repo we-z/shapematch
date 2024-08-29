@@ -10,9 +10,10 @@ import AVFoundation
 
 struct OverlaysView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
+    @ObservedObject var userPersistedData = UserPersistedData()
     var body: some View {
         ZStack {
-            if !appModel.firstGamePlayed{
+            if !userPersistedData.firstGamePlayed{
                 HandSwipeView()
             }
             if appModel.showGemMenu {
