@@ -219,7 +219,7 @@ struct ScalingPlaque: ViewModifier {
     @State private var scale: CGFloat = 1.0
     @State private var repeatAnimation = false
     @ObservedObject private var appModel = AppModel.sharedAppModel
-    @ObservedObject var userPersistedData = UserPersistedData()
+    @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     
     func body(content: Content) -> some View {
         content

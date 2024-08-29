@@ -10,7 +10,7 @@ import SwiftUI
 struct GemMenuView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @StateObject var storeKit = StoreKitManager()
-    @ObservedObject var userPersistedData = UserPersistedData()
+    @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @State var cardOffset: CGFloat = deviceWidth * 2
     
     @State var GemPack10: GemPack = GemPack(amount: 10, cost: "1.99", packID: "GemPack10")

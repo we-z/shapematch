@@ -8,7 +8,7 @@ struct ContentView: View {
 
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @StateObject var audioController = AudioManager.sharedAudioManager
-    @ObservedObject var userPersistedData = UserPersistedData()
+    @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     
     let rect = CGRect(x: 0, y: 0, width: 300, height: 100)
     var body: some View {

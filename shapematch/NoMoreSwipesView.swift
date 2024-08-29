@@ -12,7 +12,7 @@ struct NoMoreSwipesView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @State var cardOffset = deviceWidth
     @State var pulseText = true
-    @ObservedObject var userPersistedData = UserPersistedData()
+    @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     
     func resetGame() {
         appModel.resetLevel()

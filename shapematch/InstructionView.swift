@@ -10,7 +10,7 @@ import SwiftUI
 struct InstructionView: View {
     @State var cardOffset: CGFloat = -(deviceWidth/2)
     @ObservedObject private var appModel = AppModel.sharedAppModel
-    @ObservedObject var userPersistedData = UserPersistedData()
+    @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     var body: some View {
         VStack{
             HStack{

@@ -10,6 +10,8 @@ import Foundation
 import CloudStorage
 
 class UserPersistedData: ObservableObject {
+    static let sharedUserPersistedData = UserPersistedData()
+    
     @CloudStorage("gemBalance") var gemBalance: Int = 0
     @CloudStorage("level") var level: Int = 1
     @CloudStorage("firstGamePlayed") var firstGamePlayed: Bool = false

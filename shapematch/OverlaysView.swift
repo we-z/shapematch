@@ -10,7 +10,7 @@ import AVFoundation
 
 struct OverlaysView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
-    @ObservedObject var userPersistedData = UserPersistedData()
+    @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     var body: some View {
         ZStack {
             if !userPersistedData.firstGamePlayed{

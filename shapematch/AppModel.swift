@@ -42,7 +42,7 @@ class AppModel: ObservableObject {
     @Published var showNewGoal = false
     
     @ObservedObject var audioController = AudioManager.sharedAudioManager
-    @ObservedObject var userPersistedData = UserPersistedData()
+    @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     
     init() {
         // Initialize the grids from persisted data
