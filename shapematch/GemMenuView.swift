@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GemMenuView: View {
+    @State var isProcessingPurchase = false
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @StateObject var storeKit = StoreKitManager()
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
