@@ -180,7 +180,7 @@ struct ContentView: View {
                             .font(.system(size: deviceWidth/15))
                             .fixedSize()
                             .customTextStroke(width: 1.5)
-                        Text("9")
+                        Text("\(appModel.swipesLeft)")
                             .bold()
                             .font(.system(size: deviceWidth/5))
                             .customTextStroke(width: 2.7)
