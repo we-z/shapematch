@@ -240,3 +240,28 @@ struct GemPack: Hashable {
         return lhs.packID == rhs.packID
     }
 }
+
+struct HangTight: View {
+    @State var dissapear = false
+    var body: some View {
+        HStack{
+            Spacer()
+            Text("Hang tight!\nWe’re grabbing\nyour Gems 💎")
+                .bold()
+                .multilineTextAlignment(.center)
+                .font(.system(size: deviceWidth/9))
+                .customTextStroke()
+            Spacer()
+        }
+        .frame(height: deviceWidth/1.8)
+        .background(Color.green)
+        .cornerRadius(30)
+        .overlay{
+            RoundedRectangle(cornerRadius: 30)
+                .stroke(Color.black, lineWidth: 9)
+                .padding(1)
+        }
+        .padding()
+        .allowsHitTesting(false)
+    }
+}
