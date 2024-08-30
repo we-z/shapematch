@@ -470,11 +470,14 @@ struct RoundedAndShadowButtonStyle6:ButtonStyle {
             .offset(x: isPressed ? -6 : 0, y: isPressed ? 6 : 0)
             .animation(.easeInOut(duration: 0.1), value: isPressed)
             .onChange(of: configuration.isPressed) { currentlyPressing in
-                impactHeavy.impactOccurred()
+                if currentlyPressing {
+                    impactHeavy.impactOccurred()
+                }
                 isPressed = true
                 if !currentlyPressing {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [self] in
                         isPressed = false
+                        impactHeavy.impactOccurred()
                     }
                 }
             }
