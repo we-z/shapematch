@@ -137,14 +137,14 @@ class AppModel: ObservableObject {
                 secondGamePlayed = true
             }
             self.freezeGame = true
+            userPersistedData.level += 1
+            setupLevel()
+            swipesLeft =  calculateMinimumSwipes(from:  grid, to:  targetGrid)
+            initialSwipes = calculateMinimumSwipes(from:  grid, to:  targetGrid)
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
-                userPersistedData.level += 1
                 if userPersistedData.level == 2 {
                     showNewGoal.toggle()
                 }
-                setupLevel()
-                swipesLeft =  calculateMinimumSwipes(from:  grid, to:  targetGrid)
-                initialSwipes = calculateMinimumSwipes(from:  grid, to:  targetGrid)
                 self.freezeGame = false
             }
             print("You win!")
