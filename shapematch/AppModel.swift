@@ -462,33 +462,21 @@ extension ButtonStyle where Self == RoundedAndShadowButtonStyle6 {
 }
 
 struct RoundedAndShadowButtonStyle6:ButtonStyle {
+    @State var isPressed = false
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .compositingGroup()
-            .shadow(color: .black, radius: 0.1, x: configuration.isPressed ? 0 : -6, y: configuration.isPressed ? 0 : 6)
-            .offset(x: configuration.isPressed ? -6 : 0, y: configuration.isPressed ? 6 : 0)
-            .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
-            .onChange(of: configuration.isPressed) { newPressSetting in
+            .shadow(color: .black, radius: 0.1, x: isPressed ? 0 : -6, y: isPressed ? 0 : 6)
+            .offset(x: isPressed ? -6 : 0, y: isPressed ? 6 : 0)
+            .animation(.easeInOut(duration: 0.1), value: isPressed)
+            .onChange(of: configuration.isPressed) { currentlyPressing in
                 impactHeavy.impactOccurred()
-            }
-    }
-}
-
-extension ButtonStyle where Self == RoundedAndShadowButtonStyle3 {
-    static var roundedAndShadow3:RoundedAndShadowButtonStyle3 {
-        RoundedAndShadowButtonStyle3()
-    }
-}
-
-struct RoundedAndShadowButtonStyle3:ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .compositingGroup()
-            .shadow(color: .black, radius: 0.1, x: configuration.isPressed ? 0 : -3, y: configuration.isPressed ? 0 : 3)
-            .offset(x: configuration.isPressed ? -3 : 0, y: configuration.isPressed ? 3 : 0)
-            .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
-            .onChange(of: configuration.isPressed) { newPressSetting in
-                impactHeavy.impactOccurred()
+                isPressed = true
+                if !currentlyPressing {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [self] in
+                        isPressed = false
+                    }
+                }
             }
     }
 }
