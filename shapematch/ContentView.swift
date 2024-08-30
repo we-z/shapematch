@@ -132,8 +132,12 @@ struct ContentView: View {
                         Text("\(userPersistedData.level)")
                             .bold()
                             .font(.system(size: deviceWidth/5))
+                            .minimumScaleFactor(0.1)
+                            .fixedSize()
+                            .scaleEffect(userPersistedData.level > 99 ? 0.7 : 1)
                             .customTextStroke(width: 2.7)
                     }
+                    .frame(width: deviceWidth/4)
                     Spacer()
                     VStack{
                         Text("Goal 🎯")
@@ -176,11 +180,12 @@ struct ContentView: View {
                             .font(.system(size: deviceWidth/15))
                             .fixedSize()
                             .customTextStroke(width: 1.5)
-                        Text("\(appModel.swipesLeft)")
+                        Text("9")
                             .bold()
                             .font(.system(size: deviceWidth/5))
                             .customTextStroke(width: 2.7)
                     }
+                    .frame(width: deviceWidth/4)
                     Spacer()
                     
                 }
