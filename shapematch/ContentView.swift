@@ -10,6 +10,10 @@ struct ContentView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @StateObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
+    @State var firstChange = false
+    @State var playingShapeScale = 1.0
+    @State var tappedRow = 0
+    @State var tappedColumn = 0
     
     let rect = CGRect(x: 0, y: 0, width: 300, height: 100)
     var body: some View {
@@ -199,12 +203,25 @@ struct ContentView: View {
                                     .padding()
                                     .background(.white.opacity(0.01))
                                     .offset(appModel.offsets[row][column])
+                                    .scaleEffect((tappedRow == row && tappedColumn == column) ? playingShapeScale : 1)
+                                    .animation(.easeInOut(duration: 0.1), value: playingShapeScale)
                                     .gesture(
                                         DragGesture(minimumDistance: 1)
+                                            .onChanged { gesture in
+                                                if !firstChange {
+                                                    impactHeavy.impactOccurred()
+                                                    tappedRow = row
+                                                    tappedColumn = column
+                                                    playingShapeScale = 0.9
+                                                }
+                                                firstChange = true
+                                            }
                                             .onEnded { gesture in
                                                 if appModel.swipesLeft > 0 {
                                                     appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
                                                 }
+                                                firstChange = false
+                                                playingShapeScale = 1.0
                                             }
                                     )
                             }
