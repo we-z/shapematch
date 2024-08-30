@@ -29,6 +29,12 @@ struct GemMenuView: View {
         } catch {
             print("Purchase failed: \(error)")
         }
+        isProcessingPurchase = false
+        DispatchQueue.main.async {
+            withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                cardOffset = 0
+            }
+        }
     }
     
     var body: some View {
@@ -61,6 +67,7 @@ struct GemMenuView: View {
                     //            Spacer()
                     VStack(spacing: 21) {
                         Button {
+                            isProcessingPurchase = true
                             Task {
                                 await buyGems(pack: GemPack10)
                             }
@@ -106,6 +113,7 @@ struct GemMenuView: View {
                         }
                         .buttonStyle(.roundedAndShadow6)
                         Button {
+                            isProcessingPurchase = true
                             Task {
                                 await buyGems(pack: GemPack100)
                             }
@@ -152,6 +160,7 @@ struct GemMenuView: View {
                         }
                         .buttonStyle(.roundedAndShadow6)
                         Button {
+                            isProcessingPurchase = true
                             Task {
                                 await buyGems(pack: GemPack1000)
                             }
@@ -211,7 +220,22 @@ struct GemMenuView: View {
                 .offset(y: cardOffset)
                 
             }
+            if isProcessingPurchase {
+                ProgressView()
+                .scaleEffect(6)
+                .font(.system(size: deviceWidth))
+                VStack {
+                    HangTight()
+                        .onAppear{
+                            withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                                cardOffset = deviceWidth * 2
+                            }
+                        }
+                    Spacer()
+                }
+            }
         }
+        .allowsHitTesting(!isProcessingPurchase)
         .onAppear {
             DispatchQueue.main.async {
                 withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
@@ -244,6 +268,7 @@ struct GemPack: Hashable {
 
 struct HangTight: View {
     @State var dissapear = false
+    @State var cardOffset: CGFloat = -(deviceWidth / 2)
     var body: some View {
         HStack{
             Spacer()
@@ -263,6 +288,14 @@ struct HangTight: View {
                 .padding(1)
         }
         .padding()
+        .offset(y: cardOffset)
+        .onAppear{
+            DispatchQueue.main.async {
+                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                    cardOffset = 0
+                }
+            }
+        }
         .allowsHitTesting(false)
     }
 }
