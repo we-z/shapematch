@@ -24,6 +24,20 @@ class AppModel: ObservableObject {
         [.triangle, .square, .circle],
         [.square, .circle, .triangle]
     ]
+
+    @Published var tempGrid: [[ShapeType]] = [
+        [.square, .triangle, .circle],
+        [.triangle, .circle, .circle],
+        [.square, .square, .triangle]
+    ]
+    
+    @Published var tempTargetGrid: [[ShapeType]] = [
+        [.square, .triangle, .circle],
+        [.triangle, .square, .circle],
+        [.square, .circle, .triangle]
+    ]
+    
+    @Published var tempSwipesLeft = 1
     
     @Published var offsets: [[CGSize]] = Array(
         repeating: Array(repeating: .zero, count: 3),
@@ -137,15 +151,18 @@ class AppModel: ObservableObject {
                 secondGamePlayed = true
             }
             self.freezeGame = true
-            userPersistedData.level += 1
             setupLevel()
             swipesLeft =  calculateMinimumSwipes(from:  grid, to:  targetGrid)
             initialSwipes = calculateMinimumSwipes(from:  grid, to:  targetGrid)
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
-                if userPersistedData.level == 2 {
+                if userPersistedData.level == 1 {
                     showNewGoal.toggle()
                 }
+                userPersistedData.level += 1
                 self.freezeGame = false
+                self.grid = tempGrid
+                self.targetGrid = tempTargetGrid
+                self.swipesLeft = tempSwipesLeft
             }
             print("You win!")
         } else if swipesLeft <= 0 {
@@ -159,11 +176,11 @@ class AppModel: ObservableObject {
 
         // Populate the grid with randomized shapes
         for i in 0..<3 {
-            grid[i] = Array(randomizedShapes[(i * 3)..<(i * 3 + 3)])
+            tempGrid[i] = Array(randomizedShapes[(i * 3)..<(i * 3 + 3)])
         }
         
         initialGrid = grid
-        targetGrid = grid
+        tempTargetGrid = grid
         var swapsNeeded = 2
         
         switch userPersistedData.level {
@@ -191,25 +208,26 @@ class AppModel: ObservableObject {
                                    direction == 1 ? (row1, col1 < 2 ? col1 + 1 : col1 - 1) :
                                    direction == 2 ? (row1 > 0 ? row1 - 1 : row1 + 1, col1) :
                                    (row1 < 2 ? row1 + 1 : row1 - 1, col1)
-                } while (row1 == row2 && col1 == col2) || targetGrid[row1][col1] == targetGrid[row2][col2]
+                } while (row1 == row2 && col1 == col2) || tempTargetGrid[row1][col1] == tempTargetGrid[row2][col2]
                 
                 // Perform the swap
-                let temp = targetGrid[row1][col1]
-                targetGrid[row1][col1] = targetGrid[row2][col2]
-                targetGrid[row2][col2] = temp
+                let temp = tempTargetGrid[row1][col1]
+                tempTargetGrid[row1][col1] = tempTargetGrid[row2][col2]
+                tempTargetGrid[row2][col2] = temp
             }
             
             // Check if the grid requires exactly `swapsNeeded` to solve
-            let calculatedSwipes = calculateMinimumSwipes(from: grid, to: targetGrid)
+            let calculatedSwipes = calculateMinimumSwipes(from: tempGrid, to: tempTargetGrid)
             if calculatedSwipes == swapsNeeded {
                 successfulSetup = true
-                swipesLeft = swapsNeeded
-                initialSwipes = swipesLeft
-                userPersistedData.grid = grid
-                userPersistedData.targetGrid = targetGrid
+                tempSwipesLeft = swapsNeeded
+                initialSwipes = tempSwipesLeft
+                userPersistedData.grid = tempGrid
+                userPersistedData.targetGrid = tempTargetGrid
+                
             } else {
                 // If the calculated swipes do not match, reset and try again
-                targetGrid = grid
+                tempTargetGrid = tempGrid
             }
         }
     }
