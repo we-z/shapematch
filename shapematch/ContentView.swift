@@ -173,7 +173,7 @@ struct ContentView: View {
                     
                     Spacer()
                     VStack{
-                        Text("↔️")
+                        Text("↕️ ↔️")
                             .bold()
                             .font(.system(size: deviceWidth/12))
                             .fixedSize()
