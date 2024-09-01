@@ -181,8 +181,8 @@ class AppModel: ObservableObject {
             tempGrid[i] = Array(randomizedShapes[(i * 3)..<(i * 3 + 3)])
         }
         
-        initialGrid = grid
-        tempTargetGrid = grid
+        initialGrid = tempGrid
+        tempTargetGrid = tempGrid
         var swapsNeeded = 2
         
         switch userPersistedData.level {

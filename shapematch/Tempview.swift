@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct TempView: View {
+    
     @State private var grid: [[ShapeType]] = [
         [.square, .triangle, .circle],
         [.triangle, .square, .circle],
         [.square, .circle, .triangle]
     ]
-    
     
     var body: some View {
         ZStack {
@@ -27,33 +27,6 @@ struct TempView: View {
                         }
                     }
                 }
-//                Triangle()
-//                    .foregroundColor(.green)
-//                    .background(Triangle().style(
-//                        withStroke: Color.black,
-//                        lineWidth: 27,
-//                        fill: Color.green
-//                    ))
-//                    .frame(width: deviceWidth / 3, height: deviceWidth / 3)
-//                    .padding(21)
-//                HStack{
-//                    Circle().fill(Color.blue)
-//                        .background(Circle().style(
-//                            withStroke: Color.black,
-//                            lineWidth: 27,
-//                            fill: Color.blue
-//                        ))
-//                        .frame(width: deviceWidth / 3, height: deviceWidth / 3)
-//                        .padding(30)
-//                    Rectangle().fill(Color.red)
-//                        .background(Rectangle().style(
-//                            withStroke: Color.black,
-//                            lineWidth: 27,
-//                            fill: Color.red
-//                        ))
-//                        .frame(width: deviceWidth / 3, height: deviceWidth / 3)
-//                        .padding(30)
-//                }
             }
             .scaleEffect(0.9)
         }
