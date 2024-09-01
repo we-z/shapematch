@@ -343,6 +343,82 @@ enum ShapeType: Int, Identifiable, Equatable, CaseIterable {
     var id: Int { rawValue }
 }
 
+enum ExtendedShapeType: Int, Identifiable, Equatable, CaseIterable {
+    case circle, square, triangle, star // Added star as the new shape
+    
+    var id: Int { rawValue }
+}
+
+struct ExtendedLargeShapeView: View {
+    let shapeType: ExtendedShapeType
+    
+    var body: some View {
+        switch shapeType {
+        case .circle:
+            Circle().fill(Color.blue)
+                .background(Circle().style(
+                    withStroke: Color.black,
+                    lineWidth: 18,
+                    fill: Color.blue
+                ))
+        case .square:
+            Rectangle().fill(Color.red)
+                .background(Rectangle().style(
+                    withStroke: Color.black,
+                    lineWidth: 18,
+                    fill: Color.red
+                ))
+        case .triangle:
+            Triangle()
+                .foregroundColor(.green)
+                .background(Triangle().style(
+                    withStroke: Color.black,
+                    lineWidth: 18,
+                    fill: Color.green
+                ))
+        case .star: // Handle the new star shape
+            StarShape(points: 5)
+                .foregroundColor(.yellow)
+                .background(StarShape(points: 5).style(
+                    withStroke: Color.black,
+                    lineWidth: 18,
+                    fill: Color.yellow
+                ))
+        }
+    }
+}
+
+struct StarShape: Shape {
+    var points: Int
+    
+    func path(in rect: CGRect) -> Path {
+        let center = CGPoint(x: rect.width / 2, y: rect.height / 2)
+        let radius = min(rect.width, rect.height) / 2
+        let angle = .pi / CGFloat(points)
+
+        var path = Path()
+
+        for i in 0..<2 * points {
+            let isEven = i % 2 == 0
+            let pointRadius = isEven ? radius : radius * 0.4
+            let xPosition = center.x + pointRadius * sin(CGFloat(i) * angle)
+            let yPosition = center.y - pointRadius * cos(CGFloat(i) * angle)
+
+            let point = CGPoint(x: xPosition, y: yPosition)
+
+            if i == 0 {
+                path.move(to: point)
+            } else {
+                path.addLine(to: point)
+            }
+        }
+
+        path.closeSubpath()
+
+        return path
+    }
+}
+
 struct LargeShapeView: View {
     let shapeType: ShapeType
     
