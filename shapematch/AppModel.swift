@@ -99,6 +99,9 @@ class AppModel: ObservableObject {
     }
     
     func swapShapes(start: (row: Int, col: Int), end: (row: Int, col: Int), offset: CGSize) {
+        DispatchQueue.main.async {
+            self.swipesLeft -= 1
+        }
         let hapticManager = HapticManager.instance
         if grid[start.row][start.col] == grid[end.row][end.col] {
                 // If they are the same, do nothing
@@ -130,7 +133,6 @@ class AppModel: ObservableObject {
             
             offsets[start.row][start.col] = .zero
             offsets[end.row][end.col] = .zero
-            swipesLeft -= 1
             if grid != targetGrid && swipesLeft == 0 {
                 swapsToSell = calculateMinimumSwipes(from: grid, to: targetGrid)
                 AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
