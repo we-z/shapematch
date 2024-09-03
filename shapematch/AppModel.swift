@@ -12,6 +12,7 @@ import GameKit
 
 class AppModel: ObservableObject {
     static let sharedAppModel = AppModel()
+    let hapticManager = HapticManager.instance
     @Published var shouldBurst = false
     @Published var grid: [[ShapeType]] = [
         [.square, .triangle, .circle],
@@ -54,6 +55,7 @@ class AppModel: ObservableObject {
     @Published var showGemMenu = false
     @Published var showInstruction = false
     @Published var showNewGoal = false
+    @Published var swaping = false
     
     @ObservedObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
@@ -84,63 +86,53 @@ class AppModel: ObservableObject {
             direction = gesture.translation.height < 0 ? .up : .down
         }
         
-        switch direction {
-        case .left where col > 0:
-            swapShapes(start: (row, col), end: (row, col - 1), offset: CGSize(width: -deviceWidth / 3, height: 0))
-        case .right where col < 2:
-            swapShapes(start: (row, col), end: (row, col + 1), offset: CGSize(width: deviceWidth / 3, height: 0))
-        case .up where row > 0:
-            swapShapes(start: (row, col), end: (row - 1, col), offset: CGSize(width: 0, height: -deviceWidth / 3))
-        case .down where row < 2:
-            swapShapes(start: (row, col), end: (row + 1, col), offset: CGSize(width: 0, height: deviceWidth / 3))
-        default:
-            break
+        if !swaping {
+            switch direction {
+            case .left where col > 0:
+                swapShapes(start: (row, col), end: (row, col - 1), offset: CGSize(width: -deviceWidth / 3, height: 0))
+            case .right where col < 2:
+                swapShapes(start: (row, col), end: (row, col + 1), offset: CGSize(width: deviceWidth / 3, height: 0))
+            case .up where row > 0:
+                swapShapes(start: (row, col), end: (row - 1, col), offset: CGSize(width: 0, height: -deviceWidth / 3))
+            case .down where row < 2:
+                swapShapes(start: (row, col), end: (row + 1, col), offset: CGSize(width: 0, height: deviceWidth / 3))
+            default:
+                break
+            }
         }
     }
     
     func swapShapes(start: (row: Int, col: Int), end: (row: Int, col: Int), offset: CGSize) {
-        DispatchQueue.main.async {
-            self.swipesLeft -= 1
-        }
-        let hapticManager = HapticManager.instance
-        if grid[start.row][start.col] == grid[end.row][end.col] {
-                // If they are the same, do nothing
-            hapticManager.notification(type: .error)
-            withAnimation(.linear(duration: 0.1)) {
+        DispatchQueue.main.async { [self] in
+            self.swaping = true
+            withAnimation(.linear(duration: 0.2)) {
                 offsets[start.row][start.col] = offset
                 offsets[end.row][end.col] = CGSize(width: -offset.width, height: -offset.height)
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
-                let temp = grid[start.row][start.col]
-                grid[start.row][start.col] = grid[end.row][end.col]
-                grid[end.row][end.col] = temp
-                
-                offsets[start.row][start.col] = .zero
-                offsets[end.row][end.col] = .zero
-            }
-                return
         }
-        
-        withAnimation(.linear(duration: 0.1)) {
-            offsets[start.row][start.col] = offset
-            offsets[end.row][end.col] = CGSize(width: -offset.width, height: -offset.height)
-        }
-        AudioServicesPlaySystemSound(1104)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
             let temp = grid[start.row][start.col]
             grid[start.row][start.col] = grid[end.row][end.col]
             grid[end.row][end.col] = temp
-            
+             
             offsets[start.row][start.col] = .zero
             offsets[end.row][end.col] = .zero
-            if grid != targetGrid && swipesLeft == 0 {
-                swapsToSell = calculateMinimumSwipes(from: grid, to: targetGrid)
-                AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
-                showNoMoreSwipesView = true
-            }
+            swaping = false
+        }
+        
+        if grid[start.row][start.col] == grid[end.row][end.col] {
+                // If they are the same, do nothing
+            hapticManager.notification(type: .error)
+            return
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+            self.swipesLeft -= 1
+            AudioServicesPlaySystemSound(1104)
             impactHeavy.impactOccurred()
             checkWinCondition()
         }
+        
     }
     
     func checkWinCondition() {
@@ -168,6 +160,9 @@ class AppModel: ObservableObject {
             }
             print("You win!")
         } else if swipesLeft <= 0 {
+            swapsToSell = calculateMinimumSwipes(from: grid, to: targetGrid)
+            AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
+            showNoMoreSwipesView = true
             print("Level failed")
         }
     }
