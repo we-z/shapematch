@@ -18,23 +18,15 @@ struct RandomGradientView: View {
         Rectangle()
             .fill(gradient)
             .edgesIgnoringSafeArea(.all)
-//            .onAppear{
-//                // Animate the change
-//                if #available(iOS 17, *) {
-//                    withAnimation(.linear(duration: 3)) {
-//                        self.gradient = self.randomGradient()
-//                    }
-//                }
-//            }
-//            .onReceive(timer) { _ in
-//                // Generate a new gradient
-//                // Animate the change
-//                if #available(iOS 17, *) {
-//                    withAnimation(.linear(duration: 3)) {
-//                        self.gradient = self.randomGradient()
-//                    }
-//                }
-//            }
+            .onReceive(timer) { _ in
+                // Generate a new gradient
+                // Animate the change
+                if #available(iOS 17, *) {
+                    withAnimation(.linear(duration: 6)) {
+                        self.gradient = self.randomGradient()
+                    }
+                }
+            }
     }
     
     func randomGradient() -> LinearGradient {

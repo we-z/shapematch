@@ -18,8 +18,9 @@ struct ContentView: View {
     let rect = CGRect(x: 0, y: 0, width: 300, height: 100)
     var body: some View {
         ZStack{
-//            RandomGradientView()
             Color.white
+                .ignoresSafeArea()
+            Color.gray.opacity(0.3)
                 .ignoresSafeArea()
             VStack(spacing: 0) {
                 HStack{
