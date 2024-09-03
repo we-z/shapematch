@@ -30,11 +30,6 @@ struct GemMenuView: View {
             print("Purchase failed: \(error)")
         }
         isProcessingPurchase = false
-        DispatchQueue.main.async {
-            withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                cardOffset = 0
-            }
-        }
     }
     
     var body: some View {
@@ -222,15 +217,10 @@ struct GemMenuView: View {
             }
             if isProcessingPurchase {
                 ProgressView()
-                .scaleEffect(6)
+                .scaleEffect(3)
                 .font(.system(size: deviceWidth))
                 VStack {
                     HangTight()
-                        .onAppear{
-                            withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                                cardOffset = deviceWidth * 2
-                            }
-                        }
                     Spacer()
                 }
             }
