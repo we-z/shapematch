@@ -10,7 +10,8 @@ import SwiftUI
 struct NoMoreSwipesView: View {
     
     @ObservedObject private var appModel = AppModel.sharedAppModel
-    @State var cardOffset = deviceWidth
+    @State var buySwapsButtonOffset = deviceWidth/3
+    @State var resetButtonOffset = -(deviceWidth/3)
     @State var pulseText = true
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     
@@ -34,8 +35,34 @@ struct NoMoreSwipesView: View {
                 .pulsingText()
                 .allowsHitTesting(false)
             VStack {
-                Spacer()
+                
                 VStack{
+                    Button {
+                        resetGame()
+                    } label: {
+                        HStack{
+                            Spacer()
+                            Text("🔄  Reset  🔄")
+                                .bold()
+                                .font(.system(size: deviceWidth/12))
+                                .customTextStroke(width: 1.8)
+                                .padding(1)
+                            Spacer()
+                        }
+                        .padding(.vertical, 14)
+                        .background{
+                            Color.red
+                        }
+                        .cornerRadius(21)
+                        .overlay{
+                            RoundedRectangle(cornerRadius: 21)
+                                .stroke(Color.black, lineWidth: 4)
+                                .padding(1)
+                        }
+                    }
+                    .buttonStyle(.roundedAndShadow6)
+                    .offset(y: resetButtonOffset)
+                    Spacer()
                     Button {
                         if appModel.swapsToSell > userPersistedData.gemBalance {
                             appModel.showGemMenu = true
@@ -72,56 +99,29 @@ struct NoMoreSwipesView: View {
                         }
                         .padding()
                         .background(.blue)
-                        .cornerRadius(15)
+                        .cornerRadius(21)
                         .overlay{
-                            RoundedRectangle(cornerRadius: 15)
+                            RoundedRectangle(cornerRadius: 21)
                                 .stroke(Color.black, lineWidth: 4)
                                 .padding(1)
                         }
-                        .padding()
+//                        .padding()
                     }
                     .buttonStyle(.roundedAndShadow6)
-                    Button {
-                        resetGame()
-                    } label: {
-                        HStack{
-                            Text("🔄")
-                                .font(.system(size: deviceWidth/15))
-                                .customTextStroke(width: 1.2)
-                                .padding(.horizontal)
-                        }
-                        .padding(.vertical, 14)
-                        .frame(width: deviceWidth/3.3)
-                        .background{
-                            Color.red
-                        }
-                        .cornerRadius(15)
-                        .overlay{
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(Color.black, lineWidth: 4)
-                                .padding(1)
-                        }
-                    }
-                    .buttonStyle(.roundedAndShadow6)
-                    .padding(.bottom)
+                    .offset(y: buySwapsButtonOffset)
+                    
                 }
                 .padding()
-                .background(.red)
-                .cornerRadius(30)
-                .overlay{
-                    RoundedRectangle(cornerRadius: 30)
-                        .stroke(Color.black, lineWidth: 7)
-                        .padding(1)
-                }
-                .padding()
-                .offset(y: cardOffset)
+                .background(.clear)
+                
             }
             
         }
         .onAppear {
             DispatchQueue.main.async {
                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 15.0, initialVelocity: 0.0)) {
-                    cardOffset = 0
+                    buySwapsButtonOffset = 0
+                    resetButtonOffset = -(deviceWidth/30)
                 }
             }
         }
