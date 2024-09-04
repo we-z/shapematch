@@ -27,6 +27,7 @@ struct NoMoreSwipesView: View {
                 .ignoresSafeArea()
                 .onTapGesture {
                     resetGame()
+                    impactHeavy.impactOccurred()
                 }
             Text("0 Swaps left ✋")
                 .bold()
