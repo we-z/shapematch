@@ -13,6 +13,7 @@ let hapticManager = HapticManager.instance
 
 class AppModel: ObservableObject {
     static let sharedAppModel = AppModel()
+    let hapticManager = HapticManager.instance
     @Published var shouldBurst = false
     @Published var grid: [[ShapeType]] = [
         [.square, .triangle, .circle],
@@ -165,7 +166,7 @@ class AppModel: ObservableObject {
         // Determine the number of swaps needed based on the level
         var swapsNeeded: Int
         switch userPersistedData.level {
-        case 1...5: swapsNeeded = 2
+        case 1...5: swapsNeeded = 8
         case 6...15: swapsNeeded = 3
         case 16...30: swapsNeeded = 4
         case 31...50: swapsNeeded = 5
@@ -175,67 +176,54 @@ class AppModel: ObservableObject {
         default: swapsNeeded = 9
         }
 
-        // Use BFS to generate a target grid that requires swapsNeeded swaps
-        var finalState: [ShapeType] = []  // Change finalState to be mutable
 
-        var stateFound = false
-
-        while !stateFound {
-            var visited = Set<[ShapeType]>()
-            var queue: [([ShapeType], Int)] = [(startState, 0)]  // (state, depth)
-            visited.insert(startState)
-
-            while !queue.isEmpty {
-                let (currentState, depth) = queue.removeFirst()
-
-                // If we have reached the desired depth, save this state as the new target
-                if depth == swapsNeeded {
-                    finalState = currentState
-                    break
-                }
-
-                // Generate neighbors by swapping adjacent elements
-                let neighbors = generateNeighbors(for: currentState)
-
-                for neighbor in neighbors {
-                    if !visited.contains(neighbor) {
-                        visited.insert(neighbor)
-                        queue.append((neighbor, depth + 1))
-                    }
-                }
+        
+        // Use BFS to generate a grid that requires the exact number of swaps
+        var visited = Set<[ShapeType]>()
+        var queue: [([ShapeType], Int)] = [(startState, 0)]  // (state, depth)
+        visited.insert(startState)
+        
+        // Perform BFS to find a configuration requiring exactly `swapsNeeded`
+        var finalState: [ShapeType]? = nil
+        
+        while !queue.isEmpty {
+            let (currentState, depth) = queue.removeFirst()
+            
+            // If we've reached the desired depth, use this state as the new initial grid
+            if depth == swapsNeeded {
+                finalState = currentState
+                break
             }
-
-            // Convert the finalState (requiring swapsNeeded swaps to solve) back to the grid
-            if !finalState.isEmpty {
-                // Convert 1D array back to 2D grid
-                for i in 0..<3 {
-                    for j in 0..<3 {
-                        targetGrid[i][j] = finalState[i * 3 + j]
-                    }
-                }
-
-                // Ensure the grid needs exactly the specified number of swaps
-                let calculatedSwaps = calculateMinimumSwipes(from: grid, to: targetGrid)
-
-                // If the calculated swaps do not match the desired swapsNeeded, reset and try again
-                if calculatedSwaps == swapsNeeded {
-                    stateFound = true  // Set the flag to true to exit the while loop
+            
+            // Generate neighbors by swapping adjacent elements
+            let neighbors = generateNeighbors(for: currentState)
+            
+            for neighbor in neighbors {
+                if !visited.contains(neighbor) {
+                    visited.insert(neighbor)
+                    queue.append((neighbor, depth + 1))
                 }
             }
         }
-
-        // Set the initial state of the grid as the randomized start state
-        initialGrid = grid
-
-        // The grid now requires exactly swapsNeeded swaps to solve
+        
+        // Convert the finalState (which requires `swapsNeeded` swaps to solve) back to 2D grid
+        if let finalState = finalState {
+            for i in 0..<3 {
+                for j in 0..<3 {
+                    targetGrid[i][j] = finalState[i * 3 + j]
+                }
+            }
+        }
+        
+        // The grid now requires exactly `swapsNeeded` swaps to solve
         swipesLeft = swapsNeeded
         initialSwipes = swipesLeft
-
-        // Persist the current grid and targetGrid for the current level
+        initialGrid = grid
+        
+        // Persist the grid and targetGrid for the current level
         userPersistedData.grid = grid
         userPersistedData.targetGrid = targetGrid
     }
-
 
     func generateNeighbors(for state: [ShapeType]) -> [[ShapeType]] {
         var neighbors = [[ShapeType]]()
@@ -264,7 +252,6 @@ class AppModel: ObservableObject {
         
         return neighbors
     }
-
 
     
     func resetLevel() {
