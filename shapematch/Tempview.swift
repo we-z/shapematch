@@ -32,50 +32,6 @@ struct TempView: View {
             .scaleEffect(0.9)
         }
     }
-    
-    func swipeLeft() {
-        for row in 0..<4 {
-            grid[row] = moveLeft(array: grid[row])
-        }
-    }
-    
-    func swipeRight() {
-        for row in 0..<4 {
-            grid[row] = moveRight(array: grid[row])
-        }
-    }
-    
-    func swipeUp() {
-        for col in 0..<4 {
-            var columnArray = [grid[0][col], grid[1][col], grid[2][col], grid[3][col]]
-            columnArray = moveLeft(array: columnArray)
-            for row in 0..<4 {
-                grid[row][col] = columnArray[row]
-            }
-        }
-    }
-    
-    func swipeDown() {
-        for col in 0..<4 {
-            var columnArray = [grid[0][col], grid[1][col], grid[2][col], grid[3][col]]
-            columnArray = moveRight(array: columnArray)
-            for row in 0..<4 {
-                grid[row][col] = columnArray[row]
-            }
-        }
-    }
-    
-    func moveLeft(array: [ExtendedShapeType]) -> [ExtendedShapeType] {
-        var newArray = array
-        newArray.append(newArray.removeFirst())
-        return newArray
-    }
-    
-    func moveRight(array: [ExtendedShapeType]) -> [ExtendedShapeType] {
-        var newArray = array
-        newArray.insert(newArray.removeLast(), at: 0)
-        return newArray
-    }
 }
 
 #Preview {
