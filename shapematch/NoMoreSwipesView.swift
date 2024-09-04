@@ -37,31 +37,7 @@ struct NoMoreSwipesView: View {
             VStack {
                 
                 VStack{
-                    Button {
-                        resetGame()
-                    } label: {
-                        HStack{
-                            Spacer()
-                            Text("🔄  Reset  🔄")
-                                .bold()
-                                .font(.system(size: deviceWidth/12))
-                                .customTextStroke(width: 1.8)
-                                .padding(1)
-                            Spacer()
-                        }
-                        .padding(.vertical, 14)
-                        .background{
-                            Color.red
-                        }
-                        .cornerRadius(21)
-                        .overlay{
-                            RoundedRectangle(cornerRadius: 21)
-                                .stroke(Color.black, lineWidth: 4)
-                                .padding(1)
-                        }
-                    }
-                    .buttonStyle(.roundedAndShadow6)
-                    .offset(y: resetButtonOffset)
+
                     Spacer()
                     Button {
                         if appModel.swapsToSell > userPersistedData.gemBalance {

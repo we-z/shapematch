@@ -153,8 +153,8 @@ class AppModel: ObservableObject {
     func setupLevel() {
         // Randomize the grid as the starting point
         let shapes: [ShapeType] = [.circle, .square, .triangle]
-        var randomizedShapes = (shapes + shapes + shapes).shuffled() // Ensure the grid has all 9 shapes
-        var startState = randomizedShapes
+        let randomizedShapes = (shapes + shapes + shapes).shuffled() // Ensure the grid has all 9 shapes
+        let startState = randomizedShapes
         
         // Convert startState to a 2D grid
         for i in 0..<3 {
