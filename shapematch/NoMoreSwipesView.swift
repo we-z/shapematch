@@ -27,7 +27,7 @@ struct NoMoreSwipesView: View {
                 .ignoresSafeArea()
                 .onTapGesture {
                     resetGame()
-                    impactHeavy.impactOccurred()
+                    hapticManager.notification(type: .error)
                 }
             Text("0 Swaps left ✋")
                 .bold()

@@ -9,10 +9,10 @@ import Foundation
 import SwiftUI
 import GameKit
 
+let hapticManager = HapticManager.instance
 
 class AppModel: ObservableObject {
     static let sharedAppModel = AppModel()
-    let hapticManager = HapticManager.instance
     @Published var shouldBurst = false
     @Published var grid: [[ShapeType]] = [
         [.square, .triangle, .circle],

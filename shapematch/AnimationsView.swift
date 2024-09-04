@@ -32,7 +32,6 @@ struct CelebrationEffect: View {
     @State private var animateMessage = false
 
     var body: some View {
-        let hapticManager = HapticManager.instance
         ZStack{
             if animateMessage {
                 Color.gray.opacity(0.7)
