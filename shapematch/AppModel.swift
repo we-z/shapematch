@@ -151,18 +151,20 @@ class AppModel: ObservableObject {
     }
     
     func setupLevel() {
+        // Randomize the grid as the starting point
         let shapes: [ShapeType] = [.circle, .square, .triangle]
-        let randomizedShapes = (shapes + shapes + shapes).shuffled()
-
-        // Populate the grid with randomized shapes
+        var randomizedShapes = (shapes + shapes + shapes).shuffled() // Ensure the grid has all 9 shapes
+        var startState = randomizedShapes
+        
+        // Convert startState to a 2D grid
         for i in 0..<3 {
-            grid[i] = Array(randomizedShapes[(i * 3)..<(i * 3 + 3)])
+            for j in 0..<3 {
+                grid[i][j] = startState[i * 3 + j]
+            }
         }
         
-        initialGrid = grid
-        targetGrid = grid
-        var swapsNeeded = 2
-        
+        // Determine the number of swaps needed based on the level
+        var swapsNeeded: Int
         switch userPersistedData.level {
         case 1...5: swapsNeeded = 2
         case 6...15: swapsNeeded = 3
@@ -173,44 +175,84 @@ class AppModel: ObservableObject {
         case 106...140: swapsNeeded = 8
         default: swapsNeeded = 9
         }
+
+        // Use BFS to generate a target grid that requires `swapsNeeded` swaps
+        var visited = Set<[ShapeType]>()
+        var queue: [([ShapeType], Int)] = [(startState, 0)]  // (state, depth)
+        visited.insert(startState)
         
-        var successfulSetup = false
+        var finalState: [ShapeType]? = nil
+        
+        while !queue.isEmpty {
+            let (currentState, depth) = queue.removeFirst()
             
-        while !successfulSetup {
-            // Create a target grid that requires the correct number of swaps to solve
-            for _ in 0..<swapsNeeded {
-                var (row1, col1, row2, col2) = (0, 0, 0, 0)
-                repeat {
-                    row1 = Int.random(in: 0..<3)
-                    col1 = Int.random(in: 0..<3)
-                    let direction = Int.random(in: 0..<4)
-                    (row2, col2) = direction == 0 ? (row1, col1 > 0 ? col1 - 1 : col1 + 1) :
-                                   direction == 1 ? (row1, col1 < 2 ? col1 + 1 : col1 - 1) :
-                                   direction == 2 ? (row1 > 0 ? row1 - 1 : row1 + 1, col1) :
-                                   (row1 < 2 ? row1 + 1 : row1 - 1, col1)
-                } while (row1 == row2 && col1 == col2) || targetGrid[row1][col1] == targetGrid[row2][col2]
-                
-                // Perform the swap
-                let temp = targetGrid[row1][col1]
-                targetGrid[row1][col1] = targetGrid[row2][col2]
-                targetGrid[row2][col2] = temp
+            // If we have reached the desired depth, save this state as the new target
+            if depth == swapsNeeded {
+                finalState = currentState
+                break
             }
             
-            // Check if the grid requires exactly `swapsNeeded` to solve
-            let calculatedSwipes = calculateMinimumSwipes(from: grid, to: targetGrid)
-            if calculatedSwipes == swapsNeeded {
-                successfulSetup = true
-                swipesLeft = swapsNeeded
-                initialSwipes = swipesLeft
-                userPersistedData.grid = grid
-                userPersistedData.targetGrid = targetGrid
-                
-            } else {
-                // If the calculated swipes do not match, reset and try again
-                targetGrid = grid
+            // Generate neighbors by swapping adjacent elements
+            let neighbors = generateNeighbors(for: currentState)
+            
+            for neighbor in neighbors {
+                if !visited.contains(neighbor) {
+                    visited.insert(neighbor)
+                    queue.append((neighbor, depth + 1))
+                }
             }
         }
+        
+        // Convert the finalState (requiring `swapsNeeded` swaps to solve) back to the grid
+        if let finalState = finalState {
+            for i in 0..<3 {
+                for j in 0..<3 {
+                    targetGrid[i][j] = finalState[i * 3 + j]
+                }
+            }
+        }
+        
+        // Set the initial state of the grid as the randomized start state
+        initialGrid = grid
+        
+        // The grid now requires exactly `swapsNeeded` swaps to solve
+        swipesLeft = swapsNeeded
+        initialSwipes = swipesLeft
+        
+        // Persist the current grid and targetGrid for the current level
+        userPersistedData.grid = grid
+        userPersistedData.targetGrid = targetGrid
     }
+
+    func generateNeighbors(for state: [ShapeType]) -> [[ShapeType]] {
+        var neighbors = [[ShapeType]]()
+        
+        // Generate swaps for all adjacent elements
+        let gridSize = 3
+        for row in 0..<gridSize {
+            for col in 0..<gridSize {
+                let index = row * gridSize + col
+                
+                // Swap with the right neighbor
+                if col < gridSize - 1 {
+                    var newState = state
+                    newState.swapAt(index, index + 1)
+                    neighbors.append(newState)
+                }
+                
+                // Swap with the bottom neighbor
+                if row < gridSize - 1 {
+                    var newState = state
+                    newState.swapAt(index, index + gridSize)
+                    neighbors.append(newState)
+                }
+            }
+        }
+        
+        return neighbors
+    }
+
+
     
     func resetLevel() {
         // Reset the grid to its initial configuration
@@ -262,34 +304,6 @@ class AppModel: ObservableObject {
         
         // If no solution is found, return an impossible number
         return Int.max
-    }
-
-    func generateNeighbors(for state: [ShapeType]) -> [[ShapeType]] {
-        var neighbors = [[ShapeType]]()
-        
-        // We need to swap adjacent positions in the grid
-        let gridSize = 3
-        for row in 0..<gridSize {
-            for col in 0..<gridSize {
-                let index = row * gridSize + col
-                
-                // Swap with the right neighbor
-                if col < gridSize - 1 {
-                    var newState = state
-                    newState.swapAt(index, index + 1)
-                    neighbors.append(newState)
-                }
-                
-                // Swap with the bottom neighbor
-                if row < gridSize - 1 {
-                    var newState = state
-                    newState.swapAt(index, index + gridSize)
-                    neighbors.append(newState)
-                }
-            }
-        }
-        
-        return neighbors
     }
     
 }

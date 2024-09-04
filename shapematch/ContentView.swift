@@ -20,7 +20,7 @@ struct ContentView: View {
         ZStack{
             Color.white
                 .ignoresSafeArea()
-            Color.gray.opacity(0.1)
+            Color.gray.opacity(0.2)
                 .ignoresSafeArea()
             VStack(spacing: 0) {
                 HStack{
