@@ -153,20 +153,12 @@ class AppModel: ObservableObject {
     
     func setupLevel() {
         // Randomize the grid as the starting point
-        let shapes: [ShapeType] = [.circle, .square, .triangle]
-        var startState = (shapes + shapes + shapes).shuffled() // Ensure the grid has all 9 shapes
-
-        // Convert startState to a 2D grid
-        for i in 0..<3 {
-            for j in 0..<3 {
-                grid[i][j] = startState[i * 3 + j]
-            }
-        }
+        
 
         // Determine the number of swaps needed based on the level
         var swapsNeeded: Int
         switch userPersistedData.level {
-        case 1...5: swapsNeeded = 8
+        case 1...5: swapsNeeded = 2
         case 6...15: swapsNeeded = 3
         case 16...30: swapsNeeded = 4
         case 31...50: swapsNeeded = 5
@@ -179,39 +171,59 @@ class AppModel: ObservableObject {
 
         
         // Use BFS to generate a grid that requires the exact number of swaps
-        var visited = Set<[ShapeType]>()
-        var queue: [([ShapeType], Int)] = [(startState, 0)]  // (state, depth)
-        visited.insert(startState)
         
-        // Perform BFS to find a configuration requiring exactly `swapsNeeded`
-        var finalState: [ShapeType]? = nil
         
-        while !queue.isEmpty {
-            let (currentState, depth) = queue.removeFirst()
-            
-            // If we've reached the desired depth, use this state as the new initial grid
-            if depth == swapsNeeded {
-                finalState = currentState
-                break
-            }
-            
-            // Generate neighbors by swapping adjacent elements
-            let neighbors = generateNeighbors(for: currentState)
-            
-            for neighbor in neighbors {
-                if !visited.contains(neighbor) {
-                    visited.insert(neighbor)
-                    queue.append((neighbor, depth + 1))
-                }
-            }
-        }
+        var swapsNeededMet = false
         
-        // Convert the finalState (which requires `swapsNeeded` swaps to solve) back to 2D grid
-        if let finalState = finalState {
+        while !swapsNeededMet {
+            
+            let shapes: [ShapeType] = [.circle, .square, .triangle]
+            var startState = (shapes + shapes + shapes).shuffled() // Ensure the grid has all 9 shapes
+
+            // Convert startState to a 2D grid
             for i in 0..<3 {
                 for j in 0..<3 {
-                    targetGrid[i][j] = finalState[i * 3 + j]
+                    grid[i][j] = startState[i * 3 + j]
                 }
+            }
+            
+            var visited = Set<[ShapeType]>()
+            var queue: [([ShapeType], Int)] = [(startState, 0)]  // (state, depth)
+            visited.insert(startState)
+            
+            // Perform BFS to find a configuration requiring exactly `swapsNeeded`
+            var finalState: [ShapeType]? = nil
+            
+            while !queue.isEmpty {
+                let (currentState, depth) = queue.removeFirst()
+                
+                // If we've reached the desired depth, use this state as the new initial grid
+                if depth == swapsNeeded {
+                    finalState = currentState
+                    break
+                }
+                
+                // Generate neighbors by swapping adjacent elements
+                let neighbors = generateNeighbors(for: currentState)
+                
+                for neighbor in neighbors {
+                    if !visited.contains(neighbor) {
+                        visited.insert(neighbor)
+                        queue.append((neighbor, depth + 1))
+                    }
+                }
+            }
+            
+            // Convert the finalState (which requires `swapsNeeded` swaps to solve) back to 2D grid
+            if let finalState = finalState {
+                for i in 0..<3 {
+                    for j in 0..<3 {
+                        targetGrid[i][j] = finalState[i * 3 + j]
+                    }
+                }
+            }
+            if calculateMinimumSwipes(from: grid, to: targetGrid) == swapsNeeded {
+                swapsNeededMet = true
             }
         }
         
@@ -235,16 +247,30 @@ class AppModel: ObservableObject {
                 let index = row * gridSize + col
                 
                 // Swap with the right neighbor
-                if col < gridSize - 1 {
+                if col < gridSize - 1 && state[index] != state[index + 1] {
                     var newState = state
                     newState.swapAt(index, index + 1)
                     neighbors.append(newState)
                 }
                 
                 // Swap with the bottom neighbor
-                if row < gridSize - 1 {
+                if row < gridSize - 1 && state[index] != state[index + gridSize] {
                     var newState = state
                     newState.swapAt(index, index + gridSize)
+                    neighbors.append(newState)
+                }
+                
+                // Swap with the left neighbor (new condition)
+                if col > 0 && state[index] != state[index - 1] {
+                    var newState = state
+                    newState.swapAt(index, index - 1)
+                    neighbors.append(newState)
+                }
+                
+                // Swap with the top neighbor (new condition)
+                if row > 0 && state[index] != state[index - gridSize] {
+                    var newState = state
+                    newState.swapAt(index, index - gridSize)
                     neighbors.append(newState)
                 }
             }
@@ -307,6 +333,16 @@ class AppModel: ObservableObject {
     }
     
 }
+
+extension Array where Element == [ShapeType] {
+    mutating func swapAt(_ first: (row: Int, col: Int), _ second: (row: Int, col: Int)) {
+        let temp = self[first.row][first.col]
+        self[first.row][first.col] = self[second.row][second.col]
+        self[second.row][second.col] = temp
+    }
+}
+
+// Helper extension to chunk a flat array into subarrays of a given size (to reshape 1D array back to 2D
 
 class HapticManager {
     static let instance = HapticManager()
