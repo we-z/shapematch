@@ -178,7 +178,7 @@ class AppModel: ObservableObject {
         while !swapsNeededMet {
             
             let shapes: [ShapeType] = [.circle, .square, .triangle]
-            var startState = (shapes + shapes + shapes).shuffled() // Ensure the grid has all 9 shapes
+            let startState = (shapes + shapes + shapes).shuffled() // Ensure the grid has all 9 shapes
 
             // Convert startState to a 2D grid
             for i in 0..<3 {
