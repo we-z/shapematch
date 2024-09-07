@@ -11,7 +11,7 @@ import Vortex
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        CelebrationEffect()
+        FailFireEffect()
     }
 }
 
@@ -87,6 +87,23 @@ struct CelebrationEffect: View {
                     .offset(y: animateMessage ? 0 : -(deviceHeight/2))
             }
         }
+        .allowsHitTesting(false)
+    }
+}
+
+struct FailFireEffect: View {
+    var body: some View {
+        ZStack{
+            VortexView(.fire) {
+                Circle()
+                    .fill(.white)
+                    .frame(width: 45)
+                    .blur(radius: 1)
+                    .blendMode(.plusLighter)
+                    .tag("circle")
+            }
+        }
+        .frame(width: deviceWidth*8)
         .allowsHitTesting(false)
     }
 }

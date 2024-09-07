@@ -25,6 +25,9 @@ struct NoMoreSwipesView: View {
         ZStack {
             Color.gray.opacity(0.7)
                 .ignoresSafeArea()
+            FailFireEffect()
+                .frame(width: deviceWidth)
+                .offset(y: deviceWidth/15)
             Text("0 Swaps left ✋")
                 .bold()
                 .font(.system(size: deviceWidth/9))
