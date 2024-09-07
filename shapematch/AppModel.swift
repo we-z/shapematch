@@ -179,6 +179,9 @@ class AppModel: ObservableObject {
             
             let shapes: [ShapeType] = [.circle, .square, .triangle]
             let startState = (shapes + shapes + shapes).shuffled() // Ensure the grid has all 9 shapes
+            
+            let firstNeighbors = generateNeighbors(for: startState)
+            print(firstNeighbors.count)
 
             // Convert startState to a 2D grid
             for i in 0..<3 {
@@ -200,6 +203,7 @@ class AppModel: ObservableObject {
                 // If we've reached the desired depth, use this state as the new initial grid
                 if depth == swapsNeeded {
                     finalState = currentState
+                    print("depth is right: \(depth)")
                     break
                 }
                 
@@ -224,6 +228,8 @@ class AppModel: ObservableObject {
             }
             if calculateMinimumSwipes(from: grid, to: targetGrid) == swapsNeeded {
                 swapsNeededMet = true
+            } else {
+                print("trying again")
             }
         }
         
@@ -257,20 +263,6 @@ class AppModel: ObservableObject {
                 if row < gridSize - 1 && state[index] != state[index + gridSize] {
                     var newState = state
                     newState.swapAt(index, index + gridSize)
-                    neighbors.append(newState)
-                }
-                
-                // Swap with the left neighbor (new condition)
-                if col > 0 && state[index] != state[index - 1] {
-                    var newState = state
-                    newState.swapAt(index, index - 1)
-                    neighbors.append(newState)
-                }
-                
-                // Swap with the top neighbor (new condition)
-                if row > 0 && state[index] != state[index - gridSize] {
-                    var newState = state
-                    newState.swapAt(index, index - gridSize)
                     neighbors.append(newState)
                 }
             }
