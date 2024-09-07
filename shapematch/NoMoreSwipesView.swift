@@ -25,74 +25,76 @@ struct NoMoreSwipesView: View {
         ZStack {
             Color.gray.opacity(0.7)
                 .ignoresSafeArea()
-                .onTapGesture {
-                    resetGame()
-                    hapticManager.notification(type: .error)
-                }
             Text("0 Swaps left ✋")
                 .bold()
                 .font(.system(size: deviceWidth/9))
                 .customTextStroke(width: 2.4)
                 .pulsingText()
                 .allowsHitTesting(false)
-            VStack {
-                
-                VStack{
-
+            VStack{
+                HStack{
                     Spacer()
                     Button {
-                        if appModel.swapsToSell > userPersistedData.gemBalance {
-                            appModel.showGemMenu = true
-                        } else {
-                            userPersistedData.decrementBalance(amount: appModel.swapsToSell)
-                            appModel.swipesLeft += appModel.swapsToSell
-                            appModel.showNoMoreSwipesView = false
-                        }
+                        resetGame()
+                        hapticManager.notification(type: .error)
                     } label: {
-                        HStack{
-                            Spacer()
-                            Text("💎")
-                                .bold()
-                                .italic()
-                                .font(.system(size: deviceWidth/15))
-                                .fixedSize()
-                                .scaleEffect(1.5)
-                                .customTextStroke(width: 1.8)
-                            
-                            Text("+ \(appModel.swapsToSell) Swaps")
-                                .bold()
-                                .font(.system(size: deviceWidth/12))
-                                .fixedSize()
-                                .customTextStroke(width: 1.8)
-                                .padding(.horizontal, 9)
-                            Text("↔️")
-                                .bold()
-                                .italic()
-                                .font(.system(size: deviceWidth/15))
-                                .fixedSize()
-                                .scaleEffect(1.2)
-                                .customTextStroke(width: 1.2)
-                            Spacer()
-                        }
-                        .padding()
-                        .background(.blue)
-                        .cornerRadius(21)
-                        .overlay{
-                            RoundedRectangle(cornerRadius: 21)
-                                .stroke(Color.black, lineWidth: 4)
-                                .padding(1)
-                        }
-//                        .padding()
+                        Text("❌")
+                            .font(.system(size: deviceWidth/9))
+                            .customTextStroke()
+                            .padding([.trailing], 21)
                     }
-                    .buttonStyle(.roundedAndShadow6)
-                    .offset(y: buySwapsButtonOffset)
-                    
                 }
-                .padding()
-                .background(.clear)
+                Spacer()
+                Button {
+                    if appModel.swapsToSell > userPersistedData.gemBalance {
+                        appModel.showGemMenu = true
+                    } else {
+                        userPersistedData.decrementBalance(amount: appModel.swapsToSell)
+                        appModel.swipesLeft += appModel.swapsToSell
+                        appModel.showNoMoreSwipesView = false
+                    }
+                } label: {
+                    HStack{
+                        Spacer()
+                        Text("💎")
+                            .bold()
+                            .italic()
+                            .font(.system(size: deviceWidth/15))
+                            .fixedSize()
+                            .scaleEffect(1.5)
+                            .customTextStroke(width: 1.8)
+                        
+                        Text("+ \(appModel.swapsToSell) Swaps")
+                            .bold()
+                            .font(.system(size: deviceWidth/12))
+                            .fixedSize()
+                            .customTextStroke(width: 1.8)
+                            .padding(.horizontal, 9)
+                        Text("↔️")
+                            .bold()
+                            .italic()
+                            .font(.system(size: deviceWidth/15))
+                            .fixedSize()
+                            .scaleEffect(1.2)
+                            .customTextStroke(width: 1.2)
+                        Spacer()
+                    }
+                    .padding()
+                    .background(.blue)
+                    .cornerRadius(21)
+                    .overlay{
+                        RoundedRectangle(cornerRadius: 21)
+                            .stroke(Color.black, lineWidth: 4)
+                            .padding(1)
+                    }
+//                        .padding()
+                }
+                .buttonStyle(.roundedAndShadow6)
+                .offset(y: buySwapsButtonOffset)
                 
             }
-            
+            .padding()
+            .background(.clear)
         }
         .onAppear {
             DispatchQueue.main.async {
