@@ -41,7 +41,7 @@ struct NoMoreSwipesView: View {
                         Text("❌")
                             .font(.system(size: deviceWidth/9))
                             .customTextStroke()
-                            .padding([.trailing], 21)
+                            .padding([.trailing], 9)
                     }
                 }
                 Spacer()
