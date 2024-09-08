@@ -164,7 +164,14 @@ class AppModel: ObservableObject {
             case 51...75: swapsNeeded = 6
             case 76...105: swapsNeeded = 7
             case 106...140: swapsNeeded = 8
-            default: swapsNeeded = 9
+            case 141...199: swapsNeeded = 9
+            case 200...270: swapsNeeded = 10  // Start 4x4 grid at level 200
+            case 271...359: swapsNeeded = 11
+            case 360...470: swapsNeeded = 12
+            case 471...599: swapsNeeded = 13  // Start 4x4 grid at level 200
+            case 600...719: swapsNeeded = 14
+            case 720...999: swapsNeeded = 15
+            default: swapsNeeded = 16
         }
         
         switch userPersistedData.level {
