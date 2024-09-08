@@ -227,10 +227,8 @@ struct ContentView: View {
                                                 withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                                                     playingShapeScale = 1.1
                                                 }
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                                    withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
                                                         playingShapeScale = 1.0
-                                                    }
                                                 }
                                             }
                                     )
