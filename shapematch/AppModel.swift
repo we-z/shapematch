@@ -195,7 +195,7 @@ class AppModel: ObservableObject {
 //            let shapes: [ShapeType] = [.circle, .square, .triangle]
             var startState = (shapes) // Ensure the grid has all 9 shapes
             
-            for _ in 0..<shapes.count {
+            for _ in 0..<shapes.count - 1 {
                 startState += shapes
             }
             
