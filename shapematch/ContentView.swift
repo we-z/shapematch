@@ -155,7 +155,7 @@ struct ContentView: View {
                                 HStack {
                                     ForEach(0..<appModel.gridSize, id: \.self) { column in
                                         smallShapeView(shapeType: appModel.targetGrid[row][column])
-                                            .frame(width: deviceWidth / 15, height: deviceWidth / 15)
+                                            .frame(width: deviceWidth / (CGFloat(appModel.gridSize) * 5), height: deviceWidth / (CGFloat(appModel.gridSize) * 5))
                                             .padding(3)
                                     }
                                 }
