@@ -139,7 +139,7 @@ class AppModel: ObservableObject {
                 if userPersistedData.level == 1 {
                     showNewGoal.toggle()
                 }
-                userPersistedData.level += 1
+                userPersistedData.level = 200
                 setupLevel()
                 swipesLeft =  calculateMinimumSwipes(from:  grid, to:  targetGrid)
                 initialSwipes = calculateMinimumSwipes(from:  grid, to:  targetGrid)
