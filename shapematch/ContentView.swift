@@ -200,7 +200,7 @@ struct ContentView: View {
                         HStack {
                             ForEach(0..<appModel.gridSize, id: \.self) { column in
                                 LargeShapeView(shapeType: appModel.grid[row][column])
-                                    .frame(width: deviceWidth / (CGFloat(appModel.gridSize) * 1.5), height: deviceWidth / (CGFloat(appModel.gridSize) * 1.5))
+                                    .frame(width: deviceWidth / ((CGFloat(appModel.gridSize) - 1) * 2.3), height: deviceWidth / ((CGFloat(appModel.gridSize) - 1) * 2.3))
                                     .padding()
                                     .background(.white.opacity(0.01))
                                     .offset(appModel.offsets[row][column])
