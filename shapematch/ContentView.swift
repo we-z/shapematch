@@ -151,9 +151,9 @@ struct ContentView: View {
                             .fixedSize()
                             .customTextStroke(width: 1.8)
                         VStack{
-                            ForEach(0..<3) { row in
+                            ForEach(0..<appModel.gridSize, id: \.self) { row in
                                 HStack {
-                                    ForEach(0..<3) { column in
+                                    ForEach(0..<appModel.gridSize, id: \.self) { column in
                                         smallShapeView(shapeType: appModel.targetGrid[row][column])
                                             .frame(width: deviceWidth / 15, height: deviceWidth / 15)
                                             .padding(3)
@@ -196,9 +196,9 @@ struct ContentView: View {
                 }
                 Spacer()
                 VStack {
-                    ForEach(0..<3) { row in
+                    ForEach(0..<appModel.gridSize, id: \.self) { row in
                         HStack {
-                            ForEach(0..<3) { column in
+                            ForEach(0..<appModel.gridSize, id: \.self) { column in
                                 LargeShapeView(shapeType: appModel.grid[row][column])
                                     .frame(width: deviceWidth / 4.5, height: deviceWidth / 4.5)
                                     .padding()
