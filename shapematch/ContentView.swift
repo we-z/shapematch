@@ -155,7 +155,7 @@ struct ContentView: View {
                                 HStack {
                                     ForEach(0..<appModel.gridSize, id: \.self) { column in
                                         smallShapeView(shapeType: appModel.targetGrid[row][column])
-                                            .frame(width: deviceWidth / (CGFloat(appModel.gridSize) * 5), height: deviceWidth / (CGFloat(appModel.gridSize) * 5))
+                                            .frame(width: deviceWidth / ((CGFloat(appModel.gridSize) - 1) * 7.5), height: deviceWidth / ((CGFloat(appModel.gridSize) - 1) * 7.5))
                                             .padding(3)
                                     }
                                 }
@@ -214,7 +214,7 @@ struct ContentView: View {
                                                     tappedRow = row
                                                     tappedColumn = column
                                                     withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                                                        playingShapeScale = 0.8
+                                                        self.playingShapeScale = 0.8
                                                     }
                                                 }
                                                 firstChange = true
@@ -224,7 +224,7 @@ struct ContentView: View {
                                                     appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
                                                 }
                                                 firstChange = false
-                                                playingShapeScale = 1.0
+                                                self.playingShapeScale = 1.0
                                             }
                                     )
                             }
