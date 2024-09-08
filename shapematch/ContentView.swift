@@ -213,7 +213,9 @@ struct ContentView: View {
                                                     impactHeavy.impactOccurred()
                                                     tappedRow = row
                                                     tappedColumn = column
-                                                    playingShapeScale = 0.9
+                                                    withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                                                        playingShapeScale = 0.8
+                                                    }
                                                 }
                                                 firstChange = true
                                             }
@@ -222,7 +224,12 @@ struct ContentView: View {
                                                     appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
                                                 }
                                                 firstChange = false
-                                                playingShapeScale = 1.0
+                                                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                                                    playingShapeScale = 1.2
+                                                }
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
+                                                    playingShapeScale = 1.0
+                                                }
                                             }
                                     )
                             }
