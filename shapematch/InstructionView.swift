@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InstructionView: View {
-    @State var cardOffset: CGFloat = -(deviceWidth/2)
+    @State var cardOffset: CGFloat = 0
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     var body: some View {
@@ -50,16 +50,16 @@ struct InstructionView: View {
                     }
                 }
         )
-        .onAppear{
-            DispatchQueue.main.async {
-                cardOffset = -(deviceWidth/2)
-                if !userPersistedData.firstGamePlayed {
-                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 15.0, initialVelocity: 0.0)) {
-                        cardOffset = 0
-                    }
-                }
-            }
-        }
+//        .onAppear{
+//            DispatchQueue.main.async {
+//                cardOffset = -(deviceWidth/2)
+//                if !userPersistedData.firstGamePlayed {
+//                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 15.0, initialVelocity: 0.0)) {
+//                        cardOffset = 0
+//                    }
+//                }
+//            }
+//        }
         .onChange(of: userPersistedData.firstGamePlayed) { firstGamePlayed in
             if firstGamePlayed {
                 DispatchQueue.main.async {
