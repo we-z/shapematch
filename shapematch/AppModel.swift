@@ -44,6 +44,7 @@ class AppModel: ObservableObject {
     @Published var showNewGoal = false
     @Published var swaping = false
     @Published var gridSize = 3
+    @Published var swapsNeeded = 1
     @Published var shapes: [ShapeType] = []
     
     @ObservedObject var audioController = AudioManager.sharedAudioManager
@@ -153,12 +154,8 @@ class AppModel: ObservableObject {
         }
     }
     
-    func setupLevel() {
-        // Randomize the grid as the starting point
-        
-
+    func determineLevelSettings() {
         // Determine the number of swaps needed based on the level
-        var swapsNeeded: Int
         switch userPersistedData.level {
             case 1...5: swapsNeeded = 2
             case 6...15: swapsNeeded = 3
@@ -181,8 +178,12 @@ class AppModel: ObservableObject {
             case 200...999: shapes =  [.circle, .square, .triangle, .star]
             default: shapes =  [.circle, .square, .triangle, .star]
         }
+    }
+    
+    func setupLevel() {
         
-        
+        determineLevelSettings()
+
         // Use BFS to generate a grid that requires the exact number of swaps
         var swapsNeededMet = false
         
