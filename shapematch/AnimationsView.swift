@@ -11,7 +11,7 @@ import Vortex
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        FailFireEffect()
+        SwapParticleEffect()
     }
 }
 
@@ -104,6 +104,21 @@ struct FailFireEffect: View {
             }
         }
         .frame(width: deviceWidth*8)
+        .allowsHitTesting(false)
+    }
+}
+
+struct SwapParticleEffect: View {
+    var body: some View {
+        ZStack{
+            VortexView(.splash) {
+                Circle()
+                    .fill(.blue)
+                    .frame(width: 45)
+                    .tag("circle")
+            }
+        }
+//        .frame(width: deviceWidth*8)
         .allowsHitTesting(false)
     }
 }

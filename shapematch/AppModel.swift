@@ -167,8 +167,14 @@ class AppModel: ObservableObject {
         case 106...140: swapsNeeded = 8
         default: swapsNeeded = 9
         }
-
-
+        
+        let currentLevel = userPersistedData.level
+                let gridSize = currentLevel >= 200 ? 4 : 3  // 3x3 grid below level 200, 4x4 starting at level 200
+                let shapes: [ShapeType] = currentLevel >= 200 ? [.circle, .square, .triangle, .star] : [.circle, .square, .triangle]
+                
+                // Initialize the grids with random shapes
+                grid = Array(repeating: Array(repeating: .circle, count: gridSize), count: gridSize)
+                targetGrid = Array(repeating: Array(repeating: .circle, count: gridSize), count: gridSize)
         
         // Use BFS to generate a grid that requires the exact number of swaps
         
@@ -358,7 +364,7 @@ enum SwipeDirection {
 }
 
 enum ShapeType: Int, Identifiable, Equatable, CaseIterable {
-    case circle, square, triangle
+    case circle, square, triangle, star
     
     var id: Int { rawValue }
 }
@@ -466,6 +472,14 @@ struct LargeShapeView: View {
                     lineWidth: 18,
                     fill: Color.green
                 ))
+        case .star:
+            StarShape(points: 5)
+                .foregroundColor(.yellow)
+                .background(StarShape(points: 5).style(
+                    withStroke: Color.black,
+                    lineWidth: 18,
+                    fill: Color.yellow
+                ))
         }
     }
 }
@@ -496,6 +510,14 @@ struct smallShapeView: View {
                     withStroke: Color.black,
                     lineWidth: 6,
                     fill: Color.green
+                ))
+        case .star:
+            StarShape(points: 5)
+                .foregroundColor(.yellow)
+                .background(StarShape(points: 5).style(
+                    withStroke: Color.black,
+                    lineWidth: 6,
+                    fill: Color.yellow
                 ))
         }
     }
