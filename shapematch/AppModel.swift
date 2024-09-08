@@ -513,6 +513,7 @@ struct LargeShapeView: View {
                     lineWidth: 18,
                     fill: Color.yellow
                 ))
+                .scaleEffect(0.8)
         case .hexagon:
             HexagonShape()
                 .foregroundColor(.purple)
@@ -560,6 +561,7 @@ struct smallShapeView: View {
                     lineWidth: 6,
                     fill: Color.yellow
                 ))
+                .scaleEffect(0.8)
         case .hexagon:
             HexagonShape()
                 .foregroundColor(.purple)
