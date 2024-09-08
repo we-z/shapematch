@@ -415,7 +415,6 @@ struct HexagonShape: Shape {
         var path = Path()
 
         for i in 0..<6 {
-            let isEven = i % 2 == 0
             let pointRadius =  radius
             let xPosition = center.x + pointRadius * sin(CGFloat(i) * angle)
             let yPosition = center.y - pointRadius * cos(CGFloat(i) * angle)
