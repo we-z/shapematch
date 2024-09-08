@@ -200,7 +200,7 @@ struct ContentView: View {
                         HStack {
                             ForEach(0..<appModel.gridSize, id: \.self) { column in
                                 LargeShapeView(shapeType: appModel.grid[row][column])
-                                    .frame(width: deviceWidth / 4.5, height: deviceWidth / 4.5)
+                                    .frame(width: deviceWidth / (CGFloat(appModel.gridSize) * 1.5), height: deviceWidth / (CGFloat(appModel.gridSize) * 1.5))
                                     .padding()
                                     .background(.white.opacity(0.01))
                                     .offset(appModel.offsets[row][column])
@@ -236,7 +236,6 @@ struct ContentView: View {
             .scaleEffect(idiom == .pad ? 0.9 : 1)
             OverlaysView()
         }
-        
         .onAppear {
             appModel.initialGrid = appModel.grid
         }
