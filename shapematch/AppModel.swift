@@ -28,8 +28,8 @@ class AppModel: ObservableObject {
     ]
     
     @Published var offsets: [[CGSize]] = Array(
-        repeating: Array(repeating: .zero, count: 3),
-        count: 3
+        repeating: Array(repeating: .zero, count: 5),
+        count: 5
     )
     
     @Published var initialGrid: [[ShapeType]] = [[]]
@@ -263,7 +263,7 @@ class AppModel: ObservableObject {
                 var assigningTargetGrid:[[ShapeType]] = []
                 for i in 0..<shapes.count {
                     assigningTargetGrid.append([])
-                    for j in 0..<shapes.count {
+                    for _ in 0..<shapes.count {
                         assigningTargetGrid[i].append(.circle)
                     }
                 }
@@ -333,8 +333,8 @@ class AppModel: ObservableObject {
         
         // Reset offsets to zero
         offsets = Array(
-            repeating: Array(repeating: .zero, count: 3),
-            count: 3
+            repeating: Array(repeating: .zero, count: shapes.count),
+            count: shapes.count
         )
         
         // Reset the swipes left to the initial calculated value
