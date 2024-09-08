@@ -374,51 +374,6 @@ enum ShapeType: Int, Identifiable, Equatable, CaseIterable {
     var id: Int { rawValue }
 }
 
-enum ExtendedShapeType: Int, Identifiable, Equatable, CaseIterable {
-    case circle, square, triangle, star // Added star as the new shape
-    
-    var id: Int { rawValue }
-}
-
-struct ExtendedLargeShapeView: View {
-    let shapeType: ExtendedShapeType
-    
-    var body: some View {
-        switch shapeType {
-        case .circle:
-            Circle().fill(Color.blue)
-                .background(Circle().style(
-                    withStroke: Color.black,
-                    lineWidth: 18,
-                    fill: Color.blue
-                ))
-        case .square:
-            Rectangle().fill(Color.red)
-                .background(Rectangle().style(
-                    withStroke: Color.black,
-                    lineWidth: 18,
-                    fill: Color.red
-                ))
-        case .triangle:
-            Triangle()
-                .foregroundColor(.green)
-                .background(Triangle().style(
-                    withStroke: Color.black,
-                    lineWidth: 18,
-                    fill: Color.green
-                ))
-        case .star: // Handle the new star shape
-            StarShape(points: 5)
-                .foregroundColor(.yellow)
-                .background(StarShape(points: 5).style(
-                    withStroke: Color.black,
-                    lineWidth: 18,
-                    fill: Color.yellow
-                ))
-        }
-    }
-}
-
 struct StarShape: Shape {
     var points: Int
     
