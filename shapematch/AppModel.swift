@@ -167,11 +167,12 @@ class AppModel: ObservableObject {
             case 141...199: swapsNeeded = 9
             case 200...270: swapsNeeded = 10  // Start 4x4 grid at level 200
             case 271...359: swapsNeeded = 11
-            case 360...470: swapsNeeded = 12
-            case 471...599: swapsNeeded = 13  // Start 4x4 grid at level 200
-            case 600...719: swapsNeeded = 14
-            case 720...999: swapsNeeded = 15
-            default: swapsNeeded = 16
+            case 360...460: swapsNeeded = 12
+            case 461...579: swapsNeeded = 13  // Start 4x4 grid at level 200
+            case 580...699: swapsNeeded = 14
+            case 700...829: swapsNeeded = 15
+            case 830...999: swapsNeeded = 16
+            default: swapsNeeded = 17
         }
         
         switch userPersistedData.level {
@@ -183,7 +184,7 @@ class AppModel: ObservableObject {
         switch userPersistedData.level {
             case 1...199: shapes = [.circle, .square, .triangle]
             case 200...999: shapes =  [.circle, .square, .triangle, .star]
-            default: shapes =  [.circle, .square, .triangle, .star]
+        default: shapes =  [.circle, .square, .triangle, .star, .hexagon]
         }
     }
     
