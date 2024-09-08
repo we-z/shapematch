@@ -270,7 +270,6 @@ class AppModel: ObservableObject {
         var neighbors = [[ShapeType]]()
         
         // Generate swaps for all adjacent elements
-        let gridSize = 3
         for row in 0..<gridSize {
             for col in 0..<gridSize {
                 let index = row * gridSize + col
