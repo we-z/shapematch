@@ -252,7 +252,10 @@ class AppModel: ObservableObject {
                 print("trying again")
             }
         }
-        
+        persistData()
+    }
+    
+    func persistData() {
         // The grid now requires exactly `swapsNeeded` swaps to solve
         swipesLeft = swapsNeeded
         initialSwipes = swipesLeft
