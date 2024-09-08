@@ -43,6 +43,8 @@ class AppModel: ObservableObject {
     @Published var showInstruction = false
     @Published var showNewGoal = false
     @Published var swaping = false
+    @Published var gridSize = 3
+    @Published var shapes: [ShapeType] = []
     
     @ObservedObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
@@ -158,41 +160,44 @@ class AppModel: ObservableObject {
         // Determine the number of swaps needed based on the level
         var swapsNeeded: Int
         switch userPersistedData.level {
-        case 1...5: swapsNeeded = 2
-        case 6...15: swapsNeeded = 3
-        case 16...30: swapsNeeded = 4
-        case 31...50: swapsNeeded = 5
-        case 51...75: swapsNeeded = 6
-        case 76...105: swapsNeeded = 7
-        case 106...140: swapsNeeded = 8
-        default: swapsNeeded = 9
+            case 1...5: swapsNeeded = 2
+            case 6...15: swapsNeeded = 3
+            case 16...30: swapsNeeded = 4
+            case 31...50: swapsNeeded = 5
+            case 51...75: swapsNeeded = 6
+            case 76...105: swapsNeeded = 7
+            case 106...140: swapsNeeded = 8
+            default: swapsNeeded = 9
         }
         
-        let currentLevel = userPersistedData.level
-                let gridSize = currentLevel >= 200 ? 4 : 3  // 3x3 grid below level 200, 4x4 starting at level 200
-                let shapes: [ShapeType] = currentLevel >= 200 ? [.circle, .square, .triangle, .star] : [.circle, .square, .triangle]
-                
-                // Initialize the grids with random shapes
-                grid = Array(repeating: Array(repeating: .circle, count: gridSize), count: gridSize)
-                targetGrid = Array(repeating: Array(repeating: .circle, count: gridSize), count: gridSize)
+        switch userPersistedData.level {
+            case 1...199: gridSize = 3
+            case 200...999: gridSize = 4
+            default: gridSize = 5
+        }
+        
+        switch userPersistedData.level {
+            case 1...199: shapes = [.circle, .square, .triangle]
+            case 200...999: shapes =  [.circle, .square, .triangle, .star]
+            default: shapes =  [.circle, .square, .triangle, .star]
+        }
+        
         
         // Use BFS to generate a grid that requires the exact number of swaps
-        
-        
         var swapsNeededMet = false
         
         while !swapsNeededMet {
             
-            let shapes: [ShapeType] = [.circle, .square, .triangle]
+//            let shapes: [ShapeType] = [.circle, .square, .triangle]
             let startState = (shapes + shapes + shapes).shuffled() // Ensure the grid has all 9 shapes
             
             let firstNeighbors = generateNeighbors(for: startState)
             print(firstNeighbors.count)
 
             // Convert startState to a 2D grid
-            for i in 0..<3 {
-                for j in 0..<3 {
-                    grid[i][j] = startState[i * 3 + j]
+            for i in 0..<gridSize {
+                for j in 0..<gridSize {
+                    grid[i][j] = startState[i * gridSize + j]
                 }
             }
             
@@ -226,9 +231,9 @@ class AppModel: ObservableObject {
             
             // Convert the finalState (which requires `swapsNeeded` swaps to solve) back to 2D grid
             if let finalState = finalState {
-                for i in 0..<3 {
-                    for j in 0..<3 {
-                        targetGrid[i][j] = finalState[i * 3 + j]
+                for i in 0..<gridSize {
+                    for j in 0..<gridSize {
+                        targetGrid[i][j] = finalState[i * gridSize + j]
                     }
                 }
             }
