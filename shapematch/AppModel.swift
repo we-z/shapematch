@@ -139,7 +139,7 @@ class AppModel: ObservableObject {
                 if userPersistedData.level == 1 {
                     showNewGoal.toggle()
                 }
-                userPersistedData.level = 200
+                userPersistedData.level = 199
                 setupLevel()
                 swipesLeft =  calculateMinimumSwipes(from:  grid, to:  targetGrid)
                 initialSwipes = calculateMinimumSwipes(from:  grid, to:  targetGrid)
@@ -232,22 +232,21 @@ class AppModel: ObservableObject {
             print("grid count: \(grid.count)")
             print("Got above the queue")
             while !queue.isEmpty {
-                print("In the queue")
+                print("\nIn the queue")
                 let (currentState, depth) = queue.removeFirst()
                 
                 // If we've reached the desired depth, use this state as the new initial grid
-                print("swapsNeeded \(swapsNeeded)")
-                print("depth \(depth)")
+                print("depth reached\(depth)")
                 if depth == swapsNeeded {
                     finalState = currentState
-                    print("depth is right: \(depth)")
+                    print("depth found: \(depth)")
                     break
                 }
                 
                 // Generate neighbors by swapping adjacent elements
                 let neighbors = generateNeighbors(for: currentState)
                 
-                print(neighbors.count)
+                print("neighbors count \(neighbors.count)")
                 
                 for neighbor in neighbors {
                     if !visited.contains(neighbor) {
