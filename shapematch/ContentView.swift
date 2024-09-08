@@ -151,11 +151,11 @@ struct ContentView: View {
                             .fixedSize()
                             .customTextStroke(width: 1.8)
                         VStack{
-                            ForEach(0..<appModel.gridSize, id: \.self) { row in
+                            ForEach(0..<appModel.grid.count, id: \.self) { row in
                                 HStack {
-                                    ForEach(0..<appModel.gridSize, id: \.self) { column in
+                                    ForEach(0..<appModel.grid.count, id: \.self) { column in
                                         smallShapeView(shapeType: appModel.targetGrid[row][column])
-                                            .frame(width: deviceWidth / ((CGFloat(appModel.gridSize) - 1) * 7.5), height: deviceWidth / ((CGFloat(appModel.gridSize) - 1) * 7.5))
+                                            .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1) * 7.5), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1) * 7.5))
                                             .padding(3)
                                     }
                                 }
@@ -196,11 +196,11 @@ struct ContentView: View {
                 }
                 Spacer()
                 VStack {
-                    ForEach(0..<appModel.gridSize, id: \.self) { row in
+                    ForEach(0..<appModel.grid.count, id: \.self) { row in
                         HStack {
-                            ForEach(0..<appModel.gridSize, id: \.self) { column in
+                            ForEach(0..<appModel.grid.count, id: \.self) { column in
                                 LargeShapeView(shapeType: appModel.grid[row][column])
-                                    .frame(width: deviceWidth / ((CGFloat(appModel.gridSize) - 1) * 2.3), height: deviceWidth / ((CGFloat(appModel.gridSize) - 1) * 2.3))
+                                    .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1) * 2.3), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1) * 2.3))
                                     .padding()
                                     .background(.white.opacity(0.01))
                                     .offset(appModel.offsets[row][column])
