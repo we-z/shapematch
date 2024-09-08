@@ -369,7 +369,7 @@ enum SwipeDirection {
 }
 
 enum ShapeType: Int, Identifiable, Equatable, CaseIterable {
-    case circle, square, triangle, star
+    case circle, square, triangle, star, hexagon
     
     var id: Int { rawValue }
 }
@@ -387,6 +387,36 @@ struct StarShape: Shape {
         for i in 0..<2 * points {
             let isEven = i % 2 == 0
             let pointRadius = isEven ? radius : radius * 0.4
+            let xPosition = center.x + pointRadius * sin(CGFloat(i) * angle)
+            let yPosition = center.y - pointRadius * cos(CGFloat(i) * angle)
+
+            let point = CGPoint(x: xPosition, y: yPosition)
+
+            if i == 0 {
+                path.move(to: point)
+            } else {
+                path.addLine(to: point)
+            }
+        }
+
+        path.closeSubpath()
+
+        return path
+    }
+}
+
+struct HexagonShape: Shape {
+    
+    func path(in rect: CGRect) -> Path {
+        let center = CGPoint(x: rect.width / 2, y: rect.height / 2)
+        let radius = min(rect.width, rect.height) / 2
+        let angle = .pi / CGFloat(3)
+
+        var path = Path()
+
+        for i in 0..<6 {
+            let isEven = i % 2 == 0
+            let pointRadius =  radius
             let xPosition = center.x + pointRadius * sin(CGFloat(i) * angle)
             let yPosition = center.y - pointRadius * cos(CGFloat(i) * angle)
 
@@ -440,6 +470,14 @@ struct LargeShapeView: View {
                     lineWidth: 18,
                     fill: Color.yellow
                 ))
+        case .hexagon:
+            HexagonShape()
+                .foregroundColor(.purple)
+                .background(HexagonShape().style(
+                    withStroke: Color.black,
+                    lineWidth: 18,
+                    fill: Color.yellow
+                ))
         }
     }
 }
@@ -475,6 +513,14 @@ struct smallShapeView: View {
             StarShape(points: 5)
                 .foregroundColor(.yellow)
                 .background(StarShape(points: 5).style(
+                    withStroke: Color.black,
+                    lineWidth: 6,
+                    fill: Color.yellow
+                ))
+        case .hexagon:
+            HexagonShape()
+                .foregroundColor(.purple)
+                .background(HexagonShape().style(
                     withStroke: Color.black,
                     lineWidth: 6,
                     fill: Color.yellow

@@ -9,19 +9,20 @@ import SwiftUI
 
 struct TempView: View {
     
-    @State private var grid: [[ShapeType]] = [
-        [.square, .triangle, .circle, .star], // Updated to 4x4 grid with star shape
-        [.triangle, .square, .circle, .star],
-        [.square, .circle, .triangle, .star],
-        [.circle, .triangle, .square, .star]
+    @State var grid: [[ShapeType]] = [
+        [.square, .triangle, .circle, .star, .hexagon], // Updated to 4x4 grid with star shape
+        [.triangle, .square, .circle, .star, .hexagon],
+        [.square, .circle, .triangle, .star, .hexagon],
+        [.circle, .triangle, .square, .star, .hexagon],
+        [.circle, .triangle, .square, .star, .hexagon]
     ]
     
     var body: some View {
         ZStack {
             VStack {
-                ForEach(0..<4) { row in // Updated to 4 rows
+                ForEach(0..<5) { row in // Updated to 4 rows
                     HStack {
-                        ForEach(0..<4) { column in // Updated to 4 columns
+                        ForEach(0..<5) { column in // Updated to 4 columns
                             LargeShapeView(shapeType: grid[row][column])
                                 .frame(width: deviceWidth / 6, height: deviceWidth / 6) // Adjusted size for 4x4 grid
                                 .padding(15)
@@ -29,7 +30,7 @@ struct TempView: View {
                     }
                 }
             }
-            .scaleEffect(0.9)
+            .scaleEffect(0.7)
         }
     }
 }
