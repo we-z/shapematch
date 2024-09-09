@@ -64,7 +64,7 @@ class AppModel: ObservableObject {
             [.square, .circle, .triangle]
         ] : userPersistedData.targetGrid
         
-        swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
+        swipesLeft = swapsNeeded
     }
     
     func handleSwipeGesture(gesture: DragGesture.Value, row: Int, col: Int) {
@@ -80,11 +80,11 @@ class AppModel: ObservableObject {
             switch direction {
             case .left where col > 0:
                 swapShapes(start: (row, col), end: (row, col - 1), offset: CGSize(width: -deviceWidth / ((CGFloat(grid.count) - 1) * 1.5), height: 0))
-            case .right where col < 2:
+            case .right where col < grid.count - 1:
                 swapShapes(start: (row, col), end: (row, col + 1), offset: CGSize(width: deviceWidth / ((CGFloat(grid.count) - 1) * 1.5), height: 0))
             case .up where row > 0:
                 swapShapes(start: (row, col), end: (row - 1, col), offset: CGSize(width: 0, height: -deviceWidth / ((CGFloat(grid.count) - 1) * 1.5)))
-            case .down where row < 2:
+            case .down where row < grid.count - 1:
                 swapShapes(start: (row, col), end: (row + 1, col), offset: CGSize(width: 0, height: deviceWidth / ((CGFloat(grid.count) - 1) * 1.5)))
             default:
                 break
@@ -139,15 +139,15 @@ class AppModel: ObservableObject {
                 if userPersistedData.level == 1 {
                     showNewGoal.toggle()
                 }
-                userPersistedData.level = 199
+                userPersistedData.level += 1
                 setupLevel()
-                swipesLeft =  calculateMinimumSwipes(from:  grid, to:  targetGrid)
-                initialSwipes = calculateMinimumSwipes(from:  grid, to:  targetGrid)
+                swipesLeft = swapsNeeded
+                initialSwipes = swapsNeeded
                 self.freezeGame = false
             }
             print("You win!")
         } else if swipesLeft <= 0 {
-            swapsToSell = calculateMinimumSwipes(from: grid, to: targetGrid)
+            swapsToSell = 3
             AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
             showNoMoreSwipesView = true
             print("Level failed")
@@ -165,7 +165,7 @@ class AppModel: ObservableObject {
             case 76...105: swapsNeeded = 7
             case 106...140: swapsNeeded = 8
             case 141...199: swapsNeeded = 9
-            case 200...270: swapsNeeded = 4  // Start 4x4 grid at level 200
+            case 200...270: swapsNeeded = 10  // Start 4x4 grid at level 200
             case 271...359: swapsNeeded = 11
             case 360...460: swapsNeeded = 12
             case 461...579: swapsNeeded = 13  // Start 4x4 grid at level 200
@@ -188,100 +188,70 @@ class AppModel: ObservableObject {
         determineLevelSettings()
         print("shapes count \(shapes.count)")
         // Use BFS to generate a grid that requires the exact number of swaps
-        var swapsNeededMet = false
+        var directions: [SwipeDirection] = []
         
-        while !swapsNeededMet {
             
-//            let shapes: [ShapeType] = [.circle, .square, .triangle]
-            var startState = (shapes) // Ensure the grid has all 9 shapes
+        grid = []
+        for _ in 0..<shapes.count {
+            grid.append(shapes.shuffled())
+        }
+        targetGrid = grid
+        
+        var swapsMade = 0
+        var visitedSwaps = Set<[Int]>()
+        var visitedGrids = Set<[[ShapeType]]>()
             
-            for _ in 0..<shapes.count - 1 {
-                startState += shapes
+        visitedGrids.insert(targetGrid)
+        while swapsMade < swapsNeeded {
+            let row = Int.random(in: 0...targetGrid.count-1)
+            let col = Int.random(in: 0...targetGrid.count-1)
+            
+            directions = []
+            // check possible directions
+            if col < targetGrid.count - 2 && targetGrid[row][col] != targetGrid[row][col + 1] {
+                directions.append(.right)
+            }
+            if row < targetGrid.count - 2 && targetGrid[row][col] != targetGrid[row + 1][col] {
+                directions.append(.down)
             }
             
-            startState.shuffle()
-            
-            let firstNeighbors = generateNeighbors(for: startState)
-            print(firstNeighbors.count)
-
-            // Convert startState to a 2D grid
-            var assigningGrid:[[ShapeType]] = []
-            for i in 0..<shapes.count {
-                assigningGrid.append([])
-                for _ in 0..<shapes.count {
-                    assigningGrid[i].append(.circle)
-                }
-            }
-
-            for i in 0..<shapes.count {
-                for j in 0..<shapes.count {
-                    assigningGrid[i][j] = startState[i * shapes.count + j]
-                }
-            }
-            
-            grid = assigningGrid
+            let direction = directions.randomElement()
             
             
-            var visited = Set<[ShapeType]>()
-            var queue: [([ShapeType], Int)] = [(startState, 0)]  // (state, depth)
-            visited.insert(startState)
-            
-            // Perform BFS to find a configuration requiring exactly `swapsNeeded`
-            var finalState: [ShapeType]? = nil
-            
-            print("grid count: \(grid.count)")
-            print("Got above the queue")
-            while !queue.isEmpty {
-                print("\nIn the queue")
-                let (currentState, depth) = queue.removeFirst()
-                
-                // If we've reached the desired depth, use this state as the new initial grid
-                print("depth reached\(depth)")
-                if depth == swapsNeeded {
-                    finalState = currentState
-                    print("depth found: \(depth)")
-                    break
-                }
-                
-                // Generate neighbors by swapping adjacent elements
-                let neighbors = generateNeighbors(for: currentState)
-                
-                print("neighbors count \(neighbors.count)")
-                
-                for neighbor in neighbors {
-                    if !visited.contains(neighbor) {
-                        visited.insert(neighbor)
-                        queue.append((neighbor, depth + 1))
+            switch direction {
+            case .up:
+                print("up")
+            case .down:
+                if row < targetGrid.count - 2 {
+                    targetGrid.swapAt((row, col), (row + 1, col))
+                    if !visitedSwaps.contains([row, col, row + 1, col]) && !visitedGrids.contains(targetGrid) {
+                        visitedSwaps.insert([row, col, row + 1, col])
+                        visitedGrids.insert(targetGrid)
+                        swapsMade += 1
+                        print("swapped")
+                    } else {
+                        print("didn't swap")
+                        targetGrid.swapAt((row, col), (row + 1, col))
                     }
                 }
-            }
-            
-            // Convert the finalState (which requires `swapsNeeded` swaps to solve) back to 2D grid
-            if let finalState = finalState {
-                
-                var assigningTargetGrid:[[ShapeType]] = []
-                for i in 0..<shapes.count {
-                    assigningTargetGrid.append([])
-                    for _ in 0..<shapes.count {
-                        assigningTargetGrid[i].append(.circle)
+            case .left:
+                print("left")
+            case .right:
+                if col < targetGrid.count - 2 {
+                    
+                    targetGrid.swapAt((row, col), (row, col + 1))
+                    if !visitedSwaps.contains([row, col, row, col + 1]) && !visitedGrids.contains(targetGrid) {
+                        visitedSwaps.insert([row, col, row, col + 1])
+                        visitedGrids.insert(targetGrid)
+                        swapsMade += 1
+                        print("swapped")
+                    } else {
+                        print("didn't swap")
+                        targetGrid.swapAt((row, col), (row, col + 1))
                     }
                 }
-                
-                for i in 0..<grid.count {
-                    for j in 0..<grid.count {
-                        assigningTargetGrid[i][j] = finalState[i * shapes.count + j]
-                    }
-                }
-                targetGrid = assigningTargetGrid
-            }
-            offsets = Array(
-                repeating: Array(repeating: .zero, count: shapes.count),
-                count: shapes.count
-            )
-            if calculateMinimumSwipes(from: grid, to: targetGrid) == swapsNeeded {
-                swapsNeededMet = true
-            } else {
-                print("trying again")
+            case .none:
+                print("none")
             }
         }
         persistData()
@@ -298,34 +268,6 @@ class AppModel: ObservableObject {
         userPersistedData.targetGrid = targetGrid
     }
 
-    func generateNeighbors(for state: [ShapeType]) -> [[ShapeType]] {
-        var neighbors = [[ShapeType]]()
-        
-        // Generate swaps for all adjacent elements
-        for row in 0..<grid.count {
-            for col in 0..<grid.count {
-                let index = row * grid.count + col
-                
-                // Swap with the right neighbor
-                if col < grid.count - 1 && state[index] != state[index + 1] {
-                    var newState = state
-                    newState.swapAt(index, index + 1)
-                    neighbors.append(newState)
-                }
-                
-                // Swap with the bottom neighbor
-                if row < grid.count - 1 && state[index] != state[index + grid.count] {
-                    var newState = state
-                    newState.swapAt(index, index + grid.count)
-                    neighbors.append(newState)
-                }
-            }
-        }
-        
-        return neighbors
-    }
-
-    
     func resetLevel() {
         // Reset the grid to its initial configuration
         grid = initialGrid
@@ -337,51 +279,17 @@ class AppModel: ObservableObject {
         )
         
         // Reset the swipes left to the initial calculated value
-        swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
+        swipesLeft = swapsNeeded
         initialSwipes = swipesLeft
-    }
-    
-    func calculateMinimumSwipes(from startGrid: [[ShapeType]], to targetGrid: [[ShapeType]]) -> Int {
-        // Convert grid to a one-dimensional array for easier comparison and manipulation
-        let startState = startGrid.flatMap { $0 }
-        let targetState = targetGrid.flatMap { $0 }
-        
-        if startState == targetState {
-            return 0
-        }
-        
-        // BFS setup
-        var visited = Set<[ShapeType]>()
-        var queue: [([ShapeType], Int)] = [(startState, 0)]
-        visited.insert(startState)
-        
-        // BFS loop
-        while !queue.isEmpty {
-            let (currentState, depth) = queue.removeFirst()
-            
-            // Generate all possible adjacent swaps
-            let neighbors = generateNeighbors(for: currentState)
-            
-            for neighbor in neighbors {
-                if neighbor == targetState {
-                    return depth + 1
-                }
-                
-                if !visited.contains(neighbor) {
-                    visited.insert(neighbor)
-                    queue.append((neighbor, depth + 1))
-                }
-            }
-        }
-        
-        // If no solution is found, return an impossible number
-        return Int.max
     }
     
 }
 
 extension Array where Element == [ShapeType] {
     mutating func swapAt(_ first: (row: Int, col: Int), _ second: (row: Int, col: Int)) {
+        print("")
+        print(first)
+        print(second)
         let temp = self[first.row][first.col]
         self[first.row][first.col] = self[second.row][second.col]
         self[second.row][second.col] = temp
