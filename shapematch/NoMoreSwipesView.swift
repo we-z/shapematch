@@ -13,6 +13,7 @@ struct NoMoreSwipesView: View {
     @State var buySwapsButtonOffset = deviceWidth/3
     @State var resetButtonOffset = -(deviceWidth/3)
     @State var pulseText = true
+    @State var textScale: CGFloat = 10.0
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     
     func resetGame() {
@@ -32,7 +33,7 @@ struct NoMoreSwipesView: View {
                 .bold()
                 .font(.system(size: deviceWidth/9))
                 .customTextStroke(width: 2.4)
-                .pulsingText()
+                .scaleEffect(textScale)
                 .allowsHitTesting(false)
             VStack{
                 HStack{
@@ -104,6 +105,9 @@ struct NoMoreSwipesView: View {
                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 15.0, initialVelocity: 0.0)) {
                     buySwapsButtonOffset = 0
                     resetButtonOffset = -(deviceWidth/30)
+                }
+                withAnimation(.interpolatingSpring) {
+                    textScale = 1
                 }
             }
         }
