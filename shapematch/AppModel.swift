@@ -310,12 +310,6 @@ class AppModel: ObservableObject {
         // Reset the grid to its initial configuration
         grid = initialGrid
         
-        // Reset offsets to zero
-        offsets = Array(
-            repeating: Array(repeating: .zero, count: shapes.count),
-            count: shapes.count
-        )
-        
         // Reset the swipes left to the initial calculated value
         swipesLeft = initialSwipes
     }
