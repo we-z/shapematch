@@ -177,10 +177,18 @@ class AppModel: ObservableObject {
         
         
         switch userPersistedData.level {
-            case 1...199: shapes = [.circle, .square, .triangle]
-            case 200...999: shapes =  [.circle, .square, .triangle, .star]
-        default: shapes =  [.circle, .square, .triangle, .star, .hexagon]
+        case 1...199:
+            shapes = [.circle, .square, .triangle]
+        case 200...999:
+            shapes =  [.circle, .square, .triangle, .star]
+        default: 
+            shapes =  [.circle, .square, .triangle, .star, .hexagon]
         }
+        
+        offsets = Array(
+            repeating: Array(repeating: .zero, count: shapes.count),
+            count: shapes.count
+        )
     }
     
     func setupLevel() {
@@ -221,71 +229,66 @@ class AppModel: ObservableObject {
             
             grid = assigningGrid
             
+            let generatedTargetGrid = generateTargetGrid(from: grid, with: swapsNeeded)
             
-            var visited = Set<[ShapeType]>()
-            var queue: [([ShapeType], Int)] = [(startState, 0)]  // (state, depth)
-            visited.insert(startState)
-            
-            // Perform BFS to find a configuration requiring exactly `swapsNeeded`
-            var finalState: [ShapeType]? = nil
-            
-            print("grid count: \(grid.count)")
-            print("Got above the queue")
-            while !queue.isEmpty {
-                print("\nIn the queue")
-                let (currentState, depth) = queue.removeFirst()
-                
-                // If we've reached the desired depth, use this state as the new initial grid
-                print("depth reached \(depth)")
-                if depth == swapsNeeded {
-                    finalState = currentState
-                    print("depth found: \(depth)")
-                    break
-                }
-                
-                // Generate neighbors by swapping adjacent elements
-                let neighbors = generateNeighbors(for: currentState)
-                
-                print("neighbors count \(neighbors.count)")
-                
-                for neighbor in neighbors {
-                    if !visited.contains(neighbor) {
-                        visited.insert(neighbor)
-                        queue.append((neighbor, depth + 1))
-                    }
-                }
-            }
-            
-            // Convert the finalState (which requires `swapsNeeded` swaps to solve) back to 2D grid
-            if let finalState = finalState {
-                
-                var assigningTargetGrid:[[ShapeType]] = []
-                for i in 0..<shapes.count {
-                    assigningTargetGrid.append([])
-                    for _ in 0..<shapes.count {
-                        assigningTargetGrid[i].append(.circle)
-                    }
-                }
-                
-                for i in 0..<grid.count {
-                    for j in 0..<grid.count {
-                        assigningTargetGrid[i][j] = finalState[i * shapes.count + j]
-                    }
-                }
-                targetGrid = assigningTargetGrid
-            }
-            offsets = Array(
-                repeating: Array(repeating: .zero, count: shapes.count),
-                count: shapes.count
-            )
-            if calculateMinimumSwipes(from: grid, to: targetGrid) == swapsNeeded {
-                swapsNeededMet = true
-            } else {
+            if generatedTargetGrid.isEmpty {
                 print("trying again")
+                
+            } else {
+                targetGrid = generatedTargetGrid
+                swapsNeededMet = true
             }
+            
         }
         persistData()
     }
+    
+    func generateTargetGrid(from startGrid: [[ShapeType]], with minimumSwapsToSolve: Int) -> [[ShapeType]] {
+        let startState = startGrid.flatMap { $0 }
+        
+        var visited = Set<[ShapeType]>()
+        var queue: [([ShapeType], Int)] = [(startState, 0)]  // (state, depth)
+        visited.insert(startState)
+        
+        // Perform BFS to find a configuration requiring exactly swapsNeeded
+        var assigningTargetGrid: [[ShapeType]] = []
+        print("grid count: \(startGrid.count)")
+        print("Got above the queue")
+        
+        while !queue.isEmpty {
+            print("\nIn the queue")
+            let (currentState, depth) = queue.removeFirst()
+            
+            // If we've reached the desired depth, use this state as the new initial grid
+            print("depth reached \(depth)")
+            if depth == minimumSwapsToSolve {
+                print("depth found: \(depth)")
+                
+                // Use stride to efficiently convert the 1D currentState back to 2D grid
+                let gridSize = startGrid.count
+                for i in stride(from: 0, to: currentState.count, by: gridSize) {
+                    let row = Array(currentState[i..<i + gridSize])
+                    assigningTargetGrid.append(row)
+                }
+                
+                break
+            }
+            
+            // Generate neighbors by swapping adjacent elements
+            let neighbors = generateNeighbors(for: currentState)
+            
+            print("neighbors count \(neighbors.count)")
+            
+            for neighbor in neighbors {
+                if !visited.contains(neighbor) {
+                    visited.insert(neighbor)
+                    queue.append((neighbor, depth + 1))
+                }
+            }
+        }
+        return assigningTargetGrid
+    }
+
     
     func persistData() {
         // The grid now requires exactly `swapsNeeded` swaps to solve
