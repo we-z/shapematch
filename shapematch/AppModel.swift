@@ -79,13 +79,13 @@ class AppModel: ObservableObject {
         if !swaping {
             switch direction {
             case .left where col > 0:
-                swapShapes(start: (row, col), end: (row, col - 1), offset: CGSize(width: -deviceWidth / ((CGFloat(grid.count) - 1) * 1.5), height: 0))
+                swapShapes(start: (row, col), end: (row, col - 1), offset: CGSize(width: -deviceWidth / ((CGFloat(grid.count) - 1) * 1.2), height: 0))
             case .right where col < grid.count - 1:
-                swapShapes(start: (row, col), end: (row, col + 1), offset: CGSize(width: deviceWidth / ((CGFloat(grid.count) - 1) * 1.5), height: 0))
+                swapShapes(start: (row, col), end: (row, col + 1), offset: CGSize(width: deviceWidth / ((CGFloat(grid.count) - 1) * 1.2), height: 0))
             case .up where row > 0:
-                swapShapes(start: (row, col), end: (row - 1, col), offset: CGSize(width: 0, height: -deviceWidth / ((CGFloat(grid.count) - 1) * 1.5)))
+                swapShapes(start: (row, col), end: (row - 1, col), offset: CGSize(width: 0, height: -deviceWidth / ((CGFloat(grid.count) - 1) * 1.2)))
             case .down where row < grid.count - 1:
-                swapShapes(start: (row, col), end: (row + 1, col), offset: CGSize(width: 0, height: deviceWidth / ((CGFloat(grid.count) - 1) * 1.5)))
+                swapShapes(start: (row, col), end: (row + 1, col), offset: CGSize(width: 0, height: deviceWidth / ((CGFloat(grid.count) - 1) * 1.2)))
             default:
                 break
             }
