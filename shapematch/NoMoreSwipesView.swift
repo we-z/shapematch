@@ -40,7 +40,7 @@ struct NoMoreSwipesView: View {
                     Spacer()
                     Button {
                         resetGame()
-                        hapticManager.notification(type: .error)
+                        impactHeavy.impactOccurred()
                     } label: {
                         Text("❌")
                             .font(.system(size: deviceWidth/9))
