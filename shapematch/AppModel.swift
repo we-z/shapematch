@@ -307,14 +307,14 @@ class AppModel: ObservableObject {
                 let index = row * grid.count + col
                 
                 // Swap with the right neighbor
-                if col < grid.count - 1 && state[index] != state[index + 1] {
+                if col < grid.count - 1 {
                     var newState = state
                     newState.swapAt(index, index + 1)
                     neighbors.append(newState)
                 }
                 
                 // Swap with the bottom neighbor
-                if row < grid.count - 1 && state[index] != state[index + grid.count] {
+                if row < grid.count - 1 {
                     var newState = state
                     newState.swapAt(index, index + grid.count)
                     neighbors.append(newState)
