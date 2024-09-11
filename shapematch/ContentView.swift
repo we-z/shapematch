@@ -14,6 +14,7 @@ struct ContentView: View {
     @State var playingShapeScale = 1.0
     @State var tappedRow = 0
     @State var tappedColumn = 0
+    @Environment(\.scenePhase) var scenePhase
     
     let rect = CGRect(x: 0, y: 0, width: 300, height: 100)
     var body: some View {
@@ -213,8 +214,10 @@ struct ContentView: View {
                                                     impactHeavy.impactOccurred()
                                                     tappedRow = row
                                                     tappedColumn = column
-                                                    withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                                                        self.playingShapeScale = 0.8
+                                                    DispatchQueue.main.async { [self] in
+                                                        withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                                                            self.playingShapeScale = 0.8
+                                                        }
                                                     }
                                                 }
                                                 firstChange = true
@@ -224,7 +227,11 @@ struct ContentView: View {
                                                     appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
                                                 }
                                                 firstChange = false
-                                                self.playingShapeScale = 1.0
+                                                DispatchQueue.main.async { [self] in
+                                                    withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                                                        self.playingShapeScale = 1.0
+                                                    }
+                                                }
                                             }
                                     )
                             }
@@ -238,6 +245,13 @@ struct ContentView: View {
         }
         .onAppear {
             appModel.initialGrid = appModel.grid
+        }
+        .onChange(of: scenePhase) { newScenePhase in
+            DispatchQueue.main.async { [self] in
+                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                    self.playingShapeScale = 1.0
+                }
+            }
         }
     }
     
