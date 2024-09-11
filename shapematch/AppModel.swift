@@ -194,41 +194,17 @@ class AppModel: ObservableObject {
     func setupLevel() {
         
         determineLevelSettings()
-        print("shapes count \(shapes.count)")
-        // Use BFS to generate a grid that requires the exact number of swaps
         var swapsNeededMet = false
         
         while !swapsNeededMet {
             
-//            let shapes: [ShapeType] = [.circle, .square, .triangle]
-            var startState = (shapes) // Ensure the grid has all 9 shapes
+            grid = []
             
-            for _ in 0..<shapes.count - 1 {
-                startState += shapes
-            }
-            
-            startState.shuffle()
-            
-            let firstNeighbors = generateNeighbors(for: startState)
-            print(firstNeighbors.count)
-
-            // Convert startState to a 2D grid
-            var assigningGrid:[[ShapeType]] = []
             for i in 0..<shapes.count {
-                assigningGrid.append([])
-                for _ in 0..<shapes.count {
-                    assigningGrid[i].append(.circle)
-                }
+                grid.append(shapes.shuffled())
             }
-
-            for i in 0..<shapes.count {
-                for j in 0..<shapes.count {
-                    assigningGrid[i][j] = startState[i * shapes.count + j]
-                }
-            }
-            
-            grid = assigningGrid
-            
+                        
+            // optimize
             let generatedTargetGrid = generateTargetGrid(from: grid, with: swapsNeeded)
             
             if generatedTargetGrid.isEmpty {
@@ -243,6 +219,7 @@ class AppModel: ObservableObject {
         persistData()
     }
     
+    //BFS to generate grid
     func generateTargetGrid(from startGrid: [[ShapeType]], with minimumSwapsToSolve: Int) -> [[ShapeType]] {
         let startState = startGrid.flatMap { $0 }
         
