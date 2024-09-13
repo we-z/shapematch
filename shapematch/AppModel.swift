@@ -191,17 +191,6 @@ class AppModel: ObservableObject {
         )
     }
     
-    func heuristic(currentState: [ShapeType], targetState: [ShapeType]) -> Int {
-        var mismatchCount = 0
-        for (current, target) in zip(currentState, targetState) {
-            if current != target {
-                mismatchCount += 1
-            }
-        }
-        return mismatchCount / 2
-    }
-
-    
     func approximateMinimumSwipes(from startGrid: [[ShapeType]], to targetGrid: [[ShapeType]]) -> Int {
         var totalCost = 0
         let shapeTypes = Set(startGrid.flatMap { $0 })
