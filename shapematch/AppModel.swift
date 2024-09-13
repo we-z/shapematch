@@ -165,7 +165,7 @@ class AppModel: ObservableObject {
             case 76...105: swapsNeeded = 7
             case 106...140: swapsNeeded = 8
             case 141...199: swapsNeeded = 9
-            case 200...270: swapsNeeded = 7  // Start 4x4 grid at level 200
+            case 200...270: swapsNeeded = 6  // Start 4x4 grid at level 200
             case 271...359: swapsNeeded = 11
             case 360...460: swapsNeeded = 12
             case 461...579: swapsNeeded = 13
@@ -191,6 +191,16 @@ class AppModel: ObservableObject {
         )
     }
     
+    func heuristic(currentState: [ShapeType], targetState: [ShapeType]) -> Int {
+        var mismatchCount = 0
+        for (current, target) in zip(currentState, targetState) {
+            if current != target {
+                mismatchCount += 1
+            }
+        }
+        return mismatchCount / 2
+    }
+
     
     func generateNeighbors(for state: [ShapeType]) -> [[ShapeType]] {
         let gridSize = Int(sqrt(Double(state.count)))
@@ -228,58 +238,45 @@ class AppModel: ObservableObject {
     }
 
 
-    // Optimized BFS to generate target grid
     func generateTargetGrid(from startGrid: [[ShapeType]], with minimumSwapsToSolve: Int) -> [[ShapeType]] {
         let startState = startGrid.flatMap { $0 }
         let gridSize = startGrid.count
         
         var visited = Set<[ShapeType]>()
-        var queue: [([ShapeType], Int)] = [(startState, 0)]  // (state, depth)
+        let priorityQueue = PriorityQueue<Node> { $0.f < $1.f }
+        
+        // Since we're looking for a state at a specific depth, we can set heuristic to zero
+        let startNode = Node(state: startState, g: 0, f: 0)
+        priorityQueue.enqueue(startNode)
         visited.insert(startState)
         
-        // Perform BFS to find a configuration requiring exactly minimumSwapsToSolve
-        var assigningTargetGrid: [[ShapeType]] = []
-        var generateNeighborsCount = 0
-        
-        while !queue.isEmpty {
-            let (currentState, depth) = queue.removeFirst()
+        while let currentNode = priorityQueue.dequeue() {
+            let currentState = currentNode.state
+            let depth = currentNode.g
             
-            // Debugging print statements
-            print("\ndepth reached \(depth)")
-            
-            // If we've reached the desired depth, convert state back to 2D grid
             if depth == minimumSwapsToSolve {
-                print("depth found: \(depth)")
-                
+                var assigningTargetGrid: [[ShapeType]] = []
                 for i in stride(from: 0, to: currentState.count, by: gridSize) {
                     let row = Array(currentState[i..<i + gridSize])
                     assigningTargetGrid.append(row)
                 }
-                break
+                return assigningTargetGrid
             }
             
-            
-            // Generate neighbors by swapping adjacent elements
             let neighbors = generateNeighbors(for: currentState)
             
-            generateNeighborsCount += 1
-            
-            // Debugging print statements
-            print("generateNeighborsCount: \(generateNeighborsCount)")
-            print("visited size \(visited.count)")
-            print("queue size \(queue.count)")
-            
-            // Process neighbors
             for neighbor in neighbors {
                 if !visited.contains(neighbor) {
+                    let neighborNode = Node(state: neighbor, g: depth + 1, f: depth + 1)
+                    priorityQueue.enqueue(neighborNode)
                     visited.insert(neighbor)
-                    queue.append((neighbor, depth + 1))
                 }
             }
         }
         
-        return assigningTargetGrid
+        return []
     }
+
 
     func calculateMinimumSwipes(from startGrid: [[ShapeType]], to targetGrid: [[ShapeType]]) -> Int {
         let startState = startGrid.flatMap { $0 }
@@ -289,28 +286,34 @@ class AppModel: ObservableObject {
             return 0
         }
         
-        let gridSize = startGrid.count
         
-        // BFS setup
+        // A* setup
         var visited = Set<[ShapeType]>()
-        var queue: [([ShapeType], Int)] = [(startState, 0)]
+        let priorityQueue = PriorityQueue<Node> { $0.f < $1.f }
+        
+        let h = heuristic(currentState: startState, targetState: targetState)
+        let startNode = Node(state: startState, g: 0, f: h)
+        priorityQueue.enqueue(startNode)
         visited.insert(startState)
         
-        // BFS loop
-        while !queue.isEmpty {
-            let (currentState, depth) = queue.removeFirst()
+        // A* loop
+        while let currentNode = priorityQueue.dequeue() {
+            let currentState = currentNode.state
+            let g = currentNode.g
+            
+            if currentState == targetState {
+                return g
+            }
             
             // Generate all possible adjacent swaps
             let neighbors = generateNeighbors(for: currentState)
             
             for neighbor in neighbors {
-                if neighbor == targetState {
-                    return depth + 1
-                }
-                
                 if !visited.contains(neighbor) {
+                    let h = heuristic(currentState: neighbor, targetState: targetState)
+                    let neighborNode = Node(state: neighbor, g: g + 1, f: g + 1 + h)
+                    priorityQueue.enqueue(neighborNode)
                     visited.insert(neighbor)
-                    queue.append((neighbor, depth + 1))
                 }
             }
         }
@@ -318,6 +321,7 @@ class AppModel: ObservableObject {
         // If no solution is found, return an impossibly large number
         return Int.max
     }
+
 
     
     func persistData() {
@@ -678,4 +682,67 @@ extension View {
         }
     }
   }
+}
+
+class PriorityQueue<Element> {
+    private var elements: [Element]
+    private let areInIncreasingOrder: (Element, Element) -> Bool
+    
+    init(sort: @escaping (Element, Element) -> Bool) {
+        self.elements = []
+        self.areInIncreasingOrder = sort
+    }
+    
+    var isEmpty: Bool {
+        return elements.isEmpty
+    }
+    
+    func enqueue(_ element: Element) {
+        elements.append(element)
+        siftUp(elementAtIndex: elements.count - 1)
+    }
+    
+    func dequeue() -> Element? {
+        guard !elements.isEmpty else {
+            return nil
+        }
+        elements.swapAt(0, elements.count - 1)
+        let element = elements.removeLast()
+        if !elements.isEmpty {
+            siftDown(elementAtIndex: 0)
+        }
+        return element
+    }
+    
+    private func siftUp(elementAtIndex index: Int) {
+        let parentIndex = (index - 1) / 2
+        guard index > 0 && areInIncreasingOrder(elements[index], elements[parentIndex]) else {
+            return
+        }
+        elements.swapAt(index, parentIndex)
+        siftUp(elementAtIndex: parentIndex)
+    }
+    
+    private func siftDown(elementAtIndex index: Int) {
+        let leftChildIndex = index * 2 + 1
+        let rightChildIndex = index * 2 + 2
+        var first = index
+        if leftChildIndex < elements.count && areInIncreasingOrder(elements[leftChildIndex], elements[first]) {
+            first = leftChildIndex
+        }
+        if rightChildIndex < elements.count && areInIncreasingOrder(elements[rightChildIndex], elements[first]) {
+            first = rightChildIndex
+        }
+        if first == index {
+            return
+        }
+        elements.swapAt(index, first)
+        siftDown(elementAtIndex: first)
+    }
+}
+
+struct Node: Equatable {
+    let state: [ShapeType]
+    let g: Int // Cost from start to this node
+    let f: Int // Total estimated cost (g + h)
 }
