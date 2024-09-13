@@ -165,7 +165,7 @@ class AppModel: ObservableObject {
             case 76...105: swapsNeeded = 7
             case 106...140: swapsNeeded = 8
             case 141...199: swapsNeeded = 9
-            case 200...270: swapsNeeded = 6  // Start 4x4 grid at level 200
+            case 200...270: swapsNeeded = 10  // Start 4x4 grid at level 200
             case 271...359: swapsNeeded = 11
             case 360...460: swapsNeeded = 12
             case 461...579: swapsNeeded = 13
@@ -202,125 +202,106 @@ class AppModel: ObservableObject {
     }
 
     
-    func generateNeighbors(for state: [ShapeType]) -> [[ShapeType]] {
-        let gridSize = Int(sqrt(Double(state.count)))
-        var neighbors = [[ShapeType]]()
-        let neighborLock = NSLock()  // To synchronize access to the neighbors array
+    func approximateMinimumSwipes(from startGrid: [[ShapeType]], to targetGrid: [[ShapeType]]) -> Int {
+        var totalCost = 0
+        let shapeTypes = Set(startGrid.flatMap { $0 })
         
-        DispatchQueue.concurrentPerform(iterations: gridSize * gridSize) { index in
-            let row = index / gridSize
-            let col = index % gridSize
-            
-            // Swap with the right neighbor
-            if col < gridSize - 1 {
-                var newState = state
-                newState.swapAt(index, index + 1)
-                
-                // Ensure thread-safe appending of neighbors
-                neighborLock.lock()
-                neighbors.append(newState)
-                neighborLock.unlock()
-            }
-            
-            // Swap with the bottom neighbor
-            if row < gridSize - 1 {
-                var newState = state
-                newState.swapAt(index, index + gridSize)
-                
-                // Ensure thread-safe appending of neighbors
-                neighborLock.lock()
-                neighbors.append(newState)
-                neighborLock.unlock()
-            }
+        for shapeType in shapeTypes {
+            let startPositions = positions(of: shapeType, in: startGrid)
+            let targetPositions = positions(of: shapeType, in: targetGrid)
+            let cost = minimalTotalMatchingCost(startPositions: startPositions, targetPositions: targetPositions)
+            totalCost += cost
         }
         
-        return neighbors
+        return (totalCost + 1) / 2  // Equivalent to ceil(totalCost / 2)
     }
 
-
-    func generateTargetGrid(from startGrid: [[ShapeType]], with minimumSwapsToSolve: Int) -> [[ShapeType]] {
-        let startState = startGrid.flatMap { $0 }
-        let gridSize = startGrid.count
-        
-        var visited = Set<[ShapeType]>()
-        let priorityQueue = PriorityQueue<Node> { $0.f < $1.f }
-        
-        // Since we're looking for a state at a specific depth, we can set heuristic to zero
-        let startNode = Node(state: startState, g: 0, f: 0)
-        priorityQueue.enqueue(startNode)
-        visited.insert(startState)
-        
-        while let currentNode = priorityQueue.dequeue() {
-            let currentState = currentNode.state
-            let depth = currentNode.g
-            
-            if depth == minimumSwapsToSolve {
-                var assigningTargetGrid: [[ShapeType]] = []
-                for i in stride(from: 0, to: currentState.count, by: gridSize) {
-                    let row = Array(currentState[i..<i + gridSize])
-                    assigningTargetGrid.append(row)
-                }
-                return assigningTargetGrid
-            }
-            
-            let neighbors = generateNeighbors(for: currentState)
-            
-            for neighbor in neighbors {
-                if !visited.contains(neighbor) {
-                    let neighborNode = Node(state: neighbor, g: depth + 1, f: depth + 1)
-                    priorityQueue.enqueue(neighborNode)
-                    visited.insert(neighbor)
+    func positions(of shapeType: ShapeType, in grid: [[ShapeType]]) -> [Position] {
+        var positions = [Position]()
+        for (rowIndex, row) in grid.enumerated() {
+            for (colIndex, cell) in row.enumerated() {
+                if cell == shapeType {
+                    positions.append(Position(row: rowIndex, col: colIndex))
                 }
             }
         }
-        
-        return []
+        return positions
     }
 
+    func minimalTotalMatchingCost(startPositions: [Position], targetPositions: [Position]) -> Int {
+        var totalCost = 0
+        var remainingStartPositions = startPositions
+        var remainingTargetPositions = targetPositions
+        
+        while !remainingStartPositions.isEmpty && !remainingTargetPositions.isEmpty {
+            var minCost = Int.max
+            var minStartIndex = 0
+            var minTargetIndex = 0
+            
+            for (startIndex, startPos) in remainingStartPositions.enumerated() {
+                for (targetIndex, targetPos) in remainingTargetPositions.enumerated() {
+                    let cost = abs(startPos.row - targetPos.row) + abs(startPos.col - targetPos.col)
+                    if cost < minCost {
+                        minCost = cost
+                        minStartIndex = startIndex
+                        minTargetIndex = targetIndex
+                    }
+                }
+            }
+            
+            totalCost += minCost
+            remainingStartPositions.remove(at: minStartIndex)
+            remainingTargetPositions.remove(at: minTargetIndex)
+        }
+        
+        return totalCost
+    }
+
+    func generateTargetGrid(from startGrid: [[ShapeType]], with swapsNeeded: Int) -> [[ShapeType]] {
+        
+        var targetGrid = startGrid
+        var minimumSwapsNeeded = approximateMinimumSwipes(from: startGrid, to: targetGrid)
+        var previousMinimumSwapsNeeded = minimumSwapsNeeded
+        var iterations = 0
+        let maxIterations = 1000  // Adjust as needed
+        
+        while minimumSwapsNeeded < swapsNeeded && iterations < maxIterations {
+            iterations += 1
+            let gridSize = startGrid.count
+            let row = Int.random(in: 0..<gridSize)
+            let col = Int.random(in: 0..<gridSize)
+            
+            var possibleSwaps = [(Int, Int)]()
+            if row > 0 { possibleSwaps.append((row - 1, col)) }
+            if row < gridSize - 1 { possibleSwaps.append((row + 1, col)) }
+            if col > 0 { possibleSwaps.append((row, col - 1)) }
+            if col < gridSize - 1 { possibleSwaps.append((row, col + 1)) }
+            
+            if possibleSwaps.isEmpty { continue }
+            
+            let (swapRow, swapCol) = possibleSwaps.randomElement()!
+            targetGrid.swapAt((row, col), (swapRow, swapCol))
+            
+            minimumSwapsNeeded = approximateMinimumSwipes(from: startGrid, to: targetGrid)
+            
+            if minimumSwapsNeeded >= previousMinimumSwapsNeeded {
+                previousMinimumSwapsNeeded = minimumSwapsNeeded
+            } else {
+                targetGrid.swapAt((row, col), (swapRow, swapCol)) // Undo swap
+            }
+        }
+        
+        if iterations >= maxIterations {
+            print("Could not generate target grid with desired difficulty within iteration limit.")
+        }
+        
+        return targetGrid
+    }
 
     func calculateMinimumSwipes(from startGrid: [[ShapeType]], to targetGrid: [[ShapeType]]) -> Int {
-        let startState = startGrid.flatMap { $0 }
-        let targetState = targetGrid.flatMap { $0 }
-        
-        if startState == targetState {
-            return 0
-        }
-        
-        
-        // A* setup
-        var visited = Set<[ShapeType]>()
-        let priorityQueue = PriorityQueue<Node> { $0.f < $1.f }
-        
-        let h = heuristic(currentState: startState, targetState: targetState)
-        let startNode = Node(state: startState, g: 0, f: h)
-        priorityQueue.enqueue(startNode)
-        visited.insert(startState)
-        
-        // A* loop
-        while let currentNode = priorityQueue.dequeue() {
-            let currentState = currentNode.state
-            let g = currentNode.g
-            
-            if currentState == targetState {
-                return g
-            }
-            
-            // Generate all possible adjacent swaps
-            let neighbors = generateNeighbors(for: currentState)
-            
-            for neighbor in neighbors {
-                if !visited.contains(neighbor) {
-                    let h = heuristic(currentState: neighbor, targetState: targetState)
-                    let neighborNode = Node(state: neighbor, g: g + 1, f: g + 1 + h)
-                    priorityQueue.enqueue(neighborNode)
-                    visited.insert(neighbor)
-                }
-            }
-        }
-        
-        // If no solution is found, return an impossibly large number
-        return Int.max
+        return approximateMinimumSwipes(from: startGrid, to: targetGrid)
     }
+
 
 
     
@@ -351,7 +332,7 @@ class AppModel: ObservableObject {
             // optimize
             let generatedTargetGrid = generateTargetGrid(from: grid, with: swapsNeeded)
             
-            if generatedTargetGrid.isEmpty {
+            if swapsNeeded > calculateMinimumSwipes(from: grid, to: generatedTargetGrid) {
                 print("trying again")
                 
             } else {
@@ -745,4 +726,9 @@ struct Node: Equatable {
     let state: [ShapeType]
     let g: Int // Cost from start to this node
     let f: Int // Total estimated cost (g + h)
+}
+
+struct Position: Hashable {
+    let row: Int
+    let col: Int
 }
