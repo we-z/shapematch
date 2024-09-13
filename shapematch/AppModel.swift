@@ -654,68 +654,6 @@ extension View {
   }
 }
 
-class PriorityQueue<Element> {
-    private var elements: [Element]
-    private let areInIncreasingOrder: (Element, Element) -> Bool
-    
-    init(sort: @escaping (Element, Element) -> Bool) {
-        self.elements = []
-        self.areInIncreasingOrder = sort
-    }
-    
-    var isEmpty: Bool {
-        return elements.isEmpty
-    }
-    
-    func enqueue(_ element: Element) {
-        elements.append(element)
-        siftUp(elementAtIndex: elements.count - 1)
-    }
-    
-    func dequeue() -> Element? {
-        guard !elements.isEmpty else {
-            return nil
-        }
-        elements.swapAt(0, elements.count - 1)
-        let element = elements.removeLast()
-        if !elements.isEmpty {
-            siftDown(elementAtIndex: 0)
-        }
-        return element
-    }
-    
-    private func siftUp(elementAtIndex index: Int) {
-        let parentIndex = (index - 1) / 2
-        guard index > 0 && areInIncreasingOrder(elements[index], elements[parentIndex]) else {
-            return
-        }
-        elements.swapAt(index, parentIndex)
-        siftUp(elementAtIndex: parentIndex)
-    }
-    
-    private func siftDown(elementAtIndex index: Int) {
-        let leftChildIndex = index * 2 + 1
-        let rightChildIndex = index * 2 + 2
-        var first = index
-        if leftChildIndex < elements.count && areInIncreasingOrder(elements[leftChildIndex], elements[first]) {
-            first = leftChildIndex
-        }
-        if rightChildIndex < elements.count && areInIncreasingOrder(elements[rightChildIndex], elements[first]) {
-            first = rightChildIndex
-        }
-        if first == index {
-            return
-        }
-        elements.swapAt(index, first)
-        siftDown(elementAtIndex: first)
-    }
-}
-
-struct Node: Equatable {
-    let state: [ShapeType]
-    let g: Int // Cost from start to this node
-    let f: Int // Total estimated cost (g + h)
-}
 
 struct Position: Hashable {
     let row: Int
