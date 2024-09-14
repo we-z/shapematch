@@ -37,6 +37,14 @@ struct NoMoreSwipesView: View {
                                     }
                                 }
                             }
+                            if value.translation.height > 0 {
+                                // Swipe up detected
+                                DispatchQueue.main.async { [self] in
+                                    withAnimation(.linear) {
+                                        buySwapsButtonOffset = deviceWidth/3
+                                    }
+                                }
+                            }
                         }
                 )
 //            ZStack {
@@ -136,7 +144,7 @@ struct NoMoreSwipesView: View {
                 }
             }
             DispatchQueue.main.async {
-                withAnimation(.interpolatingSpring(mass: 9.0, stiffness: 120.0, damping: 16.0, initialVelocity: 0.0)) {
+                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 120.0, damping: 16.0, initialVelocity: 0.0)) {
                     textScale = 1
                 }
             }
