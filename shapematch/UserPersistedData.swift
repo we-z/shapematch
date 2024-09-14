@@ -43,7 +43,18 @@ class UserPersistedData: ObservableObject {
 
     private func decodeGrid(from string: String) -> [[ShapeType]] {
         let flatGrid = string.split(separator: ",").compactMap { Int($0).flatMap(ShapeType.init) }
-        return Array(flatGrid.chunked(into: 3))
+        var chunks = 3
+        switch flatGrid.count {
+        case 9:
+            chunks = 3
+        case 16:
+            chunks = 4
+        case 25:
+            chunks = 5
+        default:
+            chunks = 3
+        }
+        return Array(flatGrid.chunked(into: chunks))
     }
     
     func incrementBalance(amount: Int) {

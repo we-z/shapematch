@@ -18,6 +18,10 @@ struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
     
     let rect = CGRect(x: 0, y: 0, width: 300, height: 100)
+    
+    init() {
+        print("targetGrid count: \(appModel.targetGrid.count), grid count: \(appModel.grid.count)")
+    }
     var body: some View {
         ZStack{
             Color.white

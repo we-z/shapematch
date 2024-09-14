@@ -52,6 +52,8 @@ class AppModel: ObservableObject {
     
     init() {
         // Initialize the grids from persisted data
+        determineLevelSettings()
+        
         grid = userPersistedData.grid.isEmpty ? [
             [.square, .triangle, .circle],
             [.triangle, .circle, .circle],
@@ -64,7 +66,6 @@ class AppModel: ObservableObject {
             [.square, .circle, .triangle]
         ] : userPersistedData.targetGrid
         
-        determineLevelSettings()
         swipesLeft = swapsNeeded
     }
     
