@@ -218,32 +218,77 @@ class AppModel: ObservableObject {
     }
 
     func minimalTotalMatchingCost(startPositions: [Position], targetPositions: [Position]) -> Int {
-        var totalCost = 0
-        var remainingStartPositions = startPositions
-        var remainingTargetPositions = targetPositions
-        
-        while !remainingStartPositions.isEmpty && !remainingTargetPositions.isEmpty {
-            var minCost = Int.max
-            var minStartIndex = 0
-            var minTargetIndex = 0
-            
-            for (startIndex, startPos) in remainingStartPositions.enumerated() {
-                for (targetIndex, targetPos) in remainingTargetPositions.enumerated() {
-                    let cost = abs(startPos.row - targetPos.row) + abs(startPos.col - targetPos.col)
-                    if cost < minCost {
-                        minCost = cost
-                        minStartIndex = startIndex
-                        minTargetIndex = targetIndex
-                    }
-                }
-            }
-            
-            totalCost += minCost
-            remainingStartPositions.remove(at: minStartIndex)
-            remainingTargetPositions.remove(at: minTargetIndex)
+        guard startPositions.count == targetPositions.count else {
+            fatalError("Positions counts do not match")
         }
         
+        let n = startPositions.count
+        if n == 0 {
+            return 0
+        }
+        
+        // Create the cost matrix where costMatrix[i][j] is the cost of assigning startPositions[i] to targetPositions[j]
+        var costMatrix = [[Int]](repeating: [Int](repeating: 0, count: n), count: n)
+        for i in 0..<n {
+            for j in 0..<n {
+                costMatrix[i][j] = abs(startPositions[i].row - targetPositions[j].row) + abs(startPositions[i].col - targetPositions[j].col)
+            }
+        }
+        
+        // Use the Hungarian Algorithm to find the minimal total matching cost
+        let totalCost = hungarianAlgorithm(costMatrix: costMatrix)
         return totalCost
+    }
+
+    func hungarianAlgorithm(costMatrix: [[Int]]) -> Int {
+        let n = costMatrix.count
+        var u = [Int](repeating: 0, count: n + 1)
+        var v = [Int](repeating: 0, count: n + 1)
+        var p = [Int](repeating: 0, count: n + 1)
+        var way = [Int](repeating: 0, count: n + 1)
+        
+        for i in 1...n {
+            p[0] = i
+            var minv = [Int](repeating: Int.max, count: n + 1)
+            var used = [Bool](repeating: false, count: n + 1)
+            var j0 = 0
+            repeat {
+                used[j0] = true
+                let i0 = p[j0]
+                var delta = Int.max
+                var j1 = 0
+                for j in 1...n {
+                    if !used[j] {
+                        let cur = costMatrix[i0 - 1][j - 1] - u[i0] - v[j]
+                        if cur < minv[j] {
+                            minv[j] = cur
+                            way[j] = j0
+                        }
+                        if minv[j] < delta {
+                            delta = minv[j]
+                            j1 = j
+                        }
+                    }
+                }
+                for j in 0...n {
+                    if used[j] {
+                        u[p[j]] += delta
+                        v[j] -= delta
+                    } else {
+                        minv[j] -= delta
+                    }
+                }
+                j0 = j1
+            } while p[j0] != 0
+            repeat {
+                let j1 = way[j0]
+                p[j0] = p[j1]
+                j0 = j1
+            } while j0 != 0
+        }
+        
+        // The minimal total cost is stored in -v[0]
+        return -v[0]
     }
 
     func generateTargetGrid(from startGrid: [[ShapeType]], with swapsNeeded: Int) -> [[ShapeType]] {

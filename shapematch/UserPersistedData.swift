@@ -18,7 +18,7 @@ class UserPersistedData: ObservableObject {
 //    @CloudStorage("gridData") var gridData: String = ""
 //    @CloudStorage("targetGridData") var targetGridData: String = ""
     @Published var gemBalance: Int = 0
-    @Published var level: Int = 198
+    @Published var level: Int = 999
     @Published var firstGamePlayed: Bool = false
     @Published var gridData: String = ""
     @Published var targetGridData: String = ""
