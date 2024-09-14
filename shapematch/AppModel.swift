@@ -297,7 +297,7 @@ class AppModel: ObservableObject {
         var minimumSwapsNeeded = approximateMinimumSwipes(from: startGrid, to: targetGrid)
         var previousMinimumSwapsNeeded = minimumSwapsNeeded
         var iterations = 0
-        let maxIterations = 1000  // Adjust as needed
+        let maxIterations = 100  // Adjust as needed
         
         while minimumSwapsNeeded < swapsNeeded && iterations < maxIterations {
             iterations += 1
