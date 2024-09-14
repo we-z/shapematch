@@ -157,30 +157,48 @@ class AppModel: ObservableObject {
     func determineLevelSettings() {
         // Determine the number of swaps needed based on the level
         switch userPersistedData.level {
-        case 1: swapsNeeded = 1
-            case 2...3: swapsNeeded = 2
-            case 4...11: swapsNeeded = 3
-            case 12...30: swapsNeeded = 4
-            case 31...50: swapsNeeded = 5
-            case 51...75: swapsNeeded = 6
-            case 76...105: swapsNeeded = 7
-            case 106...140: swapsNeeded = 8
-            case 141...199: swapsNeeded = 9
-            case 200...270: swapsNeeded = 10  // Start 4x4 grid at level 200
-            case 271...359: swapsNeeded = 11
-            case 360...460: swapsNeeded = 12
-            case 461...579: swapsNeeded = 13
-            case 580...699: swapsNeeded = 14
-            case 700...829: swapsNeeded = 15
-            case 830...999: swapsNeeded = 16
-            default: swapsNeeded = 17
+            case 1:
+                swapsNeeded = 1
+            case 2...3:
+                swapsNeeded = 2
+            case 4...9:
+                swapsNeeded = 3
+            case 10...20:
+                swapsNeeded = 4
+            case 21...30:
+                swapsNeeded = 5
+            case 31...45:
+                swapsNeeded = 6
+            case 46...75:
+                swapsNeeded = 7
+            case 76...90:
+                swapsNeeded = 8
+            case 91...99:
+                swapsNeeded = 9
+            case 100...228:  // 128 levels
+                swapsNeeded = 10
+            case 229...356:  // 128 levels
+                swapsNeeded = 11
+            case 357...484:  // 128 levels
+                swapsNeeded = 12
+            case 485...612:  // 128 levels
+                swapsNeeded = 13
+            case 613...740:  // 128 levels
+                swapsNeeded = 14
+            case 741...868:  // 128 levels
+                swapsNeeded = 15
+            case 869...999:  // 131 levels (final slightly larger range to reach 999)
+                swapsNeeded = 16
+            default:
+                swapsNeeded = 17
         }
+
         
         
         switch userPersistedData.level {
-        case 1...199:
+        case 1...99:
             shapes = [.circle, .square, .triangle]
-        case 200...999:
+        case 100...999:
             shapes =  [.circle, .square, .triangle, .star]
         default: 
             shapes =  [.circle, .square, .triangle, .star, .hexagon]
