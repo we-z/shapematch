@@ -140,7 +140,7 @@ struct ContentView: View {
                             .font(.system(size: deviceWidth/5))
                             .minimumScaleFactor(0.1)
                             .fixedSize()
-                            .scaleEffect(userPersistedData.level > 999 ? 0.5 : userPersistedData.level > 99 ? 0.7 : 1)
+                            .scaleEffect(userPersistedData.level > 999 ? 0.5 : userPersistedData.level > 99 ? 0.6 : 1)
                             .customTextStroke(width: 2.7)
                     }
                     .frame(width: deviceWidth/4)
@@ -156,7 +156,7 @@ struct ContentView: View {
                                 HStack {
                                     ForEach(0..<appModel.grid.count, id: \.self) { column in
                                         smallShapeView(shapeType: appModel.targetGrid[row][column])
-                                            .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1) * 7.5), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1) * 7.5))
+                                            .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11))
                                             .padding(3)
                                     }
                                 }
@@ -201,9 +201,9 @@ struct ContentView: View {
                         HStack {
                             ForEach(0..<appModel.grid.count, id: \.self) { column in
                                 LargeShapeView(shapeType: appModel.grid[row][column])
-                                    .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1) * 2.3), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1) * 2.3))
+                                    .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 3), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 3))
                                     .padding()
-                                    .background(.white.opacity(0.01))
+                                    .background(.white.opacity(0.001))
                                     .offset(appModel.offsets[row][column])
                                     .scaleEffect((tappedRow == row && tappedColumn == column) ? playingShapeScale : 1)
                                     .animation(.easeInOut(duration: 0.1), value: playingShapeScale)
