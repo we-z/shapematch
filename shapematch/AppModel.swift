@@ -93,6 +93,7 @@ class AppModel: ObservableObject {
     }
     
     func swapShapes(start: (row: Int, col: Int), end: (row: Int, col: Int), offset: CGSize) {
+        AudioServicesPlaySystemSound(1001)
         DispatchQueue.main.async { [self] in
             self.swaping = true
             withAnimation(.linear(duration: 0.2)) {
@@ -109,13 +110,13 @@ class AppModel: ObservableObject {
             offsets[end.row][end.col] = .zero
             swaping = false
         }
-        AudioServicesPlaySystemSound(1114)
         if grid[start.row][start.col] == grid[end.row][end.col] {
             hapticManager.notification(type: .error)
             return
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+            AudioServicesPlaySystemSound(1105)
             self.swipesLeft -= 1
             impactHeavy.impactOccurred()
             checkWinCondition()
