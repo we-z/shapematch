@@ -109,16 +109,14 @@ class AppModel: ObservableObject {
             offsets[end.row][end.col] = .zero
             swaping = false
         }
-        AudioServicesPlaySystemSound(1104)
+        AudioServicesPlaySystemSound(1114)
         if grid[start.row][start.col] == grid[end.row][end.col] {
-                // If they are the same, do nothing
             hapticManager.notification(type: .error)
             return
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
             self.swipesLeft -= 1
-           
             impactHeavy.impactOccurred()
             checkWinCondition()
         }

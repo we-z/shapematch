@@ -245,6 +245,7 @@ struct ContentView: View {
             OverlaysView()
         }
         .onAppear {
+            AudioServicesPlaySystemSound(1105)
             appModel.initialGrid = appModel.grid
         }
         .onChange(of: scenePhase) { newScenePhase in
