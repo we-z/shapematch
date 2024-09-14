@@ -217,7 +217,7 @@ struct ContentView: View {
                                                     tappedColumn = column
                                                     DispatchQueue.main.async { [self] in
                                                         withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                                                            self.playingShapeScale = 0.8
+                                                            self.playingShapeScale = 0.6
                                                         }
                                                     }
                                                 }
@@ -245,7 +245,6 @@ struct ContentView: View {
             OverlaysView()
         }
         .onAppear {
-            AudioServicesPlaySystemSound(1105)
             appModel.initialGrid = appModel.grid
         }
         .onChange(of: scenePhase) { newScenePhase in

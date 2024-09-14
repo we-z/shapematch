@@ -26,15 +26,18 @@ struct NoMoreSwipesView: View {
         ZStack {
             Color.gray.opacity(0.7)
                 .ignoresSafeArea()
-            FailFireEffect()
-                .frame(width: deviceWidth)
-                .offset(y: deviceWidth/15)
-            Text("0 Swaps left ✋")
-                .bold()
-                .font(.system(size: deviceWidth/9))
-                .customTextStroke(width: 2.4)
-                .scaleEffect(textScale)
-                .allowsHitTesting(false)
+            ZStack {
+                FailFireEffect()
+                    .frame(width: deviceWidth)
+                    .offset(y: deviceWidth/15)
+                Text("0 Swaps left ✋")
+                    .bold()
+                    .font(.system(size: deviceWidth/9))
+                    .customTextStroke(width: 2.4)
+                
+                    .allowsHitTesting(false)
+            }
+            .scaleEffect(textScale)
             VStack{
                 HStack{
                     Spacer()
@@ -101,12 +104,14 @@ struct NoMoreSwipesView: View {
             .background(.clear)
         }
         .onAppear {
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 15.0, initialVelocity: 0.0)) {
                     buySwapsButtonOffset = 0
                     resetButtonOffset = -(deviceWidth/30)
                 }
-                withAnimation(.interpolatingSpring) {
+            }
+            DispatchQueue.main.async {
+                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 60.0, damping: 16.0, initialVelocity: 0.0)) {
                     textScale = 1
                 }
             }
