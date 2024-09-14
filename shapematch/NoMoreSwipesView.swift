@@ -13,7 +13,7 @@ struct NoMoreSwipesView: View {
     @State var buySwapsButtonOffset = deviceWidth/3
     @State var resetButtonOffset = -(deviceWidth/3)
     @State var pulseText = true
-    @State var textScale: CGFloat = 10.0
+    @State var textScale: CGFloat = 3
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     
     func resetGame() {
@@ -26,7 +26,20 @@ struct NoMoreSwipesView: View {
         ZStack {
             Color.gray.opacity(0.7)
                 .ignoresSafeArea()
-            ZStack {
+                .gesture(
+                    DragGesture(minimumDistance: 1, coordinateSpace: .local)
+                        .onEnded { value in
+                            if value.translation.height < 0 {
+                                // Swipe up detected
+                                DispatchQueue.main.async { [self] in
+                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 9.0, initialVelocity: 0.0)) {
+                                        buySwapsButtonOffset = 0
+                                    }
+                                }
+                            }
+                        }
+                )
+//            ZStack {
                 FailFireEffect()
                     .frame(width: deviceWidth)
                     .offset(y: deviceWidth/15)
@@ -36,7 +49,7 @@ struct NoMoreSwipesView: View {
                     .customTextStroke(width: 2.4)
                 
                     .allowsHitTesting(false)
-            }
+//            }
             .scaleEffect(textScale)
             VStack{
                 HStack{
@@ -94,7 +107,19 @@ struct NoMoreSwipesView: View {
                             .stroke(Color.black, lineWidth: 4)
                             .padding(1)
                     }
-//                        .padding()
+                    .gesture(
+                        DragGesture(minimumDistance: 1, coordinateSpace: .local)
+                            .onEnded { value in
+                                if value.translation.height > 0 {
+                                    // Swipe up detected
+                                    DispatchQueue.main.async { [self] in
+                                        withAnimation(.linear) {
+                                            buySwapsButtonOffset = deviceWidth/3
+                                        }
+                                    }
+                                }
+                            }
+                    )
                 }
                 .buttonStyle(.roundedAndShadow6)
                 .offset(y: buySwapsButtonOffset)
@@ -105,13 +130,13 @@ struct NoMoreSwipesView: View {
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
-                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 15.0, initialVelocity: 0.0)) {
+                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 9.0, initialVelocity: 0.0)) {
                     buySwapsButtonOffset = 0
                     resetButtonOffset = -(deviceWidth/30)
                 }
             }
             DispatchQueue.main.async {
-                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 60.0, damping: 16.0, initialVelocity: 0.0)) {
+                withAnimation(.interpolatingSpring(mass: 9.0, stiffness: 120.0, damping: 16.0, initialVelocity: 0.0)) {
                     textScale = 1
                 }
             }
