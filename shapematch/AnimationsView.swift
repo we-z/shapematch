@@ -111,14 +111,30 @@ struct FailFireEffect: View {
 struct SwapParticleEffect: View {
     var body: some View {
         ZStack{
-            VortexView(.splash) {
-                Circle()
-                    .fill(.blue)
-                    .frame(width: 45)
-                    .tag("circle")
+            VortexViewReader { proxy in
+                VortexView(.confetti) {
+                    Circle()
+                        .fill(.purple)
+                        .frame(width: 30)
+                        .tag("circle")
+                    
+                    Circle()
+                        .fill(.orange)
+                        .frame(width: 30)
+                        .tag("circle")
+                    
+                    Circle()
+                        .fill(.pink)
+                        .frame(width: 30)
+                        .tag("circle")
+                }
+                
+                .onAppear{
+                    proxy.burst()
+                }
             }
         }
-//        .frame(width: deviceWidth*8)
+        .scaleEffect(0.3)
         .allowsHitTesting(false)
     }
 }
