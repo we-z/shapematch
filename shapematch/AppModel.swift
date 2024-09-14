@@ -64,7 +64,8 @@ class AppModel: ObservableObject {
             [.square, .circle, .triangle]
         ] : userPersistedData.targetGrid
         
-        swipesLeft = calculateMinimumSwipes(from: grid, to: targetGrid)
+        determineLevelSettings()
+        swipesLeft = swapsNeeded
     }
     
     func handleSwipeGesture(gesture: DragGesture.Value, row: Int, col: Int) {
@@ -156,7 +157,8 @@ class AppModel: ObservableObject {
     func determineLevelSettings() {
         // Determine the number of swaps needed based on the level
         switch userPersistedData.level {
-            case 1...3: swapsNeeded = 2
+        case 1: swapsNeeded = 1
+            case 2...3: swapsNeeded = 2
             case 4...11: swapsNeeded = 3
             case 12...30: swapsNeeded = 4
             case 31...50: swapsNeeded = 5
