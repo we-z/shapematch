@@ -140,7 +140,7 @@ struct ContentView: View {
                             .font(.system(size: deviceWidth/5))
                             .minimumScaleFactor(0.1)
                             .fixedSize()
-                            .scaleEffect(userPersistedData.level > 99 ? 0.7 : 1)
+                            .scaleEffect(userPersistedData.level > 999 ? 0.5 : userPersistedData.level > 99 ? 0.7 : 1)
                             .customTextStroke(width: 2.7)
                     }
                     .frame(width: deviceWidth/4)
