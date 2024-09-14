@@ -15,13 +15,14 @@ struct ContentView: View {
     @State var tappedRow = 0
     @State var tappedColumn = 0
     @Environment(\.scenePhase) var scenePhase
+    @Environment(\.colorScheme) var colorScheme
     
     let rect = CGRect(x: 0, y: 0, width: 300, height: 100)
     var body: some View {
         ZStack{
             Color.white
                 .ignoresSafeArea()
-            Color.gray.opacity(0.1)
+            Color.black.opacity(colorScheme == .dark ? 0.8 : 0.1)
                 .ignoresSafeArea()
             VStack(spacing: 0) {
                 HStack{
