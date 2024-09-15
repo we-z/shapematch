@@ -65,8 +65,8 @@ class NotificationManager: ObservableObject {
         content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "BoingNotification.caf"))
 
         var dateComponents = DateComponents()
-        dateComponents.hour = 10
-        dateComponents.minute = 30
+        dateComponents.hour = 11
+        dateComponents.minute = 00
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
 
