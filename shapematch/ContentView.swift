@@ -250,6 +250,7 @@ struct ContentView: View {
         }
         .onAppear {
             appModel.initialGrid = appModel.grid
+//            AudioServicesPlaySystemSound (1018)
         }
         .onChange(of: scenePhase) { newScenePhase in
             DispatchQueue.main.async { [self] in

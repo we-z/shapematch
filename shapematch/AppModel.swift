@@ -94,7 +94,7 @@ class AppModel: ObservableObject {
     }
     
     func swapShapes(start: (row: Int, col: Int), end: (row: Int, col: Int), offset: CGSize) {
-        AudioServicesPlaySystemSound(1001)
+        AudioServicesPlaySystemSound(1018)
         DispatchQueue.main.async { [self] in
             self.swaping = true
             withAnimation(.linear(duration: 0.2)) {
