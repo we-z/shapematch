@@ -221,7 +221,10 @@ class AppModel: ObservableObject {
             totalCost += cost
         }
         
-        return (totalCost + 1) / 2  // Equivalent to ceil(totalCost / 2)
+        print("")
+        print("first equation: \((totalCost + 1) / 2)/")
+        print("second equation: \((totalCost + 1) * 5 / 10)")
+        return (totalCost + 1) * 5 / 10
     }
 
     func positions(of shapeType: ShapeType, in grid: [[ShapeType]]) -> [Position] {
@@ -403,7 +406,5 @@ class AppModel: ObservableObject {
         // Reset the swipes left to the initial calculated value
         swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
     }
-    
-    
     
 }
