@@ -136,6 +136,7 @@ struct LargeShapeView: View {
         case .star:
             StarShape(points: 5)
                 .foregroundColor(.yellow)
+                .scaleEffect(1.2)
                 .background(StarShape(points: 5).style(
                     withStroke: Color.black,
                     lineWidth: 18,
@@ -184,6 +185,7 @@ struct smallShapeView: View {
         case .star:
             StarShape(points: 5)
                 .foregroundColor(.yellow)
+                .scaleEffect(1.2)
                 .background(StarShape(points: 5).style(
                     withStroke: Color.black,
                     lineWidth: 6,
