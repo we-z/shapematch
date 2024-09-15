@@ -10,6 +10,7 @@ struct ContentView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @StateObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
+    @ObservedObject var notificationManager = NotificationManager()
     @State var firstChange = false
     @State var playingShapeScale = 1.0
     @State var tappedRow = 0
@@ -248,6 +249,7 @@ struct ContentView: View {
         }
         .onAppear {
             appModel.initialGrid = appModel.grid
+            self.notificationManager.registerLocal()
             // 1008, 1022, 1025, 1035
 //            AudioServicesPlaySystemSound(1008)
         }
