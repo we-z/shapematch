@@ -45,7 +45,7 @@ class AudioManager: ObservableObject {
         if mute == true {
             self.musicPlayer.setVolume(0, fadeDuration: 0)
         } else {
-            self.musicPlayer.setVolume(1, fadeDuration: 0)
+            self.musicPlayer.setVolume(0.1, fadeDuration: 0)
         }
     }
     
