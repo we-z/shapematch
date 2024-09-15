@@ -11,7 +11,7 @@ import Vortex
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        SwapParticleEffect()
+        HandSwipeView()
     }
 }
 
@@ -167,10 +167,11 @@ struct HandSwipeView: View {
                     .offset(y: offsetAmount)
                     .opacity(fade ? 0 : 1)
                     .scaleEffect(fade ? 0.9 : 1)
-                    .onAppear {
-                        animate()
-                    }
+                    
             }
+        }
+        .onAppear {
+            animate()
         }
         .allowsHitTesting(false)
     }
