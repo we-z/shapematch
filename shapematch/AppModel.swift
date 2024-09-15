@@ -145,7 +145,7 @@ class AppModel: ObservableObject {
                 swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
                 self.freezeGame = false
             }
-            AudioServicesPlaySystemSound(1115)
+//            AudioServicesPlaySystemSound(1115)
                 
             print("You win!")
         } else if swipesLeft <= 0 {
@@ -226,7 +226,7 @@ class AppModel: ObservableObject {
         print("")
         print("first equation: \((totalCost + 1) / 2)/")
         print("second equation: \((totalCost + 1) * 5 / 10)")
-        return (totalCost + 1) * 5 / 10
+        return (totalCost + 1) * 53 / 100 // (totalCost + 1) * 5 / 10
     }
 
     func positions(of shapeType: ShapeType, in grid: [[ShapeType]]) -> [Position] {
