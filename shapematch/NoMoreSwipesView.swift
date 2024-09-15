@@ -137,7 +137,7 @@ struct NoMoreSwipesView: View {
             .background(.clear)
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 9.0, initialVelocity: 0.0)) {
                     buySwapsButtonOffset = 0
                     resetButtonOffset = -(deviceWidth/30)

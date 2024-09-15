@@ -74,6 +74,11 @@ struct InstructionView: View {
                 }
             }
         }
+        .onAppear {
+            if userPersistedData.level > 1 {
+                cardOffset = -(deviceWidth/2)
+            }
+        }
     }
 }
 
