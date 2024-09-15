@@ -51,7 +51,7 @@ struct ContentView: View {
                             Spacer()
                                 
                         }
-                        .offset(x: -5)
+                        .offset(x: -3)
                         .padding()
                         .background{
                             Color.blue

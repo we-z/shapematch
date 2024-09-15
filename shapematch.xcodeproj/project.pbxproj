@@ -31,6 +31,7 @@
 		7677131E2C86DCF800C9E2C9 /* iconview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7677131D2C86DCF800C9E2C9 /* iconview.swift */; };
 		76ADAF042C76A92C006B2844 /* OverlaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ADAF032C76A92B006B2844 /* OverlaysView.swift */; };
 		76B774072C968EF70053B72B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B774062C968EF70053B72B /* Extensions.swift */; };
+		76B774092C96B6F50053B72B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B774082C96B6F50053B72B /* NotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		7677131D2C86DCF800C9E2C9 /* iconview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iconview.swift; sourceTree = "<group>"; };
 		76ADAF032C76A92B006B2844 /* OverlaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlaysView.swift; sourceTree = "<group>"; };
 		76B774062C968EF70053B72B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		76B774082C96B6F50053B72B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */,
 				761A444A2C78E8320017B53B /* StoreKitManager.swift */,
 				766EF08C2C7E2EEA00B2C380 /* RandomGradientView.swift */,
+				76B774082C96B6F50053B72B /* NotificationManager.swift */,
 				7639F9892C71460D00E2B371 /* Tempview.swift */,
 				7677131D2C86DCF800C9E2C9 /* iconview.swift */,
 				760776142C7A18C7003E2AD2 /* UserPersistedData.swift */,
@@ -291,6 +294,7 @@
 				7677131E2C86DCF800C9E2C9 /* iconview.swift in Sources */,
 				7639F9CE2C759A2E00E2B371 /* AudioManager.swift in Sources */,
 				7639F9612C713D8100E2B371 /* ContentView.swift in Sources */,
+				76B774092C96B6F50053B72B /* NotificationManager.swift in Sources */,
 				7639F95F2C713D8100E2B371 /* shapematchApp.swift in Sources */,
 				76ADAF042C76A92C006B2844 /* OverlaysView.swift in Sources */,
 				761A444B2C78E8320017B53B /* StoreKitManager.swift in Sources */,
