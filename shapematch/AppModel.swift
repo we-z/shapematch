@@ -223,10 +223,8 @@ class AppModel: ObservableObject {
             totalCost += cost
         }
         
-        print("")
-        print("first equation: \((totalCost + 1) / 2)/")
-        print("second equation: \((totalCost + 1) * 5 / 10)")
-        return (totalCost + 1) * 53 / 100 // (totalCost + 1) * 5 / 10
+        // the higher the first number is, the more likely we are to end up with an extra swap
+        return (totalCost + 1) * 523 / 1000 // (totalCost + 1) * 5 / 10
     }
 
     func positions(of shapeType: ShapeType, in grid: [[ShapeType]]) -> [Position] {
