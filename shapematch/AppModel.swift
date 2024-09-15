@@ -33,7 +33,6 @@ class AppModel: ObservableObject {
     )
     
     @Published var initialGrid: [[ShapeType]] = [[]]
-    @Published var initialSwipes = 1
     @Published var swipesLeft = 1
     @Published var freezeGame = false
     @Published var swapsToSell = 1
@@ -142,8 +141,7 @@ class AppModel: ObservableObject {
                 }
                 userPersistedData.level += 1
                 setupLevel()
-                swipesLeft =  calculateMinimumSwipes(from:  grid, to:  targetGrid)
-                initialSwipes = calculateMinimumSwipes(from:  grid, to:  targetGrid)
+                swipesLeft = swapsNeeded
                 self.freezeGame = false
             }
             print("You win!")
@@ -362,7 +360,6 @@ class AppModel: ObservableObject {
     func persistData() {
         // The grid now requires exactly `swapsNeeded` swaps to solve
         swipesLeft = swapsNeeded
-        initialSwipes = swipesLeft
         initialGrid = grid
         
         // Persist the grid and targetGrid for the current level
@@ -403,7 +400,7 @@ class AppModel: ObservableObject {
         grid = initialGrid
         
         // Reset the swipes left to the initial calculated value
-        swipesLeft = initialSwipes
+        swipesLeft = swapsNeeded
     }
     
     
