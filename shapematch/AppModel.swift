@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import GameKit
+import AVFoundation
 
 let hapticManager = HapticManager.instance
 
