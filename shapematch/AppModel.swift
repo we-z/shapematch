@@ -65,7 +65,7 @@ class AppModel: ObservableObject {
             [.square, .circle, .triangle]
         ] : userPersistedData.targetGrid
         
-        swipesLeft = swapsNeeded
+        swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
     }
     
     func handleSwipeGesture(gesture: DragGesture.Value, row: Int, col: Int) {
@@ -94,7 +94,8 @@ class AppModel: ObservableObject {
     }
     
     func swapShapes(start: (row: Int, col: Int), end: (row: Int, col: Int), offset: CGSize) {
-        AudioServicesPlaySystemSound(1018)
+        AudioServicesPlaySystemSound(1104)
+//        AudioServicesPlaySystemSound(1018)
         DispatchQueue.main.async { [self] in
             self.swaping = true
             withAnimation(.linear(duration: 0.2)) {
@@ -117,7 +118,7 @@ class AppModel: ObservableObject {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-            AudioServicesPlaySystemSound(1105)
+           
             self.swipesLeft -= 1
             impactHeavy.impactOccurred()
             checkWinCondition()
@@ -141,7 +142,7 @@ class AppModel: ObservableObject {
                 }
                 userPersistedData.level += 1
                 setupLevel()
-                swipesLeft = swapsNeeded
+                swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
                 self.freezeGame = false
             }
             print("You win!")
@@ -220,7 +221,7 @@ class AppModel: ObservableObject {
             totalCost += cost
         }
         
-        return (totalCost + 1) / 2  // Equivalent to ceil(totalCost / 2)
+        return (totalCost + 2) / 2  // Equivalent to ceil(totalCost / 2)
     }
 
     func positions(of shapeType: ShapeType, in grid: [[ShapeType]]) -> [Position] {
@@ -359,7 +360,7 @@ class AppModel: ObservableObject {
     
     func persistData() {
         // The grid now requires exactly `swapsNeeded` swaps to solve
-        swipesLeft = swapsNeeded
+        swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
         initialGrid = grid
         
         // Persist the grid and targetGrid for the current level
@@ -400,7 +401,7 @@ class AppModel: ObservableObject {
         grid = initialGrid
         
         // Reset the swipes left to the initial calculated value
-        swipesLeft = swapsNeeded
+        swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
     }
     
     
