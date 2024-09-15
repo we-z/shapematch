@@ -145,8 +145,7 @@ class AppModel: ObservableObject {
                 swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
                 self.freezeGame = false
             }
-//            AudioServicesPlaySystemSound(1115)
-                
+            AudioServicesPlaySystemSound(1114)
             print("You win!")
         } else if swipesLeft <= 0 {
             swapsToSell = calculateMinimumSwipes(from: grid, to: targetGrid)

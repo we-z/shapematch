@@ -250,8 +250,8 @@ struct ContentView: View {
         .onAppear {
             appModel.initialGrid = appModel.grid
             self.notificationManager.registerLocal()
-            // 1054, 1109, 1114, 1115, 1159, 1166, 1300, 1308
-//            AudioServicesPlaySystemSound(1115)
+            // 1054, 1109, 1054, 1057, 1114, 1115, 1159, 1166, 1300, 1308, 1313, 1322, 1334
+//            AudioServicesPlaySystemSound(1114)
         }
         .onChange(of: scenePhase) { newScenePhase in
             DispatchQueue.main.async { [self] in
