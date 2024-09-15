@@ -37,15 +37,13 @@ struct ContentView: View {
                             Spacer()
                             Text("💎")
                                 .bold()
-                                .italic()
                                 .font(.system(size: deviceWidth/15))
                                 .fixedSize()
-                                .padding(.trailing, idiom == .pad ? 30: 9)
+                                .padding(.trailing, idiom == .pad ? 30: 15)
                                 .customTextStroke(width: 1.8)
                                 .scaleEffect(1.3)
                             Text("\(userPersistedData.gemBalance)")
                                 .bold()
-                                .italic()
                                 .font(.system(size: deviceWidth/15))
                                 .fixedSize()
                                 .customTextStroke(width: 1.5)
@@ -53,6 +51,7 @@ struct ContentView: View {
                             Spacer()
                                 
                         }
+                        .offset(x: -5)
                         .padding()
                         .background{
                             Color.blue
@@ -124,8 +123,7 @@ struct ContentView: View {
                         audioController.setAllAudioVolume()
                     }
                 }
-                .padding(.horizontal, 9)
-//                .padding(.leading, 3)
+                .padding(.horizontal)
                 Spacer()
                 HStack{
                     Spacer()
