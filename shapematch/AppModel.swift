@@ -221,7 +221,7 @@ class AppModel: ObservableObject {
             totalCost += cost
         }
         
-        return (totalCost + 2) / 2  // Equivalent to ceil(totalCost / 2)
+        return (totalCost + 1) / 2  // Equivalent to ceil(totalCost / 2)
     }
 
     func positions(of shapeType: ShapeType, in grid: [[ShapeType]]) -> [Position] {
