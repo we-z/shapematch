@@ -34,7 +34,7 @@ struct GemMenuView: View {
     
     var body: some View {
         ZStack {
-            Color.gray.opacity(0.7)
+            Color.gray.opacity(0.6)
                 .ignoresSafeArea()
                 .onTapGesture {
                     appModel.showGemMenu = false
@@ -78,7 +78,6 @@ struct GemMenuView: View {
                                     .padding(12)
                                 Text("10")
                                     .bold()
-                                    .italic()
                                     .font(.system(size: deviceWidth/12))
                                     .customTextStroke(width: 1.8)
                                 Spacer()
@@ -101,7 +100,7 @@ struct GemMenuView: View {
                             .cornerRadius(15)
                             .overlay{
                                 RoundedRectangle(cornerRadius: 15)
-                                    .stroke(Color.black, lineWidth: 4)
+                                    .stroke(Color.black, lineWidth: 6)
                                     .padding(1)
                             }
                             .padding(.horizontal, 30)
@@ -124,7 +123,6 @@ struct GemMenuView: View {
                                     .padding(12)
                                 Text("100")
                                     .bold()
-                                    .italic()
                                     .font(.system(size: deviceWidth/12))
                                     .customTextStroke(width: 1.8)
                                 
@@ -148,7 +146,7 @@ struct GemMenuView: View {
                             .cornerRadius(15)
                             .overlay{
                                 RoundedRectangle(cornerRadius: 15)
-                                    .stroke(Color.black, lineWidth: 4)
+                                    .stroke(Color.black, lineWidth: 6)
                                     .padding(1)
                             }
                             .padding(.horizontal, 30)
@@ -171,7 +169,6 @@ struct GemMenuView: View {
                                     .padding(12)
                                 Text("1000")
                                     .bold()
-                                    .italic()
                                     .font(.system(size: deviceWidth/12))
                                     .customTextStroke(width: 1.8)
                                 
@@ -195,7 +192,7 @@ struct GemMenuView: View {
                             .cornerRadius(15)
                             .overlay{
                                 RoundedRectangle(cornerRadius: 15)
-                                    .stroke(Color.black, lineWidth: 4)
+                                    .stroke(Color.black, lineWidth: 6)
                                     .padding(1)
                             }
                             .padding(.horizontal, 30)
@@ -228,7 +225,7 @@ struct GemMenuView: View {
         .allowsHitTesting(!isProcessingPurchase)
         .onAppear {
             DispatchQueue.main.async {
-                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                withAnimation(.interpolatingSpring(mass: 2.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                     cardOffset = 0
                 }
             }
@@ -281,7 +278,7 @@ struct HangTight: View {
         .offset(y: cardOffset)
         .onAppear{
             DispatchQueue.main.async {
-                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                     cardOffset = 0
                 }
             }
