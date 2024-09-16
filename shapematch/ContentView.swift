@@ -99,6 +99,7 @@ struct ContentView: View {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
 //                                    showAlert = true
                                     impactHeavy.impactOccurred()
+                                    appModel.swapsMade = []
                                     appModel.setupLevel()
                                 }
                             }
