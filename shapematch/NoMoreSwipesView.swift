@@ -84,8 +84,9 @@ struct NoMoreSwipesView: View {
                         }
                 )
                 Spacer()
-                VStack(spacing: 21){
+                VStack(spacing: 39){
                     HStack{
+                        Spacer()
                         Button {
                             resetGame()
                             impactHeavy.impactOccurred()
@@ -105,6 +106,7 @@ struct NoMoreSwipesView: View {
                                 .customTextStroke(width: 2)
                                 .padding([.trailing], 9)
                         }
+                        Spacer()
                     }
                     .buttonStyle(.roundedAndShadow6)
                     Button {
