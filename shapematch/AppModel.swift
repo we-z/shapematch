@@ -385,6 +385,7 @@ class AppModel: ObservableObject {
     func setupLevel() {
         
         determineLevelSettings()
+        swapsMade = []
         var swapsNeededMet = false
         
         while !swapsNeededMet {
@@ -414,7 +415,7 @@ class AppModel: ObservableObject {
     func resetLevel() {
         // Reset the grid to its initial configuration
         grid = initialGrid
-        
+        swapsMade = []
         // Reset the swipes left to the initial calculated value
         swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
     }
