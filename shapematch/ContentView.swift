@@ -258,6 +258,11 @@ struct ContentView: View {
                 self.playingShapeScale = 1.0
             }
         }
+        .onChange(of: appModel.grid) { newScenePhase in
+            DispatchQueue.main.async { [self] in
+                self.playingShapeScale = 1.0
+            }
+        }
     }
     
     func HoleShapeMask(in rect: CGRect) -> Path {

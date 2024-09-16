@@ -141,6 +141,7 @@ class AppModel: ObservableObject {
                     showNewGoal.toggle()
                 }
                 userPersistedData.level += 1
+                showInstruction.toggle()
                 setupLevel()
                 swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
                 self.freezeGame = false
