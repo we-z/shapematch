@@ -90,21 +90,21 @@ struct NoMoreSwipesView: View {
                         Text("💎")
                             .bold()
                             .italic()
-                            .font(.system(size: deviceWidth/12))
+                            .font(.system(size: deviceWidth/13))
                             .fixedSize()
                             .scaleEffect(1.5)
                             .customTextStroke(width: 2.4)
                         
                         Text("+ \(appModel.swapsToSell) Swaps")
                             .bold()
-                            .font(.system(size: deviceWidth/9))
+                            .font(.system(size: deviceWidth/10))
                             .fixedSize()
                             .customTextStroke(width: 2.4)
                             .padding(.horizontal, 9)
                         Text("↔️")
                             .bold()
                             .italic()
-                            .font(.system(size: deviceWidth/12))
+                            .font(.system(size: deviceWidth/13))
                             .fixedSize()
                             .scaleEffect(1.2)
                             .customTextStroke(width: 2.4)
@@ -118,7 +118,7 @@ struct NoMoreSwipesView: View {
                             .stroke(Color.black, lineWidth: 5)
                             .padding(1)
                     }
-                    .padding(.bottom)
+                    .padding(.bottom, 6)
                     .gesture(
                         DragGesture(minimumDistance: 1, coordinateSpace: .local)
                             .onEnded { value in
