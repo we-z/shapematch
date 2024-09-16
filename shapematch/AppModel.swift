@@ -45,6 +45,7 @@ class AppModel: ObservableObject {
 //    @Published var grid.count = 3
     @Published var swapsNeeded = 1
     @Published var shapes: [ShapeType] = []
+    @Published var swapsMade: [(Position, Position)] = []
     
     @ObservedObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
@@ -118,12 +119,29 @@ class AppModel: ObservableObject {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-           
             self.swipesLeft -= 1
+            swapsMade.append((Position(row: start.row, col: start.col), Position(row: end.row, col: end.col)))
             impactHeavy.impactOccurred()
             checkWinCondition()
         }
-        
+    }
+    
+    func undoSwap() {
+        if !swapsMade.isEmpty {
+            let lastSwap = swapsMade.removeLast()
+            
+            AudioServicesPlaySystemSound(1104)
+            DispatchQueue.main.asyncAfter(deadline: .now()) { [self] in
+                let temp = grid[lastSwap.0.row][lastSwap.0.col]
+                grid[lastSwap.0.row][lastSwap.0.col] = grid[lastSwap.1.row][lastSwap.1.col]
+                grid[lastSwap.1.row][lastSwap.1.col] = temp
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now()) { [self] in
+                self.swipesLeft += 1
+            }
+            
+        }
     }
     
     func checkWinCondition() {
