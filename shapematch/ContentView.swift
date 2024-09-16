@@ -190,7 +190,7 @@ struct ContentView: View {
                             .font(.system(size: deviceWidth/15))
                             .fixedSize()
                             .customTextStroke(width: 1.5)
-                        Text("\(appModel.swipesLeft)")
+                        Text("\(appModel.swipesLeft > 0 ? appModel.swipesLeft : 0)")
                             .bold()
                             .font(.system(size: deviceWidth/5))
                             .customTextStroke(width: 2.7)
@@ -227,15 +227,15 @@ struct ContentView: View {
                                                 firstChange = true
                                             }
                                             .onEnded { gesture in
-                                                if appModel.swipesLeft > 0 {
-                                                    appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
-                                                }
-                                                firstChange = false
                                                 DispatchQueue.main.async { [self] in
                                                     withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                                                         self.playingShapeScale = 1.0
                                                     }
                                                 }
+                                                if appModel.swipesLeft > 0 {
+                                                    appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
+                                                }
+                                                firstChange = false
                                             }
                                     )
                             }
@@ -255,9 +255,7 @@ struct ContentView: View {
         }
         .onChange(of: scenePhase) { newScenePhase in
             DispatchQueue.main.async { [self] in
-                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                    self.playingShapeScale = 1.0
-                }
+                self.playingShapeScale = 1.0
             }
         }
     }
