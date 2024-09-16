@@ -179,7 +179,7 @@ struct NoMoreSwipesView: View {
                                 .stroke(Color.black, lineWidth: 5)
                                 .padding(1)
                         }
-                        .padding(.bottom, 21)
+                        .padding(.bottom, 15)
                         
                     }
                     .buttonStyle(.roundedAndShadow6)

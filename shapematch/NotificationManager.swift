@@ -20,14 +20,21 @@ class NotificationManager: ObservableObject {
     ]
     
     let bodies = [
-        "Life is all about solving problems.",
-        "The harder the problem, the greater the reward.",
-        "Problems are opportunities in disguise.",
-        "It’s not about how fast you solve, but how well you think.",
-        "Every challenge you overcome sharpens your mind.",
-        "Perseverance turns obstacles into stepping stones.",
-        "The solution is just a few moves away.",
-        "Stay patient, every problem can be solved."
+        "A problem reveals itself only when you understand its structure.",
+        "Clarity comes not from knowing the answer, but from refining the question.",
+        "The best solutions emerge when you stop looking for easy ones.",
+        "A problem often teaches more than the solution ever could.",
+        "Solving isn't just about answers, it's about uncovering the right approach.",
+        "Every complex problem is a network of smaller, simpler problems.",
+        "A good problem solver is defined by how they handle uncertainty, not how they avoid it.",
+        "Insight grows through iteration—each failure sharpens the next attempt.",
+        "The depth of a problem is hidden in its assumptions.",
+        "The simplest solutions are often found on the far side of complexity.",
+        "True problem solvers are comfortable with ambiguity and thrive in uncertainty.",
+        "To solve effectively, one must first see beyond the obvious.",
+        "The process of solving a problem is as important as the solution itself.",
+        "Questions shape the path; answers are just a byproduct of the journey.",
+        "Every solution contains the seeds of future problems."
     ]
     
     @objc func registerLocal() {

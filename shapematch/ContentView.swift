@@ -73,8 +73,7 @@ struct ContentView: View {
                     } label: {
                         HStack{
                             Spacer()
-                            Text("↪️")
-                                .rotationEffect(.degrees(180))
+                            Text("↩️")
                                 .customTextStroke(width: 1.2)
                                 .font(.system(size: deviceWidth/15))
                             Spacer()
