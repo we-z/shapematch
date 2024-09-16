@@ -84,31 +84,59 @@ struct NoMoreSwipesView: View {
                         }
                 )
                 Spacer()
-                VStack(spacing: 39){
+                VStack{
                     HStack{
-                        Spacer()
                         Button {
                             resetGame()
                             impactHeavy.impactOccurred()
                         } label: {
-                            Text("🔀")
-                                .font(.system(size: deviceWidth/6))
-                                .customTextStroke(width: 2)
-                                .padding([.trailing], 9)
+                            HStack {
+                                Spacer()
+                                Text("🔀")
+                                    .font(.system(size: deviceWidth/12))
+                                    .customTextStroke(width: 2)
+                                    .padding([.trailing], 9)
+                                Spacer()
+                            }
+                            .padding()
+                            .background{
+                                Color.green
+                            }
+                            .cornerRadius(15)
+                            .overlay{
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color.black, lineWidth: 5)
+                                    .padding(1)
+                            }
+                            .padding(3)
                         }
-                        Spacer()
                         Button {
                             resetGame()
                             impactHeavy.impactOccurred()
                         } label: {
-                            Text("🔄")
-                                .font(.system(size: deviceWidth/6))
-                                .customTextStroke(width: 2)
-                                .padding([.trailing], 9)
+                            HStack{
+                                Spacer()
+                                Text("🔄")
+                                    .font(.system(size: deviceWidth/12))
+                                    .customTextStroke(width: 2)
+                                    .padding([.trailing], 9)
+                                Spacer()
+                            }
+                            .padding()
+                            .background{
+                                Color.red
+                            }
+                            .cornerRadius(15)
+                            .overlay{
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color.black, lineWidth: 5)
+                                    .padding(1)
+                            }
+                            .padding(3)
                         }
-                        Spacer()
                     }
                     .buttonStyle(.roundedAndShadow6)
+                    .padding(.bottom, 6)
                     Button {
                         if appModel.swapsToSell > userPersistedData.gemBalance {
                             appModel.showGemMenu = true
@@ -130,9 +158,9 @@ struct NoMoreSwipesView: View {
                             
                             Text("+ \(appModel.swapsToSell) Swaps")
                                 .bold()
-                                .font(.system(size: deviceWidth/10))
+                                .font(.system(size: deviceWidth/12))
                                 .fixedSize()
-                                .customTextStroke(width: 2.4)
+                                .customTextStroke(width: 2.1)
                                 .padding(.horizontal, 9)
                             Text("↔️")
                                 .bold()
