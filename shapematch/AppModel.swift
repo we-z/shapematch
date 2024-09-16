@@ -388,6 +388,7 @@ class AppModel: ObservableObject {
             }
             
         }
+        swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
         persistData()
     }
     

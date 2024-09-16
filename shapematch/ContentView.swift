@@ -70,11 +70,11 @@ struct ContentView: View {
                     
                     
                     Button {
-                        appModel.resetLevel()
+                        appModel.setupLevel()
                     } label: {
                         HStack{
                             Spacer()
-                            Text("🔄")
+                            Text("🔀")
                                 .customTextStroke(width: 1.2)
                                 .font(.system(size: deviceWidth/15))
                             Spacer()

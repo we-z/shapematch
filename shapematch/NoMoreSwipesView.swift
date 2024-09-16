@@ -11,8 +11,8 @@ import AVFoundation
 struct NoMoreSwipesView: View {
     
     @ObservedObject private var appModel = AppModel.sharedAppModel
-    @State var buySwapsButtonOffset = deviceWidth/3
-    @State var resetButtonOffset = -(deviceWidth/3)
+    @State var buySwapsButtonOffset = deviceWidth/2
+    @State var resetButtonOffset = -(deviceWidth/2)
     @State var pulseText = true
     @State var textScale: CGFloat = 3
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
@@ -67,12 +67,14 @@ struct NoMoreSwipesView: View {
                         resetGame()
                         impactHeavy.impactOccurred()
                     } label: {
-                        Text("❌")
-                            .font(.system(size: deviceWidth/9))
-                            .customTextStroke()
+                        Text("🔄")
+                            .font(.system(size: deviceWidth/6))
+                            .customTextStroke(width: 2)
                             .padding([.trailing], 9)
+                            .offset(y: resetButtonOffset)
                     }
                 }
+                .buttonStyle(.roundedAndShadow6)
                 Spacer()
                 Button {
                     if appModel.swapsToSell > userPersistedData.gemBalance {
@@ -88,24 +90,24 @@ struct NoMoreSwipesView: View {
                         Text("💎")
                             .bold()
                             .italic()
-                            .font(.system(size: deviceWidth/15))
+                            .font(.system(size: deviceWidth/12))
                             .fixedSize()
                             .scaleEffect(1.5)
-                            .customTextStroke(width: 1.8)
+                            .customTextStroke(width: 2.4)
                         
                         Text("+ \(appModel.swapsToSell) Swaps")
                             .bold()
-                            .font(.system(size: deviceWidth/12))
+                            .font(.system(size: deviceWidth/9))
                             .fixedSize()
-                            .customTextStroke(width: 1.8)
+                            .customTextStroke(width: 2.4)
                             .padding(.horizontal, 9)
                         Text("↔️")
                             .bold()
                             .italic()
-                            .font(.system(size: deviceWidth/15))
+                            .font(.system(size: deviceWidth/12))
                             .fixedSize()
                             .scaleEffect(1.2)
-                            .customTextStroke(width: 1.2)
+                            .customTextStroke(width: 2.4)
                         Spacer()
                     }
                     .padding()
@@ -113,9 +115,10 @@ struct NoMoreSwipesView: View {
                     .cornerRadius(21)
                     .overlay{
                         RoundedRectangle(cornerRadius: 21)
-                            .stroke(Color.black, lineWidth: 4)
+                            .stroke(Color.black, lineWidth: 5)
                             .padding(1)
                     }
+                    .padding(.bottom)
                     .gesture(
                         DragGesture(minimumDistance: 1, coordinateSpace: .local)
                             .onEnded { value in
@@ -142,7 +145,7 @@ struct NoMoreSwipesView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 9.0, initialVelocity: 0.0)) {
                     buySwapsButtonOffset = 0
-                    resetButtonOffset = -(deviceWidth/30)
+                    resetButtonOffset = 0
                 }
             }
             DispatchQueue.main.async {
