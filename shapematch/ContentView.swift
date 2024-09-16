@@ -11,6 +11,7 @@ struct ContentView: View {
     @StateObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @ObservedObject var notificationManager = NotificationManager()
+    @State private var showAlert = false
     @State var firstChange = false
     @State var playingShapeScale = 1.0
     @State var tappedRow = 0
@@ -66,15 +67,13 @@ struct ContentView: View {
                         .padding(3)
                     }
                     .buttonStyle(.roundedAndShadow6)
-                    
-                    
-                    
+                                        
                     Button {
-                        appModel.setupLevel()
+                        appModel.resetLevel()
                     } label: {
                         HStack{
                             Spacer()
-                            Text("🔀")
+                            Text("🔄")
                                 .customTextStroke(width: 1.2)
                                 .font(.system(size: deviceWidth/15))
                             Spacer()
@@ -93,6 +92,17 @@ struct ContentView: View {
                         .padding(3)
                     }
                     .buttonStyle(.roundedAndShadow6)
+                    .simultaneousGesture(
+                        LongPressGesture(minimumDuration: 1.0) // Customize the duration (1 second here)
+                            .onEnded { _ in
+                                print("Long pressed!") // You can call a function here or trigger any action
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//                                    showAlert = true
+                                    impactHeavy.impactOccurred()
+                                    appModel.setupLevel()
+                                }
+                            }
+                    )
                     
                     Button{
                         audioController.mute.toggle()
@@ -262,6 +272,11 @@ struct ContentView: View {
             DispatchQueue.main.async { [self] in
                 self.playingShapeScale = 1.0
             }
+        }
+        .alert("👾 Super Undo 👾", isPresented: $showAlert) {
+            Button("🔄 Reset 🔄", role: .destructive) {appModel.resetLevel()}
+            Button("🔀 Re-Shuffle 🔀", role: .destructive) {appModel.setupLevel()}
+            Button("Cancel", role: .cancel) {}
         }
     }
     
