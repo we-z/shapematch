@@ -148,7 +148,7 @@ class AppModel: ObservableObject {
             AudioServicesPlaySystemSound(1114)
             print("You win!")
         } else if swipesLeft <= 0 {
-            swapsToSell = calculateMinimumSwipes(from: grid, to: targetGrid)
+            swapsToSell = approximateMinimumSwipes(from: grid, to: targetGrid)
             AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
             showNoMoreSwipesView = true
             print("Level failed")
@@ -223,7 +223,7 @@ class AppModel: ObservableObject {
         }
         
         // the higher the first number is, the more likely we are to end up with an extra swap
-        return (totalCost + 1) * 523 / 1000 // (totalCost + 1) * 5 / 10
+        return (totalCost + 1) * 523 / 1000 // (totalCost + 1) / 2
     }
 
     func positions(of shapeType: ShapeType, in grid: [[ShapeType]]) -> [Position] {
@@ -352,13 +352,6 @@ class AppModel: ObservableObject {
         
         return targetGrid
     }
-
-    func calculateMinimumSwipes(from startGrid: [[ShapeType]], to targetGrid: [[ShapeType]]) -> Int {
-        return approximateMinimumSwipes(from: startGrid, to: targetGrid)
-    }
-
-
-
     
     func persistData() {
         // The grid now requires exactly `swapsNeeded` swaps to solve
@@ -386,7 +379,7 @@ class AppModel: ObservableObject {
             // optimize
             let generatedTargetGrid = generateTargetGrid(from: grid, with: swapsNeeded)
             
-            if swapsNeeded > calculateMinimumSwipes(from: grid, to: generatedTargetGrid) {
+            if swapsNeeded > approximateMinimumSwipes(from: grid, to: generatedTargetGrid) {
                 print("trying again")
                 
             } else {
