@@ -60,7 +60,7 @@ struct InstructionView: View {
             }
         }
         .onChange(of: appModel.showInstruction) { _ in
-            if userPersistedData.level <= 3 {
+            if userPersistedData.level < 3 {
                 DispatchQueue.main.async {
                     cardOffset = -(deviceWidth/2)
                     withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 15.0, initialVelocity: 0.0)) {
