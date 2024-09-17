@@ -100,7 +100,7 @@ struct ContentView: View {
 //                                    showAlert = true
                                     impactHeavy.impactOccurred()
                                     appModel.swapsMade = []
-                                    appModel.setupLevel()
+                                    appModel.resetLevel()
                                 }
                             }
                     )
