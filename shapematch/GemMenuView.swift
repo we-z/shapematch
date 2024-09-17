@@ -45,7 +45,7 @@ struct GemMenuView: View {
                 .gesture(
                     DragGesture()
                         .onEnded { gesture in
-                            if gesture.translation.height > deviceWidth/6 {
+                            if gesture.translation.height > 0 {
                                 DispatchQueue.main.async { [self] in
                                     withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                                         cardOffset = deviceWidth * 2
