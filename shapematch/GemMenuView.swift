@@ -44,22 +44,14 @@ struct GemMenuView: View {
                 }
                 .gesture(
                     DragGesture()
-                        .onChanged { _ in
-                        }
                         .onEnded { gesture in
-                            if gesture.translation.height > deviceWidth/4 {
+                            if gesture.translation.height > deviceWidth/6 {
                                 DispatchQueue.main.async { [self] in
                                     withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                                         cardOffset = deviceWidth * 2
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
                                             appModel.showGemMenu = false
                                         }
-                                    }
-                                }
-                            } else {
-                                DispatchQueue.main.async { [self] in
-                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                        cardOffset = 0
                                     }
                                 }
                             }
@@ -233,10 +225,10 @@ struct GemMenuView: View {
             .gesture(
                 DragGesture()
                     .onChanged { gesture in
-                            cardOffset = gesture.translation.height
+                        cardOffset = gesture.translation.height
                     }
                     .onEnded { gesture in
-                        if gesture.translation.height > deviceWidth/4 {
+                        if gesture.translation.height > 0 {
                             DispatchQueue.main.async { [self] in
                                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                                     cardOffset = deviceWidth * 2
