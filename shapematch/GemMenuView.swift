@@ -211,9 +211,9 @@ struct GemMenuView: View {
                         Button {
 
                         } label: {
-                            Text("💎 5  Share 📲")
+                            Text("💎 5 Free! Share 📲")
                                 .bold()
-                                .font(.system(size: deviceWidth/12))
+                                .font(.system(size: deviceWidth/15))
                                 .customTextStroke(width:1.8)
                                 .padding(.top, 3)
                         }
