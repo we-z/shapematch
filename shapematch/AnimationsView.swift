@@ -11,7 +11,7 @@ import Vortex
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        HandSwipeView()
+        CelebrateGems()
     }
 }
 
@@ -19,6 +19,96 @@ struct AnimationsView: View {
     AnimationsView()
 }
 
+
+struct CelebrateGems: View {
+    @ObservedObject private var appModel = AppModel.sharedAppModel
+    @State var bannerOffset = -(deviceWidth/2)
+    
+    // State to hold the current message
+    @State private var showMessage = false
+    @State private var animateMessage = false
+
+    var body: some View {
+        ZStack{
+            if animateMessage {
+                Color.blue.opacity(0.3)
+                    .ignoresSafeArea()
+            }
+            VStack{
+                VortexViewReader { proxy in
+                    VortexView(.confetti) {
+                        Rectangle()
+                            .fill(.white)
+                            .frame(width: 30, height: 30)
+                            .tag("square")
+                        
+                        Circle()
+                            .fill(.white)
+                            .frame(width: 30)
+                            .tag("circle")
+                    }
+                    .onChange(of: appModel.boughtGems) { newValue in
+                        DispatchQueue.main.async {
+                            showMessage = true
+                            hapticManager.notification(type: .error)
+                            withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 200.0, damping: 13.0, initialVelocity: -10.0)) {
+                                animateMessage = true
+                                bannerOffset = 0
+                            }
+                            
+                            // Ensure particles are emitting before the burst
+                            proxy.particleSystem?.isEmitting = true
+                            proxy.burst()
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
+                                hapticManager.notification(type: .error)
+                                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                                    animateMessage = false
+                                    bannerOffset = -(deviceWidth/2)
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
+                                    showMessage = false
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if showMessage {
+                Text("💎 +\(appModel.amountBought) Gems!")
+                    .bold()
+                    .italic()
+                    .font(.system(size: deviceWidth / 9))
+                    .customTextStroke(width: 2.4)
+                    .rotationEffect(.degrees(animateMessage ? 0 : -180))
+                    .scaleEffect(animateMessage ? 1 : 0.1)
+                    .offset(y: animateMessage ? 0 : -(deviceHeight/2))
+            }
+            VStack {
+                HStack {
+                    Spacer()
+                    Text("💸 Success! 💸")
+                        .bold()
+                        .font(.system(size: deviceWidth/9))
+                        .customTextStroke(width: 2.4)
+                    Spacer()
+                }
+                .padding(12)
+                .background(.blue)
+                .cornerRadius(21)
+                .overlay{
+                    RoundedRectangle(cornerRadius: 21)
+                        .stroke(Color.black, lineWidth: 6)
+                        .padding(1)
+                }
+                .padding(.horizontal)
+                .offset(y: bannerOffset)
+                Spacer()
+            }
+        }
+        .allowsHitTesting(false)
+    }
+}
 
 struct CelebrationEffect: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel

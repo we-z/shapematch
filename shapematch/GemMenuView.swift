@@ -23,6 +23,8 @@ struct GemMenuView: View {
         do {
             if (try await storeKit.purchase(packID: pack.packID)) != nil{
                 DispatchQueue.main.async {
+                    appModel.amountBought = pack.amount
+                    appModel.boughtGems.toggle()
                     userPersistedData.incrementBalance(amount: pack.amount)
                 }
             }
