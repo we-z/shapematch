@@ -37,7 +37,7 @@ struct GemMenuView: View {
     
     var body: some View {
         ZStack {
-            Color.gray.opacity(0.6)
+            Color.blue.opacity(0.3)
                 .ignoresSafeArea()
                 .onTapGesture {
                     appModel.showGemMenu = false
@@ -270,7 +270,7 @@ struct HangTight: View {
             Spacer()
         }
         .frame(height: deviceWidth/1.8)
-        .background(Color.green)
+        .background(Color.blue)
         .cornerRadius(30)
         .overlay{
             RoundedRectangle(cornerRadius: 30)
