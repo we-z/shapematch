@@ -32,6 +32,7 @@
 		76ADAF042C76A92C006B2844 /* OverlaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ADAF032C76A92B006B2844 /* OverlaysView.swift */; };
 		76B774072C968EF70053B72B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B774062C968EF70053B72B /* Extensions.swift */; };
 		76B774092C96B6F50053B72B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B774082C96B6F50053B72B /* NotificationManager.swift */; };
+		76B7740B2C99EE950053B72B /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B7740A2C99EE950053B72B /* QRView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		76ADAF032C76A92B006B2844 /* OverlaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlaysView.swift; sourceTree = "<group>"; };
 		76B774062C968EF70053B72B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		76B774082C96B6F50053B72B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		76B7740A2C99EE950053B72B /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				76B774082C96B6F50053B72B /* NotificationManager.swift */,
 				7639F9892C71460D00E2B371 /* Tempview.swift */,
 				7677131D2C86DCF800C9E2C9 /* iconview.swift */,
+				76B7740A2C99EE950053B72B /* QRView.swift */,
 				760776142C7A18C7003E2AD2 /* UserPersistedData.swift */,
 			);
 			path = shapematch;
@@ -292,6 +295,7 @@
 				761A44462C7841A30017B53B /* GemMenuView.swift in Sources */,
 				766EF08F2C7EB1C500B2C380 /* InstructionView.swift in Sources */,
 				7677131E2C86DCF800C9E2C9 /* iconview.swift in Sources */,
+				76B7740B2C99EE950053B72B /* QRView.swift in Sources */,
 				7639F9CE2C759A2E00E2B371 /* AudioManager.swift in Sources */,
 				7639F9612C713D8100E2B371 /* ContentView.swift in Sources */,
 				76B774092C96B6F50053B72B /* NotificationManager.swift in Sources */,
