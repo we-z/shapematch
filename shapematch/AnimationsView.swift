@@ -60,7 +60,7 @@ struct CelebrateGems: View {
                             proxy.particleSystem?.isEmitting = true
                             proxy.burst()
                             
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
                                 hapticManager.notification(type: .error)
                                 withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                                     animateMessage = false

@@ -25,6 +25,7 @@ struct GemMenuView: View {
                 DispatchQueue.main.async {
                     appModel.amountBought = pack.amount
                     appModel.boughtGems.toggle()
+                    appModel.showGemMenu = false
                     userPersistedData.incrementBalance(amount: pack.amount)
                 }
             }

@@ -13,19 +13,20 @@ struct OverlaysView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     var body: some View {
         ZStack {
+            if userPersistedData.level == 1 {
+                HandSwipeView()
+            }
             InstructionView()
                 .padding(.top, idiom == .pad ? 30 : 0)
             NewGoalView()
                 .padding(.top, idiom == .pad ? 30 : 0)
             CelebrationEffect()
-            if userPersistedData.level == 1 {
-                HandSwipeView()
-            }
             if appModel.showGemMenu {
                 GemMenuView()
             } else if appModel.showNoMoreSwipesView {
                 NoMoreSwipesView()
             }
+            CelebrateGems()
         }
     }
 }
