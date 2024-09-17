@@ -242,7 +242,7 @@ class AppModel: ObservableObject {
         }
         
         // the higher the first number is, the more likely we are to end up with an extra swap
-        return (totalCost + 1) * 523 / 1000 // (totalCost + 1) / 2
+        return (totalCost + 1) * 5100 / 10000 // (totalCost + 1) / 2
     }
 
     func positions(of shapeType: ShapeType, in grid: [[ShapeType]]) -> [Position] {

@@ -26,32 +26,36 @@ struct NoMoreSwipesView: View {
         ZStack {
             Color.gray.opacity(0.7)
                 .ignoresSafeArea()
-                .gesture(
-                    DragGesture(minimumDistance: 1, coordinateSpace: .local)
-                        .onEnded { value in
-                            if value.translation.height < 0 {
-                                // Swipe up detected
-                                DispatchQueue.main.async { [self] in
-                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                        buttonsnOffset = 0
-                                    }
-                                }
-                            }
-                            if value.translation.height > 0 {
-                                // Swipe down detected
-                                DispatchQueue.main.async { [self] in
-                                    if bannerOffset == 0 {
-                                        withAnimation(.linear) {
-                                            buttonsnOffset = deviceWidth
-                                        }
-                                    }
-                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                        bannerOffset = 0
-                                    }
-                                }
-                            }
-                        }
-                )
+                .onTapGesture {
+                    resetGame()
+                    impactHeavy.impactOccurred()
+                }
+//                .gesture(
+//                    DragGesture(minimumDistance: 1, coordinateSpace: .local)
+//                        .onEnded { value in
+//                            if value.translation.height < 0 {
+//                                // Swipe up detected
+//                                DispatchQueue.main.async { [self] in
+//                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+//                                        buttonsnOffset = 0
+//                                    }
+//                                }
+//                            }
+//                            if value.translation.height > 0 {
+//                                // Swipe down detected
+//                                DispatchQueue.main.async { [self] in
+//                                    if bannerOffset == 0 {
+//                                        withAnimation(.linear) {
+//                                            buttonsnOffset = deviceWidth
+//                                        }
+//                                    }
+//                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+//                                        bannerOffset = 0
+//                                    }
+//                                }
+//                            }
+//                        }
+//                )
             VStack{
                 HStack {
                     Spacer()

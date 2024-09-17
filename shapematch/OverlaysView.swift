@@ -9,7 +9,7 @@ import SwiftUI
 import AVFoundation
 
 struct OverlaysView: View {
-    @ObservedObject private var appModel = AppModel.sharedAppModel
+    @ObservedObject var appModel = AppModel.sharedAppModel
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     var body: some View {
         ZStack {
@@ -18,7 +18,7 @@ struct OverlaysView: View {
             NewGoalView()
                 .padding(.top, idiom == .pad ? 30 : 0)
             CelebrationEffect()
-            if !userPersistedData.firstGamePlayed{
+            if userPersistedData.level == 1 {
                 HandSwipeView()
             }
             if appModel.showGemMenu {
