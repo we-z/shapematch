@@ -95,7 +95,6 @@ class AppModel: ObservableObject {
     }
     
     func swapShapes(start: (row: Int, col: Int), end: (row: Int, col: Int), offset: CGSize) {
-        AudioServicesPlaySystemSound(1104)
 //        AudioServicesPlaySystemSound(1018)
         DispatchQueue.main.async { [self] in
             self.swaping = true
@@ -117,7 +116,7 @@ class AppModel: ObservableObject {
             hapticManager.notification(type: .error)
             return
         }
-        
+        AudioServicesPlaySystemSound(1104)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
             self.swipesLeft -= 1
             swapsMade.append((Position(row: start.row, col: start.col), Position(row: end.row, col: end.col)))
