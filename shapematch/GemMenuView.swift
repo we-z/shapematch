@@ -37,7 +37,7 @@ struct GemMenuView: View {
     
     var body: some View {
         ZStack {
-            Color.blue.opacity(0.3)
+            Color.blue.opacity(0.15)
                 .ignoresSafeArea()
                 .onTapGesture {
                     appModel.showGemMenu = false
