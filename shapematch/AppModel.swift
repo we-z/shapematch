@@ -167,6 +167,7 @@ class AppModel: ObservableObject {
             AudioServicesPlaySystemSound(1114)
             print("You win!")
         } else if swipesLeft <= 0 {
+            AudioServicesPlaySystemSound (1053)
             swapsToSell = approximateMinimumSwipes(from: grid, to: targetGrid)
             AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
             showNoMoreSwipesView = true

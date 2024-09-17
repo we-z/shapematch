@@ -22,6 +22,15 @@ struct NoMoreSwipesView: View {
         appModel.showInstruction.toggle()
     }
     
+    func animateAwayButtonsAndBanner() {
+        DispatchQueue.main.async { [self] in
+            withAnimation(.linear(duration: 0.3)) {
+                buttonsnOffset = deviceWidth
+                bannerOffset = -(deviceWidth/2)
+            }
+        }
+    }
+    
     var body: some View {
         ZStack {
             Color.gray.opacity(0.7)
@@ -87,8 +96,11 @@ struct NoMoreSwipesView: View {
                 VStack{
                     HStack{
                         Button {
-                            resetGame()
-                            impactHeavy.impactOccurred()
+                            animateAwayButtonsAndBanner()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                appModel.showNoMoreSwipesView = false
+                                appModel.setupLevel()
+                            }
                         } label: {
                             HStack {
                                 Spacer()
@@ -111,8 +123,10 @@ struct NoMoreSwipesView: View {
                             .padding(3)
                         }
                         Button {
-                            resetGame()
-                            impactHeavy.impactOccurred()
+                            animateAwayButtonsAndBanner()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                resetGame()
+                            }
                         } label: {
                             HStack{
                                 Spacer()
@@ -138,12 +152,15 @@ struct NoMoreSwipesView: View {
                     .buttonStyle(.roundedAndShadow6)
                     .padding(.bottom, 6)
                     Button {
-                        if appModel.swapsToSell > userPersistedData.gemBalance {
-                            appModel.showGemMenu = true
-                        } else {
-                            userPersistedData.decrementBalance(amount: appModel.swapsToSell)
-                            appModel.swipesLeft += appModel.swapsToSell
-                            appModel.showNoMoreSwipesView = false
+                        animateAwayButtonsAndBanner()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                            if appModel.swapsToSell > userPersistedData.gemBalance {
+                                appModel.showGemMenu = true
+                            } else {
+                                userPersistedData.decrementBalance(amount: appModel.swapsToSell)
+                                appModel.swipesLeft += appModel.swapsToSell
+                                appModel.showNoMoreSwipesView = false
+                            }
                         }
                     } label: {
                         HStack{
@@ -204,7 +221,6 @@ struct NoMoreSwipesView: View {
             .background(.clear)
         }
         .onAppear {
-            AudioServicesPlaySystemSound (1053)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                     buttonsnOffset = 0
