@@ -98,7 +98,9 @@ struct ContentView: View {
                                 print("Long pressed!") // You can call a function here or trigger any action
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
 //                                    showAlert = true
-                                    impactHeavy.impactOccurred()
+                                    if !appModel.swapsMade.isEmpty {
+                                        impactHeavy.impactOccurred()
+                                    }
                                     appModel.swapsMade = []
                                     appModel.resetLevel()
                                 }
