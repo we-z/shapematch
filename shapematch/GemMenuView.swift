@@ -42,27 +42,42 @@ struct GemMenuView: View {
                 .onTapGesture {
                     appModel.showGemMenu = false
                 }
+                .gesture(
+                    DragGesture()
+                        .onChanged { _ in
+                        }
+                        .onEnded { gesture in
+                            if gesture.translation.height > deviceWidth/4 {
+                                DispatchQueue.main.async { [self] in
+                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                        cardOffset = deviceWidth * 2
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                            appModel.showGemMenu = false
+                                        }
+                                    }
+                                }
+                            } else {
+                                DispatchQueue.main.async { [self] in
+                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                        cardOffset = 0
+                                    }
+                                }
+                            }
+                        }
+                )
             VStack {
                 Spacer()
                 VStack {
-                    HStack{
-                        Spacer()
-                        Button {
-                            impactHeavy.impactOccurred()
-                            appModel.showGemMenu = false
-                        } label: {
-                            Text("❌")
-                                .font(.system(size: deviceWidth/15))
-                                .customTextStroke()
-                                .padding([.trailing, .top], 21)
-                        }
-                    }
+                    Capsule()
+                        .foregroundColor(.blue)
+                        .frame(width: 45, height: 9)
+                        .padding(.top, 15)
+                        .customTextStroke()
                     Text("💎 Gems 💎")
                         .bold()
                         .font(.system(size: deviceWidth/9))
                         .customTextStroke()
                     
-                    //            Spacer()
                     VStack(spacing: 21) {
                         Button {
                             isProcessingPurchase = true
@@ -215,6 +230,31 @@ struct GemMenuView: View {
                 .offset(y: cardOffset)
                 
             }
+            .gesture(
+                DragGesture()
+                    .onChanged { gesture in
+                            cardOffset = gesture.translation.height
+                    }
+                    .onEnded { gesture in
+                        if gesture.translation.height > deviceWidth/4 {
+                            DispatchQueue.main.async { [self] in
+                                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                    cardOffset = deviceWidth * 2
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                        appModel.showGemMenu = false
+                                    }
+                                }
+                            }
+                        } else {
+                            DispatchQueue.main.async { [self] in
+                                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                    cardOffset = 0
+                                }
+                            }
+                        }
+                    }
+            )
+            
             if isProcessingPurchase {
                 ProgressView()
                 .scaleEffect(3)

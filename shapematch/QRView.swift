@@ -14,6 +14,7 @@ struct QRView: View {
             VStack {
                 ZStack{
                     Rectangle()
+                        .foregroundColor(.black)
                         .frame(width: 315, height: 315)
                         .cornerRadius(54)
                     Image("qrcode")
@@ -26,7 +27,7 @@ struct QRView: View {
                     .bold()
                     .customTextStroke(width: 2.7)
             }
-            .scaleEffect(0.6)
+            .scaleEffect(0.75)
         }
         .ignoresSafeArea()
     }
