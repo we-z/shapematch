@@ -208,6 +208,15 @@ struct GemMenuView: View {
                             .padding(.horizontal, 30)
                         }
                         .buttonStyle(.roundedAndShadow6)
+                        Button {
+
+                        } label: {
+                            Text("💎 5  Share 📲")
+                                .bold()
+                                .font(.system(size: deviceWidth/12))
+                                .customTextStroke(width:1.8)
+                                .padding(.top, 3)
+                        }
                     }
                     .padding(.bottom, 30)
                 }
