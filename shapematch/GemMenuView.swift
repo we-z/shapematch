@@ -215,19 +215,17 @@ struct GemMenuView: View {
                             .padding(.horizontal, 30)
                         }
                         .buttonStyle(.roundedAndShadow6)
-                        if !userPersistedData.hasShared {
                             Button {
                                 impactHeavy.impactOccurred()
                                 self.sheetPresented = true
                             } label: {
-                                Text("💎 5 Free! Share 📲")
+                                Text("Share! 📲")
                                     .italic()
                                     .bold()
-                                    .font(.system(size: deviceWidth/15))
-                                    .customTextStroke(width:1.8)
+                                    .font(.system(size: deviceWidth/18))
+                                    .customTextStroke(width:1.5)
                                     .padding(.top, 3)
                             }
-                        }
                     }
                     .padding(.bottom, 30)
                 }
@@ -288,7 +286,7 @@ struct GemMenuView: View {
         }
         .sheet(isPresented: $sheetPresented, content: {
                 
-            if let data = render(), let url = URL(string: "https://apple.co/48036v5") {
+            if let data = render(), let url = URL(string: "https://apple.co/4ea9see") {
                 ShareView(image: data, url: url)
                     .ignoresSafeArea()
             }
