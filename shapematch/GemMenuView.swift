@@ -214,15 +214,17 @@ struct GemMenuView: View {
                             .padding(.horizontal, 30)
                         }
                         .buttonStyle(.roundedAndShadow6)
-                        Button {
-                            self.sheetPresented = true
-                        } label: {
-                            Text("💎 5 Free! Share 📲")
-                                .italic()
-                                .bold()
-                                .font(.system(size: deviceWidth/15))
-                                .customTextStroke(width:1.8)
-                                .padding(.top, 3)
+                        if !userPersistedData.hasShared {
+                            Button {
+                                self.sheetPresented = true
+                            } label: {
+                                Text("💎 5 Free! Share 📲")
+                                    .italic()
+                                    .bold()
+                                    .font(.system(size: deviceWidth/15))
+                                    .customTextStroke(width:1.8)
+                                    .padding(.top, 3)
+                            }
                         }
                     }
                     .padding(.bottom, 30)
