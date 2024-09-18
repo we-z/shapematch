@@ -181,46 +181,47 @@ class AppModel: ObservableObject {
         switch userPersistedData.level {
             case 1:
                 swapsNeeded = 1
-            case 2...3:
+            case 2:
                 swapsNeeded = 2
-            case 4...9:
+            case 3...4:
                 swapsNeeded = 3
-            case 10...20:
+            case 5...7:
                 swapsNeeded = 4
-            case 21...30:
+            case 8...12:
                 swapsNeeded = 5
-            case 31...45:
+            case 13...18:
                 swapsNeeded = 6
-            case 46...75:
+            case 19...25:
                 swapsNeeded = 7
-            case 76...90:
+            case 26...35:
                 swapsNeeded = 8
-            case 91...99:
+            case 36...50:
                 swapsNeeded = 9
-            case 100...228:  // 128 levels
+            case 51...70:
                 swapsNeeded = 10
-            case 229...356:  // 128 levels
+            case 71...100:
                 swapsNeeded = 11
-            case 357...484:  // 128 levels
+            case 101...150:
                 swapsNeeded = 12
-            case 485...612:  // 128 levels
+            case 151...200:
                 swapsNeeded = 13
-            case 613...740:  // 128 levels
+            case 201...300:
                 swapsNeeded = 14
-            case 741...868:  // 128 levels
+            case 301...500:
                 swapsNeeded = 15
-            case 869...999:  // 131 levels (final slightly larger range to reach 999)
+            case 501...750:
                 swapsNeeded = 16
-            default:
+            case 751...999:
                 swapsNeeded = 17
+            default:
+                swapsNeeded = 18
         }
 
         
-        
         switch userPersistedData.level {
-        case 1...99:
+        case 1...50:
             shapes = [.circle, .square, .triangle]
-        case 100...999:
+        case 51...999:
             shapes =  [.circle, .square, .triangle, .star]
         default: 
             shapes =  [.circle, .square, .triangle, .star, .hexagon]
