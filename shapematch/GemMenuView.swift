@@ -216,6 +216,7 @@ struct GemMenuView: View {
                         .buttonStyle(.roundedAndShadow6)
                         if !userPersistedData.hasShared {
                             Button {
+                                impactHeavy.impactOccurred()
                                 self.sheetPresented = true
                             } label: {
                                 Text("💎 5 Free! Share 📲")
