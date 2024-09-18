@@ -249,7 +249,7 @@ struct CustomTextStrokeModifier: ViewModifier {
                     .mask {
                         mask(content: content)
                     }
-                    .padding(-10)
+                    .padding(-30)
                     .allowsHitTesting(false)
             )
             .foregroundColor(.white)

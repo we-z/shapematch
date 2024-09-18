@@ -122,7 +122,7 @@ struct NoMoreSwipesView: View {
                         } label: {
                             HStack{
                                 Spacer()
-                                Text("🔄")
+                                Text("🔁")
                                     .font(.system(size: deviceWidth/12))
                                     .customTextStroke(width: 2)
                                     .padding([.trailing], 9)
@@ -157,27 +157,12 @@ struct NoMoreSwipesView: View {
                     } label: {
                         HStack{
                             Spacer()
-                            Text("💎")
-                                .bold()
-                                .italic()
-                                .font(.system(size: deviceWidth/13))
-                                .fixedSize()
-                                .scaleEffect(1.5)
-                                .customTextStroke(width: 2.4)
-                            
-                            Text("+ \(appModel.swapsToSell) Swaps")
+                            Text("💎 + \(appModel.swapsToSell) Swaps ↔️")
                                 .bold()
                                 .font(.system(size: deviceWidth/12))
                                 .fixedSize()
                                 .customTextStroke(width: 2.1)
                                 .padding(.horizontal, 9)
-                            Text("↔️")
-                                .bold()
-                                .italic()
-                                .font(.system(size: deviceWidth/13))
-                                .fixedSize()
-                                .scaleEffect(1.2)
-                                .customTextStroke(width: 2.4)
                             Spacer()
                         }
                         .padding()
