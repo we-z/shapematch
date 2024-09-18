@@ -176,7 +176,7 @@ struct GemMenuView: View {
                             }
                         } label: {
                             HStack{
-                                Text("🐳")
+                                Text("🦈")
                                     .bold()
                                     .italic()
                                     .font(.system(size: deviceWidth/15))
