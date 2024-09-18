@@ -179,17 +179,9 @@ class AppModel: ObservableObject {
     func determineLevelSettings() {
         // Determine the number of swaps needed based on the level
         switch userPersistedData.level {
-            case 1:
-                swapsNeeded = 1
-            case 2:
-                swapsNeeded = 2
-            case 3...4:
-                swapsNeeded = 3
-            case 5...7:
-                swapsNeeded = 4
-            case 8...12:
-                swapsNeeded = 5
-            case 13...18:
+        case 1...6:
+            swapsNeeded = userPersistedData.level
+            case 7...18:
                 swapsNeeded = 6
             case 19...25:
                 swapsNeeded = 7

@@ -152,7 +152,7 @@ struct ContentView: View {
             }
             .allowsHitTesting(!appModel.freezeGame)
             .scaleEffect(idiom == .pad ? 0.9 : 1)
-            OverlaysView()
+//            OverlaysView()
         }
         .onAppear {
             appModel.initialGrid = appModel.grid
