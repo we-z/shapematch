@@ -11,7 +11,7 @@ import Vortex
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        CelebrateGems()
+        HandSwipeView()
     }
 }
 
@@ -241,11 +241,11 @@ struct HandSwipeView: View {
             VStack{
                 Spacer()
                 Circle()
-                    .stroke(Color.black, lineWidth: 9.0 - -(offsetAmount/30))
+                    .stroke(Color.black, lineWidth: deviceWidth/45 - -(offsetAmount/30))
                     .frame(width: (deviceWidth/5))
-                    .opacity(rotateHand ? 0.5 : 0)
+                    .opacity(rotateHand ? 0.6 : 0)
                     .padding(21)
-                    .scaleEffect(1 - (offsetAmount/60))
+                    .scaleEffect(1 - (offsetAmount/(deviceWidth*0.15)))
             }
             VStack{
                 Spacer()
