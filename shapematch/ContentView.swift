@@ -11,7 +11,6 @@ struct ContentView: View {
     @StateObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @ObservedObject var notificationManager = NotificationManager()
-    @State private var showAlert = false
     @State var firstChange = false
     @State var playingShapeScale = 1.0
     @State var tappedRow = 0
@@ -19,11 +18,6 @@ struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.colorScheme) var colorScheme
     
-    let rect = CGRect(x: 0, y: 0, width: 300, height: 100)
-    
-    init() {
-        print("targetGrid count: \(appModel.targetGrid.count), grid count: \(appModel.grid.count)")
-    }
     var body: some View {
         ZStack{
             Color.white
@@ -152,7 +146,7 @@ struct ContentView: View {
             }
             .allowsHitTesting(!appModel.freezeGame)
             .scaleEffect(idiom == .pad ? 0.9 : 1)
-//            OverlaysView()
+            OverlaysView()
         }
         .onAppear {
             appModel.initialGrid = appModel.grid
@@ -170,17 +164,6 @@ struct ContentView: View {
                 self.playingShapeScale = 1.0
             }
         }
-        .alert("👾 Super Undo 👾", isPresented: $showAlert) {
-            Button("🔄 Reset 🔄", role: .destructive) {appModel.resetLevel()}
-            Button("🔀 Re-Shuffle 🔀", role: .destructive) {appModel.setupLevel()}
-            Button("Cancel", role: .cancel) {}
-        }
-    }
-    
-    func HoleShapeMask(in rect: CGRect) -> Path {
-        var shape = Rectangle().path(in: rect)
-        shape.addPath(Circle().path(in: rect))
-        return shape
     }
     
 }
