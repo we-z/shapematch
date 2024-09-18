@@ -20,7 +20,7 @@ class ActivityItemProvider: NSObject, UIActivityItemSource {
     }
 
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        return image
+        return url
     }
     
     func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
@@ -33,14 +33,14 @@ class ActivityItemProvider: NSObject, UIActivityItemSource {
         metadata.originalURL = url
         metadata.url = url
         metadata.title = "Shape Swap!"
-        metadata.imageProvider = NSItemProvider(object: image)
+        metadata.imageProvider = NSItemProvider(object: image)  // Use UIImage
         metadata.iconProvider = NSItemProvider(object: appIcon!)
         return metadata
     }
 }
 
 struct ShareView: UIViewControllerRepresentable {
-    let image: UIImage
+    let image: UIImage  // Use UIImage here
     let url: URL
     @ObservedObject var userPersistedData = UserPersistedData()
 

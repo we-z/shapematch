@@ -13,6 +13,7 @@ struct GemMenuView: View {
     @StateObject var storeKit = StoreKitManager()
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @State var cardOffset: CGFloat = deviceWidth * 2
+    @State private var sheetPresented : Bool = false
     
     @State var GemPack10: GemPack = GemPack(amount: 10, cost: "1.99", packID: "GemPack10")
     @State var GemPack100: GemPack = GemPack(amount: 100, cost: "14.99", packID: "GemPack100")
@@ -35,9 +36,14 @@ struct GemMenuView: View {
         isProcessingPurchase = false
     }
     
+    @MainActor
+    private func render() -> UIImage? {
+        return UIImage(named: "linkcard")  // Make sure "linkcard" exists in assets
+    }
+    
     var body: some View {
         ZStack {
-            Color.blue.opacity(0.15)
+            Color.gray.opacity(0.5)
                 .ignoresSafeArea()
                 .onTapGesture {
                     appModel.showGemMenu = false
@@ -209,7 +215,7 @@ struct GemMenuView: View {
                         }
                         .buttonStyle(.roundedAndShadow6)
                         Button {
-                            
+                            self.sheetPresented = true
                         } label: {
                             Text("💎 5 Free! Share 📲")
                                 .italic()
@@ -275,6 +281,14 @@ struct GemMenuView: View {
                 }
             }
         }
+        .sheet(isPresented: $sheetPresented, content: {
+                
+            if let data = render(), let url = URL(string: "https://apple.co/48036v5") {
+                ShareView(image: data, url: url)
+                    .ignoresSafeArea()
+            }
+            
+        })
     }
 }
 
