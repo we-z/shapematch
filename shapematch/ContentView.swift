@@ -228,7 +228,7 @@ struct ContentView: View {
                                         DragGesture(minimumDistance: 1)
                                             .onChanged { gesture in
                                                 if !firstChange {
-                                                    impactHeavy.impactOccurred()
+                                                    impactLight.impactOccurred()
                                                     tappedRow = row
                                                     tappedColumn = column
                                                     DispatchQueue.main.async { [self] in

@@ -122,7 +122,7 @@ class AppModel: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
             self.swipesLeft -= 1
             swapsMade.append((Position(row: start.row, col: start.col), Position(row: end.row, col: end.col)))
-            impactHeavy.impactOccurred()
+            impactLight.impactOccurred()
             checkWinCondition()
         }
     }
