@@ -17,18 +17,11 @@ struct OverlaysView: View {
                 HandSwipeView()
             }
             InstructionView()
-                .padding(idiom == .pad ? 30 : 0)
+                .padding(idiom == .pad ? 33 : 0)
                 .padding(.top, idiom == .pad ? 27 : 0)
             NewGoalView()
-                .padding(idiom == .pad ? 30 : 0)
+                .padding(idiom == .pad ? 33 : 0)
                 .padding(.top, idiom == .pad ? 27 : 0)
-            CelebrationEffect()
-            if appModel.showGemMenu {
-                GemMenuView()
-            } else if appModel.showNoMoreSwipesView {
-                NoMoreSwipesView()
-            }
-            CelebrateGems()
         }
     }
 }

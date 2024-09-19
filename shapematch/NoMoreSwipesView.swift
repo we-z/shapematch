@@ -181,8 +181,9 @@ struct NoMoreSwipesView: View {
                 .offset(y: buttonsnOffset)
                 
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 18)
             .background(.clear)
+            .scaleEffect(idiom == .pad ? 0.84 : 1)
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in

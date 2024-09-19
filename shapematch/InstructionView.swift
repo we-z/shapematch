@@ -60,7 +60,7 @@ struct InstructionView: View {
             }
         }
         .onChange(of: appModel.showInstruction) { _ in
-            if userPersistedData.level < 3 {
+            if userPersistedData.level < 2 {
                 DispatchQueue.main.async {
                     cardOffset = -(deviceWidth/2)
                     withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 15.0, initialVelocity: 0.0)) {
@@ -103,7 +103,7 @@ struct NewGoalView: View {
             .cornerRadius(15)
             .overlay{
                 RoundedRectangle(cornerRadius: 15)
-                    .stroke(Color.black, lineWidth: 6)
+                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
                     .padding(1)
             }
             .padding(.horizontal, 6)

@@ -93,6 +93,7 @@ struct GemMenuView: View {
                                     .scaleEffect(1.5)
                                     .customTextStroke()
                                     .padding(12)
+                                    .padding(.horizontal, idiom == .pad ? 30 : 0)
                                 Text("10")
                                     .bold()
                                     .font(.system(size: deviceWidth/12))
@@ -138,6 +139,7 @@ struct GemMenuView: View {
                                     .scaleEffect(1.5)
                                     .customTextStroke()
                                     .padding(12)
+                                    .padding(.horizontal, idiom == .pad ? 30 : 0)
                                 Text("100")
                                     .bold()
                                     .font(.system(size: deviceWidth/12))
@@ -184,6 +186,7 @@ struct GemMenuView: View {
                                     .scaleEffect(1.5)
                                     .customTextStroke()
                                     .padding(12)
+                                    .padding(.horizontal, idiom == .pad ? 30 : 0)
                                 Text("1000")
                                     .bold()
                                     .font(.system(size: deviceWidth/12))
@@ -240,6 +243,7 @@ struct GemMenuView: View {
                 .offset(y: cardOffset)
                 
             }
+            .padding(.bottom, idiom == .pad ? 90 : 0)
             .gesture(
                 DragGesture()
                     .onChanged { gesture in
