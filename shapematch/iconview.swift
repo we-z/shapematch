@@ -16,7 +16,7 @@ struct iconview: View {
     
     var body: some View {
         ZStack {
-            Color.gray.opacity(0.1)
+            Color.gray.opacity(0.07)
             VStack {
                 ForEach(0..<3) { row in // Updated to 4 rows
                     HStack {
