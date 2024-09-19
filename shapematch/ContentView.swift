@@ -49,6 +49,7 @@ struct ContentView: View {
                             .customTextStroke(width: 2.7)
                     }
                     .frame(width: deviceWidth/4)
+                    .scaleEffect(idiom == .pad ? 0.8 : 1)
                     Spacer()
                     VStack{
                         Text("Goal 🎯")
@@ -62,7 +63,7 @@ struct ContentView: View {
                                     ForEach(0..<appModel.grid.count, id: \.self) { column in
                                         smallShapeView(shapeType: appModel.targetGrid[row][column])
                                             .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11))
-                                            .padding(3)
+                                            .padding(idiom == .pad ? 9 : 3)
                                     }
                                 }
                             }
@@ -77,6 +78,7 @@ struct ContentView: View {
                             .padding(1)
                     }
                     .pulsingPlaque()
+                    .scaleEffect(idiom == .pad ? 0.8 : 1)
                     
                     Spacer()
                     VStack{
@@ -97,9 +99,11 @@ struct ContentView: View {
                             .customTextStroke(width: 2.7)
                     }
                     .frame(width: deviceWidth/4)
+                    .scaleEffect(idiom == .pad ? 0.8 : 1)
                     Spacer()
                     
                 }
+                
                 Spacer()
                 VStack {
                     ForEach(0..<appModel.grid.count, id: \.self) { row in
@@ -107,7 +111,7 @@ struct ContentView: View {
                             ForEach(0..<appModel.grid.count, id: \.self) { column in
                                 LargeShapeView(shapeType: appModel.grid[row][column])
                                     .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 3), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 3))
-                                    .padding()
+                                    .padding(idiom == .pad ? 30 : 15)
                                     .background(.white.opacity(0.001))
                                     .offset(appModel.offsets[row][column])
                                     .scaleEffect((tappedRow == row && tappedColumn == column) ? playingShapeScale : 1)
@@ -145,7 +149,7 @@ struct ContentView: View {
                 }
             }
             .allowsHitTesting(!appModel.freezeGame)
-            .scaleEffect(idiom == .pad ? 0.9 : 1)
+            .scaleEffect(idiom == .pad ? 0.93 : 1)
             OverlaysView()
         }
         .onAppear {

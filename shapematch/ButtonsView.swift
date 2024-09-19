@@ -23,7 +23,7 @@ struct ButtonsView: View {
                         .font(.system(size: deviceWidth/15))
                         .fixedSize()
                         .padding(.trailing, idiom == .pad ? 30: 15)
-                        .customTextStroke(width: 1.8)
+                        .customTextStroke(width: idiom == .pad ? 1.5 : 1.8)
                         .scaleEffect(1.3)
                     Text("\(userPersistedData.gemBalance)")
                         .bold()

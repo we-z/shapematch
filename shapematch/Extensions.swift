@@ -116,14 +116,14 @@ struct LargeShapeView: View {
             Circle().fill(Color.blue)
                 .background(Circle().style(
                     withStroke: Color.black,
-                    lineWidth: 18,
+                    lineWidth: idiom == .pad ? 30 : 18,
                     fill: Color.blue
                 ))
         case .square:
             Rectangle().fill(Color.red)
                 .background(Rectangle().style(
                     withStroke: Color.black,
-                    lineWidth: 18,
+                    lineWidth: idiom == .pad ? 30 : 18,
                     fill: Color.red
                 ))
         case .triangle:
@@ -131,7 +131,7 @@ struct LargeShapeView: View {
                 .foregroundColor(.green)
                 .background(Triangle().style(
                     withStroke: Color.black,
-                    lineWidth: 18,
+                    lineWidth: idiom == .pad ? 30 : 18,
                     fill: Color.green
                 ))
         case .star:
@@ -140,7 +140,7 @@ struct LargeShapeView: View {
                 .scaleEffect(1.2)
                 .background(StarShape(points: 5).style(
                     withStroke: Color.black,
-                    lineWidth: 18,
+                    lineWidth: idiom == .pad ? 30 : 18,
                     fill: Color.yellow
                 ))
                 .scaleEffect(0.8)
@@ -149,7 +149,7 @@ struct LargeShapeView: View {
                 .foregroundColor(.purple)
                 .background(HexagonShape().style(
                     withStroke: Color.black,
-                    lineWidth: 18,
+                    lineWidth: idiom == .pad ? 30 : 18,
                     fill: Color.yellow
                 ))
         }
@@ -165,14 +165,14 @@ struct smallShapeView: View {
             Circle().fill(Color.blue)
                 .background(Circle().style(
                     withStroke: Color.black,
-                    lineWidth: 6,
+                    lineWidth: idiom == .pad ? 12 : 6,
                     fill: Color.blue
                 ))
         case .square:
             Rectangle().fill(Color.red)
                 .background(Rectangle().style(
                     withStroke: Color.black,
-                    lineWidth: 6,
+                    lineWidth: idiom == .pad ? 12 : 6,
                     fill: Color.red
                 ))
         case .triangle:
@@ -180,7 +180,7 @@ struct smallShapeView: View {
                 .foregroundColor(.green)
                 .background(Triangle().style(
                     withStroke: Color.black,
-                    lineWidth: 6,
+                    lineWidth: idiom == .pad ? 12 : 6,
                     fill: Color.green
                 ))
         case .star:
@@ -189,7 +189,7 @@ struct smallShapeView: View {
                 .scaleEffect(1.2)
                 .background(StarShape(points: 5).style(
                     withStroke: Color.black,
-                    lineWidth: 6,
+                    lineWidth: idiom == .pad ? 12 : 6,
                     fill: Color.yellow
                 ))
                 .scaleEffect(0.8)
@@ -198,7 +198,7 @@ struct smallShapeView: View {
                 .foregroundColor(.purple)
                 .background(HexagonShape().style(
                     withStroke: Color.black,
-                    lineWidth: 6,
+                    lineWidth: idiom == .pad ? 12 : 6,
                     fill: Color.yellow
                 ))
         }

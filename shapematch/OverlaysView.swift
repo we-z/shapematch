@@ -13,11 +13,12 @@ struct OverlaysView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     var body: some View {
         ZStack {
-            if userPersistedData.level == 1 {
+            if userPersistedData.level == 1 && !userPersistedData.firstGamePlayed {
                 HandSwipeView()
             }
             InstructionView()
-                .padding(.top, idiom == .pad ? 30 : 0)
+                .padding(idiom == .pad ? 30 : 0)
+                .padding(.top, idiom == .pad ? 1 : 0)
             NewGoalView()
                 .padding(.top, idiom == .pad ? 30 : 0)
             CelebrationEffect()
