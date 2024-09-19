@@ -22,13 +22,12 @@ struct iconview: View {
                     HStack {
                         ForEach(0..<3) { column in // Updated to 4 columns
                             LargeShapeView(shapeType: grid[row][column])
-                                .frame(width: deviceWidth / 6, height: deviceWidth / 6) // Adjusted size for 4x4 grid
-                                .padding(15)
+                                .frame(width: deviceWidth / 8, height: deviceWidth / 8) // Adjusted size for 4x4 grid
+                                .padding(18)
                         }
                     }
                 }
             }
-            .scaleEffect(0.9)
         }
     }
 }
