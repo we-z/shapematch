@@ -67,7 +67,7 @@ struct NoMoreSwipesView: View {
                 .cornerRadius(21)
                 .overlay{
                     RoundedRectangle(cornerRadius: 21)
-                        .stroke(Color.black, lineWidth: 6)
+                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
                         .padding(1)
                 }
                 .offset(y: bannerOffset)
@@ -85,8 +85,8 @@ struct NoMoreSwipesView: View {
                         }
                 )
                 Spacer()
-                VStack{
-                    HStack{
+                VStack(spacing: idiom == .pad ? 18 : 6){
+                    HStack(spacing: idiom == .pad ? 18 : 9){
                         Button {
                             animateAwayButtonsAndBanner()
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
@@ -109,7 +109,7 @@ struct NoMoreSwipesView: View {
                             .cornerRadius(15)
                             .overlay{
                                 RoundedRectangle(cornerRadius: 15)
-                                    .stroke(Color.black, lineWidth: 5)
+                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                     .padding(1)
                             }
                             .padding(3)
@@ -135,7 +135,7 @@ struct NoMoreSwipesView: View {
                             .cornerRadius(15)
                             .overlay{
                                 RoundedRectangle(cornerRadius: 15)
-                                    .stroke(Color.black, lineWidth: 5)
+                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                     .padding(1)
                             }
                             .padding(3)
@@ -170,7 +170,7 @@ struct NoMoreSwipesView: View {
                         .cornerRadius(21)
                         .overlay{
                             RoundedRectangle(cornerRadius: 21)
-                                .stroke(Color.black, lineWidth: 5)
+                                .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                 .padding(1)
                         }
                         .padding(.bottom, 15)
