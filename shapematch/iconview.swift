@@ -22,8 +22,9 @@ struct iconview: View {
                     HStack {
                         ForEach(0..<3) { column in // Updated to 4 columns
                             LargeShapeView(shapeType: grid[row][column])
-                                .frame(width: deviceWidth / 8, height: deviceWidth / 8) // Adjusted size for 4x4 grid
+                                .frame(width: deviceWidth / 8, height: deviceWidth / 8)
                                 .padding(18)
+                            
                         }
                     }
                 }

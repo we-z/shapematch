@@ -20,7 +20,8 @@ struct OverlaysView: View {
                 .padding(idiom == .pad ? 30 : 0)
                 .padding(.top, idiom == .pad ? 27 : 0)
             NewGoalView()
-                .padding(.top, idiom == .pad ? 30 : 0)
+                .padding(idiom == .pad ? 30 : 0)
+                .padding(.top, idiom == .pad ? 27 : 0)
             CelebrationEffect()
             if appModel.showGemMenu {
                 GemMenuView()

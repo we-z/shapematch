@@ -216,7 +216,7 @@ struct GemMenuView: View {
                         }
                         .buttonStyle(.roundedAndShadow6)
                             Button {
-                                impactHeavy.impactOccurred()
+                                impactLight.impactOccurred()
                                 self.sheetPresented = true
                             } label: {
                                 Text("Share! 📲")
