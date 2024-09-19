@@ -18,7 +18,7 @@ struct ButtonsView: View {
             } label: {
                 HStack{
                     Spacer()
-                    Text("💎 0")
+                    Text("💎 \(userPersistedData.gemBalance)")
                         .bold()
                         .font(.system(size: deviceWidth/15))
                         .fixedSize()
