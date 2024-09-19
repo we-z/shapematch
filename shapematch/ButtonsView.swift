@@ -12,29 +12,21 @@ struct ButtonsView: View {
     @StateObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     var body: some View {
-        HStack(spacing: idiom == .pad ? 21 : 6){
+        HStack(spacing: idiom == .pad ? 21 : 9){
             Button {
                 appModel.showGemMenu = true
             } label: {
                 HStack{
                     Spacer()
-                    Text("💎")
-                        .bold()
-                        .font(.system(size: deviceWidth/15))
-                        .fixedSize()
-                        .padding(.trailing, idiom == .pad ? 30: 15)
-                        .customTextStroke(width: idiom == .pad ? 1.5 : 1.8)
-                        .scaleEffect(1.3)
-                    Text("\(userPersistedData.gemBalance)")
+                    Text("💎 0")
                         .bold()
                         .font(.system(size: deviceWidth/15))
                         .fixedSize()
                         .customTextStroke(width: 1.5)
-                        .scaleEffect(1.5)
+                        .scaleEffect(idiom == .pad ? 1 : 1.2)
                     Spacer()
                         
                 }
-                .offset(x: -3)
                 .padding()
                 .background{
                     Color.blue
