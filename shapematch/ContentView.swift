@@ -74,7 +74,7 @@ struct ContentView: View {
                     .cornerRadius(15)
                     .overlay{
                         RoundedRectangle(cornerRadius: 15)
-                            .stroke(Color.black, lineWidth: 6)
+                            .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
                             .padding(1)
                     }
                     .pulsingPlaque()
@@ -149,7 +149,7 @@ struct ContentView: View {
                 }
             }
             .allowsHitTesting(!appModel.freezeGame)
-            .scaleEffect(idiom == .pad ? 0.93 : 1)
+            .scaleEffect(idiom == .pad ? 0.9 : 1)
             OverlaysView()
         }
         .onAppear {

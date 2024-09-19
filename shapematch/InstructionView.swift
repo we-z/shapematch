@@ -29,10 +29,10 @@ struct InstructionView: View {
             .cornerRadius(15)
             .overlay{
                 RoundedRectangle(cornerRadius: 15)
-                    .stroke(Color.black, lineWidth: 6)
+                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
                     .padding(1)
             }
-            .padding(.horizontal, 15)
+            .padding(.horizontal, 12)
             .offset(y: cardOffset)
             
             Spacer()

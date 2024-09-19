@@ -12,7 +12,7 @@ struct ButtonsView: View {
     @StateObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     var body: some View {
-        HStack{
+        HStack(spacing: idiom == .pad ? 21 : 6){
             Button {
                 appModel.showGemMenu = true
             } label: {
@@ -42,7 +42,7 @@ struct ButtonsView: View {
                 .cornerRadius(15)
                 .overlay{
                     RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.black, lineWidth: 5)
+                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                         .padding(1)
                 }
                 .padding(3)
@@ -67,7 +67,7 @@ struct ButtonsView: View {
                 .cornerRadius(15)
                 .overlay{
                     RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.black, lineWidth: 5)
+                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                         .padding(1)
                 }
                 .padding(3)
@@ -108,7 +108,7 @@ struct ButtonsView: View {
                 .cornerRadius(15)
                 .overlay{
                     RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.black, lineWidth: 5)
+                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                         .padding(1)
                 }
                 .padding(3)
