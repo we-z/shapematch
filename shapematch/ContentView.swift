@@ -22,7 +22,7 @@ struct ContentView: View {
         ZStack{
             Color.white
                 .ignoresSafeArea()
-            Color.black.opacity(colorScheme == .dark ? 0.8 : 0.06)
+            Color.black.opacity(colorScheme == .dark ? 0.8 : 0.1)
                 .ignoresSafeArea()
             VStack(spacing: 0) {
                 ButtonsView()

@@ -17,8 +17,8 @@ struct OverlaysView: View {
                 HandSwipeView()
             }
             InstructionView()
-                .padding(idiom == .pad ? 30 : 0)
-                .padding(.top, idiom == .pad ? 1 : 0)
+                .padding(idiom == .pad ? 21 : 0)
+                .padding(.top, idiom == .pad ? 15 : 0)
             NewGoalView()
                 .padding(.top, idiom == .pad ? 30 : 0)
             CelebrationEffect()
