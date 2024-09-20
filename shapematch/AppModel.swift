@@ -129,7 +129,7 @@ class AppModel: ObservableObject {
     }
     
     func undoSwap() {
-        if !swapsMade.isEmpty || undosLeft > 0 {
+        if !swapsMade.isEmpty {
             undosLeft -= 1
             let lastSwap = swapsMade.removeLast()
             

@@ -27,6 +27,7 @@ struct ContentView: View {
             Group {
                 VStack(spacing: 0) {
                     ButtonsView()
+                        .zIndex(1)
                     Spacer()
                     HStack{
                         Spacer()

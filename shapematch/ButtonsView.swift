@@ -40,32 +40,54 @@ struct ButtonsView: View {
                 .padding(3)
             }
             .buttonStyle(.roundedAndShadow6)
-                                
-            Button {
-            } label: {
-                HStack{
-                    Spacer()
-                    Text("↩️ \(appModel.undosLeft)")
-                        .bold()
-                        .customTextStroke(width: 1.2)
-                        .font(.system(size: deviceWidth/15))
-                        .scaleEffect(idiom == .pad ? 1 : 1.2)
-                    Spacer()
+            ZStack{
+                Button {
+                    if appModel.undosLeft > 0 {
+                        appModel.undoSwap()
+                    }
+                } label: {
+                    HStack{
+                        Spacer()
+                        Text("↩️ \(appModel.undosLeft)")
+                            .bold()
+                            .customTextStroke(width: 1.2)
+                            .font(.system(size: deviceWidth/15))
+                            .scaleEffect(idiom == .pad ? 1 : 1.2)
+                        Spacer()
                         
+                    }
+                    .padding()
+                    .background{
+                        Color.red
+                    }
+                    .cornerRadius(15)
+                    .overlay{
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                            .padding(1)
+                    }
+                    .padding(3)
                 }
-                .padding()
-                .background{
-                    Color.red
+                .buttonStyle(.roundedAndShadow6)
+                if appModel.undosLeft <= 0 {
+                    ZStack {
+                        Circle()
+                            .frame(width: deviceWidth/7)
+                            .foregroundColor(.blue)
+                            .customTextStroke()
+                        VStack {
+                            Text("+ 3")
+                                .bold()
+                                .customTextStroke(width: 1)
+                            Text("💎 1")
+                                .bold()
+                                .customTextStroke(width: 1)
+                                .scaleEffect(0.8)
+                        }
+                    }
+                    .offset(x: deviceWidth/15, y:deviceWidth/8)
                 }
-                .cornerRadius(15)
-                .overlay{
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                        .padding(1)
-                }
-                .padding(3)
             }
-            .buttonStyle(.roundedAndShadow6)
             .simultaneousGesture(
                 LongPressGesture(minimumDuration: 1.0) // Customize the duration (1 second here)
                     .onEnded { _ in
