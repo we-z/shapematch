@@ -51,6 +51,7 @@ struct ButtonsView: View {
                         .italic()
                         .customTextStroke(width: 1.2)
                         .font(.system(size: deviceWidth/21))
+                        .scaleEffect(idiom == .pad ? 1 : 1.2)
                     Spacer()
                         
                 }
@@ -95,7 +96,7 @@ struct ButtonsView: View {
                     }
                     .padding(.vertical)
                     .background{
-                        Color.red
+                        Color.yellow
                     }
                     .cornerRadius(15)
                     .overlay{
@@ -106,11 +107,12 @@ struct ButtonsView: View {
                     .padding(3)
                 }
                 .buttonStyle(.roundedAndShadow6)
-//                if appModel.undosLeft <= 0 {
+                if appModel.undosLeft <= 0 {
                     ZStack {
                         Circle()
                             .frame(width: deviceWidth/8)
                             .foregroundColor(.black)
+                            .scaleEffect(idiom == .pad ? 1.2 : 1)
                         Circle()
                             .frame(width: idiom == .pad ? deviceWidth/10 : deviceWidth/9)
                             .foregroundColor(.blue)
@@ -126,7 +128,7 @@ struct ButtonsView: View {
                     }
                     .offset(x: deviceWidth/18, y: idiom == .pad ? deviceWidth/12 : deviceWidth/12)
                     .compositingGroup()
-//                }
+                }
             }
             .zIndex(1)
             Button{
@@ -140,12 +142,13 @@ struct ButtonsView: View {
                         .italic()
                         .customTextStroke(width: 1.2)
                         .font(.system(size: deviceWidth/21))
+                        .scaleEffect(idiom == .pad ? 1 : 1.2)
                     Spacer()
                         
                 }
                 .padding()
                 .background{
-                    Color.yellow
+                    Color.red
                 }
                 .cornerRadius(15)
                 .overlay{
