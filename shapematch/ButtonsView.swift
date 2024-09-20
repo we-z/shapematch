@@ -79,20 +79,20 @@ struct ButtonsView: View {
                 if appModel.undosLeft <= 0 {
                     ZStack {
                         Circle()
-                            .frame(width: deviceWidth/7)
+                            .frame(width: deviceWidth/6)
                             .foregroundColor(.blue)
                             .customTextStroke()
-                        VStack {
+                        VStack(spacing: 6) {
                             Text("+ 3")
                                 .bold()
                                 .customTextStroke(width: 1)
                             Text("💎 1")
                                 .bold()
                                 .customTextStroke(width: 1)
-                                .scaleEffect(0.8)
                         }
                     }
-                    .offset(x: deviceWidth/15, y:deviceWidth/8)
+                    .offset(x: deviceWidth/15, y:deviceWidth/7)
+                    
                 }
             }
             .simultaneousGesture(
@@ -109,6 +109,7 @@ struct ButtonsView: View {
                         }
                     }
             )
+            .zIndex(1)
             
             Button{
                 audioController.mute.toggle()
