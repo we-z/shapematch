@@ -129,7 +129,8 @@ class AppModel: ObservableObject {
     }
     
     func undoSwap() {
-        if !swapsMade.isEmpty {
+        if !swapsMade.isEmpty || undosLeft > 0 {
+            undosLeft -= 1
             let lastSwap = swapsMade.removeLast()
             
             AudioServicesPlaySystemSound(1104)
@@ -380,6 +381,7 @@ class AppModel: ObservableObject {
         
         determineLevelSettings()
         swapsMade = []
+        undosLeft = 3
         var swapsNeededMet = false
         
         while !swapsNeededMet {
@@ -410,6 +412,7 @@ class AppModel: ObservableObject {
         // Reset the grid to its initial configuration
         grid = initialGrid
         swapsMade = []
+        undosLeft = 3
         // Reset the swipes left to the initial calculated value
         swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
     }
