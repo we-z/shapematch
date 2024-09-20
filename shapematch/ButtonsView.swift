@@ -106,15 +106,15 @@ struct ButtonsView: View {
                     .padding(3)
                 }
                 .buttonStyle(.roundedAndShadow6)
-                if appModel.undosLeft <= 0 {
+//                if appModel.undosLeft <= 0 {
                     ZStack {
                         Circle()
-                            .frame(width: deviceWidth/6.3)
+                            .frame(width: deviceWidth/8)
                             .foregroundColor(.black)
                         Circle()
-                            .frame(width: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
+                            .frame(width: idiom == .pad ? deviceWidth/10 : deviceWidth/9)
                             .foregroundColor(.blue)
-                        VStack(spacing: 6) {
+                        VStack(spacing: 3) {
                             Text("+ 3")
                                 .bold()
                                 .customTextStroke(width: 1)
@@ -122,11 +122,11 @@ struct ButtonsView: View {
                                 .bold()
                                 .customTextStroke(width: 1)
                         }
-                        .font(.system(size: idiom == .pad ? 36 : 18))
+                        .font(.system(size: idiom == .pad ? 36 : 12))
                     }
-                    .offset(x: deviceWidth/12, y: idiom == .pad ? deviceWidth/12 : deviceWidth/9)
+                    .offset(x: deviceWidth/18, y: idiom == .pad ? deviceWidth/12 : deviceWidth/12)
                     .compositingGroup()
-                }
+//                }
             }
             .zIndex(1)
             Button{
