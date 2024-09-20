@@ -25,7 +25,7 @@ struct InstructionView: View {
                 Spacer()
             }
             .padding(.vertical, 21)
-            .background(.blue)
+            .background(.green)
             .cornerRadius(15)
             .overlay{
                 RoundedRectangle(cornerRadius: 15)
@@ -99,7 +99,7 @@ struct NewGoalView: View {
                 Spacer()
             }
             .padding(.vertical, 18)
-            .background(.blue)
+            .background(.green)
             .cornerRadius(15)
             .overlay{
                 RoundedRectangle(cornerRadius: 15)
