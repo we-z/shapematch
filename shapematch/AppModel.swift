@@ -45,6 +45,7 @@ class AppModel: ObservableObject {
     @Published var swaping = false
 //    @Published var grid.count = 3
     @Published var swapsNeeded = 1
+    @Published var undosLeft = 3
     @Published var amountBought = 5
     @Published var shapes: [ShapeType] = []
     @Published var swapsMade: [(Position, Position)] = []

@@ -46,9 +46,11 @@ struct ButtonsView: View {
             } label: {
                 HStack{
                     Spacer()
-                    Text("↩️")
+                    Text("↩️  \(appModel.undosLeft)")
+                        .bold()
                         .customTextStroke(width: 1.2)
                         .font(.system(size: deviceWidth/15))
+                        .scaleEffect(idiom == .pad ? 1 : 1.2)
                     Spacer()
                         
                 }
