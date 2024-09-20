@@ -20,10 +20,10 @@ struct ButtonsView: View {
                     Spacer()
                     Text("💎 \(userPersistedData.gemBalance)")
                         .bold()
-                        .font(.system(size: deviceWidth/21))
+                        .font(.system(size: userPersistedData.gemBalance > 99 ?  deviceWidth/27 : deviceWidth/21))
                         .lineLimit(1 )
                         .customTextStroke(width: 1.5)
-                        .scaleEffect(idiom == .pad ? 1 : 1.2)
+                        .fixedSize()
                     Spacer()
                         
                 }
