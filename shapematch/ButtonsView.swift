@@ -63,7 +63,7 @@ struct ButtonsView: View {
                         Spacer()
                         
                     }
-                    .padding()
+                    .padding(.vertical)
                     .background{
                         Color.red
                     }
@@ -76,12 +76,14 @@ struct ButtonsView: View {
                     .padding(3)
                 }
                 .buttonStyle(.roundedAndShadow6)
-                if appModel.undosLeft <= 0 {
+//                if appModel.undosLeft <= 0 {
                     ZStack {
                         Circle()
-                            .frame(width: deviceWidth/6)
+                            .frame(width: deviceWidth/5.5)
+                            .foregroundColor(.black)
+                        Circle()
+                            .frame(width: idiom == .pad ? deviceWidth/9 : deviceWidth/6.3)
                             .foregroundColor(.blue)
-                            .customTextStroke()
                         VStack(spacing: 6) {
                             Text("+ 3")
                                 .bold()
@@ -90,10 +92,11 @@ struct ButtonsView: View {
                                 .bold()
                                 .customTextStroke(width: 1)
                         }
+                        .font(.system(size: idiom == .pad ? 36 : 18))
                     }
-                    .offset(x: deviceWidth/15, y:deviceWidth/7)
-                    
-                }
+                    .offset(x: deviceWidth/12, y: idiom == .pad ? deviceWidth/12 : deviceWidth/7)
+                    .compositingGroup()
+//                }
             }
             .simultaneousGesture(
                 LongPressGesture(minimumDuration: 1.0) // Customize the duration (1 second here)
