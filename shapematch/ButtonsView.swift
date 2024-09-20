@@ -20,14 +20,14 @@ struct ButtonsView: View {
                     Spacer()
                     Text("💎 \(userPersistedData.gemBalance)")
                         .bold()
-                        .font(.system(size: deviceWidth/15))
-                        .fixedSize()
+                        .font(.system(size: deviceWidth/21))
+                        .lineLimit(1 )
                         .customTextStroke(width: 1.5)
                         .scaleEffect(idiom == .pad ? 1 : 1.2)
                     Spacer()
                         
                 }
-                .padding()
+                .padding(.vertical)
                 .background{
                     Color.blue
                 }
@@ -40,6 +40,36 @@ struct ButtonsView: View {
                 .padding(3)
             }
             .buttonStyle(.roundedAndShadow6)
+            
+            Button{
+                audioController.mute.toggle()
+            } label: {
+                HStack{
+                    Spacer()
+                    Text(audioController.mute ? "🔇" : "🔊")
+                        .bold()
+                        .italic()
+                        .customTextStroke(width: 1.2)
+                        .font(.system(size: deviceWidth/21))
+                    Spacer()
+                        
+                }
+                .padding()
+                .background{
+                    Color.green
+                }
+                .cornerRadius(15)
+                .overlay{
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                        .padding(1)
+                }
+                .padding(3)
+            }
+            .buttonStyle(.roundedAndShadow6)
+            .onChange(of: audioController.mute) { newSetting in
+                audioController.setAllAudioVolume()
+            }
             ZStack{
                 Button {
                     if appModel.undosLeft > 0 {
@@ -58,7 +88,7 @@ struct ButtonsView: View {
                         Text("↩️ \(appModel.undosLeft)")
                             .bold()
                             .customTextStroke(width: 1.2)
-                            .font(.system(size: deviceWidth/15))
+                            .font(.system(size: deviceWidth/21))
                             .scaleEffect(idiom == .pad ? 1 : 1.2)
                         Spacer()
                         
@@ -79,10 +109,10 @@ struct ButtonsView: View {
                 if appModel.undosLeft <= 0 {
                     ZStack {
                         Circle()
-                            .frame(width: deviceWidth/5.5)
+                            .frame(width: deviceWidth/6.3)
                             .foregroundColor(.black)
                         Circle()
-                            .frame(width: idiom == .pad ? deviceWidth/9 : deviceWidth/6.3)
+                            .frame(width: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
                             .foregroundColor(.blue)
                         VStack(spacing: 6) {
                             Text("+ 3")
@@ -94,42 +124,28 @@ struct ButtonsView: View {
                         }
                         .font(.system(size: idiom == .pad ? 36 : 18))
                     }
-                    .offset(x: deviceWidth/12, y: idiom == .pad ? deviceWidth/12 : deviceWidth/7)
+                    .offset(x: deviceWidth/12, y: idiom == .pad ? deviceWidth/12 : deviceWidth/9)
                     .compositingGroup()
                 }
             }
-            .simultaneousGesture(
-                LongPressGesture(minimumDuration: 1.0) // Customize the duration (1 second here)
-                    .onEnded { _ in
-                        print("Long pressed!") // You can call a function here or trigger any action
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-//                                    showAlert = true
-                            if !appModel.swapsMade.isEmpty {
-                                impactHeavy.impactOccurred()
-                            }
-                            appModel.swapsMade = []
-                            appModel.resetLevel()
-                        }
-                    }
-            )
             .zIndex(1)
-            
             Button{
-                audioController.mute.toggle()
+                appModel.swapsMade = []
+                appModel.resetLevel()
             } label: {
                 HStack{
                     Spacer()
-                    Text(audioController.mute ? "🔇" : "🔊")
+                    Text("🔁")
                         .bold()
                         .italic()
                         .customTextStroke(width: 1.2)
-                        .font(.system(size: deviceWidth/15))
+                        .font(.system(size: deviceWidth/21))
                     Spacer()
                         
                 }
                 .padding()
                 .background{
-                    Color.green
+                    Color.yellow
                 }
                 .cornerRadius(15)
                 .overlay{
