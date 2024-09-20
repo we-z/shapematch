@@ -76,8 +76,8 @@ struct ButtonsView: View {
                     if appModel.undosLeft > 0 {
                         appModel.undoSwap()
                     } else {
-                        if userPersistedData.gemBalance >= 3 {
-                            userPersistedData.gemBalance -= 3
+                        if userPersistedData.gemBalance >= 1 {
+                            userPersistedData.gemBalance -= 1
                             appModel.undosLeft = 3
                         } else {
                             appModel.showGemMenu = true
