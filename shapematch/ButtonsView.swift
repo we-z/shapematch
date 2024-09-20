@@ -42,7 +42,10 @@ struct ButtonsView: View {
             .buttonStyle(.roundedAndShadow6)
                                 
             Button {
-                appModel.undoSwap()
+                if appModel.undosLeft > 0 {
+                    appModel.undosLeft -= 1
+                    appModel.undoSwap()
+                }
             } label: {
                 HStack{
                     Spacer()
