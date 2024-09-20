@@ -27,7 +27,7 @@ struct ButtonsView: View {
                     Spacer()
                         
                 }
-                .padding(.vertical)
+                .frame(height: deviceWidth/7)
                 .background{
                     Color.blue
                 }
@@ -55,7 +55,7 @@ struct ButtonsView: View {
                     Spacer()
                         
                 }
-                .padding()
+                .frame(height: deviceWidth/7)
                 .background{
                     Color.green
                 }
@@ -94,7 +94,7 @@ struct ButtonsView: View {
                         Spacer()
                         
                     }
-                    .padding(.vertical)
+                    .frame(height: deviceWidth/7)
                     .background{
                         Color.yellow
                     }
@@ -146,7 +146,7 @@ struct ButtonsView: View {
                     Spacer()
                         
                 }
-                .padding()
+                .frame(height: deviceWidth/7)
                 .background{
                     Color.red
                 }
