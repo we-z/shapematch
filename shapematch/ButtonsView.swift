@@ -76,7 +76,7 @@ struct ButtonsView: View {
                     .padding(3)
                 }
                 .buttonStyle(.roundedAndShadow6)
-//                if appModel.undosLeft <= 0 {
+                if appModel.undosLeft <= 0 {
                     ZStack {
                         Circle()
                             .frame(width: deviceWidth/5.5)
@@ -96,7 +96,7 @@ struct ButtonsView: View {
                     }
                     .offset(x: deviceWidth/12, y: idiom == .pad ? deviceWidth/12 : deviceWidth/7)
                     .compositingGroup()
-//                }
+                }
             }
             .simultaneousGesture(
                 LongPressGesture(minimumDuration: 1.0) // Customize the duration (1 second here)
