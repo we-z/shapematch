@@ -44,6 +44,13 @@ struct ButtonsView: View {
                 Button {
                     if appModel.undosLeft > 0 {
                         appModel.undoSwap()
+                    } else {
+                        if userPersistedData.gemBalance >= 3 {
+                            userPersistedData.gemBalance -= 3
+                            appModel.undosLeft = 3
+                        } else {
+                            appModel.showGemMenu = true
+                        }
                     }
                 } label: {
                     HStack{
