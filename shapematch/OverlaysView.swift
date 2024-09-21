@@ -15,6 +15,7 @@ struct OverlaysView: View {
         ZStack {
             if userPersistedData.level == 1 && !userPersistedData.firstGamePlayed {
                 HandSwipeView()
+                    .scaleEffect(idiom == .pad ? 0.8 : 1)
             }
 //            InstructionView()
 //                .padding(idiom == .pad ? 33 : 0)
