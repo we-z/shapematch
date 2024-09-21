@@ -22,33 +22,60 @@ struct ContentView: View {
         ZStack{
             Color.white
                 .ignoresSafeArea()
-            Color.black.opacity(colorScheme == .dark ? 0.8 : 0.1)
+            Color.black.opacity(colorScheme == .dark ? 0.8 : 0.2)
                 .ignoresSafeArea()
             Group {
                 VStack(spacing: 0) {
-                    ButtonsView()
-                        .zIndex(1)
                     Spacer()
                     HStack{
                         Spacer()
                         VStack{
-                            Text("🕹️")
+                            Button {
+                                appModel.showGemMenu = true
+                            } label: {
+                                HStack{
+                                    Spacer()
+                                    Text("💎 \(userPersistedData.gemBalance)")
+                                        .bold()
+                                        .font(.system(size: userPersistedData.gemBalance > 99 ?  deviceWidth/27 : deviceWidth/21))
+                                        .lineLimit(1)
+                                        .customTextStroke(width: 1.5)
+                                        .fixedSize()
+                                    Spacer()
+                                        
+                                }
+                                .frame(height: deviceWidth/7)
+                                .background{
+                                    Color.blue
+                                }
+                                .cornerRadius(30)
+                                .overlay{
+                                    RoundedRectangle(cornerRadius: 30)
+                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                        .padding(1)
+                                }
+                                .padding(3)
+                            }
+                            .buttonStyle(.roundedAndShadow6)
+                            Spacer()
+                            Text("🕹️ 👾")
                                 .bold()
-                                .font(.system(size: deviceWidth/12))
+                                .font(.system(size: deviceWidth/18))
                                 .fixedSize()
-                                .customTextStroke(width: 1.8)
+                                .customTextStroke(width: 1.5)
+                                .padding(.top, idiom == .pad ? 60 : 0)
                             Text("Level")
                                 .bold()
-                                .font(.system(size: deviceWidth/12))
+                                .font(.system(size: deviceWidth/15))
                                 .fixedSize()
                                 .customTextStroke(width: 1.5)
                             Text("\(userPersistedData.level)")
                                 .bold()
-                                .font(.system(size: deviceWidth/5))
+                                .font(.system(size: deviceWidth/9))
                                 .minimumScaleFactor(0.1)
                                 .fixedSize()
-                                .scaleEffect(userPersistedData.level > 999 ? 0.5 : userPersistedData.level > 99 ? 0.6 : 1)
-                                .customTextStroke(width: 2.7)
+                                .customTextStroke()
+                            Spacer()
                         }
                         .frame(width: deviceWidth/4)
                         .scaleEffect(idiom == .pad ? 0.8 : 1)
@@ -84,11 +111,41 @@ struct ContentView: View {
                         
                         Spacer()
                         VStack{
-                            Text("↕️ ↔️")
+                            Button{
+                                audioController.mute.toggle()
+                            } label: {
+                                HStack{
+                                    Spacer()
+                                    Text(audioController.mute ? "🔇" : "🔊")
+                                        .bold()
+                                        .italic()
+                                        .customTextStroke(width: 1.2)
+                                        .font(.system(size: deviceWidth/21))
+                                        .scaleEffect(idiom == .pad ? 1 : 1.2)
+                                    Spacer()
+                                        
+                                }
+                                .frame(height: deviceWidth/7)
+                                .background{
+                                    Color.purple
+                                }
+                                .cornerRadius(30)
+                                .overlay{
+                                    RoundedRectangle(cornerRadius: 30)
+                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                        .padding(1)
+                                }
+                                .padding(3)
+                            }
+                            .buttonStyle(.roundedAndShadow6)
+                            Spacer()
+                            Text("↔️ ↕️")
                                 .bold()
-                                .font(.system(size: deviceWidth/12))
+                                .multilineTextAlignment(.center)
+                                .font(.system(size: deviceWidth/18))
                                 .fixedSize()
-                                .customTextStroke(width: 1.8)
+                                .customTextStroke(width: 1.5)
+                                .padding(.top, idiom == .pad ? 60 : 0)
                             Text("Swaps")
                                 .bold()
                                 .multilineTextAlignment(.center)
@@ -97,16 +154,20 @@ struct ContentView: View {
                                 .customTextStroke(width: 1.5)
                             Text("\(appModel.swipesLeft > 0 ? appModel.swipesLeft : 0)")
                                 .bold()
-                                .font(.system(size: deviceWidth/5))
-                                .customTextStroke(width: 2.7)
+                                .font(.system(size: deviceWidth/9))
+                                .customTextStroke()
+                                
+                            Spacer()
                         }
                         .frame(width: deviceWidth/4)
                         .scaleEffect(idiom == .pad ? 0.8 : 1)
                         Spacer()
                         
                     }
-                    
                     Spacer()
+                    ButtonsView()
+                        .zIndex(1)
+                        .padding(.bottom, idiom == .pad ? 60 : 21)
                     VStack {
                         ForEach(0..<appModel.grid.count, id: \.self) { row in
                             HStack {
@@ -149,6 +210,20 @@ struct ContentView: View {
                             }
                         }
                     }
+                    .background {
+                        ZStack {
+                            if colorScheme == .dark {
+                                Color.white.opacity(0.1)
+                            } else {
+                                Color.white.opacity(0.5)
+                            }
+                        }
+                        
+                        .cornerRadius(30)
+                        .scaleEffect(1.1)
+                    }
+                    .scaleEffect(0.9)
+                    .padding(.bottom)
                 }
                 .allowsHitTesting(!appModel.freezeGame)
                 .scaleEffect(idiom == .pad ? 0.9 : 1)

@@ -260,7 +260,7 @@ struct HandSwipeView: View {
                     
             }
         }
-        .offset(y: idiom == .pad ? -30 : 0)
+        .offset(y: idiom == .pad ? -60 : -30)
         .onAppear {
             animate()
         }

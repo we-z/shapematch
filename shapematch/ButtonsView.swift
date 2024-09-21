@@ -13,40 +13,12 @@ struct ButtonsView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     var body: some View {
         HStack(spacing: idiom == .pad ? 21 : 9){
-            Button {
-                appModel.showGemMenu = true
-            } label: {
-                HStack{
-                    Spacer()
-                    Text("💎 \(userPersistedData.gemBalance)")
-                        .bold()
-                        .font(.system(size: userPersistedData.gemBalance > 99 ?  deviceWidth/27 : deviceWidth/21))
-                        .lineLimit(1 )
-                        .customTextStroke(width: 1.5)
-                        .fixedSize()
-                    Spacer()
-                        
-                }
-                .frame(height: deviceWidth/7)
-                .background{
-                    Color.blue
-                }
-                .cornerRadius(15)
-                .overlay{
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                        .padding(1)
-                }
-                .padding(3)
-            }
-            .buttonStyle(.roundedAndShadow6)
-            
             Button{
-                audioController.mute.toggle()
+                appModel.setupLevel()
             } label: {
                 HStack{
                     Spacer()
-                    Text(audioController.mute ? "🔇" : "🔊")
+                    Text("🔀")
                         .bold()
                         .italic()
                         .customTextStroke(width: 1.2)
@@ -96,7 +68,7 @@ struct ButtonsView: View {
                     }
                     .frame(height: deviceWidth/7)
                     .background{
-                        Color.yellow
+                        Color.blue
                     }
                     .cornerRadius(15)
                     .overlay{

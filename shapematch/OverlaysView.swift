@@ -16,12 +16,12 @@ struct OverlaysView: View {
             if userPersistedData.level == 1 && !userPersistedData.firstGamePlayed {
                 HandSwipeView()
             }
-            InstructionView()
-                .padding(idiom == .pad ? 33 : 0)
-                .padding(.top, idiom == .pad ? 27 : 0)
-            NewGoalView()
-                .padding(idiom == .pad ? 33 : 0)
-                .padding(.top, idiom == .pad ? 27 : 0)
+//            InstructionView()
+//                .padding(idiom == .pad ? 33 : 0)
+//                .padding(.top, idiom == .pad ? 27 : 0)
+//            NewGoalView()
+//                .padding(idiom == .pad ? 33 : 0)
+//                .padding(.top, idiom == .pad ? 27 : 0)
         }
     }
 }
