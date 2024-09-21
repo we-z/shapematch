@@ -80,35 +80,39 @@ struct ContentView: View {
                         .frame(width: deviceWidth/4)
                         .scaleEffect(idiom == .pad ? 0.8 : 1)
                         Spacer()
-                        VStack{
-                            Text("Goal 🎯")
-                                .bold()
-                                .font(.system(size: deviceWidth/15))
-                                .fixedSize()
-                                .customTextStroke(width: 1.8)
+                        VStack {
+                            Spacer()
+                            Spacer()
                             VStack{
-                                ForEach(0..<appModel.grid.count, id: \.self) { row in
-                                    HStack {
-                                        ForEach(0..<appModel.grid.count, id: \.self) { column in
-                                            smallShapeView(shapeType: appModel.targetGrid[row][column])
-                                                .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11))
-                                                .padding(idiom == .pad ? 9 : 3)
+                                Text("Goal 🎯")
+                                    .bold()
+                                    .font(.system(size: deviceWidth/15))
+                                    .fixedSize()
+                                    .customTextStroke(width: 1.8)
+                                VStack{
+                                    ForEach(0..<appModel.grid.count, id: \.self) { row in
+                                        HStack {
+                                            ForEach(0..<appModel.grid.count, id: \.self) { column in
+                                                smallShapeView(shapeType: appModel.targetGrid[row][column])
+                                                    .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11))
+                                                    .padding(idiom == .pad ? 9 : 3)
+                                            }
                                         }
                                     }
                                 }
                             }
+                            .padding()
+                            .background(Color.yellow)
+                            .cornerRadius(15)
+                            .overlay{
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
+                                    .padding(1)
+                            }
+                            .pulsingPlaque()
+                            .scaleEffect(idiom == .pad ? 0.8 : 1)
+                            Spacer()
                         }
-                        .padding()
-                        .background(Color.yellow)
-                        .cornerRadius(15)
-                        .overlay{
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
-                                .padding(1)
-                        }
-                        .pulsingPlaque()
-                        .scaleEffect(idiom == .pad ? 0.8 : 1)
-                        
                         Spacer()
                         VStack{
                             Button{
