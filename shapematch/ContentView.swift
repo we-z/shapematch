@@ -37,7 +37,7 @@ struct ContentView: View {
                                     Spacer()
                                     Text("💎 \(userPersistedData.gemBalance)")
                                         .bold()
-                                        .font(.system(size: userPersistedData.gemBalance > 99 ?  deviceWidth/27 : deviceWidth/18))
+                                        .font(.system(size: userPersistedData.gemBalance > 99 ?  deviceWidth/21 : deviceWidth/15))
                                         .lineLimit(1)
                                         .customTextStroke(width: 1.5)
                                         .fixedSize()
@@ -227,7 +227,6 @@ struct ContentView: View {
                         .scaleEffect(1.1)
                     }
                     .scaleEffect(0.9)
-                    .padding(.bottom)
                 }
                 .allowsHitTesting(!appModel.freezeGame)
                 .scaleEffect(idiom == .pad ? 0.9 : 1)

@@ -17,12 +17,12 @@ struct OverlaysView: View {
                 HandSwipeView()
                     .scaleEffect(idiom == .pad ? 0.8 : 1)
             }
-//            InstructionView()
-//                .padding(idiom == .pad ? 33 : 0)
-//                .padding(.top, idiom == .pad ? 27 : 0)
-//            NewGoalView()
-//                .padding(idiom == .pad ? 33 : 0)
-//                .padding(.top, idiom == .pad ? 27 : 0)
+            InstructionView()
+                .padding(idiom == .pad ? 33 : 0)
+                .padding(.top, idiom == .pad ? 27 : 0)
+            NewGoalView()
+                .padding(idiom == .pad ? 33 : 0)
+                .padding(.top, idiom == .pad ? 27 : 0)
         }
     }
 }
