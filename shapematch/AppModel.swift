@@ -364,6 +364,10 @@ class AppModel: ObservableObject {
             print("Could not generate target grid with desired difficulty within iteration limit.")
         }
         
+        if minimumSwapsNeeded > swapsNeeded {
+            self.swapsNeeded = minimumSwapsNeeded  // Adjust the swapsNeeded if necessary
+        }
+        
         return targetGrid
     }
     
