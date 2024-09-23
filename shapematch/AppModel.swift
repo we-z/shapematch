@@ -183,13 +183,13 @@ class AppModel: ObservableObject {
         switch userPersistedData.level {
         case 1...7:
             swapsNeeded = userPersistedData.level
-            case 8...21:
+            case 8...11:
                 swapsNeeded = 7
-            case 22...35:
+            case 12...15:
                 swapsNeeded = 8
-            case 36...50:
+            case 16...39:
                 swapsNeeded = 9
-            case 51...70:
+            case 40...70:
                 swapsNeeded = 10
             case 71...100:
                 swapsNeeded = 11
@@ -211,9 +211,9 @@ class AppModel: ObservableObject {
 
         
         switch userPersistedData.level {
-        case 1...50:
+        case 1...15:
             shapes = [.circle, .square, .triangle]
-        case 51...999:
+        case 16...999:
             shapes =  [.circle, .square, .triangle, .star]
         default: 
             shapes =  [.circle, .square, .triangle, .star, .hexagon]

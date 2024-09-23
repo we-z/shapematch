@@ -22,7 +22,7 @@ struct ContentView: View {
         ZStack{
             Color.white
                 .ignoresSafeArea()
-            Color.black.opacity(colorScheme == .dark ? 0.8 : 0.2)
+            Color.black.opacity(colorScheme == .dark ? 0.8 : 0.15)
                 .ignoresSafeArea()
             Group {
                 VStack(spacing: 0) {
@@ -81,7 +81,6 @@ struct ContentView: View {
                         .scaleEffect(idiom == .pad ? 0.8 : 1)
                         Spacer()
                         VStack {
-                            Spacer()
                             Spacer()
                             VStack{
                                 Text("Goal 🎯")

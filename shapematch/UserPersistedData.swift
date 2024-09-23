@@ -12,19 +12,19 @@ import CloudStorage
 class UserPersistedData: ObservableObject {
     static let sharedUserPersistedData = UserPersistedData()
     
-    @CloudStorage("gemBalance") var gemBalance: Int = 0
-    @CloudStorage("level") var level: Int = 1
-    @CloudStorage("firstGamePlayed") var firstGamePlayed: Bool = false
-    @CloudStorage("hasShared") var hasShared: Bool = false
-    @CloudStorage("gridData") var gridData: String = ""
-    @CloudStorage("targetGridData") var targetGridData: String = ""
+//    @CloudStorage("gemBalance") var gemBalance: Int = 0
+//    @CloudStorage("level") var level: Int = 1
+//    @CloudStorage("firstGamePlayed") var firstGamePlayed: Bool = false
+//    @CloudStorage("hasShared") var hasShared: Bool = false
+//    @CloudStorage("gridData") var gridData: String = ""
+//    @CloudStorage("targetGridData") var targetGridData: String = ""
 
-//    @Published var gemBalance: Int = 0
-//    @Published var level: Int = 1
-//    @Published var firstGamePlayed: Bool = false
-//    @Published var hasShared: Bool = false
-//    @Published var gridData: String = ""
-//    @Published var targetGridData: String = ""
+    @Published var gemBalance: Int = 0
+    @Published var level: Int = 11
+    @Published var firstGamePlayed: Bool = false
+    @Published var hasShared: Bool = false
+    @Published var gridData: String = ""
+    @Published var targetGridData: String = ""
     
 //    @CloudStorage("hasSharedShapeSwap") var hasSharedShapeSwap: Bool = false
 //    @CloudStorage("lastLaunch") var lastLaunch: String = ""
