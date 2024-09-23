@@ -172,7 +172,7 @@ struct ContentView: View {
                     ButtonsView()
                         .zIndex(1)
                         .padding(.bottom, idiom == .pad ? 41 : 21)
-                        .padding(.horizontal, idiom == .pad ? 69 : 0)
+                        .padding(.horizontal, idiom == .pad ? 69 : 21)
                     VStack {
                         ForEach(0..<appModel.grid.count, id: \.self) { row in
                             HStack {
@@ -231,7 +231,7 @@ struct ContentView: View {
                 }
                 .allowsHitTesting(!appModel.freezeGame)
                 .scaleEffect(idiom == .pad ? 0.93 : 1)
-//                OverlaysView()
+                OverlaysView()
             }
             .scaleEffect(idiom == .pad ? 0.9 : 1)
             CelebrationEffect()
