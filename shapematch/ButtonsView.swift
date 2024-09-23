@@ -63,6 +63,7 @@ struct ButtonsView: View {
                             .customTextStroke(width: 1.2)
                             .font(.system(size: deviceWidth/21))
                             .scaleEffect(idiom == .pad ? 1 : 1.2)
+                            .fixedSize()
                         Spacer()
                         
                     }

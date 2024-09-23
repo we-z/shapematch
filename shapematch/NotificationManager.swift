@@ -13,7 +13,6 @@ class NotificationManager: ObservableObject {
     // Define arrays of titles and bodies
     let titles = [
         "Challenges Lead to Growth",
-        "Stay Focused",
         "Think, Plan, Solve",
         "Don’t Give Up",
         "Every Problem Has a Solution",
