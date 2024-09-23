@@ -27,7 +27,7 @@ struct ButtonsView: View {
                     Spacer()
                         
                 }
-                .frame(height: deviceWidth/7)
+                .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
                 .background{
                     Color.green
                 }
@@ -66,7 +66,7 @@ struct ButtonsView: View {
                         Spacer()
                         
                     }
-                    .frame(height: deviceWidth/7)
+                    .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
                     .background{
                         Color.blue
                     }
@@ -118,7 +118,7 @@ struct ButtonsView: View {
                     Spacer()
                         
                 }
-                .frame(height: deviceWidth/7)
+                .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
                 .background{
                     Color.red
                 }

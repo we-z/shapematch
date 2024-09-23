@@ -48,9 +48,9 @@ struct ContentView: View {
                                 .background{
                                     Color.blue
                                 }
-                                .cornerRadius(30)
+                                .cornerRadius(idiom == .pad ? 90 : 30)
                                 .overlay{
-                                    RoundedRectangle(cornerRadius: 30)
+                                    RoundedRectangle(cornerRadius: idiom == .pad ? 90 : 30)
                                         .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                         .padding(1)
                                 }
@@ -101,11 +101,11 @@ struct ContentView: View {
                                     }
                                 }
                             }
-                            .padding()
+                            .padding( idiom == .pad ? 30 : 18)
                             .background(Color.yellow)
-                            .cornerRadius(15)
+                            .cornerRadius(idiom == .pad ? 30 : 15)
                             .overlay{
-                                RoundedRectangle(cornerRadius: 15)
+                                RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
                                     .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
                                     .padding(1)
                             }
@@ -133,9 +133,9 @@ struct ContentView: View {
                                 .background{
                                     Color.purple
                                 }
-                                .cornerRadius(30)
+                                .cornerRadius(idiom == .pad ? 90 : 30)
                                 .overlay{
-                                    RoundedRectangle(cornerRadius: 30)
+                                    RoundedRectangle(cornerRadius:idiom == .pad ? 90 :  30)
                                         .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                         .padding(1)
                                 }
@@ -171,7 +171,8 @@ struct ContentView: View {
                     Spacer()
                     ButtonsView()
                         .zIndex(1)
-                        .padding(.bottom, idiom == .pad ? 60 : 21)
+                        .padding(.bottom, idiom == .pad ? 41 : 21)
+                        .padding(.horizontal, idiom == .pad ? 69 : 0)
                     VStack {
                         ForEach(0..<appModel.grid.count, id: \.self) { row in
                             HStack {
@@ -229,8 +230,8 @@ struct ContentView: View {
                     .scaleEffect(0.9)
                 }
                 .allowsHitTesting(!appModel.freezeGame)
-                .scaleEffect(idiom == .pad ? 0.9 : 1)
-                OverlaysView()
+                .scaleEffect(idiom == .pad ? 0.93 : 1)
+//                OverlaysView()
             }
             .scaleEffect(idiom == .pad ? 0.9 : 1)
             CelebrationEffect()
