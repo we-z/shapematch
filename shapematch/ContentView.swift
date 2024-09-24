@@ -71,7 +71,7 @@ struct ContentView: View {
                                 .customTextStroke(width: 1.5)
                             Text("\(userPersistedData.level)")
                                 .bold()
-                                .font(.system(size: deviceWidth/9))
+                                .font(.system(size: userPersistedData.level  > 999 ? deviceWidth/12 : deviceWidth/9))
                                 .minimumScaleFactor(0.1)
                                 .fixedSize()
                                 .customTextStroke()

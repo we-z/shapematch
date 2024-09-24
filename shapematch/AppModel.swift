@@ -207,15 +207,21 @@ class AppModel: ObservableObject {
                 swapsNeeded = 16
             case 751...999:
                 swapsNeeded = 17
-            default:
+            case 1000...3000:
                 swapsNeeded = 18
+            case 3001...6000:
+                swapsNeeded = 19
+            case 6001...9999:
+                swapsNeeded = 20
+            default:
+                swapsNeeded = 21
         }
 
         
         switch userPersistedData.level {
         case 1...15:
             shapes = [.circle, .square, .triangle]
-        case 16...999:
+        case 16...500:
             shapes =  [.circle, .square, .triangle, .star]
         default: 
             shapes =  [.circle, .square, .triangle, .star, .hexagon]
@@ -344,7 +350,7 @@ class AppModel: ObservableObject {
 
         var swapsMade = 0
         var iterations = 0
-        let maxIterations = 1000
+        let maxIterations = 100
 
         while swapsMade < swapsNeeded && iterations < maxIterations {
             iterations += 1
