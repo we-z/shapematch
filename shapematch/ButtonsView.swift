@@ -22,6 +22,7 @@ struct ButtonsView: View {
                         .bold()
                         .italic()
                         .customTextStroke(width: 1.2)
+                        .fixedSize()
                         .font(.system(size: deviceWidth/21))
                         .scaleEffect(idiom == .pad ? 1 : 1.2)
                     Spacer()
@@ -93,9 +94,11 @@ struct ButtonsView: View {
                             Text("+ 3")
                                 .bold()
                                 .customTextStroke(width: 1)
+                                .fixedSize()
                             Text("💎 1")
                                 .bold()
                                 .customTextStroke(width: 1)
+                                .fixedSize()
                         }
                         .font(.system(size: idiom == .pad ? 36 : 12))
                     }
@@ -114,6 +117,7 @@ struct ButtonsView: View {
                         .bold()
                         .italic()
                         .customTextStroke(width: 1.2)
+                        .fixedSize()
                         .font(.system(size: deviceWidth/21))
                         .scaleEffect(idiom == .pad ? 1 : 1.2)
                     Spacer()

@@ -123,6 +123,7 @@ struct ContentView: View {
                                         .bold()
                                         .italic()
                                         .customTextStroke(width: 1.2)
+                                        .fixedSize()
                                         .font(.system(size: deviceWidth/21))
                                         .scaleEffect(idiom == .pad ? 1 : 1.2)
                                     Spacer()

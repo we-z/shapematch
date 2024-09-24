@@ -99,6 +99,7 @@ struct NoMoreSwipesView: View {
                                 Text("🔀")
                                     .font(.system(size: deviceWidth/12))
                                     .customTextStroke(width: 2)
+                                    .fixedSize()
                                     .padding([.trailing], 9)
                                 Spacer()
                             }
@@ -125,6 +126,7 @@ struct NoMoreSwipesView: View {
                                 Text("🔁")
                                     .font(.system(size: deviceWidth/12))
                                     .customTextStroke(width: 2)
+                                    .fixedSize()
                                     .padding([.trailing], 9)
                                 Spacer()
                             }
