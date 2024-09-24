@@ -22,12 +22,12 @@ struct iconview: View {
                         ForEach(0..<2) { column in // Updated to 4 columns
                             LargeShapeView(shapeType: grid[row][column])
                                 .frame(width: deviceWidth / 8, height: deviceWidth / 8)
-                                .padding(12)
+                                .padding(18)
                             
                         }
                     }
                 }
-            }.scaleEffect(1.5)
+            }.scaleEffect(1.8)
         }
     }
 }

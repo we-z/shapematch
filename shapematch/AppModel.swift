@@ -327,49 +327,67 @@ class AppModel: ObservableObject {
     }
 
     func generateTargetGrid(from startGrid: [[ShapeType]], with swapsNeeded: Int) -> [[ShapeType]] {
-        
         var targetGrid = startGrid
-        var minimumSwapsNeeded = approximateMinimumSwipes(from: startGrid, to: targetGrid)
-        var previousMinimumSwapsNeeded = minimumSwapsNeeded
+        var previousPositions: [ShapeType: Set<Position>] = [:]
+        let gridSize = startGrid.count
+
+        // Initialize previousPositions with the starting positions
+        for row in 0..<gridSize {
+            for col in 0..<gridSize {
+                let shape = startGrid[row][col]
+                let position = Position(row: row, col: col)
+                previousPositions[shape, default: []].insert(position)
+            }
+        }
+
+        var swapsMade = 0
         var iterations = 0
-        let maxIterations = 100  // Adjust as needed
-        
-        while minimumSwapsNeeded < swapsNeeded && iterations < maxIterations {
+        let maxIterations = 1000
+
+        while swapsMade < swapsNeeded && iterations < maxIterations {
             iterations += 1
-            let gridSize = startGrid.count
             let row = Int.random(in: 0..<gridSize)
             let col = Int.random(in: 0..<gridSize)
-            
+
             var possibleSwaps = [(Int, Int)]()
             if row > 0 { possibleSwaps.append((row - 1, col)) }
             if row < gridSize - 1 { possibleSwaps.append((row + 1, col)) }
             if col > 0 { possibleSwaps.append((row, col - 1)) }
             if col < gridSize - 1 { possibleSwaps.append((row, col + 1)) }
-            
-            if possibleSwaps.isEmpty { continue }
-            
-            let (swapRow, swapCol) = possibleSwaps.randomElement()!
-            targetGrid.swapAt((row, col), (swapRow, swapCol))
-            
-            minimumSwapsNeeded = approximateMinimumSwipes(from: startGrid, to: targetGrid)
-            
-            if minimumSwapsNeeded >= previousMinimumSwapsNeeded {
-                previousMinimumSwapsNeeded = minimumSwapsNeeded
-            } else {
-                targetGrid.swapAt((row, col), (swapRow, swapCol)) // Undo swap
+
+            possibleSwaps.shuffle()
+
+            for (swapRow, swapCol) in possibleSwaps {
+                let pos1 = Position(row: row, col: col)
+                let pos2 = Position(row: swapRow, col: swapCol)
+                let shape1 = targetGrid[pos1.row][pos1.col]
+                let shape2 = targetGrid[pos2.row][pos2.col]
+
+                // Ensure shapes are different and swapping doesn't return shapes to previous positions
+                if shape1 != shape2,
+                   !previousPositions[shape1, default: []].contains(pos2),
+                   !previousPositions[shape2, default: []].contains(pos1) {
+
+                    // Perform the swap
+                    targetGrid.swapAt((pos1.row, pos1.col), (pos2.row, pos2.col))
+
+                    // Update previous positions
+                    previousPositions[shape1, default: []].insert(pos2)
+                    previousPositions[shape2, default: []].insert(pos1)
+
+                    swapsMade += 1
+                    break
+                }
             }
         }
-        
+
         if iterations >= maxIterations {
             print("Could not generate target grid with desired difficulty within iteration limit.")
         }
-        
-        if minimumSwapsNeeded > swapsNeeded {
-            self.swapsNeeded = minimumSwapsNeeded  // Adjust the swapsNeeded if necessary
-        }
-        
+
         return targetGrid
     }
+
     
     func persistData() {
         // The grid now requires exactly `swapsNeeded` swaps to solve
