@@ -82,6 +82,7 @@ struct ContentView: View {
                         Spacer()
                         VStack {
                             Spacer()
+                            Spacer()
                             VStack{
                                 Text("Goal 🎯")
                                     .bold()
@@ -169,10 +170,16 @@ struct ContentView: View {
                         
                     }
                     Spacer()
-                    ButtonsView()
-                        .zIndex(1)
-                        .padding(.bottom, idiom == .pad ? 41 : 21)
-                        .padding(.horizontal, idiom == .pad ? 69 : 21)
+                    ZStack{
+                        ButtonsView()
+                            .padding(.horizontal, idiom == .pad ? 69 : 21)
+                        InstructionView()
+                            .frame(height: 1)
+                        NewGoalView()
+                            .frame(height: 1)
+                    }
+                    .padding(.bottom, idiom == .pad ? 41 : 21)
+                    .zIndex(1)
                     VStack {
                         ForEach(0..<appModel.grid.count, id: \.self) { row in
                             HStack {
