@@ -143,7 +143,7 @@ struct LargeShapeView: View {
                     lineWidth: idiom == .pad ? 30 : 18,
                     fill: Color.yellow
                 ))
-                .scaleEffect(0.9)
+                .scaleEffect(0.8)
         case .hexagon:
             HexagonShape()
                 .foregroundColor(.purple)
