@@ -93,8 +93,9 @@ struct ContentView: View {
                                     ForEach(0..<appModel.grid.count, id: \.self) { row in
                                         HStack {
                                             ForEach(0..<appModel.grid.count, id: \.self) { column in
-                                                smallShapeView(shapeType: appModel.targetGrid[row][column])
+                                                ShapeView(shapeType: appModel.targetGrid[row][column])
                                                     .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11))
+                                                    .scaleEffect(0.39)
                                                     .padding(idiom == .pad ? 9 : 3)
                                             }
                                         }
@@ -184,8 +185,9 @@ struct ContentView: View {
                         ForEach(0..<appModel.grid.count, id: \.self) { row in
                             HStack {
                                 ForEach(0..<appModel.grid.count, id: \.self) { column in
-                                    LargeShapeView(shapeType: appModel.grid[row][column])
+                                    ShapeView(shapeType: appModel.grid[row][column])
                                         .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 3), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 3))
+                                        .scaleEffect(1.3)
                                         .padding(idiom == .pad ? 30 : 15)
                                         .background(.white.opacity(0.001))
                                         .offset(appModel.offsets[row][column])
@@ -253,7 +255,7 @@ struct ContentView: View {
             appModel.initialGrid = appModel.grid
             self.notificationManager.registerLocal()
             // 1054, 1109, 1054, 1057, 1114, 1115, 1159, 1166, 1300, 1308, 1313, 1322, 1334
-//            AudioServicesPlaySystemSound(1114)
+//            AudioServicesPlaySystemSound(1335)
         }
         .onChange(of: scenePhase) { newScenePhase in
             DispatchQueue.main.async { [self] in
