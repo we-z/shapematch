@@ -129,68 +129,6 @@ struct Triangle: Shape {
     }
 }
 
-struct ShapeView: View {
-    let shapeType: ShapeType
-    
-    var body: some View {
-        switch shapeType {
-        case .circle:
-            ZStack {
-                Circle()
-                    .fill(Color.black)
-                    .scaleEffect(1.2)
-                Circle()
-                    .fill(Color.blue)
-            }
-            .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-        case .square:
-            ZStack {
-                Rectangle()
-                    .fill(Color.black)
-                    .cornerRadius(deviceWidth / 45)
-                    .scaleEffect(1.21)
-                Rectangle()
-                    .fill(Color.red)
-                    .cornerRadius(deviceWidth / 60)
-            }
-            .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-        case .triangle:
-            ZStack {
-                RoundedTriangle(cornerRadius: deviceWidth / 60)
-                    .foregroundColor(.black)
-                    .scaleEffect(1.18)
-                RoundedTriangle(cornerRadius: deviceWidth / 90)
-                    .foregroundColor(.green)
-            }
-            .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-            .scaleEffect(1.3)
-            .offset(y: deviceWidth / 45)
-            
-        case .star:
-            ZStack {
-                RoundedStar(cornerRadius: deviceWidth / 90)
-                    .foregroundColor(.black)
-                    .scaleEffect(1.2)
-                RoundedStar(cornerRadius: deviceWidth / 210)
-                    .foregroundColor(.yellow)
-            }
-            .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-            .scaleEffect(1.15)
-            .offset(y: deviceWidth / 120)
-        case .hexagon:
-            ZStack {
-                RoundedHexagon(cornerRadius: deviceWidth / 75)
-                    .foregroundColor(.black)
-                    .scaleEffect(1.21)
-                RoundedHexagon(cornerRadius: deviceWidth / 150)
-                    .foregroundColor(.purple)
-                
-            }
-            .scaleEffect(1.03)
-            .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-        }
-    }
-}
 
 struct RoundedHexagon: Shape {
     var cornerRadius: CGFloat

@@ -96,6 +96,7 @@ struct ContentView: View {
                                                 ShapeView(shapeType: appModel.targetGrid[row][column])
                                                     .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11))
                                                     .scaleEffect(0.39)
+                                                    .scaleEffect(1.4 - (CGFloat(appModel.grid.count) * 0.18))
                                                     .padding(idiom == .pad ? 9 : 3)
                                             }
                                         }
@@ -187,7 +188,7 @@ struct ContentView: View {
                                 ForEach(0..<appModel.grid.count, id: \.self) { column in
                                     ShapeView(shapeType: appModel.grid[row][column])
                                         .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 3), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 3))
-                                        .scaleEffect(1.3)
+                                        .scaleEffect(2.1 - (CGFloat(appModel.grid.count) * 0.29))
                                         .padding(idiom == .pad ? 30 : 15)
                                         .background(.white.opacity(0.001))
                                         .offset(appModel.offsets[row][column])
