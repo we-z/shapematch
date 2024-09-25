@@ -10,11 +10,11 @@ import SwiftUI
 struct TempView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @State var grid: [[ShapeType]] = [
-        [.square, .triangle, .circle, .star, .hexagon], // Updated to 4x4 grid with star shape
-        [.triangle, .square, .circle, .star, .hexagon],
-        [.square, .circle, .triangle, .star, .hexagon],
-        [.circle, .triangle, .square, .star, .hexagon],
-        [.circle, .triangle, .square, .star, .hexagon]
+        [.square, .triangle, .circle, .star, .heart], // Updated to 4x4 grid with star shape
+        [.triangle, .square, .circle, .star, .heart],
+        [.square, .circle, .triangle, .star, .heart],
+        [.circle, .triangle, .square, .star, .heart],
+        [.circle, .triangle, .square, .star, .heart]
     ]
     
     @State var grid2: [[ShapeType]] = [

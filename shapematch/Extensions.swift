@@ -42,7 +42,7 @@ enum SwipeDirection {
 }
 
 enum ShapeType: Int, Identifiable, Equatable, CaseIterable {
-    case circle, square, triangle, star, hexagon
+    case circle, square, triangle, star, heart
     
     var id: Int { rawValue }
 }

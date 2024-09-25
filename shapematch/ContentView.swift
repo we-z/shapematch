@@ -22,7 +22,7 @@ struct ContentView: View {
         ZStack{
             Color.white
                 .ignoresSafeArea()
-            Color.black.opacity(colorScheme == .dark ? 0.8 : 0.15)
+            Color.black.opacity(colorScheme == .dark ? 0.8 : 0.12)
                 .ignoresSafeArea()
             Group {
                 VStack(spacing: 0) {
@@ -62,7 +62,7 @@ struct ContentView: View {
                                 .bold()
                                 .font(.system(size: deviceWidth/18))
                                 .fixedSize()
-                                .customTextStroke(width: 1.5)
+                                .customTextStroke(width: 1.2)
                                 .padding(.top, idiom == .pad ? 60 : 0)
                             Text("Level")
                                 .bold()
@@ -96,7 +96,7 @@ struct ContentView: View {
                                                 ShapeView(shapeType: appModel.targetGrid[row][column])
                                                     .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11))
                                                     .scaleEffect(0.39)
-                                                    .scaleEffect(1.52 - (CGFloat(appModel.grid.count) * 0.2))
+                                                    .scaleEffect(1.52 - (CGFloat(appModel.grid.count) * 0.21))
                                                     .padding(idiom == .pad ? 9 : 3)
                                             }
                                         }
@@ -188,7 +188,7 @@ struct ContentView: View {
                                 ForEach(0..<appModel.grid.count, id: \.self) { column in
                                     ShapeView(shapeType: appModel.grid[row][column])
                                         .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 3), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 3))
-                                        .scaleEffect(2.1 - (CGFloat(appModel.grid.count) * 0.29))
+                                        .scaleEffect(2.1 - (CGFloat(appModel.grid.count) * 0.3))
                                         .padding(idiom == .pad ? 30 : 15)
                                         .background(.white.opacity(0.001))
                                         .offset(appModel.offsets[row][column])

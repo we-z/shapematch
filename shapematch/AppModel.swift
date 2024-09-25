@@ -158,6 +158,7 @@ class AppModel: ObservableObject {
             }
             self.freezeGame = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
+                AudioServicesPlaySystemSound(1335)
                 userPersistedData.level += 1
                 showInstruction.toggle()
                 setupLevel()
@@ -222,7 +223,7 @@ class AppModel: ObservableObject {
         case 16...500:
             shapes =  [.circle, .square, .triangle, .star]
         default: 
-            shapes =  [.circle, .square, .triangle, .star, .hexagon]
+            shapes =  [.circle, .square, .triangle, .star, .heart]
         }
         
         offsets = Array(
