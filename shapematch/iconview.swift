@@ -21,12 +21,13 @@ struct iconview: View {
                     HStack {
                         ForEach(0..<2) { column in // Updated to 4 columns
                             ShapeView(shapeType: grid[row][column])
-                                .padding(6)
+                                .padding(18)
                             
                         }
                     }
                 }
-            }.scaleEffect(3)
+            }
+            .scaleEffect(1.4)
         }
     }
 }

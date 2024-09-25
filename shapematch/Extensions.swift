@@ -147,19 +147,19 @@ struct ShapeView: View {
             ZStack {
                 Rectangle()
                     .fill(Color.black)
-                    .cornerRadius(deviceWidth / 24)
-                    .scaleEffect(1.2)
+                    .cornerRadius(deviceWidth / 45)
+                    .scaleEffect(1.21)
                 Rectangle()
                     .fill(Color.red)
-                    .cornerRadius(deviceWidth / 30)
+                    .cornerRadius(deviceWidth / 60)
             }
             .frame(width: deviceWidth / 6, height: deviceWidth / 6)
         case .triangle:
             ZStack {
-                RoundedTriangle(cornerRadius: deviceWidth / 45)
+                RoundedTriangle(cornerRadius: deviceWidth / 60)
                     .foregroundColor(.black)
                     .scaleEffect(1.18)
-                RoundedTriangle(cornerRadius: deviceWidth / 75)
+                RoundedTriangle(cornerRadius: deviceWidth / 90)
                     .foregroundColor(.green)
             }
             .frame(width: deviceWidth / 6, height: deviceWidth / 6)
@@ -168,10 +168,10 @@ struct ShapeView: View {
             
         case .star:
             ZStack {
-                RoundedStar(cornerRadius: deviceWidth / 75)
+                RoundedStar(cornerRadius: deviceWidth / 90)
                     .foregroundColor(.black)
                     .scaleEffect(1.2)
-                RoundedStar(cornerRadius: deviceWidth / 150)
+                RoundedStar(cornerRadius: deviceWidth / 210)
                     .foregroundColor(.yellow)
             }
             .frame(width: deviceWidth / 6, height: deviceWidth / 6)
