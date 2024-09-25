@@ -101,7 +101,7 @@ struct NewGoalView: View {
                     cardOffset = 0
                 }
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 6) { [self] in
                 withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                     cardOffset = -(deviceWidth * 1.2)
                 }

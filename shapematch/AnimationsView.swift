@@ -25,18 +25,20 @@ struct AnimationsView: View {
 
 struct CelebrationEffect: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
-
+    @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     // Array of congratulatory messages
     private let messages = ["Well Done!", "Great Job!", "You Did It!", "Awesome!"]
     
     // State to hold the current message
     @State private var currentMessage = ""
     @State private var showMessage = false
+    @State private var showAnimation = false
+    @State private var showLevel = false
     @State private var animateMessage = false
 
     var body: some View {
         ZStack{
-            if animateMessage {
+            if showAnimation {
                 Color.gray.opacity(0.7)
                     .ignoresSafeArea()
             }
@@ -56,6 +58,7 @@ struct CelebrationEffect: View {
                     .onChange(of: appModel.shouldBurst) { newValue in
                         DispatchQueue.main.async {
                             showMessage = true
+                            showAnimation = true
                             hapticManager.notification(type: .error)
                             withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 200.0, damping: 13.0, initialVelocity: -10.0)) {
                                 animateMessage = true
@@ -73,6 +76,16 @@ struct CelebrationEffect: View {
                                 }
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
                                     showMessage = false
+                                    withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 200.0, damping: 13.0, initialVelocity: -10.0)) {
+                                        showLevel = true
+                                    }
+                                }
+                            }
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [self] in
+                                withAnimation(.linear) {
+                                    showLevel = false
+                                    showAnimation = false
                                 }
                             }
                         }
@@ -89,6 +102,14 @@ struct CelebrationEffect: View {
                     .scaleEffect(animateMessage ? 1 : 0.1)
                     .offset(y: animateMessage ? 0 : -(deviceHeight/2))
             }
+            Text("Level\n\(userPersistedData.level)")
+                .bold()
+                .italic()
+                .multilineTextAlignment(.center)
+                .font(.system(size: deviceWidth / 4.5))
+                .customTextStroke(width: 3.3)
+                .rotationEffect(.degrees(showLevel ? 0 : -180))
+                .scaleEffect(showLevel ? 1 : 0.001)
         }
         .allowsHitTesting(false)
     }

@@ -96,7 +96,7 @@ struct ContentView: View {
                                                 ShapeView(shapeType: appModel.targetGrid[row][column])
                                                     .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11))
                                                     .scaleEffect(0.39)
-                                                    .scaleEffect(1.4 - (CGFloat(appModel.grid.count) * 0.18))
+                                                    .scaleEffect(1.52 - (CGFloat(appModel.grid.count) * 0.2))
                                                     .padding(idiom == .pad ? 9 : 3)
                                             }
                                         }

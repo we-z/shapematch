@@ -21,13 +21,13 @@ struct iconview: View {
                     HStack {
                         ForEach(0..<2) { column in // Updated to 4 columns
                             ShapeView(shapeType: grid[row][column])
-                                .padding(18)
+                                .padding(15)
                             
                         }
                     }
                 }
             }
-            .scaleEffect(1.4)
+            .scaleEffect(1.5)
         }
     }
 }
@@ -73,12 +73,12 @@ struct ShapeView: View {
             ZStack {
                 RoundedStar(cornerRadius: deviceWidth / 180)
                     .foregroundColor(.black)
-                    .scaleEffect(1.3)
+                    .scaleEffect(1.5)
                 RoundedStar(cornerRadius: deviceWidth / 360)
                     .foregroundColor(.yellow)
             }
             .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-            .scaleEffect(1.15)
+            .scaleEffect(1)
             .offset(y: deviceWidth / 120)
         case .hexagon:
             ZStack {
