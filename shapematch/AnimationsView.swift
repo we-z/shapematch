@@ -88,6 +88,7 @@ struct CelebrationEffect: View {
                             }
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [self] in
+                                appModel.freezeGame = false
                                 withAnimation(.linear) {
                                     showLevel = false
                                     showAnimation = false

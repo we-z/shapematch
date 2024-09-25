@@ -163,7 +163,7 @@ class AppModel: ObservableObject {
                 showInstruction.toggle()
                 setupLevel()
                 swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
-                self.freezeGame = false
+                
             }
             // 1335, 1114
             AudioServicesPlaySystemSound(1114)
