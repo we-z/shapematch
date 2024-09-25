@@ -168,7 +168,9 @@ class AppModel: ObservableObject {
             // 1335, 1114
             AudioServicesPlaySystemSound(1114)
             DispatchQueue.main.asyncAfter(deadline: .now() + 6) { [self] in
-                audioController.musicPlayer.setVolume(0.1, fadeDuration: 1)
+                if !audioController.mute {
+                    audioController.musicPlayer.setVolume(0.1, fadeDuration: 1)
+                }
             }
             print("You win!")
         } else if swipesLeft <= 0 {
