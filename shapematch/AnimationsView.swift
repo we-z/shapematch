@@ -58,9 +58,10 @@ struct CelebrationEffect: View {
                     .onChange(of: appModel.shouldBurst) { newValue in
                         DispatchQueue.main.async {
                             showMessage = true
-                            showAnimation = true
                             hapticManager.notification(type: .error)
                             withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 200.0, damping: 13.0, initialVelocity: -10.0)) {
+                                
+                                showAnimation = true
                                 animateMessage = true
                                 currentMessage = messages.randomElement() ?? "Well Done!"
                             }
