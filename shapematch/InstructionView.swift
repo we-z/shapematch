@@ -36,6 +36,19 @@ struct InstructionView: View {
             .padding(.horizontal, 12)
             .offset(y: cardOffset)
         }
+        .gesture(
+            DragGesture(minimumDistance: 1, coordinateSpace: .local)
+                .onEnded { value in
+                    if value.translation.height < 0 {
+                        // Swipe up detected
+                        DispatchQueue.main.async { [self] in
+                            withAnimation(.linear) {
+                                cardOffset = -(deviceWidth * 1.2)
+                            }
+                        }
+                    }
+                }
+        )
         .onChange(of: userPersistedData.level) { level in
             if level > 1 {
                 DispatchQueue.main.async {

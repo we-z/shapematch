@@ -4,7 +4,7 @@
 //
 //  Created by Wheezy Capowdis on 9/14/24.
 //
-
+import AVFoundation
 import Foundation
 import SwiftUI
 
@@ -322,12 +322,14 @@ struct RoundedAndShadowButtonStyle6:ButtonStyle {
             .onChange(of: configuration.isPressed) { currentlyPressing in
                 if currentlyPressing {
                     impactHeavy.impactOccurred()
+                    AudioServicesPlaySystemSound(1104)
                 }
                 isPressed = true
                 if !currentlyPressing {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [self] in
                         isPressed = false
                         impactHeavy.impactOccurred()
+//                        AudioServicesPlaySystemSound(1103)
                     }
                 }
             }

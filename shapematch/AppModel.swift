@@ -158,7 +158,7 @@ class AppModel: ObservableObject {
             }
             self.freezeGame = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
-                AudioServicesPlaySystemSound(1335)
+                AudioServicesPlaySystemSound(1020)
                 userPersistedData.level += 1
                 showInstruction.toggle()
                 setupLevel()
