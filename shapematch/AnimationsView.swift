@@ -89,6 +89,9 @@ struct CelebrationEffect: View {
                                     showLevel = false
                                     showAnimation = false
                                 }
+                                if userPersistedData.level == 2 {
+                                    appModel.showNewGoal.toggle()
+                                }
                             }
                         }
                     }

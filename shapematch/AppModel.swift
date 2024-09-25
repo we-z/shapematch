@@ -158,9 +158,6 @@ class AppModel: ObservableObject {
             }
             self.freezeGame = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
-                if userPersistedData.level == 1 {
-                    showNewGoal.toggle()
-                }
                 userPersistedData.level += 1
                 showInstruction.toggle()
                 setupLevel()
