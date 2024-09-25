@@ -36,11 +36,11 @@ struct InstructionView: View {
             .padding(.horizontal, 12)
             .offset(y: cardOffset)
         }
-        .onChange(of: userPersistedData.firstGamePlayed) { firstGamePlayed in
-            if firstGamePlayed {
+        .onChange(of: userPersistedData.level) { level in
+            if level > 1 {
                 DispatchQueue.main.async {
-                    withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                        cardOffset = -(deviceWidth * 1.2)
+                    withAnimation(.linear) {
+                        cardOffset = (deviceWidth * 1.5)
                     }
                 }
             }
