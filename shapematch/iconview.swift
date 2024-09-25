@@ -45,7 +45,7 @@ struct ShapeView: View {
 //                Circle()
 //                    .fill(Color.blue)
                 Text("🔵")
-                    .font(.system(size: 53))
+                    .font(.system(size: idiom == .pad ? 75 : 53))
                     .customTextStroke()
                     .scaleEffect(1.5)
             }
@@ -60,7 +60,7 @@ struct ShapeView: View {
 //                    .fill(Color.red)
 //                    .cornerRadius(deviceWidth / 120)
                 Text("🟩")
-                    .font(.system(size: 53))
+                    .font(.system(size: idiom == .pad ? 75 : 53))
                     .customTextStroke()
                     .scaleEffect(1.5)
             }
@@ -73,7 +73,7 @@ struct ShapeView: View {
 //                RoundedTriangle(cornerRadius: deviceWidth / 180)
 //                    .foregroundColor(.green)
             Text("🔺")
-                .font(.system(size: 53))
+                    .font(.system(size: idiom == .pad ? 75 : 53))
                 .customTextStroke(width: 1)
                 .scaleEffect(2.4)
             }
@@ -89,7 +89,7 @@ struct ShapeView: View {
 //                RoundedStar(cornerRadius: deviceWidth / 360)
 //                    .foregroundColor(.yellow)
                 Text("⭐️")
-                    .font(.system(size: 53))
+                    .font(.system(size: idiom == .pad ? 75 : 53))
                     .customTextStroke()
                     .scaleEffect(1.7)
             }
@@ -99,7 +99,7 @@ struct ShapeView: View {
         case .heart:
             ZStack {
                 Text("💜")
-                    .font(.system(size: 53))
+                    .font(.system(size: idiom == .pad ? 75 : 53))
                     .customTextStroke()
                     .scaleEffect(1.6)
                 
