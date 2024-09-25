@@ -72,7 +72,7 @@ struct ShapeView: View {
 //                    .scaleEffect(1.21)
 //                RoundedTriangle(cornerRadius: deviceWidth / 180)
 //                    .foregroundColor(.green)
-            Text("🔺")
+            Text("🔻")
                     .font(.system(size: idiom == .pad ? 90 : 53))
                 .customTextStroke(width: 1)
                 .scaleEffect(2.4)
