@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Vortex
+import AVFoundation
 
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
@@ -26,6 +27,7 @@ struct AnimationsView: View {
 struct CelebrationEffect: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
+    @StateObject var audioController = AudioManager.sharedAudioManager
     // Array of congratulatory messages
     private let messages = ["Well Done!", "Great Job!", "You Did It!", "Awesome!"]
     
@@ -72,6 +74,7 @@ struct CelebrationEffect: View {
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
                                 hapticManager.notification(type: .error)
+                                audioController.musicPlayer.setVolume(0, fadeDuration: 1)
                                 withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                                     animateMessage = false
                                 }

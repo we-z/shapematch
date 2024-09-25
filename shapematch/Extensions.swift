@@ -7,7 +7,7 @@
 import AVFoundation
 import Foundation
 import SwiftUI
-
+import AVFoundation
 
 extension Array where Element == [ShapeType] {
     mutating func swapAt(_ first: (row: Int, col: Int), _ second: (row: Int, col: Int)) {
