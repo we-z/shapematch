@@ -16,20 +16,21 @@ struct iconview: View {
     var body: some View {
         ZStack {
             Color.white
-            Color.black.opacity(0.8)
+//            Color.black.opacity(0.8)
             VStack {
-//                ForEach(0..<2) { row in // Updated to 4 rows
-//                    HStack {
-//                        ForEach(0..<2) { column in // Updated to 4 columns
-//                            ShapeView(shapeType: grid[row][column])
-//                                .padding(18)
-//                            
-//                        }
-//                    }
-//                }
+                ForEach(0..<2) { row in // Updated to 4 rows
+                    HStack {
+                        ForEach(0..<2) { column in // Updated to 4 columns
+                            ShapeView(shapeType: grid[row][column])
+                                .padding(18)
+                            
+                        }
+                    }
+                }
 //                ShapeView(shapeType: .triangle)
-                Text("🔻")
-                    .font(.system(size: 210))
+//                Text("🔻")
+//                    .font(.system(size: 270))
+//                    .customTextStroke(width: 6)
                 
             }
 //            .scaleEffect(1.5)

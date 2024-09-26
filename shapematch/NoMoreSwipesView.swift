@@ -56,7 +56,7 @@ struct NoMoreSwipesView: View {
             VStack{
                 HStack {
                     Spacer()
-                    Text("0 Swaps left ✋")
+                    Text("0 Moves left ✋")
                         .bold()
                         .font(.system(size: deviceWidth/9))
                         .customTextStroke(width: 2.4)
@@ -160,7 +160,7 @@ struct NoMoreSwipesView: View {
                     } label: {
                         HStack{
                             Spacer()
-                            Text("💎 + \(appModel.swapsToSell) Swaps ↔️")
+                            Text("💎 + \(appModel.swapsToSell) Moves ↔️")
                                 .bold()
                                 .font(.system(size: deviceWidth/12))
                                 .fixedSize()
