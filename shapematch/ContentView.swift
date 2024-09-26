@@ -96,7 +96,7 @@ struct ContentView: View {
                                                 ShapeView(shapeType: appModel.targetGrid[row][column])
                                                     .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11))
                                                     .scaleEffect(0.39)
-                                                    .scaleEffect(1.52 - (CGFloat(appModel.grid.count) * 0.21))
+                                                    .scaleEffect(1.7 - (CGFloat(appModel.grid.count) * 0.27))
                                                     .padding(idiom == .pad ? 9 : 3)
                                             }
                                         }
@@ -192,7 +192,7 @@ struct ContentView: View {
                                 ForEach(0..<appModel.grid.count, id: \.self) { column in
                                     ShapeView(shapeType: appModel.grid[row][column])
                                         .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 3), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 3))
-                                        .scaleEffect(2.1 - (CGFloat(appModel.grid.count) * 0.3))
+                                        .scaleEffect(2.2 - (CGFloat(appModel.grid.count) * 0.36))
                                         .padding(idiom == .pad ? 30 : 15)
                                         .background(.white.opacity(0.001))
                                         .offset(appModel.offsets[row][column])
@@ -260,7 +260,7 @@ struct ContentView: View {
             appModel.initialGrid = appModel.grid
             self.notificationManager.registerLocal()
             // 1054, 1109, 1054, 1057, 1114, 1115, 1159, 1166, 1300, 1308, 1313, 1322, 1334
-            
+//            AudioServicesPlaySystemSound(1105)
         }
         .onChange(of: scenePhase) { newScenePhase in
             DispatchQueue.main.async { [self] in

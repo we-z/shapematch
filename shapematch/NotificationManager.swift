@@ -10,14 +10,6 @@ import GameKit
 
 class NotificationManager: ObservableObject {
     
-    // Define arrays of titles and bodies
-    let titles = [
-        "Challenges Lead to Growth",
-        "Think, Plan, Solve",
-        "Don’t Give Up",
-        "Every Problem Has a Solution",
-    ]
-    
     let bodies = [
         "A problem reveals itself only when you understand its structure.",
         "Clarity comes not from knowing the answer, but from refining the question.",
@@ -55,13 +47,12 @@ class NotificationManager: ObservableObject {
     @objc func scheduleLocal() {
         print("scheduleLocal called")
         let center = UNUserNotificationCenter.current()
-
+        
         // Randomly select a title and body
-        let randomTitleIndex = Int.random(in: 0..<titles.count)
         let randomBodyIndex = Int.random(in: 0..<bodies.count)
         
         let content = UNMutableNotificationContent()
-        content.title = titles[randomTitleIndex]
+        content.title = "Shape Swap"
         content.body = bodies[randomBodyIndex]
         content.categoryIdentifier = "alarm"
         content.userInfo = ["customData": "fizzbuzz"]

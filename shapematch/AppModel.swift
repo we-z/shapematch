@@ -111,7 +111,7 @@ class AppModel: ObservableObject {
             return
         }
         if !audioController.mute {
-            AudioServicesPlaySystemSound(1104)
+            AudioServicesPlaySystemSound(1105)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
             self.swipesLeft -= 1
@@ -126,7 +126,7 @@ class AppModel: ObservableObject {
             undosLeft -= 1
             let lastSwap = swapsMade.removeLast()
             if !audioController.mute {
-                AudioServicesPlaySystemSound(1104)
+                AudioServicesPlaySystemSound(1105)
             }
             DispatchQueue.main.asyncAfter(deadline: .now()) { [self] in
                 let temp = grid[lastSwap.0.row][lastSwap.0.col]

@@ -324,7 +324,7 @@ struct RoundedAndShadowButtonStyle6:ButtonStyle {
                 if currentlyPressing {
                     impactHeavy.impactOccurred()
                     if !audioController.mute {
-                        AudioServicesPlaySystemSound(1104)
+                        AudioServicesPlaySystemSound(1105)
                     }
                 }
                 isPressed = true
