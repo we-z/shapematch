@@ -70,6 +70,7 @@ struct NoMoreSwipesView: View {
                         .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
                         .padding(1)
                 }
+                .padding(.top)
                 .offset(y: bannerOffset)
                 .gesture(
                     DragGesture(minimumDistance: 1, coordinateSpace: .local)
