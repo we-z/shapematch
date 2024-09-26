@@ -313,6 +313,7 @@ extension ButtonStyle where Self == RoundedAndShadowButtonStyle6 {
 
 struct RoundedAndShadowButtonStyle6:ButtonStyle {
     @State var isPressed = false
+    @ObservedObject var audioController = AudioManager.sharedAudioManager
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .compositingGroup()
@@ -322,14 +323,15 @@ struct RoundedAndShadowButtonStyle6:ButtonStyle {
             .onChange(of: configuration.isPressed) { currentlyPressing in
                 if currentlyPressing {
                     impactHeavy.impactOccurred()
-                    AudioServicesPlaySystemSound(1104)
+                    if !audioController.mute {
+                        AudioServicesPlaySystemSound(1104)
+                    }
                 }
                 isPressed = true
                 if !currentlyPressing {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [self] in
                         isPressed = false
                         impactHeavy.impactOccurred()
-//                        AudioServicesPlaySystemSound(1103)
                     }
                 }
             }

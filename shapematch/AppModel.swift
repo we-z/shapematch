@@ -90,7 +90,6 @@ class AppModel: ObservableObject {
     }
     
     func swapShapes(start: (row: Int, col: Int), end: (row: Int, col: Int), offset: CGSize) {
-//        AudioServicesPlaySystemSound(1018)
         DispatchQueue.main.async { [self] in
             self.swaping = true
             withAnimation(.linear(duration: 0.2)) {
@@ -111,7 +110,9 @@ class AppModel: ObservableObject {
             hapticManager.notification(type: .error)
             return
         }
-        AudioServicesPlaySystemSound(1104)
+        if !audioController.mute {
+            AudioServicesPlaySystemSound(1104)
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
             self.swipesLeft -= 1
             swapsMade.append((Position(row: start.row, col: start.col), Position(row: end.row, col: end.col)))
@@ -124,8 +125,9 @@ class AppModel: ObservableObject {
         if !swapsMade.isEmpty {
             undosLeft -= 1
             let lastSwap = swapsMade.removeLast()
-            
-            AudioServicesPlaySystemSound(1104)
+            if !audioController.mute {
+                AudioServicesPlaySystemSound(1104)
+            }
             DispatchQueue.main.asyncAfter(deadline: .now()) { [self] in
                 let temp = grid[lastSwap.0.row][lastSwap.0.col]
                 grid[lastSwap.0.row][lastSwap.0.col] = grid[lastSwap.1.row][lastSwap.1.col]
@@ -150,7 +152,9 @@ class AppModel: ObservableObject {
             }
             self.freezeGame = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
-                AudioServicesPlaySystemSound(1320)
+                if !audioController.mute {
+                    AudioServicesPlaySystemSound(1320)
+                }
                 userPersistedData.level += 1
                 showInstruction.toggle()
                 setupLevel()
@@ -158,7 +162,9 @@ class AppModel: ObservableObject {
                 
             }
             // 1335, 1114
-            AudioServicesPlaySystemSound(1114)
+            if !audioController.mute {
+                AudioServicesPlaySystemSound(1114)
+            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 6) { [self] in
                 if !audioController.mute {
                     audioController.musicPlayer.setVolume(1, fadeDuration: 1)
@@ -166,7 +172,9 @@ class AppModel: ObservableObject {
             }
             print("You win!")
         } else if swipesLeft <= 0 {
-            AudioServicesPlaySystemSound (1053)
+            if !audioController.mute {
+                AudioServicesPlaySystemSound (1053)
+            }
             swapsToSell = approximateMinimumSwipes(from: grid, to: targetGrid)
             AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
             showNoMoreSwipesView = true
