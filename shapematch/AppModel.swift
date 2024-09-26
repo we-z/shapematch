@@ -50,15 +50,15 @@ class AppModel: ObservableObject {
         determineLevelSettings()
         
         grid = userPersistedData.grid.isEmpty ? [
-            [.square, .triangle, .circle],
-            [.triangle, .circle, .circle],
-            [.square, .square, .triangle]
+            [.triangle, .circle, .triangle],
+            [.circle, .triangle, .circle],
+            [.square, .square, .square]
         ] : userPersistedData.grid
         
         targetGrid = userPersistedData.targetGrid.isEmpty ? [
-            [.square, .triangle, .circle],
-            [.triangle, .square, .circle],
-            [.square, .circle, .triangle]
+            [.triangle, .circle, .triangle],
+            [.circle, .square, .circle],
+            [.square, .triangle, .square]
         ] : userPersistedData.targetGrid
         
         swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
@@ -150,7 +150,7 @@ class AppModel: ObservableObject {
             }
             self.freezeGame = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
-                AudioServicesPlaySystemSound(1020)
+                AudioServicesPlaySystemSound(1320)
                 userPersistedData.level += 1
                 showInstruction.toggle()
                 setupLevel()

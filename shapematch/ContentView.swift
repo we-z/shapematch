@@ -175,7 +175,7 @@ struct ContentView: View {
                     ZStack{
                         ButtonsView()
                             .padding(.horizontal, idiom == .pad ? 69 : 21)
-                        if userPersistedData.level < 3 {
+                        if !userPersistedData.firstGamePlayed {
                             InstructionView()
                                 .frame(height: 1)
                         }
@@ -260,7 +260,7 @@ struct ContentView: View {
             appModel.initialGrid = appModel.grid
             self.notificationManager.registerLocal()
             // 1054, 1109, 1054, 1057, 1114, 1115, 1159, 1166, 1300, 1308, 1313, 1322, 1334
-//            AudioServicesPlaySystemSound(1104)
+//            (1104)
         }
         .onChange(of: scenePhase) { newScenePhase in
             DispatchQueue.main.async { [self] in

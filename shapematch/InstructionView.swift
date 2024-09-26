@@ -49,8 +49,8 @@ struct InstructionView: View {
                     }
                 }
         )
-        .onChange(of: userPersistedData.level) { level in
-            if level > 1 {
+        .onChange(of: userPersistedData.firstGamePlayed) { firstGamePlayed in
+            if firstGamePlayed {
                 DispatchQueue.main.async {
                     withAnimation(.linear) {
                         cardOffset = (deviceWidth * 1.5)
