@@ -161,7 +161,7 @@ class AppModel: ObservableObject {
             AudioServicesPlaySystemSound(1114)
             DispatchQueue.main.asyncAfter(deadline: .now() + 6) { [self] in
                 if !audioController.mute {
-                    audioController.musicPlayer.setVolume(0.1, fadeDuration: 1)
+                    audioController.musicPlayer.setVolume(1, fadeDuration: 1)
                 }
             }
             print("You win!")

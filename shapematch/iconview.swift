@@ -16,6 +16,7 @@ struct iconview: View {
     var body: some View {
         ZStack {
             Color.white
+//            Color.black.opacity(0.8)
             VStack {
                 ForEach(0..<2) { row in // Updated to 4 rows
                     HStack {
@@ -79,7 +80,7 @@ struct ShapeView: View {
             }
             .frame(width: deviceWidth / 6, height: deviceWidth / 6)
 //            .scaleEffect(1.33)
-            .offset(y: deviceWidth / 120)
+//            .offset(y: deviceWidth / 120)
             
         case .star:
             ZStack {
