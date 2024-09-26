@@ -153,7 +153,7 @@ struct ContentView: View {
                                 .fixedSize()
                                 .customTextStroke(width: 1.5)
                                 .padding(.top, idiom == .pad ? 60 : 0)
-                            Text("Swaps")
+                            Text("Moves")
                                 .bold()
                                 .multilineTextAlignment(.center)
                                 .font(.system(size: deviceWidth/15))

@@ -12,7 +12,7 @@ import AVFoundation
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        CelebrationEffect()
+        CelebrateGems()
             .onAppear {
                 appModel.shouldBurst.toggle()
             }
@@ -58,11 +58,11 @@ struct CelebrationEffect: View {
                             .tag("circle")
                     }
                     .onChange(of: appModel.shouldBurst) { newValue in
+                        
                         DispatchQueue.main.async {
                             showMessage = true
                             hapticManager.notification(type: .error)
                             withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 200.0, damping: 13.0, initialVelocity: -10.0)) {
-                                
                                 showAnimation = true
                                 animateMessage = true
                                 currentMessage = messages.randomElement() ?? "Well Done!"
@@ -127,6 +127,7 @@ struct CelebrationEffect: View {
 struct CelebrateGems: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @State var bannerOffset = -(deviceWidth/2)
+    @StateObject var audioController = AudioManager.sharedAudioManager
     
     // State to hold the current message
     @State private var showMessage = false
@@ -152,6 +153,8 @@ struct CelebrateGems: View {
                             .tag("circle")
                     }
                     .onChange(of: appModel.boughtGems) { newValue in
+                        audioController.musicPlayer.setVolume(0, fadeDuration: 1)
+                        AudioServicesPlaySystemSound(1335)
                         DispatchQueue.main.async {
                             showMessage = true
                             hapticManager.notification(type: .error)
@@ -171,6 +174,7 @@ struct CelebrateGems: View {
                                     bannerOffset = -(deviceWidth/2)
                                 }
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
+                                    audioController.musicPlayer.setVolume(1, fadeDuration: 1)
                                     showMessage = false
                                 }
                             }
