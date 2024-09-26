@@ -16,17 +16,9 @@ class AppModel: ObservableObject {
     let hapticManager = HapticManager.instance
     @Published var shouldBurst = false
     @Published var boughtGems = false
-    @Published var grid: [[ShapeType]] = [
-        [.square, .triangle, .circle],
-        [.triangle, .circle, .circle],
-        [.square, .square, .triangle]
-    ]
+    @Published var grid: [[ShapeType]] = []
     
-    @Published var targetGrid: [[ShapeType]] = [
-        [.square, .triangle, .circle],
-        [.triangle, .square, .circle],
-        [.square, .circle, .triangle]
-    ]
+    @Published var targetGrid: [[ShapeType]] = []
     
     @Published var offsets: [[CGSize]] = Array(
         repeating: Array(repeating: .zero, count: 5),
