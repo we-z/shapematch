@@ -175,10 +175,14 @@ struct ContentView: View {
                     ZStack{
                         ButtonsView()
                             .padding(.horizontal, idiom == .pad ? 69 : 21)
-                        InstructionView()
-                            .frame(height: 1)
-                        NewGoalView()
-                            .frame(height: 1)
+                        if userPersistedData.level < 3 {
+                            InstructionView()
+                                .frame(height: 1)
+                        }
+                        if userPersistedData.level < 4 {
+                            NewGoalView()
+                                .frame(height: 1)
+                        }
                     }
                     .padding(.bottom, idiom == .pad ? 41 : 21)
                     .zIndex(1)

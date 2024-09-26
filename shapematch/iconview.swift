@@ -9,8 +9,8 @@ import SwiftUI
 
 struct iconview: View {
     @State private var grid: [[ShapeType]] = [
-        [.circle, .star], // Updated to 4x4 grid with star shape
-        [.square, .triangle]
+        [.triangle, .circle], // Updated to 4x4 grid with star shape
+        [.square, .star]
     ]
     
     var body: some View {
@@ -21,7 +21,7 @@ struct iconview: View {
                     HStack {
                         ForEach(0..<2) { column in // Updated to 4 columns
                             ShapeView(shapeType: grid[row][column])
-                                .padding(30)
+                                .padding(18)
                             
                         }
                     }
