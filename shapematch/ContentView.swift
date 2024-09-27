@@ -22,7 +22,7 @@ struct ContentView: View {
         ZStack{
             Color.white
                 .ignoresSafeArea()
-            Color.black.opacity(colorScheme == .dark ? 0.8 : 0.12)
+            Color.black.opacity(colorScheme == .dark ? 0.8 : 0)
                 .ignoresSafeArea()
             Group {
                 VStack(spacing: 0) {
@@ -104,13 +104,19 @@ struct ContentView: View {
                                 }
                             }
                             .padding( idiom == .pad ? 30 : 18)
-                            .background(Color.yellow)
-                            .cornerRadius(idiom == .pad ? 30 : 15)
-                            .overlay{
-                                RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
-                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
-                                    .padding(1)
+                            .background{
+                                if colorScheme == .dark {
+                                    Color.white.opacity(0.1)
+                                } else {
+                                    Color.black.opacity(0.15)
+                                }
                             }
+                            .cornerRadius(idiom == .pad ? 30 : 15)
+//                            .overlay{
+//                                RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
+//                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 4)
+//                                    .padding(1)
+//                            }
                             .pulsingPlaque()
                             .scaleEffect(idiom == .pad ? 0.8 : 1)
                             Spacer()
@@ -234,7 +240,7 @@ struct ContentView: View {
                             if colorScheme == .dark {
                                 Color.white.opacity(0.1)
                             } else {
-                                Color.white.opacity(0.5)
+                                Color.black.opacity(0.15)
                             }
                         }
                         
