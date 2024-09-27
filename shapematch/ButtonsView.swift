@@ -70,7 +70,7 @@ struct ButtonsView: View {
                     }
                     .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
                     .background{
-                        Color.blue
+                        Color.yellow
                     }
                     .cornerRadius(15)
                     .overlay{

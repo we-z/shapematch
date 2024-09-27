@@ -48,9 +48,9 @@ struct ContentView: View {
                                 .background{
                                     Color.blue
                                 }
-                                .cornerRadius(idiom == .pad ? 90 : 30)
+                                .cornerRadius(15)
                                 .overlay{
-                                    RoundedRectangle(cornerRadius: idiom == .pad ? 90 : 30)
+                                    RoundedRectangle(cornerRadius: 15)
                                         .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                         .padding(1)
                                 }
@@ -142,9 +142,9 @@ struct ContentView: View {
                                 .background{
                                     Color.purple
                                 }
-                                .cornerRadius(idiom == .pad ? 90 : 30)
+                                .cornerRadius(15)
                                 .overlay{
-                                    RoundedRectangle(cornerRadius:idiom == .pad ? 90 :  30)
+                                    RoundedRectangle(cornerRadius: 15)
                                         .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                         .padding(1)
                                 }
