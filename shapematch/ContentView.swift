@@ -249,15 +249,16 @@ struct ContentView: View {
                                 Color.black.opacity(0.1)
                             }
                         }
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 30)
-                                .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
-                                .padding(1)
-                        }
+                        
                         .cornerRadius(30)
                         .scaleEffect(1.1)
                     }
                     .scaleEffect(0.9)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
+                            .padding(1)
+                    }
                 }
                 .allowsHitTesting(!appModel.freezeGame)
                 .scaleEffect(idiom == .pad ? 0.93 : 1)
