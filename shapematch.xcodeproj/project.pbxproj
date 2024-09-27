@@ -35,6 +35,7 @@
 		76B7740B2C99EE950053B72B /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B7740A2C99EE950053B72B /* QRView.swift */; };
 		76B7740D2C9A006C0053B72B /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B7740C2C9A006C0053B72B /* ShareView.swift */; };
 		76B7740F2C9AA20F0053B72B /* ButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B7740E2C9AA20F0053B72B /* ButtonsView.swift */; };
+		76D489792CA72557004060FA /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D489782CA72557004060FA /* BackgroundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		76B7740A2C99EE950053B72B /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRView.swift; sourceTree = "<group>"; };
 		76B7740C2C9A006C0053B72B /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		76B7740E2C9AA20F0053B72B /* ButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsView.swift; sourceTree = "<group>"; };
+		76D489782CA72557004060FA /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				7639F98B2C7146AF00E2B371 /* AppModel.swift */,
 				7639F9622C713D8200E2B371 /* Assets.xcassets */,
 				7639F9CD2C759A2E00E2B371 /* AudioManager.swift */,
+				76D489782CA72557004060FA /* BackgroundView.swift */,
 				76B7740E2C9AA20F0053B72B /* ButtonsView.swift */,
 				7639F9602C713D8100E2B371 /* ContentView.swift */,
 				761A44452C7841A30017B53B /* GemMenuView.swift */,
@@ -307,6 +310,7 @@
 				7639F9612C713D8100E2B371 /* ContentView.swift in Sources */,
 				76B774092C96B6F50053B72B /* NotificationManager.swift in Sources */,
 				7639F95F2C713D8100E2B371 /* shapematchApp.swift in Sources */,
+				76D489792CA72557004060FA /* BackgroundView.swift in Sources */,
 				76ADAF042C76A92C006B2844 /* OverlaysView.swift in Sources */,
 				761A444B2C78E8320017B53B /* StoreKitManager.swift in Sources */,
 				7639F9CA2C7587C800E2B371 /* NoMoreSwipesView.swift in Sources */,

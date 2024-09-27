@@ -24,6 +24,8 @@ struct ContentView: View {
                 .ignoresSafeArea()
             Color.black.opacity(colorScheme == .dark ? 0.8 : 0)
                 .ignoresSafeArea()
+            BackgroundView()
+                .opacity(0.2)
             Group {
                 VStack(spacing: 0) {
                     Spacer()
@@ -106,17 +108,19 @@ struct ContentView: View {
                             .padding( idiom == .pad ? 30 : 18)
                             .background{
                                 if colorScheme == .dark {
-                                    Color.white.opacity(0.1)
+                                    Color.black
+                                    Color.white.opacity(0.3)
                                 } else {
-                                    Color.black.opacity(0.15)
+                                    Color.white
+                                    Color.black.opacity(0.1)
                                 }
                             }
                             .cornerRadius(idiom == .pad ? 30 : 15)
-//                            .overlay{
-//                                RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
-//                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 4)
-//                                    .padding(1)
-//                            }
+                            .overlay {
+                                RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
+                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 4)
+                                    .padding(1)
+                            }
                             .pulsingPlaque()
                             .scaleEffect(idiom == .pad ? 0.8 : 1)
                             Spacer()
@@ -238,12 +242,18 @@ struct ContentView: View {
                     .background {
                         ZStack {
                             if colorScheme == .dark {
-                                Color.white.opacity(0.1)
+                                Color.black
+                                Color.white.opacity(0.3)
                             } else {
-                                Color.black.opacity(0.15)
+                                Color.white
+                                Color.black.opacity(0.1)
                             }
                         }
-                        
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 30)
+                                .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
+                                .padding(1)
+                        }
                         .cornerRadius(30)
                         .scaleEffect(1.1)
                     }

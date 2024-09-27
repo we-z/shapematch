@@ -35,6 +35,7 @@ class AppModel: ObservableObject {
     @Published var showInstruction = false
     @Published var showNewGoal = false
     @Published var swaping = false
+    @Published var shuffleBackground = false
 //    @Published var grid.count = 3
     @Published var swapsNeeded = 1
     @Published var undosLeft = 3
@@ -412,7 +413,7 @@ class AppModel: ObservableObject {
     }
     
     func setupLevel() {
-        
+        shuffleBackground.toggle()
         determineLevelSettings()
         swapsMade = []
         undosLeft = 3
