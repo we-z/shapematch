@@ -25,7 +25,7 @@ struct ContentView: View {
             Color.black.opacity(colorScheme == .dark ? 0.8 : 0)
                 .ignoresSafeArea()
             BackgroundView()
-                .opacity(0.2)
+                .opacity(0.1)
             Group {
                 VStack(spacing: 0) {
                     Spacer()
@@ -122,7 +122,7 @@ struct ContentView: View {
                                     .padding(1)
                             }
                             .pulsingPlaque()
-                            .scaleEffect(idiom == .pad ? 0.8 : 1)
+                            .scaleEffect(idiom == .pad ? 0.8 : 0.9)
                             Spacer()
                         }
                         Spacer()
@@ -259,6 +259,7 @@ struct ContentView: View {
                             .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
                             .padding(1)
                     }
+                    .scaleEffect(0.9)
                 }
                 .allowsHitTesting(!appModel.freezeGame)
                 .scaleEffect(idiom == .pad ? 0.93 : 1)
