@@ -43,7 +43,7 @@ struct InstructionView: View {
                         // Swipe up detected
                         DispatchQueue.main.async { [self] in
                             withAnimation(.linear) {
-                                cardOffset = -(deviceWidth * 1.2)
+                                cardOffset = -(deviceWidth * 1.5)
                             }
                         }
                     }
@@ -53,14 +53,14 @@ struct InstructionView: View {
             if firstGamePlayed {
                 DispatchQueue.main.async {
                     withAnimation(.linear) {
-                        cardOffset = (deviceWidth * 1.5)
+                        cardOffset = (deviceWidth * 1.8)
                     }
                 }
             }
         }
         .onAppear {
             if userPersistedData.level > 1 {
-                cardOffset = -(deviceWidth * 1.2)
+                cardOffset = -(deviceWidth * 1.5)
             }
         }
     }
@@ -102,7 +102,7 @@ struct NewGoalView: View {
                         // Swipe up detected
                         DispatchQueue.main.async { [self] in
                             withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                                cardOffset = -(deviceWidth * 1.2)
+                                cardOffset = -(deviceWidth * 1.5)
                             }
                         }
                     }
@@ -116,7 +116,7 @@ struct NewGoalView: View {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 6) { [self] in
                 withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                    cardOffset = -(deviceWidth * 1.2)
+                    cardOffset = -(deviceWidth * 1.5)
                 }
             }
         }

@@ -413,7 +413,6 @@ class AppModel: ObservableObject {
     }
     
     func setupLevel() {
-        shuffleBackground.toggle()
         determineLevelSettings()
         swapsMade = []
         undosLeft = 3

@@ -28,7 +28,7 @@ struct ContentView: View {
                 .opacity(0.1)
             Group {
                 VStack(spacing: 0) {
-                    Spacer()
+                    Group {
                     HStack{
                         Spacer()
                         VStack{
@@ -44,19 +44,20 @@ struct ContentView: View {
                                         .customTextStroke(width: 1.5)
                                         .fixedSize()
                                     Spacer()
-                                        
+                                    
                                 }
                                 .frame(height: deviceWidth/7)
                                 .background{
                                     Color.blue
                                 }
-                                .cornerRadius(15)
+                                .cornerRadius(18)
                                 .overlay{
-                                    RoundedRectangle(cornerRadius: 15)
+                                    RoundedRectangle(cornerRadius: 18)
                                         .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                         .padding(1)
                                 }
                                 .padding(3)
+                                
                             }
                             .buttonStyle(.roundedAndShadow6)
                             Spacer()
@@ -86,7 +87,7 @@ struct ContentView: View {
                             Spacer()
                             Spacer()
                             VStack{
-                                Text("Goal 🎯")
+                                Text("Match")
                                     .bold()
                                     .font(.system(size: deviceWidth/15))
                                     .fixedSize()
@@ -122,7 +123,7 @@ struct ContentView: View {
                                     .padding(1)
                             }
                             .pulsingPlaque()
-                            .scaleEffect(idiom == .pad ? 0.8 : 0.9)
+                            .scaleEffect(idiom == .pad ? 0.8 : 1)
                             Spacer()
                         }
                         Spacer()
@@ -140,15 +141,15 @@ struct ContentView: View {
                                         .font(.system(size: deviceWidth/21))
                                         .scaleEffect(idiom == .pad ? 1 : 1.2)
                                     Spacer()
-                                        
+                                    
                                 }
                                 .frame(height: deviceWidth/7)
                                 .background{
                                     Color.purple
                                 }
-                                .cornerRadius(15)
+                                .cornerRadius(18)
                                 .overlay{
-                                    RoundedRectangle(cornerRadius: 15)
+                                    RoundedRectangle(cornerRadius: 18)
                                         .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                         .padding(1)
                                 }
@@ -173,7 +174,7 @@ struct ContentView: View {
                                 .bold()
                                 .font(.system(size: deviceWidth/9))
                                 .customTextStroke()
-                                
+                            
                             Spacer()
                         }
                         .frame(width: deviceWidth/4)
@@ -181,21 +182,22 @@ struct ContentView: View {
                         Spacer()
                         
                     }
-                    Spacer()
                     ZStack{
                         ButtonsView()
-                            .padding(.horizontal, idiom == .pad ? 69 : 21)
-                        if !userPersistedData.firstGamePlayed {
-                            InstructionView()
-                                .frame(height: 1)
-                        }
-                        if userPersistedData.level < 4 {
-                            NewGoalView()
-                                .frame(height: 1)
-                        }
+                        //                            .padding(.horizontal, idiom == .pad ? 69 : 21)
+//                        if !userPersistedData.firstGamePlayed {
+//                            InstructionView()
+//                                .frame(height: 1)
+//                        }
+//                        if userPersistedData.level < 4 {
+//                            NewGoalView()
+//                                .frame(height: 1)
+//                        }
                     }
-                    .padding(.bottom, idiom == .pad ? 41 : 21)
+                    .padding(.bottom, idiom == .pad ? 41 : 15)
                     .zIndex(1)
+                }
+//                    .scaleEffect(0.9)
                     VStack {
                         ForEach(0..<appModel.grid.count, id: \.self) { row in
                             HStack {
@@ -259,7 +261,7 @@ struct ContentView: View {
                             .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
                             .padding(1)
                     }
-                    .scaleEffect(0.9)
+                    .padding(.bottom, 21)
                 }
                 .allowsHitTesting(!appModel.freezeGame)
                 .scaleEffect(idiom == .pad ? 0.93 : 1)
