@@ -30,9 +30,8 @@ struct ContentView: View {
                 .opacity(0.1)
             Group {
                 VStack(spacing: 0) {
-                    Group {
                     HStack{
-                        Spacer()
+//                        Spacer()
                         VStack{
                             Button {
                                 appModel.showGemMenu = true
@@ -48,7 +47,7 @@ struct ContentView: View {
                                     Spacer()
                                     
                                 }
-                                .frame(height: deviceWidth/7)
+                                .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
                                 .background{
                                     LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                                 }
@@ -83,7 +82,7 @@ struct ContentView: View {
                             Spacer()
                         }
                         .frame(width: deviceWidth/4)
-                        .scaleEffect(idiom == .pad ? 0.8 : 1)
+//                        .scaleEffect(idiom == .pad ? 0.8 : 1)
                         Spacer()
                         VStack {
                             Spacer()
@@ -124,7 +123,7 @@ struct ContentView: View {
                                     .padding(1)
                             }
                             .pulsingPlaque()
-                            .scaleEffect(idiom == .pad ? 0.8 : 1)
+//                            .scaleEffect(idiom == .pad ? 0.8 : 1)
                             Spacer()
                         }
                         Spacer()
@@ -144,7 +143,7 @@ struct ContentView: View {
                                     Spacer()
                                     
                                 }
-                                .frame(height: deviceWidth/7)
+                                .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
                                 .background{
                                     LinearGradient(gradient: Gradient(colors: [.purple, .indigo]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                                 }
@@ -179,10 +178,11 @@ struct ContentView: View {
                             Spacer()
                         }
                         .frame(width: deviceWidth/4)
-                        .scaleEffect(idiom == .pad ? 0.8 : 1)
-                        Spacer()
+//                        .scaleEffect(idiom == .pad ? 0.8 : 1)
+//                        Spacer()
                         
                     }
+                    .padding(.horizontal)
                     ZStack{
                         ButtonsView()
                         //                            .padding(.horizontal, idiom == .pad ? 69 : 21)
@@ -195,9 +195,8 @@ struct ContentView: View {
 //                                .frame(height: 1)
 //                        }
                     }
-                    .padding(.bottom, idiom == .pad ? 41 : 3)
+                    .padding(.vertical, idiom == .pad ? 41 : 3)
                     .zIndex(1)
-                }
 //                    .scaleEffect(0.9)
 //                    VStack {
 //                        ForEach(0..<appModel.grid.count, id: \.self) { row in
@@ -289,7 +288,7 @@ struct ContentView: View {
                                         ShapeView(shapeType: appModel.grid[row][column])
                                             .frame(width: shapeWidth, height: shapeWidth)
                                             .scaleEffect(shapeScale)
-                                            .scaleEffect(idiom == .pad ? 0.5 : 1)
+                                            .scaleEffect(idiom == .pad ? 0.54 : 1)
                                             .background(.white.opacity(0.001))
                                             .offset(appModel.offsets[row][column])
                                             .scaleEffect((tappedRow == row && tappedColumn == column) ? playingShapeScale : 1)
@@ -325,13 +324,13 @@ struct ContentView: View {
                                 }
                             }
                         }
+                        .scaleEffect(idiom == .pad ? 1.1 : 1)
                     }
                 }
                 .allowsHitTesting(!appModel.freezeGame)
-                .scaleEffect(idiom == .pad ? 0.93 : 1)
                 OverlaysView()
             }
-            .scaleEffect(idiom == .pad ? 0.9 : 1)
+            .scaleEffect(idiom == .pad ? 0.8 : 1)
             CelebrationEffect()
             if appModel.showGemMenu {
                 GemMenuView()
