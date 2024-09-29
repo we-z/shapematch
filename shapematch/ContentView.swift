@@ -101,7 +101,7 @@ struct ContentView: View {
                                                 ShapeView(shapeType: appModel.targetGrid[row][column])
                                                     .frame(width: shapeWidth / 3.9, height: shapeWidth / 3.9)
                                                     .scaleEffect(shapeScale / 3.3)
-                                                    .scaleEffect(idiom == .pad ? 0.6 : 1)
+                                                    .scaleEffect(idiom == .pad ? 0.5 : 1)
                                             }
                                         }
                                     }
@@ -289,7 +289,7 @@ struct ContentView: View {
                                         ShapeView(shapeType: appModel.grid[row][column])
                                             .frame(width: shapeWidth, height: shapeWidth)
                                             .scaleEffect(shapeScale)
-                                            .scaleEffect(idiom == .pad ? 0.6 : 1)
+                                            .scaleEffect(idiom == .pad ? 0.5 : 1)
                                             .background(.white.opacity(0.001))
                                             .offset(appModel.offsets[row][column])
                                             .scaleEffect((tappedRow == row && tappedColumn == column) ? playingShapeScale : 1)
