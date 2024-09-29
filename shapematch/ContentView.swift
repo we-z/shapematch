@@ -15,6 +15,8 @@ struct ContentView: View {
     @State var playingShapeScale = 1.0
     @State var tappedRow = 0
     @State var tappedColumn = 0
+    @State var shapeWidth = 0.0
+    @State var shapeScale = 1.0
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.colorScheme) var colorScheme
     
@@ -61,12 +63,12 @@ struct ContentView: View {
                             }
                             .buttonStyle(.roundedAndShadow6)
                             Spacer()
-                            Text("🕹️ 👾")
-                                .bold()
-                                .font(.system(size: deviceWidth/18))
-                                .fixedSize()
-                                .customTextStroke(width: 1.2)
-                                .padding(.top, idiom == .pad ? 60 : 0)
+//                            Text("🕹️ 👾")
+//                                .bold()
+//                                .font(.system(size: deviceWidth/18))
+//                                .fixedSize()
+//                                .customTextStroke(width: 1.2)
+//                                .padding(.top, idiom == .pad ? 60 : 0)
                             Text("Level")
                                 .bold()
                                 .font(.system(size: deviceWidth/15))
@@ -74,7 +76,7 @@ struct ContentView: View {
                                 .customTextStroke(width: 1.5)
                             Text("\(userPersistedData.level)")
                                 .bold()
-                                .font(.system(size: userPersistedData.level  > 999 ? deviceWidth/12 : deviceWidth/9))
+                                .font(.system(size: userPersistedData.level  > 99 ? deviceWidth/8 : deviceWidth/6))
                                 .minimumScaleFactor(0.1)
                                 .fixedSize()
                                 .customTextStroke()
@@ -97,10 +99,9 @@ struct ContentView: View {
                                         HStack {
                                             ForEach(0..<appModel.grid.count, id: \.self) { column in
                                                 ShapeView(shapeType: appModel.targetGrid[row][column])
-                                                    .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 11))
-                                                    .scaleEffect(0.39)
-                                                    .scaleEffect(1.7 - (CGFloat(appModel.grid.count) * 0.27))
-                                                    .padding(idiom == .pad ? 9 : 3)
+                                                    .frame(width: shapeWidth / 3.9, height: shapeWidth / 3.9)
+                                                    .scaleEffect(shapeScale / 3.3)
+                                                    .scaleEffect(idiom == .pad ? 0.6 : 1)
                                             }
                                         }
                                     }
@@ -157,13 +158,13 @@ struct ContentView: View {
                             }
                             .buttonStyle(.roundedAndShadow6)
                             Spacer()
-                            Text("↔️ ↕️")
-                                .bold()
-                                .multilineTextAlignment(.center)
-                                .font(.system(size: deviceWidth/18))
-                                .fixedSize()
-                                .customTextStroke(width: 1.5)
-                                .padding(.top, idiom == .pad ? 60 : 0)
+//                            Text("↔️ ↕️")
+//                                .bold()
+//                                .multilineTextAlignment(.center)
+//                                .font(.system(size: deviceWidth/18))
+//                                .fixedSize()
+//                                .customTextStroke(width: 1.5)
+//                                .padding(.top, idiom == .pad ? 60 : 0)
                             Text("Moves")
                                 .bold()
                                 .multilineTextAlignment(.center)
@@ -172,7 +173,7 @@ struct ContentView: View {
                                 .customTextStroke(width: 1.5)
                             Text("\(appModel.swipesLeft > 0 ? appModel.swipesLeft : 0)")
                                 .bold()
-                                .font(.system(size: deviceWidth/9))
+                                .font(.system(size: deviceWidth/6))
                                 .customTextStroke()
                             
                             Spacer()
@@ -194,74 +195,137 @@ struct ContentView: View {
 //                                .frame(height: 1)
 //                        }
                     }
-                    .padding(.bottom, idiom == .pad ? 41 : 15)
+                    .padding(.bottom, idiom == .pad ? 41 : 3)
                     .zIndex(1)
                 }
 //                    .scaleEffect(0.9)
-                    VStack {
-                        ForEach(0..<appModel.grid.count, id: \.self) { row in
-                            HStack {
-                                ForEach(0..<appModel.grid.count, id: \.self) { column in
-                                    ShapeView(shapeType: appModel.grid[row][column])
-                                        .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 3), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.5) * 3))
-                                        .scaleEffect(2.2 - (CGFloat(appModel.grid.count) * 0.36))
-                                        .padding(idiom == .pad ? 30 : 15)
-                                        .background(.white.opacity(0.001))
-                                        .offset(appModel.offsets[row][column])
-                                        .scaleEffect((tappedRow == row && tappedColumn == column) ? playingShapeScale : 1)
-                                        .animation(.easeInOut(duration: 0.1), value: playingShapeScale)
-                                        .gesture(
-                                            DragGesture(minimumDistance: 1)
-                                                .onChanged { gesture in
-                                                    if !firstChange {
-                                                        impactLight.impactOccurred()
-                                                        tappedRow = row
-                                                        tappedColumn = column
-                                                        DispatchQueue.main.async { [self] in
-                                                            withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                                                                self.playingShapeScale = 0.6
+//                    VStack {
+//                        ForEach(0..<appModel.grid.count, id: \.self) { row in
+//                            HStack {
+//                                ForEach(0..<appModel.grid.count, id: \.self) { column in
+//                                    ShapeView(shapeType: appModel.grid[row][column])
+//                                        .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.27) * 2.7), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.27) * 2.7))
+//                                        .scaleEffect(2.2 - (CGFloat(appModel.grid.count) * 0.36))
+//                                        .padding(idiom == .pad ? 30 : 15)
+//                                        .background(.white.opacity(0.001))
+//                                        .offset(appModel.offsets[row][column])
+//                                        .scaleEffect((tappedRow == row && tappedColumn == column) ? playingShapeScale : 1)
+//                                        .animation(.easeInOut(duration: 0.1), value: playingShapeScale)
+//                                        .gesture(
+//                                            DragGesture(minimumDistance: 1)
+//                                                .onChanged { gesture in
+//                                                    if !firstChange {
+//                                                        impactLight.impactOccurred()
+//                                                        tappedRow = row
+//                                                        tappedColumn = column
+//                                                        DispatchQueue.main.async { [self] in
+//                                                            withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+//                                                                self.playingShapeScale = 0.6
+//                                                            }
+//                                                        }
+//                                                    }
+//                                                    firstChange = true
+//                                                }
+//                                                .onEnded { gesture in
+//                                                    DispatchQueue.main.async { [self] in
+//                                                        withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+//                                                            self.playingShapeScale = 1.0
+//                                                        }
+//                                                    }
+//                                                    if appModel.swipesLeft > 0 {
+//                                                        appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
+//                                                    }
+//                                                    firstChange = false
+//                                                }
+//                                        )
+//                                }
+//                            }
+//                        }
+//                    }
+//                    .background {
+//                        ZStack {
+//                            if colorScheme == .dark {
+//                                Color.black
+//                                Color.white.opacity(0.3)
+//                            } else {
+//                                Color.white
+//                                Color.black.opacity(0.1)
+//                            }
+//                        }
+//                        
+//                        .cornerRadius(30)
+//                        .scaleEffect(1.1)
+//                    }
+//                    .scaleEffect(0.9)
+//                    .overlay {
+//                        RoundedRectangle(cornerRadius: 30)
+//                            .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
+//                            .padding(1)
+//                    }
+//                    .padding(.bottom, 21)
+                    ZStack{
+                        Rectangle()
+                            .overlay{
+                                if colorScheme == .dark {
+                                    Color.black
+                                    Color.white.opacity(0.3)
+                                } else {
+                                    Color.white
+                                    Color.black.opacity(0.1)
+                                }
+                            }
+                            .aspectRatio(1.0, contentMode: .fill)
+                            .cornerRadius(30)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 30)
+                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
+                                    .padding(1)
+                            }
+                            .padding()
+                        VStack {
+                            ForEach(0..<appModel.grid.count, id: \.self) { row in
+                                HStack {
+                                    ForEach(0..<appModel.grid.count, id: \.self) { column in
+                                        ShapeView(shapeType: appModel.grid[row][column])
+                                            .frame(width: shapeWidth, height: shapeWidth)
+                                            .scaleEffect(shapeScale)
+                                            .scaleEffect(idiom == .pad ? 0.6 : 1)
+                                            .background(.white.opacity(0.001))
+                                            .offset(appModel.offsets[row][column])
+                                            .scaleEffect((tappedRow == row && tappedColumn == column) ? playingShapeScale : 1)
+                                            .animation(.easeInOut(duration: 0.1), value: playingShapeScale)
+                                            .gesture(
+                                                DragGesture(minimumDistance: 1)
+                                                    .onChanged { gesture in
+                                                        if !firstChange {
+                                                            impactLight.impactOccurred()
+                                                            tappedRow = row
+                                                            tappedColumn = column
+                                                            DispatchQueue.main.async { [self] in
+                                                                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                                                                    self.playingShapeScale = 0.6
+                                                                }
                                                             }
                                                         }
+                                                        firstChange = true
                                                     }
-                                                    firstChange = true
-                                                }
-                                                .onEnded { gesture in
-                                                    DispatchQueue.main.async { [self] in
-                                                        withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                                                            self.playingShapeScale = 1.0
+                                                    .onEnded { gesture in
+                                                        DispatchQueue.main.async { [self] in
+                                                            withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                                                                self.playingShapeScale = 1.0
+                                                            }
                                                         }
+                                                        if appModel.swipesLeft > 0 {
+                                                            appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
+                                                        }
+                                                        firstChange = false
                                                     }
-                                                    if appModel.swipesLeft > 0 {
-                                                        appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
-                                                    }
-                                                    firstChange = false
-                                                }
-                                        )
+                                            )
+                                    }
                                 }
                             }
                         }
                     }
-                    .background {
-                        ZStack {
-                            if colorScheme == .dark {
-                                Color.black
-                                Color.white.opacity(0.3)
-                            } else {
-                                Color.white
-                                Color.black.opacity(0.1)
-                            }
-                        }
-                        
-                        .cornerRadius(30)
-                        .scaleEffect(1.1)
-                    }
-                    .scaleEffect(0.9)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 30)
-                            .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
-                            .padding(1)
-                    }
-                    .padding(.bottom, 21)
                 }
                 .allowsHitTesting(!appModel.freezeGame)
                 .scaleEffect(idiom == .pad ? 0.93 : 1)
@@ -279,15 +343,37 @@ struct ContentView: View {
         .onAppear {
             appModel.initialGrid = appModel.grid
             self.notificationManager.registerLocal()
+            
+            if appModel.grid.count == 3 {
+                shapeWidth = deviceWidth / 4.0
+                shapeScale = deviceWidth / 390
+            } else if appModel.grid.count == 4 {
+                shapeWidth = deviceWidth / 5.3
+                shapeScale = deviceWidth / 540
+            } else if appModel.grid.count == 5 {
+                shapeWidth = deviceWidth / 6.6
+                shapeScale = deviceWidth / 690
+            }
+            
             // 1054, 1109, 1054, 1057, 1114, 1115, 1159, 1166, 1300, 1308, 1313, 1322, 1334
 //            AudioServicesPlaySystemSound(1105)
         }
-        .onChange(of: scenePhase) { newScenePhase in
+        .onChange(of: appModel.grid) { newScenePhase in
             DispatchQueue.main.async { [self] in
                 self.playingShapeScale = 1.0
             }
+            if appModel.grid.count == 3 {
+                shapeWidth = deviceWidth / 4.0
+                shapeScale = deviceWidth / 390
+            } else if appModel.grid.count == 4 {
+                shapeWidth = deviceWidth / 5.3
+                shapeScale = deviceWidth / 540
+            } else if appModel.grid.count == 5 {
+                shapeWidth = deviceWidth / 6.6
+                shapeScale = deviceWidth / 690
+            }
         }
-        .onChange(of: appModel.grid) { newScenePhase in
+        .onChange(of: scenePhase) { newScenePhase in
             DispatchQueue.main.async { [self] in
                 self.playingShapeScale = 1.0
             }

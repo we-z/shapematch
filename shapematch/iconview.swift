@@ -16,7 +16,7 @@ struct iconview: View {
     var body: some View {
         ZStack {
             Color.white
-//            Color.black.opacity(0.8)
+            Color.blue
             VStack {
 //                ForEach(0..<2) { row in // Updated to 4 rows
 //                    HStack {
@@ -28,9 +28,9 @@ struct iconview: View {
 //                    }
 //                }
 //                ShapeView(shapeType: .triangle)
-                Text("🧩")
-                    .font(.system(size: 240))
-                    .customTextStroke(width: 6)
+                Text("💎")
+                    .font(.system(size: 270))
+                    .customTextStroke(width: 9)
                 
             }
 //            .scaleEffect(1.5)

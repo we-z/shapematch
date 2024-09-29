@@ -160,7 +160,7 @@ struct NoMoreSwipesView: View {
                     } label: {
                         HStack{
                             Spacer()
-                            Text("💎 + \(appModel.swapsToSell) Moves ↕️ ↔️")
+                            Text("💎 + \(appModel.swapsToSell) Moves")
                                 .bold()
                                 .font(.system(size: deviceWidth/12))
                                 .fixedSize()
