@@ -116,7 +116,9 @@ struct GemMenuView: View {
                                     .fixedSize()
                             }
                             .padding()
-                            .background(.blue)
+                            .background{
+                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                            }
                             .cornerRadius(15)
                             .overlay{
                                 RoundedRectangle(cornerRadius: 15)
@@ -165,7 +167,9 @@ struct GemMenuView: View {
                                     .padding(.trailing, 3)
                             }
                             .padding()
-                            .background(.blue)
+                            .background{
+                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                            }
                             .cornerRadius(15)
                             .overlay{
                                 RoundedRectangle(cornerRadius: 15)
@@ -213,7 +217,9 @@ struct GemMenuView: View {
                                     .padding(.trailing, 3)
                             }
                             .padding()
-                            .background(.blue)
+                            .background{
+                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                            }
                             .cornerRadius(15)
                             .overlay{
                                 RoundedRectangle(cornerRadius: 15)
@@ -237,7 +243,9 @@ struct GemMenuView: View {
                     }
                     .padding(.bottom, 30)
                 }
-                .background(.cyan)
+                .background{
+                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                }
                 .cornerRadius(30)
                 .overlay{
                     RoundedRectangle(cornerRadius: 30)
