@@ -50,7 +50,7 @@ struct ContentView: View {
                                 }
                                 .frame(height: deviceWidth/7)
                                 .background{
-                                    Color.blue
+                                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                                 }
                                 .cornerRadius(18)
                                 .overlay{
@@ -146,7 +146,7 @@ struct ContentView: View {
                                 }
                                 .frame(height: deviceWidth/7)
                                 .background{
-                                    Color.purple
+                                    LinearGradient(gradient: Gradient(colors: [.purple, .indigo]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                                 }
                                 .cornerRadius(18)
                                 .overlay{
@@ -186,10 +186,10 @@ struct ContentView: View {
                     ZStack{
                         ButtonsView()
                         //                            .padding(.horizontal, idiom == .pad ? 69 : 21)
-                        if !userPersistedData.firstGamePlayed {
+//                        if !userPersistedData.firstGamePlayed {
                             InstructionView()
                                 .frame(height: 1)
-                        }
+//                        }
 //                        if userPersistedData.level < 4 {
 //                            NewGoalView()
 //                                .frame(height: 1)

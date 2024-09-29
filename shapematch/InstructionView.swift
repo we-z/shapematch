@@ -55,7 +55,7 @@ struct InstructionView: View {
             if firstGamePlayed {
                 DispatchQueue.main.async {
                     withAnimation(.linear) {
-                        cardOffset = (deviceWidth * 1.8)
+                        cardOffset = -(deviceWidth * 1.8)
                     }
                 }
             }

@@ -63,7 +63,9 @@ struct NoMoreSwipesView: View {
                     Spacer()
                 }
                 .padding(12)
-                .background(.red)
+                .background{
+                    LinearGradient(gradient: Gradient(colors: [.white, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
+                }
                 .cornerRadius(21)
                 .overlay{
                     RoundedRectangle(cornerRadius: 21)
@@ -106,7 +108,7 @@ struct NoMoreSwipesView: View {
                             }
                             .padding()
                             .background{
-                                Color.green
+                                LinearGradient(gradient: Gradient(colors: [.white, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
                             }
                             .cornerRadius(15)
                             .overlay{
@@ -133,7 +135,7 @@ struct NoMoreSwipesView: View {
                             }
                             .padding()
                             .background{
-                                Color.red
+                                LinearGradient(gradient: Gradient(colors: [.white, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
                             }
                             .cornerRadius(15)
                             .overlay{
@@ -169,7 +171,9 @@ struct NoMoreSwipesView: View {
                             Spacer()
                         }
                         .padding()
-                        .background(.blue)
+                        .background{
+                            LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                        }
                         .cornerRadius(21)
                         .overlay{
                             RoundedRectangle(cornerRadius: 21)
