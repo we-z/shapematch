@@ -186,10 +186,10 @@ struct ContentView: View {
                     ZStack{
                         ButtonsView()
                         //                            .padding(.horizontal, idiom == .pad ? 69 : 21)
-//                        if !userPersistedData.firstGamePlayed {
-//                            InstructionView()
-//                                .frame(height: 1)
-//                        }
+                        if !userPersistedData.firstGamePlayed {
+                            InstructionView()
+                                .frame(height: 1)
+                        }
 //                        if userPersistedData.level < 4 {
 //                            NewGoalView()
 //                                .frame(height: 1)

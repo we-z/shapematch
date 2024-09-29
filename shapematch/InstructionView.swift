@@ -16,7 +16,7 @@ struct InstructionView: View {
             HStack{
                 Spacer()
                 VStack(spacing: 5){
-                    Text("↗️ Match the goal pattern ↖️")
+                    Text("↗️  Match The Shapes  ↖️")
                         .bold()
                         .multilineTextAlignment(.center)
                         .font(.system(size: deviceWidth / 15))
@@ -26,7 +26,9 @@ struct InstructionView: View {
                 Spacer()
             }
             .padding(.vertical, 21)
-            .background(.green)
+            .background{
+                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+            }
             .cornerRadius(15)
             .overlay{
                 RoundedRectangle(cornerRadius: 15)
