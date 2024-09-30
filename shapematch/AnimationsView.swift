@@ -12,7 +12,7 @@ import AVFoundation
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        CelebrateGems()
+        CelebrationEffect()
             .onAppear {
                 appModel.shouldBurst.toggle()
             }
@@ -43,7 +43,7 @@ struct RotatingSunView: View {
             }
             .rotationEffect(.degrees(rotationAngle))
             .onAppear {
-                withAnimation(Animation.linear(duration: 30).repeatForever(autoreverses: false)) {
+                withAnimation(Animation.linear(duration: 12).repeatForever(autoreverses: false)) {
                     self.rotationAngle = 360
                 }
             }
@@ -154,13 +154,20 @@ struct CelebrationEffect: View {
                     .scaleEffect(animateMessage ? 1 : 0.1)
                     .offset(y: animateMessage ? 0 : -(deviceHeight/2))
             }
-            Text("Level\n\(userPersistedData.level)")
-                .bold()
-                .italic()
-                .multilineTextAlignment(.center)
-                .font(.system(size: deviceWidth / 4.5))
-                .customTextStroke(width: 3.3)
-                .rotationEffect(.degrees(showLevel ? 0 : -180))
+            ZStack{
+                RotatingSunView()
+                    .frame(width: 1, height: 1)
+//                    .offset(y: deviceWidth / 7.5)
+                Text("Level\n\(userPersistedData.level)")
+                    .bold()
+                    .italic()
+                    .multilineTextAlignment(.center)
+                    .font(.system(size: deviceWidth / 4.5))
+                    .customTextStroke(width: 3.3)
+                    .rotationEffect(.degrees(showLevel ? 0 : -180))
+                    .offset(y: -(deviceWidth / 7.5))
+            }
+                
                 .scaleEffect(showLevel ? 1 : 0.001)
         }
         .allowsHitTesting(false)
