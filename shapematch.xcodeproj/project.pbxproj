@@ -35,6 +35,7 @@
 		76B7740B2C99EE950053B72B /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B7740A2C99EE950053B72B /* QRView.swift */; };
 		76B7740D2C9A006C0053B72B /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B7740C2C9A006C0053B72B /* ShareView.swift */; };
 		76B7740F2C9AA20F0053B72B /* ButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B7740E2C9AA20F0053B72B /* ButtonsView.swift */; };
+		76BE41E12CAADB4900C5492C /* LevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BE41E02CAADB4900C5492C /* LevelsView.swift */; };
 		76D489792CA72557004060FA /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D489782CA72557004060FA /* BackgroundView.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		76B7740A2C99EE950053B72B /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRView.swift; sourceTree = "<group>"; };
 		76B7740C2C9A006C0053B72B /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		76B7740E2C9AA20F0053B72B /* ButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsView.swift; sourceTree = "<group>"; };
+		76BE41E02CAADB4900C5492C /* LevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsView.swift; sourceTree = "<group>"; };
 		76D489782CA72557004060FA /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,24 +144,25 @@
 				76D489782CA72557004060FA /* BackgroundView.swift */,
 				76B7740E2C9AA20F0053B72B /* ButtonsView.swift */,
 				7639F9602C713D8100E2B371 /* ContentView.swift */,
-				761A44452C7841A30017B53B /* GemMenuView.swift */,
 				76B774062C968EF70053B72B /* Extensions.swift */,
-				7639F9C92C7587C800E2B371 /* NoMoreSwipesView.swift */,
-				76ADAF032C76A92B006B2844 /* OverlaysView.swift */,
+				761A44452C7841A30017B53B /* GemMenuView.swift */,
+				7677131D2C86DCF800C9E2C9 /* iconview.swift */,
 				766EF08E2C7EB1C500B2C380 /* InstructionView.swift */,
+				76BE41E02CAADB4900C5492C /* LevelsView.swift */,
+				7639F9C92C7587C800E2B371 /* NoMoreSwipesView.swift */,
+				76B774082C96B6F50053B72B /* NotificationManager.swift */,
+				76ADAF032C76A92B006B2844 /* OverlaysView.swift */,
 				7639F9652C713D8200E2B371 /* Preview Content */,
-				761A444E2C78F03B0017B53B /* products.storekit */,
 				761A444C2C78EFA40017B53B /* ProductList.plist */,
+				761A444E2C78F03B0017B53B /* products.storekit */,
+				76B7740A2C99EE950053B72B /* QRView.swift */,
+				766EF08C2C7E2EEA00B2C380 /* RandomGradientView.swift */,
 				7639F9642C713D8200E2B371 /* shapematch.entitlements */,
 				7639F95E2C713D8100E2B371 /* shapematchApp.swift */,
 				7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */,
-				761A444A2C78E8320017B53B /* StoreKitManager.swift */,
-				766EF08C2C7E2EEA00B2C380 /* RandomGradientView.swift */,
-				76B774082C96B6F50053B72B /* NotificationManager.swift */,
 				76B7740C2C9A006C0053B72B /* ShareView.swift */,
+				761A444A2C78E8320017B53B /* StoreKitManager.swift */,
 				7639F9892C71460D00E2B371 /* Tempview.swift */,
-				7677131D2C86DCF800C9E2C9 /* iconview.swift */,
-				76B7740A2C99EE950053B72B /* QRView.swift */,
 				760776142C7A18C7003E2AD2 /* UserPersistedData.swift */,
 			);
 			path = shapematch;
@@ -304,6 +307,7 @@
 				761A44462C7841A30017B53B /* GemMenuView.swift in Sources */,
 				766EF08F2C7EB1C500B2C380 /* InstructionView.swift in Sources */,
 				7677131E2C86DCF800C9E2C9 /* iconview.swift in Sources */,
+				76BE41E12CAADB4900C5492C /* LevelsView.swift in Sources */,
 				76B7740B2C99EE950053B72B /* QRView.swift in Sources */,
 				7639F9CE2C759A2E00E2B371 /* AudioManager.swift in Sources */,
 				76B7740D2C9A006C0053B72B /* ShareView.swift in Sources */,
@@ -464,7 +468,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = shapematch/shapematch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1.9;
+				CURRENT_PROJECT_VERSION = 1.2.0;
 				DEVELOPMENT_ASSET_PATHS = "\"shapematch/Preview Content\"";
 				DEVELOPMENT_TEAM = 3Y2Y4CJNN6;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -485,7 +489,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
-				MARKETING_VERSION = 1.1.9;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.shapematch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -503,7 +507,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = shapematch/shapematch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1.9;
+				CURRENT_PROJECT_VERSION = 1.2.0;
 				DEVELOPMENT_ASSET_PATHS = "\"shapematch/Preview Content\"";
 				DEVELOPMENT_TEAM = 3Y2Y4CJNN6;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -524,7 +528,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
-				MARKETING_VERSION = 1.1.9;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.shapematch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
