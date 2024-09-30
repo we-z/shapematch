@@ -23,24 +23,17 @@ struct LevelsView: View {
                 HStack(spacing: 4) {
                     ForEach(getShapes(level: currentLevel), id: \.self) { shape in
                         ShapeView(shapeType: shape)
-                            .frame(width: 60, height: 60)
-                            .scaleEffect(0.6)
+                            .frame(width: 40, height: 40)
+                            .scaleEffect(0.4)
                     }
                 }
-            }
-            .animation(.default, value: currentLevel)
-
-            // "Level" and "Moves" titles
-            HStack {
-                Text("Level")
-                    .font(.subheadline)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading)
-                Text("Moves")
-                    .font(.subheadline)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
+                Spacer()
+                Text("Moves: \(getSwapsNeeded(level: currentLevel))")
                     .padding(.trailing)
             }
+//            .animation(.default, value: currentLevel)
+
+
 
             // Button to jump back to current level
             if currentLevel != userPersistedData.level {
@@ -181,16 +174,9 @@ struct LevelRow: View {
 
     var body: some View {
         HStack {
-            Text("Level \(level)")
+            Text("\(level)")
                 .font(.body)
                 .foregroundColor(isUnlocked ? .primary : .gray)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading)
-            Text("\(swapsNeeded)")
-                .font(.body)
-                .foregroundColor(isUnlocked ? .primary : .gray)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding(.trailing)
         }
         .contentShape(Rectangle())
     }
