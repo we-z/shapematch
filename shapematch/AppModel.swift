@@ -249,9 +249,47 @@ class AppModel: ObservableObject {
             totalCost += cost
         }
         
-        // the higher the first number is, the more likely we are to end up with an extra swap
-        return Int(ceil (Double(totalCost) / 2.0))
+        // Adjust totalCost to account for blocking shapes
+        let gridSize = startGrid.count
+        for i in 0..<gridSize {
+            for j in 0..<gridSize {
+                // Check if the shape is in its correct position
+                if startGrid[i][j] == targetGrid[i][j] {
+                    // Get adjacent positions
+                    let adjacentPositions = getAdjacentPositions(i: i, j: j, gridSize: gridSize)
+                    // For each pair of adjacent mismatched positions
+                    for k in 0..<adjacentPositions.count {
+                        let (ni1, nj1) = adjacentPositions[k]
+                        for l in (k+1)..<adjacentPositions.count {
+                            let (ni2, nj2) = adjacentPositions[l]
+                            // Check if both positions have mismatched shapes
+                            if startGrid[ni1][nj1] != targetGrid[ni1][nj1] && startGrid[ni2][nj2] != targetGrid[ni2][nj2] {
+                                // Check if shapes need to swap
+                                if startGrid[ni1][nj1] == targetGrid[ni2][nj2] && startGrid[ni2][nj2] == targetGrid[ni1][nj1] {
+                                    // The shape at (i,j) is blocking the swap
+                                    totalCost += 1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Return the adjusted totalCost
+        return Int(ceil(Double(totalCost) / 2.0))
     }
+
+    // Helper function to get adjacent positions
+    func getAdjacentPositions(i: Int, j: Int, gridSize: Int) -> [(Int, Int)] {
+        var positions = [(Int, Int)]()
+        if i > 0 { positions.append((i - 1, j)) }
+        if i < gridSize - 1 { positions.append((i + 1, j)) }
+        if j > 0 { positions.append((i, j - 1)) }
+        if j < gridSize - 1 { positions.append((i, j + 1)) }
+        return positions
+    }
+
 
     func positions(of shapeType: ShapeType, in grid: [[ShapeType]]) -> [Position] {
         var positions = [Position]()
@@ -430,7 +468,7 @@ class AppModel: ObservableObject {
             // optimize
             let generatedTargetGrid = generateTargetGrid(from: grid, with: swapsNeeded)
             
-            if swapsNeeded > approximateMinimumSwipes(from: grid, to: generatedTargetGrid) {
+            if swapsNeeded != approximateMinimumSwipes(from: grid, to: generatedTargetGrid) {
                 print("trying again")
                 
             } else {

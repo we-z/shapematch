@@ -7,7 +7,7 @@ var idiom : UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
 
 struct ContentView: View {
 
-    @ObservedObject private var appModel = AppModel.sharedAppModel
+    @ObservedObject var appModel = AppModel.sharedAppModel
     @StateObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @ObservedObject var notificationManager = NotificationManager()
