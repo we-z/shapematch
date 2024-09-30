@@ -10,7 +10,7 @@ import SwiftUI
 struct QRView: View {
     var body: some View {
         ZStack {
-            Color.blue
+            LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
             VStack {
                 ZStack{
                     Rectangle()
