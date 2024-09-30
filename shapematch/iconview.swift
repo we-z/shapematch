@@ -17,6 +17,7 @@ struct iconview: View {
         ZStack {
             Color.blue
             LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0.3), endPoint: UnitPoint(x: 0.5, y: 0.7))
+            RotatingSunView()
             ZStack {
 //                ForEach(0..<2) { row in // Updated to 4 rows
 //                    HStack {
@@ -31,10 +32,10 @@ struct iconview: View {
                 Text("💎")
                     .font(.system(size: 270))
                     .customTextStroke(width: 9)
-                Text("✨")
-                    .font(.system(size: 120))
-                    .customTextStroke(width: 3)
-                    .offset(x: 90, y: -90)
+//                Text("✨")
+//                    .font(.system(size: 120))
+//                    .customTextStroke(width: 3)
+//                    .offset(x: 90, y: -90)
                 
             }
 //            .scaleEffect(1.5)
