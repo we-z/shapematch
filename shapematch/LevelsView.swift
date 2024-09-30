@@ -14,84 +14,92 @@ struct LevelsView: View {
     @State private var scrollProxy: ScrollViewProxy? = nil
 
     var body: some View {
-        VStack(alignment: .leading) {
-            // Top title displaying grid dimensions and shapes
-            HStack {
-                Text("\(getGridSize(level: currentLevel))x\(getGridSize(level: currentLevel))")
-                    .font(.headline)
-                    .padding(.leading)
-                HStack(spacing: 4) {
-                    ForEach(getShapes(level: currentLevel), id: \.self) { shape in
-                        ShapeView(shapeType: shape)
-                            .frame(width: 40, height: 40)
-                            .scaleEffect(0.4)
-                    }
-                }
-                Spacer()
-                Text("Moves: \(getSwapsNeeded(level: currentLevel))")
-                    .padding(.trailing)
-            }
-//            .animation(.default, value: currentLevel)
-
-
-
-            // Button to jump back to current level
-            if currentLevel != userPersistedData.level {
-                Button(action: {
-                    if let scrollProxy = scrollProxy {
-                        withAnimation {
-                            scrollProxy.scrollTo(userPersistedData.level, anchor: .center)
+        ZStack {
+            VStack(alignment: .leading) {
+                // Top title displaying grid dimensions and shapes
+                HStack {
+                    Text("\(getGridSize(level: currentLevel))x\(getGridSize(level: currentLevel))")
+                        .font(.headline)
+                        .padding(.leading)
+                    HStack(spacing: 4) {
+                        ForEach(getShapes(level: currentLevel), id: \.self) { shape in
+                            ShapeView(shapeType: shape)
+                                .frame(width: 40, height: 40)
+                                .scaleEffect(0.4)
                         }
                     }
-                }) {
-                    Text("Jump to Level \(userPersistedData.level)")
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
+                    Spacer()
+                    Text("Moves: \(getSwapsNeeded(level: currentLevel))")
+                        .padding(.trailing)
                 }
-                .padding()
+                            .animation(.default, value: currentLevel)
+                
+                
+                
+                // Button to jump back to current level
+                
+                // ScrollView with lazy loading
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(1...10000, id: \.self) { level in
+                                LevelRow(level: level,
+                                         isUnlocked: level <= userPersistedData.level,
+                                         swapsNeeded: getSwapsNeeded(level: level))
+//                                .onTapGesture {
+//                                    if level <= userPersistedData.level {
+//                                        appModel.userPersistedData.level = level
+//                                        appModel.setupLevel()
+//                                    }
+//                                }
+                                .id(level)
+                                .background(GeometryReader { geo -> Color in
+                                    let frame = geo.frame(in: .global)
+                                    let midY = UIScreen.main.bounds.height / 3
+                                    let diff = abs(frame.midY - midY)
+                                    DispatchQueue.main.async {
+                                        if diff < 50 {
+                                            self.currentLevel = level
+                                        }
+                                    }
+                                    return Color.clear
+                                })
+                                .scaleEffect(currentLevel == level ? 1.0 : 0.6)
+                                .opacity( level <= userPersistedData.level ? 1.0 : 0.6)
+                                .animation(.default, value: currentLevel)
+                            }
+                        }
+                    }
+                    .onAppear {
+                        self.scrollProxy = proxy
+                        // Jump to the current level
+                        DispatchQueue.main.async {
+                            withAnimation {
+                                proxy.scrollTo(userPersistedData.level, anchor: .center)
+                            }
+                        }
+                    }
+                }
             }
-
-            // ScrollView with lazy loading
-            ScrollViewReader { proxy in
-                ScrollView {
-                    LazyVStack {
-                        ForEach(1...10000, id: \.self) { level in
-                            LevelRow(level: level,
-                                     isUnlocked: level <= userPersistedData.level,
-                                     swapsNeeded: getSwapsNeeded(level: level))
-                            .onTapGesture {
-                                if level <= userPersistedData.level {
-                                    appModel.userPersistedData.level = level
-                                    appModel.setupLevel()
+            VStack {
+                Spacer()
+                HStack{
+                    Spacer()
+                    if currentLevel != userPersistedData.level {
+                        Button(action: {
+                            if let scrollProxy = scrollProxy {
+                                withAnimation {
+                                    scrollProxy.scrollTo(userPersistedData.level, anchor: .center)
                                 }
                             }
-                            .id(level)
-                            .background(GeometryReader { geo -> Color in
-                                let frame = geo.frame(in: .global)
-                                let midY = UIScreen.main.bounds.height / 2
-                                let diff = abs(frame.midY - midY)
-                                DispatchQueue.main.async {
-                                    if diff < 50 {
-                                        self.currentLevel = level
-                                    }
-                                }
-                                return Color.clear
-                            })
-                            .scaleEffect(currentLevel == level ? 1.0 : 0.9)
-                            .opacity(currentLevel == level ? 1.0 : 0.6)
-                            .animation(.default, value: currentLevel)
+                        }) {
+                            Text("Level \(userPersistedData.level) ^")
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
                         }
-                    }
-                }
-                .onAppear {
-                    self.scrollProxy = proxy
-                    // Jump to the current level
-                    DispatchQueue.main.async {
-                        withAnimation {
-                            proxy.scrollTo(userPersistedData.level, anchor: .center)
-                        }
+                        .padding()
                     }
                 }
             }
@@ -175,8 +183,9 @@ struct LevelRow: View {
     var body: some View {
         HStack {
             Text("\(level)")
-                .font(.body)
-                .foregroundColor(isUnlocked ? .primary : .gray)
+                .font(.system(size: deviceWidth / 3))
+                .customTextStroke(width: 4)
+//                .foregroundColor(isUnlocked ? .primary : .gray)
         }
         .contentShape(Rectangle())
     }
