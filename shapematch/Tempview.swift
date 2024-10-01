@@ -24,30 +24,31 @@ struct TempView: View {
         [.circle, .triangle, .square, .star]
     ]
     
+    let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "🛥️", "⛴️", "🛳️", "🚢", "⛵", "🌅", "🏝️", "🏖️", "🪼"]
+    
     var body: some View {
         ZStack {
             VortexView(createSnow()) {
-                Circle()
-                    .fill(.blue)
-                    .blendMode(.plusLighter)
-                    .blur(radius: 0)
-                    .frame(width: 50)
-                    .padding(90)
-                    .tag("circle")
+                ForEach(0...emojis.count - 1, id: \.self) { i in
+                    Text(emojis[i])
+                        .font(.system(size: deviceWidth/4))
+                        .blur(radius: 0)
+                        .frame(width: .infinity, height: .infinity)
+                        .rotationEffect(.degrees(180))
+                        .tag(emojis[i])
+                }
             }
             .rotationEffect(.degrees(180))
-//            .frame(width: deviceWidth * 9, height: deviceHeight * 9)
-//            .offset(y: deviceHeight )
         }
     }
     
     func createSnow() -> VortexSystem {
-        let system = VortexSystem(tags: ["circle"])
+        let system = VortexSystem(tags: emojis)
         system.position = [0.5, 0]
         system.speed = 0.1
-        system.speedVariation = 0.25
-        system.lifespan = 6
-        system.shape = .box(width: 3, height: 0)
+        system.speedVariation = 0.15
+        system.lifespan = 9
+        system.shape = .box(width: 9, height: 0)
         system.angle = .degrees(180)
         system.angleRange = .degrees(20)
         system.size = 0.1

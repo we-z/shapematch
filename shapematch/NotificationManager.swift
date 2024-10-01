@@ -25,7 +25,6 @@ class NotificationManager: ObservableObject {
         "To solve effectively, one must first see beyond the obvious.",
         "The process of solving a problem is as important as the solution itself.",
         "Questions shape the path; answers are just a byproduct of the journey.",
-        "Every solution contains the seeds of future problems."
     ]
     
     @objc func registerLocal() {
