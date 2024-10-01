@@ -15,10 +15,10 @@ struct LevelsView: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.mint, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+            LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
             VStack {
                 Capsule()
-                    .foregroundColor(.green)
+                    .foregroundColor(.blue)
                     .frame(width: 45, height: 9)
                     .padding(.top, 15)
                     .customTextStroke()
@@ -44,7 +44,7 @@ struct LevelsView: View {
                                     //                                    }
                                     //                                }
                                     .id(level)
-                                    .padding(.top, level == 1 ? deviceHeight / 4 : 0)
+                                    .padding(.top, level == 1 ? deviceHeight / 3 : 0)
                                     .background(GeometryReader { geo -> Color in
                                         let frame = geo.frame(in: .global)
                                         let midY = UIScreen.main.bounds.height / 2
@@ -227,7 +227,7 @@ struct LevelRow: View {
                 
         }
         .customTextStroke(width: 3)
-        .offset(x: level % 2 == 0 ? deviceWidth / 6 : -(deviceWidth/6))
+        .offset(x: level % 2 == 0 ? deviceWidth / 7 : -(deviceWidth/7))
         
         
     }
