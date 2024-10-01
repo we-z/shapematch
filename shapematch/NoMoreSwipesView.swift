@@ -161,14 +161,20 @@ struct NoMoreSwipesView: View {
                         }
                     } label: {
                         HStack{
-                            Spacer()
-                            Text("💎 + 3 Moves")
+                            Text("+ 3 Moves")
                                 .bold()
                                 .font(.system(size: deviceWidth/12))
                                 .fixedSize()
                                 .customTextStroke(width: 2.1)
-                                .padding(.horizontal, 9)
+                                .padding(.leading)
                             Spacer()
+                            Text("3 💎")
+                                .bold()
+                                .font(.system(size: deviceWidth/12))
+                                .fixedSize()
+                                .customTextStroke(width: 2.1)
+                                .padding(.trailing)
+                            
                         }
                         .padding()
                         .background{
