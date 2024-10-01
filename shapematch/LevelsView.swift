@@ -18,21 +18,33 @@ struct LevelsView: View {
             VStack(alignment: .leading) {
                 // Top title displaying grid dimensions and shapes
                 HStack {
-                    Text("\(getGridSize(level: currentLevel))x\(getGridSize(level: currentLevel))")
-                        .font(.headline)
-                        .padding(.leading)
-                    HStack(spacing: 4) {
-                        ForEach(getShapes(level: currentLevel), id: \.self) { shape in
-                            ShapeView(shapeType: shape)
-                                .frame(width: 40, height: 40)
-                                .scaleEffect(0.4)
+                    VStack(spacing: 3){
+                        HStack {
+                        Text("\(getGridSize(level: currentLevel))x\(getGridSize(level: currentLevel))")
+                            .bold()
+                            .font(.system(size: deviceWidth / 9))
+                            .customTextStroke(width: 1.8)
+                            Spacer()
+                    }
+                        HStack(spacing: 4) {
+                            ForEach(getShapes(level: currentLevel), id: \.self) { shape in
+                                ShapeView(shapeType: shape)
+                                    .frame(width: deviceWidth / 9, height: deviceWidth / 9)
+                                    .scaleEffect(0.5)
+                            }
+                            Spacer()
                         }
                     }
+                    .padding(.leading)
                     Spacer()
-                    Text("Moves: \(getSwapsNeeded(level: currentLevel))")
+                    Text("Moves:\n\(getSwapsNeeded(level: currentLevel))")
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .font(.system(size: deviceWidth / 12))
+                        .customTextStroke(width: 1.8)
                         .padding(.trailing)
                 }
-                            .animation(.default, value: currentLevel)
+//                            .animation(.default, value: currentLevel)
                 
                 
                 
@@ -65,7 +77,7 @@ struct LevelsView: View {
                                     return Color.clear
                                 })
                                 .scaleEffect(currentLevel == level ? 1.0 : 0.6)
-                                .opacity( level <= userPersistedData.level ? 1.0 : 0.6)
+                                .opacity( level <= userPersistedData.level ? 1.0 : 0.4)
                                 .animation(.default, value: currentLevel)
                             }
                         }
@@ -75,7 +87,7 @@ struct LevelsView: View {
                         // Jump to the current level
                         DispatchQueue.main.async {
                             withAnimation {
-                                proxy.scrollTo(userPersistedData.level, anchor: .center)
+                                proxy.scrollTo(userPersistedData.level, anchor: .top)
                             }
                         }
                     }
@@ -85,11 +97,11 @@ struct LevelsView: View {
                 Spacer()
                 HStack{
                     Spacer()
-                    if currentLevel != userPersistedData.level {
+                    if currentLevel > userPersistedData.level {
                         Button(action: {
                             if let scrollProxy = scrollProxy {
                                 withAnimation {
-                                    scrollProxy.scrollTo(userPersistedData.level, anchor: .center)
+                                    scrollProxy.scrollTo(userPersistedData.level, anchor: .top)
                                 }
                             }
                         }) {
@@ -183,9 +195,9 @@ struct LevelRow: View {
     var body: some View {
         HStack {
             Text("\(level)")
+                .bold()
                 .font(.system(size: deviceWidth / 3))
                 .customTextStroke(width: 4)
-//                .foregroundColor(isUnlocked ? .primary : .gray)
         }
         .contentShape(Rectangle())
     }
