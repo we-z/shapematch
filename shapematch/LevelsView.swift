@@ -13,7 +13,7 @@ struct LevelsView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @State private var currentLevel = 1
     @State private var scrollProxy: ScrollViewProxy? = nil
-    @State var backgroundEmojis = "🐟🐠🐡🦈🐬🐳🐋🐙🦑🦀🦞🦐🐚🪸🐊🌊🏄‍♂️🏄‍♀️🚤🛥️⛴️🛳️🚢⛵🌅🏝️🏖️🪼"
+    let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "🛥️", "⛴️", "🛳️", "🚢", "⛵", "🏝️", "🏖️", "🪼"]
     
     func createBubbles() -> VortexSystem {
         let system = VortexSystem(tags: ["circle"])
@@ -22,6 +22,20 @@ struct LevelsView: View {
         system.speedVariation = 0.25
         system.lifespan = 6
         system.shape = .box(width: 3, height: 0)
+        system.angle = .degrees(180)
+        system.angleRange = .degrees(20)
+        system.size = 0.1
+        system.sizeVariation = 0.5
+        return system
+    }
+    
+    func createEmojis() -> VortexSystem {
+        let system = VortexSystem(tags: emojis)
+        system.position = [0.5, 0]
+        system.speed = 0.1
+        system.speedVariation = 0.15
+        system.lifespan = 9
+        system.shape = .box(width: 9, height: 0)
         system.angle = .degrees(180)
         system.angleRange = .degrees(20)
         system.size = 0.1
@@ -45,6 +59,18 @@ struct LevelsView: View {
                     .tag("circle")
             }
             .rotationEffect(.degrees(180))
+            VortexView(createEmojis()) {
+                ForEach(0...emojis.count - 1, id: \.self) { i in
+                    Text(emojis[i])
+                        .font(.system(size: deviceWidth/4))
+                        .blur(radius: 0)
+                        .frame(width: .infinity, height: .infinity)
+                        .rotationEffect(.degrees(180))
+                        .tag(emojis[i])
+                }
+            }
+            .rotationEffect(.degrees(180))
+            .opacity(0.3)
             VStack {
                 Capsule()
                     .foregroundColor(.blue)
@@ -97,9 +123,9 @@ struct LevelsView: View {
                             self.scrollProxy = proxy
                             // Jump to the current level
                             DispatchQueue.main.async {
-                                withAnimation {
+//                                withAnimation {
                                     proxy.scrollTo(userPersistedData.level, anchor: .center)
-                                }
+//                                }
                                 self.currentLevel = userPersistedData.level
                             }
                         }
