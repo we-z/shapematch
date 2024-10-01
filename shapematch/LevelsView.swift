@@ -16,20 +16,94 @@ struct LevelsView: View {
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.mint, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                .ignoresSafeArea()
             VStack {
-                // Top title displaying grid dimensions and shapes
-                Text("👾 Levels 🕹️")
-                    .bold()
-                    .font(.system(size: deviceWidth / 9))
+                Capsule()
+                    .foregroundColor(.green)
+                    .frame(width: 45, height: 9)
+                    .padding(.top, 15)
                     .customTextStroke()
-                    .padding()
+                // Top title displaying grid dimensions and shapes
+                Text("Levels")
+                    .bold()
+                    .font(.system(size: deviceWidth / 8))
+                    .customTextStroke()
+                // ScrollView with lazy loading
+                ZStack {
+                    ScrollViewReader { proxy in
+                        ScrollView {
+                            LazyVStack {
+                                ForEach(1...10000, id: \.self) { level in
+                                    LevelRow(level: level,
+                                             isUnlocked: level <= userPersistedData.level,
+                                             swapsNeeded: getSwapsNeeded(level: level))
+                                    
+                                    //                                .onTapGesture {
+                                    //                                    if level <= userPersistedData.level {
+                                    //                                        appModel.userPersistedData.level = level
+                                    //                                        appModel.setupLevel()
+                                    //                                    }
+                                    //                                }
+                                    .id(level)
+                                    .padding(.top, level == 1 ? deviceHeight / 4 : 0)
+                                    .background(GeometryReader { geo -> Color in
+                                        let frame = geo.frame(in: .global)
+                                        let midY = UIScreen.main.bounds.height / 2
+                                        let diff = abs(frame.midY - midY)
+                                        DispatchQueue.main.async {
+                                            if diff < 50 {
+                                                self.currentLevel = level
+                                            }
+                                        }
+                                        return Color.clear
+                                    })
+                                    .scaleEffect(currentLevel == level ? 1.0 : 0.8)
+                                    .opacity( level <= userPersistedData.level ? 1.0 : 0.4)
+                                    .animation(.default, value: currentLevel)
+                                }
+                            }
+                        }
+                        .onAppear {
+                            self.scrollProxy = proxy
+                            // Jump to the current level
+                            DispatchQueue.main.async {
+                                withAnimation {
+                                    proxy.scrollTo(userPersistedData.level, anchor: .center)
+                                }
+                                self.currentLevel = userPersistedData.level
+                            }
+                        }
+                    }
+                    VStack {
+                        Spacer()
+                        HStack{
+                            Spacer()
+                            if currentLevel > userPersistedData.level {
+                                Button(action: {
+                                    if let scrollProxy = scrollProxy {
+                                        withAnimation {
+                                            scrollProxy.scrollTo(userPersistedData.level, anchor: .center)
+                                        }
+                                        self.currentLevel = userPersistedData.level
+                                    }
+                                    
+                                }) {
+                                    Text("⬆️")
+                                        .font(.system(size: deviceWidth / 6))
+                                        .customTextStroke(width: 3)
+                                        .padding()
+                                }
+                                .padding()
+                            }
+                        }
+                    }
+                }
+                
                 HStack {
                     VStack(spacing: 3){
                         HStack {
                         Text("\(getGridSize(level: currentLevel))x\(getGridSize(level: currentLevel))")
                             .bold()
-                            .font(.system(size: deviceWidth / 9))
+                            .font(.system(size: deviceWidth / 12))
                             .customTextStroke(width: 1.8)
                             Spacer()
                     }
@@ -37,7 +111,7 @@ struct LevelsView: View {
                             ForEach(getShapes(level: currentLevel), id: \.self) { shape in
                                 ShapeView(shapeType: shape)
                                     .frame(width: deviceWidth / 9, height: deviceWidth / 9)
-                                    .scaleEffect(0.5)
+                                    .scaleEffect(0.4)
                             }
                             Spacer()
                         }
@@ -47,86 +121,21 @@ struct LevelsView: View {
                     Text("Moves:\n\(getSwapsNeeded(level: currentLevel))")
                         .bold()
                         .multilineTextAlignment(.center)
-                        .font(.system(size: deviceWidth / 9))
-                        .customTextStroke(width: 2.1)
+                        .font(.system(size: deviceWidth / 11))
+                        .customTextStroke(width: 1.8)
                         .padding(.trailing)
                 }
-//                            .animation(.default, value: currentLevel)
-                
-                
-                
-                // Button to jump back to current level
-                
-                // ScrollView with lazy loading
-                ScrollViewReader { proxy in
-                    ScrollView {
-                        LazyVStack {
-                            ForEach(1...10000, id: \.self) { level in
-                                LevelRow(level: level,
-                                         isUnlocked: level <= userPersistedData.level,
-                                         swapsNeeded: getSwapsNeeded(level: level))
-                                .customTextStroke(width: 3)
-//                                .onTapGesture {
-//                                    if level <= userPersistedData.level {
-//                                        appModel.userPersistedData.level = level
-//                                        appModel.setupLevel()
-//                                    }
-//                                }
-                                .id(level)
-                                .padding(.top, level == 1 ? deviceHeight / 7 : 0)
-                                .background(GeometryReader { geo -> Color in
-                                    let frame = geo.frame(in: .global)
-                                    let midY = UIScreen.main.bounds.height / 1.5
-                                    let diff = abs(frame.midY - midY)
-                                    DispatchQueue.main.async {
-                                        if diff < 50 {
-                                            self.currentLevel = level
-                                        }
-                                    }
-                                    return Color.clear
-                                })
-                                .scaleEffect(currentLevel == level ? 1.0 : 0.6)
-                                .opacity( level <= userPersistedData.level ? 1.0 : 0.4)
-                                .animation(.default, value: currentLevel)
-                            }
-                        }
-                    }
-                    .onAppear {
-                        self.scrollProxy = proxy
-                        // Jump to the current level
-                        DispatchQueue.main.async {
-                            withAnimation {
-                                proxy.scrollTo(userPersistedData.level, anchor: .center)
-                            }
-                            self.currentLevel = userPersistedData.level
-                        }
-                    }
-                }
-            }
-            VStack {
-                Spacer()
-                HStack{
-                    Spacer()
-                    if currentLevel > userPersistedData.level {
-                        Button(action: {
-                            if let scrollProxy = scrollProxy {
-                                withAnimation {
-                                    scrollProxy.scrollTo(userPersistedData.level, anchor: .center)
-                                }
-                                self.currentLevel = userPersistedData.level
-                            }
-                            
-                        }) {
-                            Text("⬆️")
-                                .font(.system(size: deviceWidth / 6))
-                                .customTextStroke(width: 3)
-                                .padding()
-                        }
-                        .padding()
-                    }
-                }
+                .padding(.bottom)
+//                .animation(.default, value: currentLevel)
             }
         }
+        .cornerRadius(30)
+        .overlay{
+            RoundedRectangle(cornerRadius: 30)
+                .stroke(Color.black, lineWidth: 9)
+                .padding(1)
+        }
+        .padding()
     }
 
     // Helper functions to get level settings
@@ -206,17 +215,21 @@ struct LevelRow: View {
     var body: some View {
         ZStack {
             Circle()
-                .frame(width: deviceWidth / 3)
+                .frame(width: deviceWidth / 5)
                 .overlay{
                     LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                         .mask(Circle())
                 }
             Text("\(level)")
                 .bold()
-                .font(.system(size: deviceWidth / 5))
-                .customTextStroke(width: 3)
+                .font(.system(size: deviceWidth / 9))
+                .customTextStroke()
+                
         }
-        .contentShape(Rectangle())
+        .customTextStroke(width: 3)
+        .offset(x: level % 2 == 0 ? deviceWidth / 6 : -(deviceWidth/6))
+        
+        
     }
 }
 
