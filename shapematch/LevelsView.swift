@@ -52,6 +52,7 @@ struct LevelsView: View {
                                         DispatchQueue.main.async {
                                             if diff < 50 {
                                                 self.currentLevel = level
+                                                impactLight.impactOccurred()
                                             }
                                         }
                                         return Color.clear
@@ -100,7 +101,7 @@ struct LevelsView: View {
                 }
                 
                 HStack {
-                    VStack(spacing: 3){
+                    VStack(spacing: 12){
                         HStack {
                         Text("\(getGridSize(level: currentLevel))x\(getGridSize(level: currentLevel))")
                             .bold()
@@ -111,8 +112,8 @@ struct LevelsView: View {
                         HStack(spacing: 4) {
                             ForEach(getShapes(level: currentLevel), id: \.self) { shape in
                                 ShapeView(shapeType: shape)
-                                    .frame(width: deviceWidth / 9, height: deviceWidth / 9)
-                                    .scaleEffect(0.4)
+                                    .frame(width: deviceWidth / 12, height: deviceWidth / 12)
+                                    .scaleEffect(0.3)
                             }
                             Spacer()
                         }
@@ -223,7 +224,7 @@ struct LevelRow: View {
                 }
             Text("\(level)")
                 .bold()
-                .font(.system(size: deviceWidth / 9))
+                .font(.system(size: level > 99 ? deviceWidth / 12 : deviceWidth / 9))
                 .customTextStroke()
                 
         }
