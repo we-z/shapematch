@@ -151,18 +151,18 @@ struct NoMoreSwipesView: View {
                     Button {
                         animateAwayButtonsAndBanner()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                            if appModel.swapsToSell > userPersistedData.gemBalance {
+                            if 3 > userPersistedData.gemBalance {
                                 appModel.showGemMenu = true
                             } else {
-                                userPersistedData.decrementBalance(amount: appModel.swapsToSell)
-                                appModel.swipesLeft += appModel.swapsToSell
+                                userPersistedData.decrementBalance(amount: 3)
+                                appModel.swipesLeft += 3
                                 appModel.showNoMoreSwipesView = false
                             }
                         }
                     } label: {
                         HStack{
                             Spacer()
-                            Text("💎 + \(appModel.swapsToSell) Moves")
+                            Text("💎 + 3 Moves")
                                 .bold()
                                 .font(.system(size: deviceWidth/12))
                                 .fixedSize()
