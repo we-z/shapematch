@@ -47,7 +47,7 @@ struct LevelsView: View {
                                     .padding(.top, level == 1 ? deviceHeight / 3 : 0)
                                     .background(GeometryReader { geo -> Color in
                                         let frame = geo.frame(in: .global)
-                                        let midY = UIScreen.main.bounds.height / 2
+                                        let midY = UIScreen.main.bounds.height / 1.8
                                         let diff = abs(frame.midY - midY)
                                         DispatchQueue.main.async {
                                             if diff < 50 {
@@ -56,6 +56,7 @@ struct LevelsView: View {
                                         }
                                         return Color.clear
                                     })
+                                    .rotationEffect(.degrees(currentLevel == level ? 0 : level % 2 == 0 ? 25 : -15 ))
                                     .scaleEffect(currentLevel == level ? 1.0 : 0.8)
                                     .opacity( level <= userPersistedData.level ? 1.0 : 0.4)
                                     .animation(.default, value: currentLevel)
@@ -88,8 +89,8 @@ struct LevelsView: View {
                                     
                                 }) {
                                     Text("⬆️")
-                                        .font(.system(size: deviceWidth / 6))
-                                        .customTextStroke(width: 3)
+                                        .font(.system(size: deviceWidth / 9))
+                                        .customTextStroke()
                                         .padding()
                                 }
                                 .padding()
