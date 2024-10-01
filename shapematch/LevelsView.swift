@@ -15,8 +15,12 @@ struct LevelsView: View {
 
     var body: some View {
         ZStack {
-            VStack(alignment: .leading) {
+            VStack {
                 // Top title displaying grid dimensions and shapes
+                Text("Levels")
+                    .bold()
+                    .font(.system(size: deviceWidth / 9))
+                    .customTextStroke()
                 HStack {
                     VStack(spacing: 3){
                         HStack {
@@ -65,9 +69,10 @@ struct LevelsView: View {
 //                                    }
 //                                }
                                 .id(level)
+                                .padding(.top, level == 1 ? deviceHeight / 6 : 0)
                                 .background(GeometryReader { geo -> Color in
                                     let frame = geo.frame(in: .global)
-                                    let midY = UIScreen.main.bounds.height / 3
+                                    let midY = UIScreen.main.bounds.height / 2
                                     let diff = abs(frame.midY - midY)
                                     DispatchQueue.main.async {
                                         if diff < 50 {
@@ -105,11 +110,10 @@ struct LevelsView: View {
                                 }
                             }
                         }) {
-                            Text("Level \(userPersistedData.level) ^")
+                            Text("⬆️")
+                                .font(.system(size: deviceWidth / 6))
+                                .customTextStroke(width: 3)
                                 .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
                         }
                         .padding()
                     }
