@@ -15,12 +15,15 @@ struct LevelsView: View {
 
     var body: some View {
         ZStack {
+            LinearGradient(gradient: Gradient(colors: [.mint, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                .ignoresSafeArea()
             VStack {
                 // Top title displaying grid dimensions and shapes
-                Text("Levels")
+                Text("👾 Levels 🕹️")
                     .bold()
                     .font(.system(size: deviceWidth / 9))
                     .customTextStroke()
+                    .padding()
                 HStack {
                     VStack(spacing: 3){
                         HStack {
@@ -44,8 +47,8 @@ struct LevelsView: View {
                     Text("Moves:\n\(getSwapsNeeded(level: currentLevel))")
                         .bold()
                         .multilineTextAlignment(.center)
-                        .font(.system(size: deviceWidth / 12))
-                        .customTextStroke(width: 1.8)
+                        .font(.system(size: deviceWidth / 9))
+                        .customTextStroke(width: 2.1)
                         .padding(.trailing)
                 }
 //                            .animation(.default, value: currentLevel)
@@ -62,6 +65,7 @@ struct LevelsView: View {
                                 LevelRow(level: level,
                                          isUnlocked: level <= userPersistedData.level,
                                          swapsNeeded: getSwapsNeeded(level: level))
+                                .customTextStroke(width: 3)
 //                                .onTapGesture {
 //                                    if level <= userPersistedData.level {
 //                                        appModel.userPersistedData.level = level
@@ -69,10 +73,10 @@ struct LevelsView: View {
 //                                    }
 //                                }
                                 .id(level)
-                                .padding(.top, level == 1 ? deviceHeight / 6 : 0)
+                                .padding(.top, level == 1 ? deviceHeight / 7 : 0)
                                 .background(GeometryReader { geo -> Color in
                                     let frame = geo.frame(in: .global)
-                                    let midY = UIScreen.main.bounds.height / 2
+                                    let midY = UIScreen.main.bounds.height / 1.5
                                     let diff = abs(frame.midY - midY)
                                     DispatchQueue.main.async {
                                         if diff < 50 {
@@ -92,8 +96,9 @@ struct LevelsView: View {
                         // Jump to the current level
                         DispatchQueue.main.async {
                             withAnimation {
-                                proxy.scrollTo(userPersistedData.level, anchor: .top)
+                                proxy.scrollTo(userPersistedData.level, anchor: .center)
                             }
+                            self.currentLevel = userPersistedData.level
                         }
                     }
                 }
@@ -106,9 +111,11 @@ struct LevelsView: View {
                         Button(action: {
                             if let scrollProxy = scrollProxy {
                                 withAnimation {
-                                    scrollProxy.scrollTo(userPersistedData.level, anchor: .top)
+                                    scrollProxy.scrollTo(userPersistedData.level, anchor: .center)
                                 }
+                                self.currentLevel = userPersistedData.level
                             }
+                            
                         }) {
                             Text("⬆️")
                                 .font(.system(size: deviceWidth / 6))
@@ -197,11 +204,17 @@ struct LevelRow: View {
     var swapsNeeded: Int
 
     var body: some View {
-        HStack {
+        ZStack {
+            Circle()
+                .frame(width: deviceWidth / 3)
+                .overlay{
+                    LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                        .mask(Circle())
+                }
             Text("\(level)")
                 .bold()
-                .font(.system(size: deviceWidth / 3))
-                .customTextStroke(width: 4)
+                .font(.system(size: deviceWidth / 5))
+                .customTextStroke(width: 3)
         }
         .contentShape(Rectangle())
     }
