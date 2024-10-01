@@ -244,7 +244,12 @@ struct GemMenuView: View {
                     .padding(.bottom, 30)
                 }
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    ZStack {
+                        LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                        RotatingSunView()
+                            .frame(width: 1, height: 1)
+                            .offset(y: -(deviceWidth/1.5))
+                    }
                 }
                 .cornerRadius(30)
                 .overlay{
