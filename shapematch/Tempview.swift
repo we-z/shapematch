@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Vortex
 struct TempView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @State var grid: [[ShapeType]] = [
@@ -26,23 +26,75 @@ struct TempView: View {
     
     var body: some View {
         ZStack {
-            VStack {
-                ForEach(0..<grid2.count, id: \.self) { row in // Updated to 4 rows
-                    HStack {
-                        ForEach(0..<grid2.count, id: \.self) { column in // Updated to 4 columns
-                            ShapeView(shapeType: grid2[row][column])
-                                .frame(width: deviceWidth / ((CGFloat(grid2.count) - 1 ) * 2.3), height: deviceWidth / ((CGFloat(grid2.count) - 1 ) * 2.3)) // Adjusted size for 4x4 grid
-                                .padding(15)
-                                .onTapGesture {
-                                    grid2 = grid
-                                }
-                        }
-                    }
-                }
+            VortexView(createSnow()) {
+                Circle()
+                    .fill(.blue)
+                    .blendMode(.plusLighter)
+                    .blur(radius: 0)
+                    .frame(width: 50)
+                    .padding(90)
+                    .tag("circle")
             }
+            .rotationEffect(.degrees(180))
+//            .frame(width: deviceWidth * 9, height: deviceHeight * 9)
+//            .offset(y: deviceHeight )
         }
     }
+    
+    func createSnow() -> VortexSystem {
+        let system = VortexSystem(tags: ["circle"])
+        system.position = [0.5, 0]
+        system.speed = 0.1
+        system.speedVariation = 0.25
+        system.lifespan = 6
+        system.shape = .box(width: 3, height: 0)
+        system.angle = .degrees(180)
+        system.angleRange = .degrees(20)
+        system.size = 0.1
+        system.sizeVariation = 0.5
+        return system
+    }
+    
 }
+
+
+struct EmojiFloatingView: View {
+    // Array of emojis
+    let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "🛥️", "⛴️", "🛳️", "🚢", "⛵", "🌅", "🏝️", "🏖️", "🪼"]
+    
+    @State private var animationValues: [Bool] = Array(repeating: false, count: 28)
+    
+    var body: some View {
+        ZStack {
+            ForEach(0..<emojis.count, id: \.self) { index in
+                EmojiView(emoji: emojis[index], animationTrigger: $animationValues[index])
+                    .offset(y: animationValues[index] ? -700 : 400) // Move vertically from bottom to top
+                    .animation(Animation.easeInOut(duration: Double.random(in: 12...15)).repeatForever(autoreverses: false), value: animationValues[index])
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 0...5)) {
+                            animationValues[index] = true
+                        }
+                    }
+            }
+        }
+        .background(Color.blue.opacity(0.1)) // Optional: Background color
+        .ignoresSafeArea() // Make it full screen
+    }
+}
+
+struct EmojiView: View {
+    var emoji: String
+    @Binding var animationTrigger: Bool
+    
+    var body: some View {
+        Text(emoji)
+            .font(.system(size: 50)) // Adjust the emoji size
+            .position(x: CGFloat.random(in: 0...deviceWidth), y: deviceHeight) // Random X axis position, starts from bottom
+//            .rotationEffect(.degrees(animationTrigger ? 15 : -15), anchor: .center) // Slight rotation as they move up
+            .animation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true), value: animationTrigger)
+    }
+}
+
 
 #Preview {
     TempView()

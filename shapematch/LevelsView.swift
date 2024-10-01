@@ -6,16 +6,45 @@
 //
 
 import SwiftUI
+import Vortex
 
 struct LevelsView: View {
     @ObservedObject var appModel = AppModel.sharedAppModel
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @State private var currentLevel = 1
     @State private var scrollProxy: ScrollViewProxy? = nil
+    @State var backgroundEmojis = "🐟🐠🐡🦈🐬🐳🐋🐙🦑🦀🦞🦐🐚🪸🐊🌊🏄‍♂️🏄‍♀️🚤🛥️⛴️🛳️🚢⛵🌅🏝️🏖️🪼"
+    
+    func createBubbles() -> VortexSystem {
+        let system = VortexSystem(tags: ["circle"])
+        system.position = [0.5, 0]
+        system.speed = 0.1
+        system.speedVariation = 0.25
+        system.lifespan = 6
+        system.shape = .box(width: 3, height: 0)
+        system.angle = .degrees(180)
+        system.angleRange = .degrees(20)
+        system.size = 0.1
+        system.sizeVariation = 0.5
+        return system
+    }
 
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+            RotatingSunView()
+                .frame(width: 1, height: 1)
+                .offset(y: -(deviceHeight / 2))
+            VortexView(createBubbles()) {
+                Circle()
+                    .fill(.blue)
+                    .blendMode(.plusLighter)
+                    .blur(radius: 0)
+                    .frame(width: 50)
+                    .padding(90)
+                    .tag("circle")
+            }
+            .rotationEffect(.degrees(180))
             VStack {
                 Capsule()
                     .foregroundColor(.blue)
@@ -128,6 +157,7 @@ struct LevelsView: View {
                         .padding(.trailing)
                 }
                 .padding(.bottom)
+//                .background(.green)
 //                .animation(.default, value: currentLevel)
             }
         }
