@@ -89,13 +89,16 @@ struct ButtonsView: View {
                             .scaleEffect(idiom == .pad ? 1.2 : 1)
                         Circle()
                             .frame(width: idiom == .pad ? deviceWidth/10 : deviceWidth/9)
-                            .foregroundColor(.blue)
-                        VStack(spacing: 3) {
+                            .overlay {
+                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
+                                    .mask(Circle())
+                            }
+                        VStack(spacing: 6) {
                             Text("+ 3")
                                 .bold()
                                 .customTextStroke(width: 1)
                                 .fixedSize()
-                            Text("💎 1")
+                            Text("1 💎")
                                 .bold()
                                 .customTextStroke(width: 1)
                                 .fixedSize()
