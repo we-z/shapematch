@@ -37,7 +37,7 @@ struct LevelsView: View {
         system.position = [0.5, 0]
         system.speed = 0.1
         system.speedVariation = 0.15
-        system.lifespan = 9
+        system.lifespan = 15
         system.shape = .box(width: 9, height: 0)
         system.angle = .degrees(180)
         system.angleRange = .degrees(20)
@@ -84,17 +84,18 @@ struct LevelsView: View {
 //            BackgroundView()
 //                .opacity(0.1)
             VStack {
-//                Capsule()
-//                    .foregroundColor(.blue)
-//                    .frame(width: 45, height: 9)
-//                    .padding(.top, 15)
-//                    .customTextStroke()
-                // Top title displaying grid dimensions and shapes
-                Text("Levels")
-                    .bold()
-                    .font(.system(size: deviceWidth / 8))
+                Capsule()
+                    .foregroundColor(.blue)
+                    .frame(width: 45, height: 9)
+                    .padding(.top, 15)
                     .customTextStroke()
-                    .padding(.top, 30)
+                // Top title displaying grid dimensions and shapes
+                Text("🐋 Levels 🐳")
+                    .italic()
+                    .bold()
+                    .font(.system(size: deviceWidth / 9))
+                    .customTextStroke()
+//                    .padding(.top, 30)
                 // ScrollView with lazy loading
                 ZStack {
                     ScrollViewReader { proxy in
@@ -279,7 +280,7 @@ struct LevelRow: View {
                 }
             Text("\(level)")
                 .bold()
-                .font(.system(size: level > 99 ? deviceWidth / 15 : deviceWidth / 12))
+                .font(.system(size: level > 999 ? deviceWidth / 21 : level > 99 ? deviceWidth / 15 : deviceWidth / 12))
                 .customTextStroke(width: 1.8)
                 
         }
