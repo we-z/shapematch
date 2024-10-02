@@ -174,7 +174,7 @@ struct LevelsView: View {
                         HStack {
                         Text("\(getGridSize(level: currentLevel))x\(getGridSize(level: currentLevel))")
                             .bold()
-                            .font(.system(size: deviceWidth / 12))
+                            .font(.system(size: deviceWidth / 10))
                             .customTextStroke(width: 1.8)
                             Spacer()
                     }
@@ -182,7 +182,7 @@ struct LevelsView: View {
                             ForEach(getShapes(level: currentLevel), id: \.self) { shape in
                                 ShapeView(shapeType: shape)
                                     .frame(width: deviceWidth / 12, height: deviceWidth / 12)
-                                    .scaleEffect(0.3)
+                                    .scaleEffect(0.33)
                             }
                             Spacer()
                         }
