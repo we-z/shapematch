@@ -13,6 +13,7 @@ struct LevelsView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @State private var currentLevel = 1
     @State private var scrollProxy: ScrollViewProxy? = nil
+    @Environment(\.colorScheme) var colorScheme
     let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "🛥️", "⛴️", "🛳️", "🚢", "⛵", "🏝️", "🏖️", "🪼"]
     
     @State var cardOffset: CGFloat = deviceHeight
@@ -47,46 +48,53 @@ struct LevelsView: View {
 
     var body: some View {
         ZStack {
-            ZStack {
-                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                RotatingSunView()
-                    .frame(width: 1, height: 1)
-                    .offset(y: -(deviceHeight / 2))
-                VortexView(createBubbles()) {
-                    Circle()
-                        .fill(.blue)
-                        .blendMode(.plusLighter)
-                        .blur(radius: 0)
-                        .frame(width: 50)
-                        .padding(90)
-                        .tag("circle")
-                }
-                .rotationEffect(.degrees(180))
-                VortexView(createEmojis()) {
-                    ForEach(0...emojis.count - 1, id: \.self) { i in
-                        Text(emojis[i])
-                            .font(.system(size: deviceWidth/4))
-                            .blur(radius: 0)
-                            .frame(width: 100, height: 100)
-                            .rotationEffect(.degrees(180))
-                            .tag(emojis[i])
-                    }
-                }
-                .rotationEffect(.degrees(180))
-                .opacity(0.3)
-            }
-            .ignoresSafeArea()
+//            ZStack {
+//                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+//                RotatingSunView()
+//                    .frame(width: 1, height: 1)
+//                    .offset(y: -(deviceHeight / 2))
+//                VortexView(createBubbles()) {
+//                    Circle()
+//                        .fill(.blue)
+//                        .blendMode(.plusLighter)
+//                        .blur(radius: 0)
+//                        .frame(width: 50)
+//                        .padding(90)
+//                        .tag("circle")
+//                }
+//                .rotationEffect(.degrees(180))
+//                VortexView(createEmojis()) {
+//                    ForEach(0...emojis.count - 1, id: \.self) { i in
+//                        Text(emojis[i])
+//                            .font(.system(size: deviceWidth/4))
+//                            .blur(radius: 0)
+//                            .frame(width: 100, height: 100)
+//                            .rotationEffect(.degrees(180))
+//                            .tag(emojis[i])
+//                    }
+//                }
+//                .rotationEffect(.degrees(180))
+//                .opacity(0.3)
+//            }
+//            .ignoresSafeArea()
+            Color.white
+                .ignoresSafeArea()
+            Color.black.opacity(colorScheme == .dark ? 0.8 : 0)
+                .ignoresSafeArea()
+            BackgroundView()
+                .opacity(0.1)
             VStack {
-                Capsule()
-                    .foregroundColor(.blue)
-                    .frame(width: 45, height: 9)
-                    .padding(.top, 15)
-                    .customTextStroke()
+//                Capsule()
+//                    .foregroundColor(.blue)
+//                    .frame(width: 45, height: 9)
+//                    .padding(.top, 15)
+//                    .customTextStroke()
                 // Top title displaying grid dimensions and shapes
                 Text("Levels")
                     .bold()
                     .font(.system(size: deviceWidth / 8))
                     .customTextStroke()
+                    .padding(.top, 15)
                 // ScrollView with lazy loading
                 ZStack {
                     ScrollViewReader { proxy in
@@ -116,7 +124,7 @@ struct LevelsView: View {
                                         let midY = UIScreen.main.bounds.height / 2.0
                                         let diff = abs(frame.midY - midY)
                                         DispatchQueue.main.async {
-                                            if diff < 50 {
+                                            if diff < 100 {
                                                 if level != self.currentLevel {
                                                     impactLight.impactOccurred()
                                                 }
@@ -137,10 +145,9 @@ struct LevelsView: View {
                             self.scrollProxy = proxy
                             // Jump to the current level
                             DispatchQueue.main.async {
-                                withAnimation {
+//                                withAnimation {
                                     proxy.scrollTo(userPersistedData.level, anchor: .center)
-                                }
-//                                self.currentLevel = userPersistedData.level
+//                                }
                             }
                         }
                     }
@@ -154,7 +161,6 @@ struct LevelsView: View {
                                         withAnimation {
                                             scrollProxy.scrollTo(userPersistedData.level, anchor: .center)
                                         }
-                                        self.currentLevel = userPersistedData.level
                                     }
                                     
                                 }) {
