@@ -25,9 +25,14 @@ class UserPersistedData: ObservableObject {
     @Published var hasShared: Bool = false
     @Published var gridData: String = ""
     @Published var targetGridData: String = ""
-//    
+    @Published var currentPlayinglevel: Int = 0
+//
 //    @CloudStorage("hasSharedShapeSwap") var hasSharedShapeSwap: Bool = false
 //    @CloudStorage("lastLaunch") var lastLaunch: String = ""
+    
+    init() {
+        currentPlayinglevel = currentPlayinglevel == 0 ? level : currentPlayinglevel
+    }
     
     var grid: [[ShapeType]] {
         get { decodeGrid(from: gridData) }

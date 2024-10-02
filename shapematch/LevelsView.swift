@@ -260,7 +260,7 @@ struct LevelsView: View {
                                         .customTextStroke(width: 1.5)
                                     Text("\(userPersistedData.level)")
                                         .bold()
-                                        .font(.system(size: userPersistedData.level  > 99 ? deviceWidth/8 : deviceWidth/6))
+                                        .font(.system(size: userPersistedData.level  > 99 ? deviceWidth/9 : deviceWidth/6))
                                         .minimumScaleFactor(0.1)
                                         .fixedSize()
                                         .customTextStroke()
@@ -321,13 +321,7 @@ struct LevelsView: View {
                         Button {
                             animateAwayButtonsAndBanner()
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                if 3 > userPersistedData.gemBalance {
-                                    appModel.showGemMenu = true
-                                } else {
-                                    userPersistedData.decrementBalance(amount: 3)
-                                    appModel.swipesLeft += 3
-                                    appModel.showNoMoreSwipesView = false
-                                }
+                               dismiss()
                             }
                         } label: {
                             HStack{
