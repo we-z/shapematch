@@ -119,20 +119,19 @@ struct LevelsView: View {
                                     }
                                     .id(level)
                                     .padding(.top, level == 1 ? deviceHeight / 3 : 0)
-                                    .background(GeometryReader { geo -> Color in
-                                        let frame = geo.frame(in: .global)
-                                        let midY = UIScreen.main.bounds.height / 2.0
-                                        let diff = abs(frame.midY - midY)
-                                        DispatchQueue.main.async {
-                                            if diff < 100 {
-                                                self.currentLevel = level
-                                                
-                                            }
-                                        }
-                                        return Color.clear
-                                    })
-                                    .rotationEffect(.degrees(currentLevel == level ? 0 : level % 2 == 0 ? 25 : -15 ))
-                                    .scaleEffect(currentLevel == level ? 1.2 : 0.8)
+//                                    .background(GeometryReader { geo -> Color in
+//                                        let frame = geo.frame(in: .global)
+//                                        let midY = UIScreen.main.bounds.height / 2.0
+//                                        let diff = abs(frame.midY - midY)
+//                                        DispatchQueue.main.async {
+//                                            if diff < 100 {
+//                                                self.currentLevel = level
+//                                                
+//                                            }
+//                                        }
+//                                        return Color.clear
+//                                    })
+//                                    .scaleEffect(currentLevel == level ? 1.2 : 0.8)
                                     .opacity( level <= userPersistedData.level ? 1.0 : 0.4)
                                     .animation(.default, value: currentLevel)
                                     .onChange(of: currentLevel) { _ in
@@ -160,9 +159,9 @@ struct LevelsView: View {
                             if currentLevel > userPersistedData.level {
                                 Button(action: {
                                     if let scrollProxy = scrollProxy {
-                                        withAnimation {
+//                                        withAnimation {
                                             scrollProxy.scrollTo(userPersistedData.level, anchor: .center)
-                                        }
+//                                        }
                                     }
                                     
                                 }) {
@@ -205,50 +204,8 @@ struct LevelsView: View {
                         .padding(.trailing)
                 }
                 .padding(.bottom)
-//                .background(.green)
-//                .animation(.default, value: currentLevel)
             }
         }
-//        .cornerRadius(30)
-//        .overlay{
-//            RoundedRectangle(cornerRadius: 30)
-//                .stroke(Color.black, lineWidth: 9)
-//                .padding(1)
-//        }
-//        .padding()
-//        .offset(y: cardOffset)
-//        .gesture(
-//            DragGesture()
-//                .onChanged { gesture in
-//                    cardOffset = gesture.translation.height
-//                }
-//                .onEnded { gesture in
-//                    if gesture.translation.height > 0 {
-//                        DispatchQueue.main.async { [self] in
-//                            withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-//                                cardOffset = deviceHeight
-//                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-//                                    impactLight.impactOccurred()
-//                                    appModel.showGemMenu = false
-//                                }
-//                            }
-//                        }
-//                    } else {
-//                        DispatchQueue.main.async { [self] in
-//                            withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-//                                cardOffset = 0
-//                            }
-//                        }
-//                    }
-//                }
-//        )
-//        .onAppear{
-//            DispatchQueue.main.async {
-//                withAnimation(.interpolatingSpring(mass: 2.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-//                    cardOffset = 0
-//                }
-//            }
-//        }
     }
 
     // Helper functions to get level settings
@@ -340,9 +297,7 @@ struct LevelRow: View {
                 
         }
         .customTextStroke(width: 3)
-        .offset(x: level % 2 == 0 ? deviceWidth / 7 : -(deviceWidth/7))
-        
-        
+        .offset(x: sin(CGFloat(level) * .pi / 4) * deviceWidth / 4)
     }
 }
 

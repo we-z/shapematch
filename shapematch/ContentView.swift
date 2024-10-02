@@ -64,7 +64,6 @@ struct ContentView: View {
                             .buttonStyle(.roundedAndShadow6)
                             Spacer()
                             Button {
-                                impactHeavy.impactOccurred()
                                 showLevelsMenu = true
                             } label : {
                                 VStack {
