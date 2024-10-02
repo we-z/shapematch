@@ -94,7 +94,7 @@ struct LevelsView: View {
                     .bold()
                     .font(.system(size: deviceWidth / 8))
                     .customTextStroke()
-                    .padding(.top, 15)
+                    .padding(.top, 30)
                 // ScrollView with lazy loading
                 ZStack {
                     ScrollViewReader { proxy in
@@ -118,7 +118,7 @@ struct LevelsView: View {
 //                                        }
                                     }
                                     .id(level)
-                                    .padding(.top, level == 1 ? deviceHeight / 12 : 0)
+                                    .padding(.top, level == 1 ? deviceHeight / 21 : 0)
                                     .opacity( level <= userPersistedData.level ? 1.0 : 0.4)
                                     .animation(.default, value: currentLevel)
                                     .onChange(of: currentLevel) { _ in
@@ -279,8 +279,8 @@ struct LevelRow: View {
                 }
             Text("\(level)")
                 .bold()
-                .font(.system(size: level > 99 ? deviceWidth / 12 : deviceWidth / 9))
-                .customTextStroke()
+                .font(.system(size: level > 99 ? deviceWidth / 15 : deviceWidth / 12))
+                .customTextStroke(width: 1.8)
                 
         }
         .customTextStroke(width: 3)
