@@ -14,6 +14,7 @@ struct LevelsView: View {
     @State private var currentLevel = 1
     @State private var scrollProxy: ScrollViewProxy? = nil
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.dismiss) private var dismiss
     let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "🛥️", "⛴️", "🛳️", "🚢", "⛵", "🏝️", "🏖️", "🪼"]
     
     @State var cardOffset: CGFloat = deviceHeight
@@ -108,6 +109,7 @@ struct LevelsView: View {
                                     
                                     .onTapGesture {
                                         DispatchQueue.main.async {
+                                            dismiss()
                                             withAnimation {
                                                 proxy.scrollTo(level, anchor: .center)
                                             }
