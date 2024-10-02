@@ -15,6 +15,8 @@ struct LevelsView: View {
     @State private var scrollProxy: ScrollViewProxy? = nil
     let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "🛥️", "⛴️", "🛳️", "🚢", "⛵", "🏝️", "🏖️", "🪼"]
     
+    @State var cardOffset: CGFloat = deviceHeight
+    
     func createBubbles() -> VortexSystem {
         let system = VortexSystem(tags: ["circle"])
         system.position = [0.5, 0]
@@ -194,6 +196,39 @@ struct LevelsView: View {
                 .padding(1)
         }
         .padding()
+        .offset(y: cardOffset)
+        .gesture(
+            DragGesture()
+                .onChanged { gesture in
+                    cardOffset = gesture.translation.height
+                }
+                .onEnded { gesture in
+                    if gesture.translation.height > 0 {
+                        DispatchQueue.main.async { [self] in
+                            withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                cardOffset = deviceHeight
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                    impactLight.impactOccurred()
+                                    appModel.showGemMenu = false
+                                }
+                            }
+                        }
+                    } else {
+                        DispatchQueue.main.async { [self] in
+                            withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                cardOffset = 0
+                            }
+                        }
+                    }
+                }
+        )
+        .onAppear{
+            DispatchQueue.main.async {
+                withAnimation(.interpolatingSpring(mass: 2.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                    cardOffset = 0
+                }
+            }
+        }
     }
 
     // Helper functions to get level settings
