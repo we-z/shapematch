@@ -62,12 +62,6 @@ struct ContentView: View {
                             }
                             .buttonStyle(.roundedAndShadow6)
                             Spacer()
-//                            Text("🕹️ 👾")
-//                                .bold()
-//                                .font(.system(size: deviceWidth/18))
-//                                .fixedSize()
-//                                .customTextStroke(width: 1.2)
-//                                .padding(.top, idiom == .pad ? 60 : 0)
                             Text("Level")
                                 .bold()
                                 .font(.system(size: deviceWidth/15))
@@ -82,7 +76,6 @@ struct ContentView: View {
                             Spacer()
                         }
                         .frame(width: deviceWidth/4)
-//                        .scaleEffect(idiom == .pad ? 0.8 : 1)
                         Spacer()
                         VStack {
                             Spacer()
@@ -113,7 +106,7 @@ struct ContentView: View {
                                     Color.white.opacity(0.3)
                                 } else {
                                     Color.white
-                                    Color.black.opacity(0.1)
+                                    Color.black.opacity(0.06)
                                 }
                             }
                             .cornerRadius(idiom == .pad ? 30 : 15)
@@ -190,78 +183,10 @@ struct ContentView: View {
                             InstructionView()
                                 .frame(height: 1)
 //                        }
-//                        if userPersistedData.level < 4 {
-//                            NewGoalView()
-//                                .frame(height: 1)
-//                        }
+
                     }
                     .padding(.vertical, idiom == .pad ? 41 : 3)
                     .zIndex(1)
-//                    .scaleEffect(0.9)
-//                    VStack {
-//                        ForEach(0..<appModel.grid.count, id: \.self) { row in
-//                            HStack {
-//                                ForEach(0..<appModel.grid.count, id: \.self) { column in
-//                                    ShapeView(shapeType: appModel.grid[row][column])
-//                                        .frame(width: deviceWidth / ((CGFloat(appModel.grid.count) - 1.27) * 2.7), height: deviceWidth / ((CGFloat(appModel.grid.count) - 1.27) * 2.7))
-//                                        .scaleEffect(2.2 - (CGFloat(appModel.grid.count) * 0.36))
-//                                        .padding(idiom == .pad ? 30 : 15)
-//                                        .background(.white.opacity(0.001))
-//                                        .offset(appModel.offsets[row][column])
-//                                        .scaleEffect((tappedRow == row && tappedColumn == column) ? playingShapeScale : 1)
-//                                        .animation(.easeInOut(duration: 0.1), value: playingShapeScale)
-//                                        .gesture(
-//                                            DragGesture(minimumDistance: 1)
-//                                                .onChanged { gesture in
-//                                                    if !firstChange {
-//                                                        impactLight.impactOccurred()
-//                                                        tappedRow = row
-//                                                        tappedColumn = column
-//                                                        DispatchQueue.main.async { [self] in
-//                                                            withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-//                                                                self.playingShapeScale = 0.6
-//                                                            }
-//                                                        }
-//                                                    }
-//                                                    firstChange = true
-//                                                }
-//                                                .onEnded { gesture in
-//                                                    DispatchQueue.main.async { [self] in
-//                                                        withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-//                                                            self.playingShapeScale = 1.0
-//                                                        }
-//                                                    }
-//                                                    if appModel.swipesLeft > 0 {
-//                                                        appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
-//                                                    }
-//                                                    firstChange = false
-//                                                }
-//                                        )
-//                                }
-//                            }
-//                        }
-//                    }
-//                    .background {
-//                        ZStack {
-//                            if colorScheme == .dark {
-//                                Color.black
-//                                Color.white.opacity(0.3)
-//                            } else {
-//                                Color.white
-//                                Color.black.opacity(0.1)
-//                            }
-//                        }
-//                        
-//                        .cornerRadius(30)
-//                        .scaleEffect(1.1)
-//                    }
-//                    .scaleEffect(0.9)
-//                    .overlay {
-//                        RoundedRectangle(cornerRadius: 30)
-//                            .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
-//                            .padding(1)
-//                    }
-//                    .padding(.bottom, 21)
                     ZStack{
                         Rectangle()
                             .overlay{
@@ -270,7 +195,7 @@ struct ContentView: View {
                                     Color.white.opacity(0.3)
                                 } else {
                                     Color.white
-                                    Color.black.opacity(0.1)
+                                    Color.black.opacity(0.06)
                                 }
                             }
                             .aspectRatio(1.0, contentMode: .fill)

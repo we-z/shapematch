@@ -189,46 +189,46 @@ struct LevelsView: View {
 //                .animation(.default, value: currentLevel)
             }
         }
-        .cornerRadius(30)
-        .overlay{
-            RoundedRectangle(cornerRadius: 30)
-                .stroke(Color.black, lineWidth: 9)
-                .padding(1)
-        }
-        .padding()
-        .offset(y: cardOffset)
-        .gesture(
-            DragGesture()
-                .onChanged { gesture in
-                    cardOffset = gesture.translation.height
-                }
-                .onEnded { gesture in
-                    if gesture.translation.height > 0 {
-                        DispatchQueue.main.async { [self] in
-                            withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                cardOffset = deviceHeight
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                    impactLight.impactOccurred()
-                                    appModel.showGemMenu = false
-                                }
-                            }
-                        }
-                    } else {
-                        DispatchQueue.main.async { [self] in
-                            withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                cardOffset = 0
-                            }
-                        }
-                    }
-                }
-        )
-        .onAppear{
-            DispatchQueue.main.async {
-                withAnimation(.interpolatingSpring(mass: 2.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                    cardOffset = 0
-                }
-            }
-        }
+//        .cornerRadius(30)
+//        .overlay{
+//            RoundedRectangle(cornerRadius: 30)
+//                .stroke(Color.black, lineWidth: 9)
+//                .padding(1)
+//        }
+//        .padding()
+//        .offset(y: cardOffset)
+//        .gesture(
+//            DragGesture()
+//                .onChanged { gesture in
+//                    cardOffset = gesture.translation.height
+//                }
+//                .onEnded { gesture in
+//                    if gesture.translation.height > 0 {
+//                        DispatchQueue.main.async { [self] in
+//                            withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+//                                cardOffset = deviceHeight
+//                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+//                                    impactLight.impactOccurred()
+//                                    appModel.showGemMenu = false
+//                                }
+//                            }
+//                        }
+//                    } else {
+//                        DispatchQueue.main.async { [self] in
+//                            withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+//                                cardOffset = 0
+//                            }
+//                        }
+//                    }
+//                }
+//        )
+//        .onAppear{
+//            DispatchQueue.main.async {
+//                withAnimation(.interpolatingSpring(mass: 2.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+//                    cardOffset = 0
+//                }
+//            }
+//        }
     }
 
     // Helper functions to get level settings
