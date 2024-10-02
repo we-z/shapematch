@@ -9,15 +9,17 @@ import SwiftUI
 import Vortex
 
 struct LevelsView: View {
+    @State var dissapear = false
     @ObservedObject var appModel = AppModel.sharedAppModel
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @State private var currentLevel = 1
     @State private var scrollProxy: ScrollViewProxy? = nil
+    @State var showLevelDetails = false
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) private var dismiss
     let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "🛥️", "⛴️", "🛳️", "🚢", "⛵", "🏝️", "🏖️", "🪼"]
     
-    @State var cardOffset: CGFloat = deviceHeight
+    @State var cardOffset: CGFloat = deviceWidth
     
     func createBubbles() -> VortexSystem {
         let system = VortexSystem(tags: ["circle"])
@@ -91,7 +93,7 @@ struct LevelsView: View {
                     .padding(.top, 15)
                     .customTextStroke()
                 // Top title displaying grid dimensions and shapes
-                Text("🐋 Levels 🐳")
+                Text("Levels")
                     .italic()
                     .bold()
                     .font(.system(size: deviceWidth / 9))
@@ -104,16 +106,19 @@ struct LevelsView: View {
                             LazyVStack {
                                 ForEach(1...10000, id: \.self) { level in
                                     LevelRow(level: level,
-                                             isUnlocked: level <= userPersistedData.level,
-                                             swapsNeeded: getSwapsNeeded(level: level))
+                                             isUnlocked: level <= userPersistedData.level)
                                     
                                     .onTapGesture {
-                                        DispatchQueue.main.async {
-                                            dismiss()
-                                            withAnimation {
-                                                proxy.scrollTo(level, anchor: .center)
-                                            }
-//                                            self.currentLevel = level
+                                        showLevelDetails = true
+                                        if level <= userPersistedData.level {
+                                            impactLight.impactOccurred()
+//                                            dismiss()
+                                            appModel.setupLevel()
+//                                            DispatchQueue.main.async {
+//                                                withAnimation {
+//                                                    proxy.scrollTo(level, anchor: .center)
+//                                                }
+//                                            }
                                         }
 //                                        if level <= userPersistedData.level {
 //                                            appModel.userPersistedData.level = level
@@ -195,82 +200,281 @@ struct LevelsView: View {
 //                }
 //                .padding(.bottom)
             }
+            if showLevelDetails {
+                LevelDetailsView
+            }
+        }
+    }
+    
+    func animateAwayButtonsAndBanner() {
+        DispatchQueue.main.async { [self] in
+            withAnimation(.linear(duration: 0.3)) {
+                cardOffset = deviceWidth
+            }
+        }
+    }
+    
+    var LevelDetailsView: some View {
+        ZStack{
+            Color.gray.opacity(0.5)
+                .ignoresSafeArea()
+                .onTapGesture {
+                    showLevelDetails = false
+                }
+                .gesture(
+                    DragGesture()
+                        .onEnded { gesture in
+                            if gesture.translation.height > 0 {
+                                DispatchQueue.main.async { [self] in
+                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                        cardOffset = deviceWidth * 2
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                            impactLight.impactOccurred()
+                                            showLevelDetails = false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                )
+            VStack{
+                Spacer()
+                ZStack {
+                    VStack(spacing: 0){
+                        Capsule()
+                            .foregroundColor(.blue)
+                            .frame(width: 45, height: 9)
+                            .padding(.bottom, 15)
+                            .customTextStroke()
+                        HStack{
+                            //                        Spacer()
+                            VStack{
+                                
+                                VStack {
+                                    Text("Level")
+                                        .bold()
+                                        .font(.system(size: deviceWidth/15))
+                                        .fixedSize()
+                                        .customTextStroke(width: 1.5)
+                                    Text("\(userPersistedData.level)")
+                                        .bold()
+                                        .font(.system(size: userPersistedData.level  > 99 ? deviceWidth/8 : deviceWidth/6))
+                                        .minimumScaleFactor(0.1)
+                                        .fixedSize()
+                                        .customTextStroke()
+                                }
+                            }
+                            .frame(width: deviceWidth/4)
+                            Spacer()
+                            VStack {
+                                VStack{
+                                    Text("\(appModel.grid.count)x\(appModel.grid.count)")
+                                        .bold()
+                                        .font(.system(size: deviceWidth/12))
+                                        .fixedSize()
+                                        .customTextStroke(width: 1.8)
+                                    VStack{
+                                        ForEach(0..<appModel.grid.count, id: \.self) { row in
+                                            HStack {
+                                                ForEach(0..<appModel.grid.count, id: \.self) { column in
+                                                    ShapeView(shapeType: appModel.targetGrid[row][column])
+                                                        .frame(width: appModel.shapeWidth / 3.9, height: appModel.shapeWidth / 3.9)
+                                                        .scaleEffect(appModel.shapeScale / 3.3)
+                                                        .scaleEffect(idiom == .pad ? 0.5 : 1)
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                .padding( idiom == .pad ? 30 : 18)
+                                .background{
+                                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                                }
+                                .cornerRadius(idiom == .pad ? 30 : 15)
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
+                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                        .padding(1)
+                                }
+                                //                            .scaleEffect(idiom == .pad ? 0.8 : 1)
+                            }
+                            Spacer()
+                            VStack{
+                                Text("Moves")
+                                    .bold()
+                                    .multilineTextAlignment(.center)
+                                    .font(.system(size: deviceWidth/15))
+                                    .fixedSize()
+                                    .customTextStroke(width: 1.5)
+                                Text("\(appModel.swipesLeft > 0 ? appModel.swipesLeft : 0)")
+                                    .bold()
+                                    .font(.system(size: deviceWidth/6))
+                                    .customTextStroke()
+                                
+                            }
+                            .frame(width: deviceWidth/4)
+                            
+                        }
+                        .padding(.vertical)
+                        Button {
+                            animateAwayButtonsAndBanner()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                if 3 > userPersistedData.gemBalance {
+                                    appModel.showGemMenu = true
+                                } else {
+                                    userPersistedData.decrementBalance(amount: 3)
+                                    appModel.swipesLeft += 3
+                                    appModel.showNoMoreSwipesView = false
+                                }
+                            }
+                        } label: {
+                            HStack{
+                                Spacer()
+                                Text("Play!")
+                                    .italic()
+                                    .bold()
+                                    .font(.system(size: deviceWidth/12))
+                                    .fixedSize()
+                                    .customTextStroke(width: 2.1)
+                                Spacer()
+                            }
+                            .padding()
+                            .background{
+                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                            }
+                            .cornerRadius(21)
+                            .overlay{
+                                RoundedRectangle(cornerRadius: 21)
+                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                    .padding(1)
+                            }
+                            .padding()
+                            
+                        }
+                        .buttonStyle(.roundedAndShadow6)
+                    }
+                }
+                .padding()
+                .background{
+                    LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                }
+                .cornerRadius(30)
+                .overlay{
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(Color.black, lineWidth: 9)
+                        .padding(1)
+                }
+                .padding()
+                .offset(y: cardOffset)
+                .onAppear{
+                    DispatchQueue.main.async {
+                        cardOffset = deviceWidth
+                        withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                            cardOffset = 0
+                        }
+                    }
+                }
+                .gesture(
+                    DragGesture()
+                        .onChanged { gesture in
+                            cardOffset = gesture.translation.height
+                        }
+                        .onEnded { gesture in
+                            if gesture.translation.height > 0 {
+                                DispatchQueue.main.async { [self] in
+                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                        cardOffset = deviceWidth * 2
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                            impactLight.impactOccurred()
+                                            showLevelDetails = false
+                                        }
+                                    }
+                                }
+                            } else {
+                                DispatchQueue.main.async { [self] in
+                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                        cardOffset = 0
+                                    }
+                                }
+                            }
+                        }
+                )
+            }
         }
     }
 
     // Helper functions to get level settings
-    func getLevelSettings(level: Int) -> (swapsNeeded: Int, shapes: [ShapeType], gridSize: Int) {
-        var swapsNeeded = 1
-        var shapes: [ShapeType] = []
-
-        switch level {
-        case 1...6:
-            swapsNeeded = level
-        case 7...10:
-            swapsNeeded = 6
-        case 11...15:
-            swapsNeeded = 7
-        case 16...27:
-            swapsNeeded = 8
-        case 28...39:
-            swapsNeeded = 9
-        case 40...70:
-            swapsNeeded = 10
-        case 71...100:
-            swapsNeeded = 11
-        case 101...150:
-            swapsNeeded = 12
-        case 151...200:
-            swapsNeeded = 13
-        case 201...300:
-            swapsNeeded = 14
-        case 301...499:
-            swapsNeeded = 15
-        case 500...750:
-            swapsNeeded = 16
-        case 751...999:
-            swapsNeeded = 17
-        case 1000...3000:
-            swapsNeeded = 18
-        case 3001...6000:
-            swapsNeeded = 19
-        case 6001...9999:
-            swapsNeeded = 20
-        default:
-            swapsNeeded = 21
-        }
-
-        switch level {
-        case 1...15:
-            shapes = [.circle, .square, .triangle]
-        case 16...499:
-            shapes = [.circle, .square, .triangle, .star]
-        default:
-            shapes = [.circle, .square, .triangle, .star, .heart]
-        }
-
-        let gridSize = shapes.count
-        return (swapsNeeded, shapes, gridSize)
-    }
-
-    func getSwapsNeeded(level: Int) -> Int {
-        return getLevelSettings(level: level).swapsNeeded
-    }
-
-    func getShapes(level: Int) -> [ShapeType] {
-        return getLevelSettings(level: level).shapes
-    }
-
-    func getGridSize(level: Int) -> Int {
-        return getLevelSettings(level: level).gridSize
-    }
+//    func getLevelSettings(level: Int) -> (swapsNeeded: Int, shapes: [ShapeType], gridSize: Int) {
+//        var swapsNeeded = 1
+//        var shapes: [ShapeType] = []
+//
+//        switch level {
+//        case 1...6:
+//            swapsNeeded = level
+//        case 7...10:
+//            swapsNeeded = 6
+//        case 11...15:
+//            swapsNeeded = 7
+//        case 16...27:
+//            swapsNeeded = 8
+//        case 28...39:
+//            swapsNeeded = 9
+//        case 40...70:
+//            swapsNeeded = 10
+//        case 71...100:
+//            swapsNeeded = 11
+//        case 101...150:
+//            swapsNeeded = 12
+//        case 151...200:
+//            swapsNeeded = 13
+//        case 201...300:
+//            swapsNeeded = 14
+//        case 301...499:
+//            swapsNeeded = 15
+//        case 500...750:
+//            swapsNeeded = 16
+//        case 751...999:
+//            swapsNeeded = 17
+//        case 1000...3000:
+//            swapsNeeded = 18
+//        case 3001...6000:
+//            swapsNeeded = 19
+//        case 6001...9999:
+//            swapsNeeded = 20
+//        default:
+//            swapsNeeded = 21
+//        }
+//
+//        switch level {
+//        case 1...15:
+//            shapes = [.circle, .square, .triangle]
+//        case 16...499:
+//            shapes = [.circle, .square, .triangle, .star]
+//        default:
+//            shapes = [.circle, .square, .triangle, .star, .heart]
+//        }
+//
+//        let gridSize = shapes.count
+//        return (swapsNeeded, shapes, gridSize)
+//    }
+//
+//    func getSwapsNeeded(level: Int) -> Int {
+//        return getLevelSettings(level: level).swapsNeeded
+//    }
+//
+//    func getShapes(level: Int) -> [ShapeType] {
+//        return getLevelSettings(level: level).shapes
+//    }
+//
+//    func getGridSize(level: Int) -> Int {
+//        return getLevelSettings(level: level).gridSize
+//    }
 }
 
 // LevelRow to display individual level information
 struct LevelRow: View {
     var level: Int
     var isUnlocked: Bool
-    var swapsNeeded: Int
 
     var body: some View {
         ZStack {
@@ -294,3 +498,37 @@ struct LevelRow: View {
 #Preview {
     LevelsView()
 }
+
+//struct LevelDetailsView: View {
+//    @State var dissapear = false
+//    @State var cardOffset: CGFloat = -(deviceWidth / 2)
+//    var body: some View {
+//        VStack{
+//            Text("Level \(currentLevel)")
+//                .bold()
+//                .multilineTextAlignment(.center)
+//                .font(.system(size: deviceWidth/13))
+//                .customTextStroke()
+//        }
+//        .frame(height: deviceWidth/3)
+//        .background{
+//            LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+//        }
+//        .cornerRadius(30)
+//        .overlay{
+//            RoundedRectangle(cornerRadius: 30)
+//                .stroke(Color.black, lineWidth: 9)
+//                .padding(1)
+//        }
+//        .padding()
+//        .offset(y: cardOffset)
+//        .onAppear{
+//            DispatchQueue.main.async {
+//                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+//                    cardOffset = 0
+//                }
+//            }
+//        }
+//        .allowsHitTesting(false)
+//    }
+//}

@@ -15,8 +15,6 @@ struct ContentView: View {
     @State var playingShapeScale = 1.0
     @State var tappedRow = 0
     @State var tappedColumn = 0
-    @State var shapeWidth = 0.0
-    @State var shapeScale = 1.0
     @State var showLevelsMenu = false
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.colorScheme) var colorScheme
@@ -99,8 +97,8 @@ struct ContentView: View {
                                         HStack {
                                             ForEach(0..<appModel.grid.count, id: \.self) { column in
                                                 ShapeView(shapeType: appModel.targetGrid[row][column])
-                                                    .frame(width: shapeWidth / 3.9, height: shapeWidth / 3.9)
-                                                    .scaleEffect(shapeScale / 3.3)
+                                                    .frame(width: appModel.shapeWidth / 3.9, height: appModel.shapeWidth / 3.9)
+                                                    .scaleEffect(appModel.shapeScale / 3.3)
                                                     .scaleEffect(idiom == .pad ? 0.5 : 1)
                                             }
                                         }
@@ -209,8 +207,8 @@ struct ContentView: View {
                                 HStack {
                                     ForEach(0..<appModel.grid.count, id: \.self) { column in
                                         ShapeView(shapeType: appModel.grid[row][column])
-                                            .frame(width: shapeWidth, height: shapeWidth)
-                                            .scaleEffect(shapeScale)
+                                            .frame(width: appModel.shapeWidth, height: appModel.shapeWidth)
+                                            .scaleEffect(appModel.shapeScale)
                                             .scaleEffect(idiom == .pad ? 0.54 : 1)
                                             .background(.white.opacity(0.001))
                                             .offset(appModel.offsets[row][column])
@@ -268,35 +266,8 @@ struct ContentView: View {
         .onAppear {
             appModel.initialGrid = appModel.grid
             self.notificationManager.registerLocal()
-            
-            if appModel.grid.count == 3 {
-                shapeWidth = deviceWidth / 4.0
-                shapeScale = deviceWidth / 390
-            } else if appModel.grid.count == 4 {
-                shapeWidth = deviceWidth / 5.3
-                shapeScale = deviceWidth / 540
-            } else if appModel.grid.count == 5 {
-                shapeWidth = deviceWidth / 6.6
-                shapeScale = deviceWidth / 690
-            }
-            
             // 1054, 1109, 1054, 1057, 1114, 1115, 1159, 1166, 1300, 1308, 1313, 1322, 1334
 //            AudioServicesPlaySystemSound(1105)
-        }
-        .onChange(of: appModel.grid) { newScenePhase in
-            DispatchQueue.main.async { [self] in
-                self.playingShapeScale = 1.0
-            }
-            if appModel.grid.count == 3 {
-                shapeWidth = deviceWidth / 4.0
-                shapeScale = deviceWidth / 390
-            } else if appModel.grid.count == 4 {
-                shapeWidth = deviceWidth / 5.3
-                shapeScale = deviceWidth / 540
-            } else if appModel.grid.count == 5 {
-                shapeWidth = deviceWidth / 6.6
-                shapeScale = deviceWidth / 690
-            }
         }
         .onChange(of: scenePhase) { newScenePhase in
             DispatchQueue.main.async { [self] in

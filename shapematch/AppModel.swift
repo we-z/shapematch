@@ -35,6 +35,8 @@ class AppModel: ObservableObject {
     @Published var showNewGoal = false
     @Published var swaping = false
     @Published var shuffleBackground = false
+    @Published var shapeWidth = 0.0
+    @Published var shapeScale = 1.0
 //    @Published var grid.count = 3
     @Published var swapsNeeded = 1
     @Published var undosLeft = 3
@@ -62,6 +64,16 @@ class AppModel: ObservableObject {
         ] : userPersistedData.targetGrid
         
         swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
+        if grid.count == 3 {
+            shapeWidth = deviceWidth / 4.0
+            shapeScale = deviceWidth / 390
+        } else if grid.count == 4 {
+            shapeWidth = deviceWidth / 5.3
+            shapeScale = deviceWidth / 540
+        } else if grid.count == 5 {
+            shapeWidth = deviceWidth / 6.6
+            shapeScale = deviceWidth / 690
+        }
     }
     
     func handleSwipeGesture(gesture: DragGesture.Value, row: Int, col: Int) {
