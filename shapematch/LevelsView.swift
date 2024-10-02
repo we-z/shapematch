@@ -118,20 +118,7 @@ struct LevelsView: View {
 //                                        }
                                     }
                                     .id(level)
-                                    .padding(.top, level == 1 ? deviceHeight / 3 : 0)
-//                                    .background(GeometryReader { geo -> Color in
-//                                        let frame = geo.frame(in: .global)
-//                                        let midY = UIScreen.main.bounds.height / 2.0
-//                                        let diff = abs(frame.midY - midY)
-//                                        DispatchQueue.main.async {
-//                                            if diff < 100 {
-//                                                self.currentLevel = level
-//                                                
-//                                            }
-//                                        }
-//                                        return Color.clear
-//                                    })
-//                                    .scaleEffect(currentLevel == level ? 1.2 : 0.8)
+                                    .padding(.top, level == 1 ? deviceHeight / 12 : 0)
                                     .opacity( level <= userPersistedData.level ? 1.0 : 0.4)
                                     .animation(.default, value: currentLevel)
                                     .onChange(of: currentLevel) { _ in
@@ -176,34 +163,34 @@ struct LevelsView: View {
                     }
                 }
                 
-                HStack {
-                    VStack(spacing: 12){
-                        HStack {
-                        Text("\(getGridSize(level: currentLevel))x\(getGridSize(level: currentLevel))")
-                            .bold()
-                            .font(.system(size: deviceWidth / 10))
-                            .customTextStroke(width: 1.8)
-                            Spacer()
-                    }
-                        HStack(spacing: 4) {
-                            ForEach(getShapes(level: currentLevel), id: \.self) { shape in
-                                ShapeView(shapeType: shape)
-                                    .frame(width: deviceWidth / 12, height: deviceWidth / 12)
-                                    .scaleEffect(0.33)
-                            }
-                            Spacer()
-                        }
-                    }
-                    .padding(.leading)
-                    Spacer()
-                    Text("Moves:\n\(getSwapsNeeded(level: currentLevel))")
-                        .bold()
-                        .multilineTextAlignment(.center)
-                        .font(.system(size: deviceWidth / 11))
-                        .customTextStroke(width: 1.8)
-                        .padding(.trailing)
-                }
-                .padding(.bottom)
+//                HStack {
+//                    VStack(spacing: 12){
+//                        HStack {
+//                        Text("\(getGridSize(level: currentLevel))x\(getGridSize(level: currentLevel))")
+//                            .bold()
+//                            .font(.system(size: deviceWidth / 10))
+//                            .customTextStroke(width: 1.8)
+//                            Spacer()
+//                    }
+//                        HStack(spacing: 4) {
+//                            ForEach(getShapes(level: currentLevel), id: \.self) { shape in
+//                                ShapeView(shapeType: shape)
+//                                    .frame(width: deviceWidth / 12, height: deviceWidth / 12)
+//                                    .scaleEffect(0.33)
+//                            }
+//                            Spacer()
+//                        }
+//                    }
+//                    .padding(.leading)
+//                    Spacer()
+//                    Text("Moves:\n\(getSwapsNeeded(level: currentLevel))")
+//                        .bold()
+//                        .multilineTextAlignment(.center)
+//                        .font(.system(size: deviceWidth / 11))
+//                        .customTextStroke(width: 1.8)
+//                        .padding(.trailing)
+//                }
+//                .padding(.bottom)
             }
         }
     }
@@ -285,7 +272,7 @@ struct LevelRow: View {
     var body: some View {
         ZStack {
             Circle()
-                .frame(width: deviceWidth / 5)
+                .frame(width: deviceWidth / 6)
                 .overlay{
                     LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                         .mask(Circle())
