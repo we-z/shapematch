@@ -67,7 +67,7 @@ struct LevelsView: View {
                         Text(emojis[i])
                             .font(.system(size: deviceWidth/4))
                             .blur(radius: 0)
-                            .frame(width: .infinity, height: .infinity)
+                            .frame(width: 100, height: 100)
                             .rotationEffect(.degrees(180))
                             .tag(emojis[i])
                     }
@@ -97,28 +97,37 @@ struct LevelsView: View {
                                              isUnlocked: level <= userPersistedData.level,
                                              swapsNeeded: getSwapsNeeded(level: level))
                                     
-                                    //                                .onTapGesture {
-                                    //                                    if level <= userPersistedData.level {
-                                    //                                        appModel.userPersistedData.level = level
-                                    //                                        appModel.setupLevel()
-                                    //                                    }
-                                    //                                }
+                                    .onTapGesture {
+                                        DispatchQueue.main.async {
+                                            withAnimation {
+                                                proxy.scrollTo(level, anchor: .center)
+                                            }
+//                                            self.currentLevel = level
+                                        }
+//                                        if level <= userPersistedData.level {
+//                                            appModel.userPersistedData.level = level
+//                                            appModel.setupLevel()
+//                                        }
+                                    }
                                     .id(level)
                                     .padding(.top, level == 1 ? deviceHeight / 3 : 0)
                                     .background(GeometryReader { geo -> Color in
                                         let frame = geo.frame(in: .global)
-                                        let midY = UIScreen.main.bounds.height / 1.8
+                                        let midY = UIScreen.main.bounds.height / 2.0
                                         let diff = abs(frame.midY - midY)
                                         DispatchQueue.main.async {
                                             if diff < 50 {
+                                                if level != self.currentLevel {
+                                                    impactLight.impactOccurred()
+                                                }
                                                 self.currentLevel = level
-                                                impactLight.impactOccurred()
+                                                
                                             }
                                         }
                                         return Color.clear
                                     })
                                     .rotationEffect(.degrees(currentLevel == level ? 0 : level % 2 == 0 ? 25 : -15 ))
-                                    .scaleEffect(currentLevel == level ? 1.0 : 0.8)
+                                    .scaleEffect(currentLevel == level ? 1.2 : 0.8)
                                     .opacity( level <= userPersistedData.level ? 1.0 : 0.4)
                                     .animation(.default, value: currentLevel)
                                 }
@@ -131,7 +140,7 @@ struct LevelsView: View {
                                 withAnimation {
                                     proxy.scrollTo(userPersistedData.level, anchor: .center)
                                 }
-                                self.currentLevel = userPersistedData.level
+//                                self.currentLevel = userPersistedData.level
                             }
                         }
                     }
