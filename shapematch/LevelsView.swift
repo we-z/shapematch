@@ -47,32 +47,35 @@ struct LevelsView: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-            RotatingSunView()
-                .frame(width: 1, height: 1)
-                .offset(y: -(deviceHeight / 2))
-            VortexView(createBubbles()) {
-                Circle()
-                    .fill(.blue)
-                    .blendMode(.plusLighter)
-                    .blur(radius: 0)
-                    .frame(width: 50)
-                    .padding(90)
-                    .tag("circle")
-            }
-            .rotationEffect(.degrees(180))
-            VortexView(createEmojis()) {
-                ForEach(0...emojis.count - 1, id: \.self) { i in
-                    Text(emojis[i])
-                        .font(.system(size: deviceWidth/4))
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                RotatingSunView()
+                    .frame(width: 1, height: 1)
+                    .offset(y: -(deviceHeight / 2))
+                VortexView(createBubbles()) {
+                    Circle()
+                        .fill(.blue)
+                        .blendMode(.plusLighter)
                         .blur(radius: 0)
-                        .frame(width: .infinity, height: .infinity)
-                        .rotationEffect(.degrees(180))
-                        .tag(emojis[i])
+                        .frame(width: 50)
+                        .padding(90)
+                        .tag("circle")
                 }
+                .rotationEffect(.degrees(180))
+                VortexView(createEmojis()) {
+                    ForEach(0...emojis.count - 1, id: \.self) { i in
+                        Text(emojis[i])
+                            .font(.system(size: deviceWidth/4))
+                            .blur(radius: 0)
+                            .frame(width: .infinity, height: .infinity)
+                            .rotationEffect(.degrees(180))
+                            .tag(emojis[i])
+                    }
+                }
+                .rotationEffect(.degrees(180))
+                .opacity(0.3)
             }
-            .rotationEffect(.degrees(180))
-            .opacity(0.3)
+            .ignoresSafeArea()
             VStack {
                 Capsule()
                     .foregroundColor(.blue)
@@ -125,9 +128,9 @@ struct LevelsView: View {
                             self.scrollProxy = proxy
                             // Jump to the current level
                             DispatchQueue.main.async {
-//                                withAnimation {
+                                withAnimation {
                                     proxy.scrollTo(userPersistedData.level, anchor: .center)
-//                                }
+                                }
                                 self.currentLevel = userPersistedData.level
                             }
                         }

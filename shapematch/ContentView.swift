@@ -17,6 +17,7 @@ struct ContentView: View {
     @State var tappedColumn = 0
     @State var shapeWidth = 0.0
     @State var shapeScale = 1.0
+    @State var showLevelsMenu = false
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.colorScheme) var colorScheme
     
@@ -62,17 +63,23 @@ struct ContentView: View {
                             }
                             .buttonStyle(.roundedAndShadow6)
                             Spacer()
-                            Text("Level")
-                                .bold()
-                                .font(.system(size: deviceWidth/15))
-                                .fixedSize()
-                                .customTextStroke(width: 1.5)
-                            Text("\(userPersistedData.level)")
-                                .bold()
-                                .font(.system(size: userPersistedData.level  > 99 ? deviceWidth/8 : deviceWidth/6))
-                                .minimumScaleFactor(0.1)
-                                .fixedSize()
-                                .customTextStroke()
+                            Button {
+                                showLevelsMenu = true
+                            } label : {
+                                VStack {
+                                    Text("Level")
+                                        .bold()
+                                        .font(.system(size: deviceWidth/15))
+                                        .fixedSize()
+                                        .customTextStroke(width: 1.5)
+                                    Text("\(userPersistedData.level)")
+                                        .bold()
+                                        .font(.system(size: userPersistedData.level  > 99 ? deviceWidth/8 : deviceWidth/6))
+                                        .minimumScaleFactor(0.1)
+                                        .fixedSize()
+                                        .customTextStroke()
+                                }
+                            }
                             Spacer()
                         }
                         .frame(width: deviceWidth/4)
@@ -150,13 +157,6 @@ struct ContentView: View {
                             }
                             .buttonStyle(.roundedAndShadow6)
                             Spacer()
-//                            Text("↔️ ↕️")
-//                                .bold()
-//                                .multilineTextAlignment(.center)
-//                                .font(.system(size: deviceWidth/18))
-//                                .fixedSize()
-//                                .customTextStroke(width: 1.5)
-//                                .padding(.top, idiom == .pad ? 60 : 0)
                             Text("Moves")
                                 .bold()
                                 .multilineTextAlignment(.center)
@@ -171,14 +171,11 @@ struct ContentView: View {
                             Spacer()
                         }
                         .frame(width: deviceWidth/4)
-//                        .scaleEffect(idiom == .pad ? 0.8 : 1)
-//                        Spacer()
                         
                     }
                     .padding(.horizontal)
                     ZStack{
                         ButtonsView()
-                        //                            .padding(.horizontal, idiom == .pad ? 69 : 21)
 //                        if !userPersistedData.firstGamePlayed {
                             InstructionView()
                                 .frame(height: 1)
@@ -263,6 +260,9 @@ struct ContentView: View {
                 NoMoreSwipesView()
             }
             CelebrateGems()
+        }
+        .sheet(isPresented: self.$showLevelsMenu){
+            LevelsView()
         }
         .onAppear {
             appModel.initialGrid = appModel.grid
