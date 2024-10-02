@@ -48,41 +48,41 @@ struct LevelsView: View {
 
     var body: some View {
         ZStack {
-//            ZStack {
-//                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-//                RotatingSunView()
-//                    .frame(width: 1, height: 1)
-//                    .offset(y: -(deviceHeight / 2))
-//                VortexView(createBubbles()) {
-//                    Circle()
-//                        .fill(.blue)
-//                        .blendMode(.plusLighter)
-//                        .blur(radius: 0)
-//                        .frame(width: 50)
-//                        .padding(90)
-//                        .tag("circle")
-//                }
-//                .rotationEffect(.degrees(180))
-//                VortexView(createEmojis()) {
-//                    ForEach(0...emojis.count - 1, id: \.self) { i in
-//                        Text(emojis[i])
-//                            .font(.system(size: deviceWidth/4))
-//                            .blur(radius: 0)
-//                            .frame(width: 100, height: 100)
-//                            .rotationEffect(.degrees(180))
-//                            .tag(emojis[i])
-//                    }
-//                }
-//                .rotationEffect(.degrees(180))
-//                .opacity(0.3)
-//            }
-//            .ignoresSafeArea()
-            Color.white
-                .ignoresSafeArea()
-            Color.black.opacity(colorScheme == .dark ? 0.8 : 0)
-                .ignoresSafeArea()
-            BackgroundView()
-                .opacity(0.1)
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                RotatingSunView()
+                    .frame(width: 1, height: 1)
+                    .offset(y: -(deviceHeight / 2))
+                VortexView(createBubbles()) {
+                    Circle()
+                        .fill(.blue)
+                        .blendMode(.plusLighter)
+                        .blur(radius: 0)
+                        .frame(width: 50)
+                        .padding(90)
+                        .tag("circle")
+                }
+                .rotationEffect(.degrees(180))
+                VortexView(createEmojis()) {
+                    ForEach(0...emojis.count - 1, id: \.self) { i in
+                        Text(emojis[i])
+                            .font(.system(size: deviceWidth/4))
+                            .blur(radius: 0)
+                            .frame(width: 100, height: 100)
+                            .rotationEffect(.degrees(180))
+                            .tag(emojis[i])
+                    }
+                }
+                .rotationEffect(.degrees(180))
+                .opacity(0.3)
+            }
+            .ignoresSafeArea()
+//            Color.white
+//                .ignoresSafeArea()
+//            Color.black.opacity(colorScheme == .dark ? 0.8 : 0)
+//                .ignoresSafeArea()
+//            BackgroundView()
+//                .opacity(0.1)
             VStack {
 //                Capsule()
 //                    .foregroundColor(.blue)
@@ -125,9 +125,6 @@ struct LevelsView: View {
                                         let diff = abs(frame.midY - midY)
                                         DispatchQueue.main.async {
                                             if diff < 100 {
-                                                if level != self.currentLevel {
-                                                    impactLight.impactOccurred()
-                                                }
                                                 self.currentLevel = level
                                                 
                                             }
@@ -138,6 +135,11 @@ struct LevelsView: View {
                                     .scaleEffect(currentLevel == level ? 1.2 : 0.8)
                                     .opacity( level <= userPersistedData.level ? 1.0 : 0.4)
                                     .animation(.default, value: currentLevel)
+                                    .onChange(of: currentLevel) { _ in
+                                        if level != self.currentLevel {
+                                            impactLight.impactOccurred()
+                                        }
+                                    }
                                 }
                             }
                         }
