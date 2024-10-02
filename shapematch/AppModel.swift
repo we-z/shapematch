@@ -16,7 +16,20 @@ class AppModel: ObservableObject {
     let hapticManager = HapticManager.instance
     @Published var shouldBurst = false
     @Published var boughtGems = false
-    @Published var grid: [[ShapeType]] = []
+    @Published var grid: [[ShapeType]] = [] {
+        didSet {
+            if grid.count == 3 {
+                shapeWidth = deviceWidth / 4.0
+                shapeScale = deviceWidth / 390
+            } else if grid.count == 4 {
+                shapeWidth = deviceWidth / 5.3
+                shapeScale = deviceWidth / 540
+            } else if grid.count == 5 {
+                shapeWidth = deviceWidth / 6.6
+                shapeScale = deviceWidth / 690
+            }
+        }
+    }
     
     @Published var targetGrid: [[ShapeType]] = []
     

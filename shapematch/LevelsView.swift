@@ -110,6 +110,7 @@ struct LevelsView: View {
                                     
                                     .onTapGesture {
                                         showLevelDetails = true
+                                        userPersistedData.level = level
                                         if level <= userPersistedData.level {
                                             impactLight.impactOccurred()
 //                                            dismiss()
@@ -248,7 +249,7 @@ struct LevelsView: View {
                             .padding(.bottom, 15)
                             .customTextStroke()
                         HStack{
-                            //                        Spacer()
+                            Spacer()
                             VStack{
                                 
                                 VStack {
@@ -265,15 +266,15 @@ struct LevelsView: View {
                                         .customTextStroke()
                                 }
                             }
-                            .frame(width: deviceWidth/4)
+                            .frame(width: deviceWidth/5)
                             Spacer()
                             VStack {
                                 VStack{
-                                    Text("\(appModel.grid.count)x\(appModel.grid.count)")
-                                        .bold()
-                                        .font(.system(size: deviceWidth/12))
-                                        .fixedSize()
-                                        .customTextStroke(width: 1.8)
+//                                    Text("\(appModel.grid.count)x\(appModel.grid.count)")
+//                                        .bold()
+//                                        .font(.system(size: deviceWidth/9))
+//                                        .fixedSize()
+//                                        .customTextStroke(width: 1.8)
                                     VStack{
                                         ForEach(0..<appModel.grid.count, id: \.self) { row in
                                             HStack {
@@ -313,8 +314,8 @@ struct LevelsView: View {
                                     .customTextStroke()
                                 
                             }
-                            .frame(width: deviceWidth/4)
-                            
+                            .frame(width: deviceWidth/5)
+                            Spacer()
                         }
                         .padding(.vertical)
                         Button {
