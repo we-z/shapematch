@@ -220,6 +220,7 @@ struct LevelsView: View {
                 .ignoresSafeArea()
                 .onTapGesture {
                     showLevelDetails = false
+                    cardOffset = deviceWidth
                 }
                 .gesture(
                     DragGesture()
