@@ -409,37 +409,3 @@ struct LevelRow: View {
 #Preview {
     LevelsView()
 }
-
-//struct LevelDetailsView: View {
-//    @State var dissapear = false
-//    @State var cardOffset: CGFloat = -(deviceWidth / 2)
-//    var body: some View {
-//        VStack{
-//            Text("Level \(currentLevel)")
-//                .bold()
-//                .multilineTextAlignment(.center)
-//                .font(.system(size: deviceWidth/13))
-//                .customTextStroke()
-//        }
-//        .frame(height: deviceWidth/3)
-//        .background{
-//            LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-//        }
-//        .cornerRadius(30)
-//        .overlay{
-//            RoundedRectangle(cornerRadius: 30)
-//                .stroke(Color.black, lineWidth: 9)
-//                .padding(1)
-//        }
-//        .padding()
-//        .offset(y: cardOffset)
-//        .onAppear{
-//            DispatchQueue.main.async {
-//                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-//                    cardOffset = 0
-//                }
-//            }
-//        }
-//        .allowsHitTesting(false)
-//    }
-//}

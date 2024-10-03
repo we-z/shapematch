@@ -445,25 +445,31 @@ class AppModel: ObservableObject {
         (swapsNeeded, shapes) = determineLevelSettings(level: userPersistedData.level)
         swapsMade = []
         undosLeft = 3
+        
+        if startGrid.isEmpty {
+            grid = []
+            
+            for _ in 0..<shapes.count {
+                grid.append(shapes.shuffled())
+            }
+        } else {
+            grid = startGrid
+        }
+        
         var swapsNeededMet = false
         
         while !swapsNeededMet {
-            
-            if startGrid.isEmpty {
-                grid = []
-                
-                for _ in 0..<shapes.count {
-                    grid.append(shapes.shuffled())
-                }
-            } else {
-                grid = startGrid
-            }
                         
             // optimize
             let generatedTargetGrid = generateTargetGrid(from: grid, with: swapsNeeded)
             
             if swapsNeeded > approximateMinimumSwipes(from: grid, to: generatedTargetGrid) {
                 print("trying again")
+                grid = []
+                
+                for _ in 0..<shapes.count {
+                    grid.append(shapes.shuffled())
+                }
                 
             } else {
                 targetGrid = generatedTargetGrid
