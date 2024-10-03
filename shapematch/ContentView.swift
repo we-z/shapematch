@@ -274,9 +274,7 @@ struct ContentView: View {
                 self.playingShapeScale = 1.0
             }
         }
-//        .onChange(of: userPersistedData.level) { _ in
-//            appModel.setupLevel()
-//        }
+
     }
     
 }

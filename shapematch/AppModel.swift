@@ -211,7 +211,7 @@ class AppModel: ObservableObject {
         
         var swapsNeeded = 0
         var shapes: [ShapeType] = []
-        switch userPersistedData.level {
+        switch level {
         case 1...6:
             swapsNeeded = userPersistedData.level
             case 7...10:
@@ -249,7 +249,7 @@ class AppModel: ObservableObject {
         }
 
         
-        switch userPersistedData.level {
+        switch level {
         case 1...15:
             shapes = [.circle, .square, .triangle]
         case 16...499:
@@ -258,10 +258,10 @@ class AppModel: ObservableObject {
             shapes =  [.circle, .square, .triangle, .star, .heart]
         }
         
-        offsets = Array(
-            repeating: Array(repeating: .zero, count: shapes.count),
-            count: shapes.count
-        )
+//        offsets = Array(
+//            repeating: Array(repeating: .zero, count: shapes.count),
+//            count: shapes.count
+//        )
         
         return (swapsNeeded, shapes)
     }
@@ -440,7 +440,7 @@ class AppModel: ObservableObject {
         userPersistedData.targetGrid = targetGrid
     }
     
-    func setupLevel() {
+    func setupLevel(startGrid: [[ShapeType]] = []) {
         shuffleBackground.toggle()
         (swapsNeeded, shapes) = determineLevelSettings(level: userPersistedData.level)
         swapsMade = []
@@ -449,10 +449,14 @@ class AppModel: ObservableObject {
         
         while !swapsNeededMet {
             
-            grid = []
-            
-            for _ in 0..<shapes.count {
-                grid.append(shapes.shuffled())
+            if startGrid.isEmpty {
+                grid = []
+                
+                for _ in 0..<shapes.count {
+                    grid.append(shapes.shuffled())
+                }
+            } else {
+                grid = startGrid
             }
                         
             // optimize
