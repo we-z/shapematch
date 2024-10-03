@@ -20,6 +20,11 @@ class UserPersistedData: ObservableObject {
 //    @CloudStorage("targetGridData") var targetGridData: String = ""
 
     @Published var gemBalance: Int = 1
+    @Published var firstGamePlayed: Bool = false
+    @Published var hasShared: Bool = false
+    @Published var gridData: String = ""
+    @Published var targetGridData: String = ""
+    @Published var highestLevel: Int = 0
     @Published var level: Int = 16 {
         didSet {
             if level > highestLevel {
@@ -27,11 +32,6 @@ class UserPersistedData: ObservableObject {
             }
         }
     }
-    @Published var firstGamePlayed: Bool = false
-    @Published var hasShared: Bool = false
-    @Published var gridData: String = ""
-    @Published var targetGridData: String = ""
-    @Published var highestLevel: Int = 0
 //
 //    @CloudStorage("hasSharedShapeSwap") var hasSharedShapeSwap: Bool = false
 //    @CloudStorage("lastLaunch") var lastLaunch: String = ""

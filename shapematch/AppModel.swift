@@ -62,7 +62,7 @@ class AppModel: ObservableObject {
     
     init() {
         // Initialize the grids from persisted data
-        determineLevelSettings()
+        (swapsNeeded, shapes) = determineLevelSettings(level: userPersistedData.level)
         
         grid = userPersistedData.grid.isEmpty ? [
             [.triangle, .circle, .triangle],
@@ -206,8 +206,11 @@ class AppModel: ObservableObject {
         }
     }
     
-    func determineLevelSettings() {
+    func determineLevelSettings(level: Int) -> (Int, [ShapeType]) {
         // Determine the number of swaps needed based on the level
+        
+        var swapsNeeded = 0
+        var shapes: [ShapeType] = []
         switch userPersistedData.level {
         case 1...6:
             swapsNeeded = userPersistedData.level
@@ -259,6 +262,8 @@ class AppModel: ObservableObject {
             repeating: Array(repeating: .zero, count: shapes.count),
             count: shapes.count
         )
+        
+        return (swapsNeeded, shapes)
     }
     
     func approximateMinimumSwipes(from startGrid: [[ShapeType]], to targetGrid: [[ShapeType]]) -> Int {
@@ -437,7 +442,7 @@ class AppModel: ObservableObject {
     
     func setupLevel() {
         shuffleBackground.toggle()
-        determineLevelSettings()
+        (swapsNeeded, shapes) = determineLevelSettings(level: userPersistedData.level)
         swapsMade = []
         undosLeft = 3
         var swapsNeededMet = false

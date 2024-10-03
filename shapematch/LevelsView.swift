@@ -13,6 +13,7 @@ struct LevelsView: View {
     @ObservedObject var appModel = AppModel.sharedAppModel
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @State private var currentLevel = 1
+    @State var chosenLevel = 1
     @State private var scrollProxy: ScrollViewProxy? = nil
     @State var showLevelDetails = false
     @Environment(\.colorScheme) var colorScheme
@@ -93,7 +94,7 @@ struct LevelsView: View {
                     .padding(.top, 15)
                     .customTextStroke()
                 // Top title displaying grid dimensions and shapes
-                Text("Levels")
+                Text("🐳 Levels 🐋")
                     .italic()
                     .bold()
                     .font(.system(size: deviceWidth / 9))
@@ -109,12 +110,11 @@ struct LevelsView: View {
                                              isUnlocked: level <= userPersistedData.level)
                                     
                                     .onTapGesture {
+                                        chosenLevel = level
                                         showLevelDetails = true
-                                        userPersistedData.level = level
-                                        if level <= userPersistedData.level {
+                                        if level <= userPersistedData.highestLevel {
                                             impactLight.impactOccurred()
 //                                            dismiss()
-                                            appModel.setupLevel()
 //                                            DispatchQueue.main.async {
 //                                                withAnimation {
 //                                                    proxy.scrollTo(level, anchor: .center)
@@ -128,13 +128,13 @@ struct LevelsView: View {
                                     }
                                     .id(level)
                                     .padding(.top, level == 1 ? deviceHeight / 21 : 0)
-                                    .opacity( level <= userPersistedData.level ? 1.0 : 0.4)
-                                    .animation(.default, value: currentLevel)
-                                    .onChange(of: currentLevel) { _ in
-                                        if level != self.currentLevel {
-                                            impactLight.impactOccurred()
-                                        }
-                                    }
+                                    .opacity( level <= userPersistedData.highestLevel ? 1.0 : 0.4)
+//                                    .animation(.default, value: currentLevel)
+//                                    .onChange(of: currentLevel) { _ in
+//                                        if level != self.currentLevel {
+//                                            impactLight.impactOccurred()
+//                                        }
+//                                    }
                                 }
                             }
                         }
@@ -270,11 +270,11 @@ struct LevelsView: View {
                             Spacer()
                             VStack {
                                 VStack{
-//                                    Text("\(appModel.grid.count)x\(appModel.grid.count)")
-//                                        .bold()
-//                                        .font(.system(size: deviceWidth/9))
-//                                        .fixedSize()
-//                                        .customTextStroke(width: 1.8)
+                                    //                                    Text("\(appModel.grid.count)x\(appModel.grid.count)")
+                                    //                                        .bold()
+                                    //                                        .font(.system(size: deviceWidth/9))
+                                    //                                        .fixedSize()
+                                    //                                        .customTextStroke(width: 1.8)
                                     VStack{
                                         ForEach(0..<appModel.grid.count, id: \.self) { row in
                                             HStack {
@@ -318,36 +318,39 @@ struct LevelsView: View {
                             Spacer()
                         }
                         .padding(.vertical)
-                        Button {
-                            animateAwayButtonsAndBanner()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                               dismiss()
+                        if chosenLevel <= userPersistedData.highestLevel {
+                            Button {
+                                animateAwayButtonsAndBanner()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                    userPersistedData.level = chosenLevel
+                                    dismiss()
+                                }
+                            } label: {
+                                HStack{
+                                    Spacer()
+                                    Text("Play!")
+                                        .italic()
+                                        .bold()
+                                        .font(.system(size: deviceWidth/12))
+                                        .fixedSize()
+                                        .customTextStroke(width: 2.1)
+                                    Spacer()
+                                }
+                                .padding()
+                                .background{
+                                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                                }
+                                .cornerRadius(21)
+                                .overlay{
+                                    RoundedRectangle(cornerRadius: 21)
+                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                        .padding(1)
+                                }
+                                .padding()
+                                
                             }
-                        } label: {
-                            HStack{
-                                Spacer()
-                                Text("Play!")
-                                    .italic()
-                                    .bold()
-                                    .font(.system(size: deviceWidth/12))
-                                    .fixedSize()
-                                    .customTextStroke(width: 2.1)
-                                Spacer()
-                            }
-                            .padding()
-                            .background{
-                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                            }
-                            .cornerRadius(21)
-                            .overlay{
-                                RoundedRectangle(cornerRadius: 21)
-                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                    .padding(1)
-                            }
-                            .padding()
-                            
+                            .buttonStyle(.roundedAndShadow6)
                         }
-                        .buttonStyle(.roundedAndShadow6)
                     }
                 }
                 .padding()
