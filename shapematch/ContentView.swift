@@ -109,7 +109,7 @@ struct ContentView: View {
                             .background{
                                 if colorScheme == .dark {
                                     Color.black
-                                    Color.white.opacity(0.3)
+                                    Color.white.opacity(0.36)
                                 } else {
                                     Color.white
                                     Color.black.opacity(0.1)
@@ -188,7 +188,7 @@ struct ContentView: View {
                             .overlay{
                                 if colorScheme == .dark {
                                     Color.black
-                                    Color.white.opacity(0.3)
+                                    Color.white.opacity(0.36)
                                 } else {
                                     Color.white
                                     Color.black.opacity(0.1)
