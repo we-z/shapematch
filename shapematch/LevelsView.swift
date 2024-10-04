@@ -107,12 +107,7 @@ struct LevelsView: View {
                 .opacity(0.3)
             }
             .ignoresSafeArea()
-//            Color.white
-//                .ignoresSafeArea()
-//            Color.black.opacity(colorScheme == .dark ? 0.8 : 0)
-//                .ignoresSafeArea()
-//            BackgroundView()
-//                .opacity(0.1)
+
             VStack {
                 Capsule()
                     .foregroundColor(.blue)
@@ -120,10 +115,10 @@ struct LevelsView: View {
                     .padding(.top, 15)
                     .customTextStroke()
                 // Top title displaying grid dimensions and shapes
-                Text("🐳 Levels 🐋")
-                    .italic()
+                Text("Levels")
+//                    .italic()
                     .bold()
-                    .font(.system(size: deviceWidth / 9))
+                    .font(.system(size: deviceWidth / 12))
                     .customTextStroke()
 //                    .padding(.top, 30)
                 // ScrollView with lazy loading
@@ -142,26 +137,11 @@ struct LevelsView: View {
                                         showLevelDetails = true
                                         if level <= userPersistedData.highestLevel {
                                             impactLight.impactOccurred()
-//                                            dismiss()
-//                                            DispatchQueue.main.async {
-//                                                withAnimation {
-//                                                    proxy.scrollTo(level, anchor: .center)
-//                                                }
-//                                            }
                                         }
-//                                        if level <= userPersistedData.level {
-//                                            appModel.userPersistedData.level = level
-//                                        }
                                     }
                                     .id(level)
                                     .padding(.top, level == 1 ? deviceHeight / 21 : 0)
                                     .opacity( level <= userPersistedData.highestLevel ? 1.0 : 0.4)
-//                                    .animation(.default, value: currentLevel)
-//                                    .onChange(of: currentLevel) { _ in
-//                                        if level != self.currentLevel {
-//                                            impactLight.impactOccurred()
-//                                        }
-//                                    }
                                 }
                             }
                         }
@@ -172,28 +152,6 @@ struct LevelsView: View {
 //                                withAnimation {
                                     proxy.scrollTo(userPersistedData.level, anchor: .center)
 //                                }
-                            }
-                        }
-                    }
-                    VStack {
-                        Spacer()
-                        HStack{
-                            Spacer()
-                            if currentLevel > userPersistedData.level {
-                                Button(action: {
-                                    if let scrollProxy = scrollProxy {
-//                                        withAnimation {
-                                            scrollProxy.scrollTo(userPersistedData.level, anchor: .center)
-//                                        }
-                                    }
-                                    
-                                }) {
-                                    Text("⬆️")
-                                        .font(.system(size: deviceWidth / 9))
-                                        .customTextStroke()
-                                        .padding()
-                                }
-                                .padding()
                             }
                         }
                     }
