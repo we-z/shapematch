@@ -15,6 +15,8 @@ struct LevelsView: View {
     @State private var currentLevel = 1
     @State var chosenLevel = 1
     @State var moves = 1
+    @State var shapeWidth = 0.0
+    @State var shapeScale = 1.0
     @State var shapes: [ShapeType] = []
     @State private var scrollProxy: ScrollViewProxy? = nil
     @State var showLevelDetails = false
@@ -22,7 +24,20 @@ struct LevelsView: View {
     @Environment(\.dismiss) private var dismiss
     let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "🛥️", "⛴️", "🛳️", "🚢", "⛵", "🏝️", "🏖️", "🪼"]
     
-    @State var previewGrid: [[ShapeType]] = []
+    @State var previewGrid: [[ShapeType]] = [] {
+        didSet {
+            if previewGrid.count == 3 {
+                shapeWidth = deviceWidth / 4.0
+                shapeScale = deviceWidth / 390
+            } else if previewGrid.count == 4 {
+                shapeWidth = deviceWidth / 5.3
+                shapeScale = deviceWidth / 540
+            } else if previewGrid.count == 5 {
+                shapeWidth = deviceWidth / 6.6
+                shapeScale = deviceWidth / 690
+            }
+        }
+    }
     
     @State var cardOffset: CGFloat = deviceWidth
     
@@ -235,7 +250,7 @@ struct LevelsView: View {
                             Spacer()
                             VStack{
                                 
-                                VStack {
+                                VStack() {
                                     Text("Level")
                                         .bold()
                                         .font(.system(size: deviceWidth/15))
@@ -243,10 +258,11 @@ struct LevelsView: View {
                                         .customTextStroke(width: 1.5)
                                     Text("\(chosenLevel)")
                                         .bold()
-                                        .font(.system(size: userPersistedData.level  > 99 ? deviceWidth/9 : deviceWidth/6))
+                                        .font(.system(size: chosenLevel > 99 ? deviceWidth/9 : deviceWidth/6))
                                         .minimumScaleFactor(0.1)
                                         .fixedSize()
                                         .customTextStroke()
+                                    
                                 }
                             }
                             .frame(width: deviceWidth/5)
@@ -258,8 +274,8 @@ struct LevelsView: View {
                                             HStack {
                                                 ForEach(0..<shapes.count, id: \.self) { column in
                                                     ShapeView(shapeType: previewGrid[row][column])
-                                                        .frame(width: appModel.shapeWidth / 3.9, height: appModel.shapeWidth / 3.9)
-                                                        .scaleEffect(appModel.shapeScale / 3.3)
+                                                        .frame(width: shapeWidth / 3.9, height: shapeWidth / 3.9)
+                                                        .scaleEffect( shapeScale / 3.3)
                                                         .scaleEffect(idiom == .pad ? 0.5 : 1)
                                                 }
                                             }
