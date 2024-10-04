@@ -176,8 +176,15 @@ struct LevelsView: View {
             Color.gray.opacity(0.5)
                 .ignoresSafeArea()
                 .onTapGesture {
-                    showLevelDetails = false
-                    cardOffset = deviceWidth
+                    DispatchQueue.main.async { [self] in
+                        withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                            cardOffset = deviceWidth * 2
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                impactLight.impactOccurred()
+                                showLevelDetails = false
+                            }
+                        }
+                    }
                 }
                 .gesture(
                     DragGesture()
