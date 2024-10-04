@@ -35,6 +35,12 @@ struct NoMoreSwipesView: View {
         ZStack {
             Color.gray.opacity(0.7)
                 .ignoresSafeArea()
+                .onTapGesture {
+                    animateAwayButtonsAndBanner()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                        resetGame()
+                    }
+                }
                 .gesture(
                     DragGesture()
                         .onChanged { gesture in

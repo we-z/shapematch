@@ -13,6 +13,9 @@ struct QRView: View {
             LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
             VStack {
                 ZStack{
+                    RotatingSunView()
+                        .scaleEffect(1.8)
+                        .frame(width: 1, height: 1)
                     Rectangle()
                         .foregroundColor(.black)
                         .frame(width: 315, height: 315)
