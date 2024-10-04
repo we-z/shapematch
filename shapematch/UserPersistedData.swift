@@ -19,13 +19,13 @@ class UserPersistedData: ObservableObject {
 //    @CloudStorage("gridData") var gridData: String = ""
 //    @CloudStorage("targetGridData") var targetGridData: String = ""
 
-    @Published var gemBalance: Int = 1
+    @Published var gemBalance: Int = 999
     @Published var firstGamePlayed: Bool = false
     @Published var hasShared: Bool = false
     @Published var gridData: String = ""
     @Published var targetGridData: String = ""
     @Published var highestLevel: Int = 0
-    @Published var level: Int = 16 {
+    @Published var level: Int = 1 {
         didSet {
             if level > highestLevel {
                 highestLevel = level

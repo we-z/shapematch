@@ -213,7 +213,7 @@ class AppModel: ObservableObject {
         var shapes: [ShapeType] = []
         switch level {
         case 1...6:
-            swapsNeeded = userPersistedData.level
+            swapsNeeded = level
             case 7...10:
                 swapsNeeded = 6
             case 11...15:

@@ -64,7 +64,7 @@ struct NoMoreSwipesView: View {
                 }
                 .padding(12)
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.white, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
+                    LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
                 }
                 .cornerRadius(21)
                 .overlay{
@@ -168,7 +168,7 @@ struct NoMoreSwipesView: View {
                                 .customTextStroke(width: 2.1)
                                 .padding(.leading)
                             Spacer()
-                            Text("3 💎")
+                            Text("💎")
                                 .bold()
                                 .font(.system(size: deviceWidth/12))
                                 .fixedSize()
