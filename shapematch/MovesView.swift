@@ -21,7 +21,7 @@ struct MovesView: View {
                     .font(.system(size: deviceWidth / 9))
                     .customTextStroke(width: 3)
                 Spacer()
-                Text("Use the minimum\nnumber of moves\nto match the\nshape pattern 🧠")
+                Text("Make the minimum\nnumber of moves\nto match the\nshape pattern 🙌")
                     .bold()
                     .font(.system(size: deviceWidth / 12))
                     .customTextStroke()
@@ -29,7 +29,7 @@ struct MovesView: View {
                     .fixedSize()
                 Spacer()
                 HStack {
-                    Text("Tip 1️⃣ : If a shape is in the right\nplace, don’t move it.")
+                    Text("Tip 1️⃣ : If a shape is in the right\nplace, don’t move it 🙅‍♀️")
                         .bold()
                         .font(.system(size: deviceWidth / 21))
                         .customTextStroke(width: 1.2)
@@ -38,7 +38,7 @@ struct MovesView: View {
                     Spacer()
                 }
                 HStack {
-                Text("Tip 2️⃣ : Make sure your swaps\nare moving both shapes in there\ncorrect directions")
+                Text("Tip 2️⃣ : Make sure your swaps\nare moving both shapes in there\ncorrect directions 👉")
                     .bold()
                     .font(.system(size: deviceWidth / 21))
                     .customTextStroke(width: 1.2)
@@ -48,7 +48,7 @@ struct MovesView: View {
                 }
                 .padding(.vertical)
                 HStack {
-                    Text("Tip 3️⃣ : Count the number of\nmoves for each shape and start\nwith the one that requires the\nmost moves")
+                    Text("Tip 3️⃣ : Count the number of\nmoves for each shape type and\nstart with the one that requires\nthe most moves 🧠")
                         .bold()
                         .font(.system(size: deviceWidth / 21))
                         .customTextStroke(width: 1.2)
