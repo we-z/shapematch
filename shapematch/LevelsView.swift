@@ -127,19 +127,20 @@ struct LevelsView: View {
                         ScrollView {
                             LazyVStack {
                                 ForEach(1...9999, id: \.self) { level in
-                                    LevelRow(level: level,
-                                             isUnlocked: level <= userPersistedData.level)
-                                    
-                                    .onTapGesture {
+                                    Button {
                                         chosenLevel = level
                                         (moves, shapes) = appModel.determineLevelSettings(level: chosenLevel)
                                         shufflePreview()
                                         showLevelDetails = true
                                         impactLight.impactOccurred()
+                                    } label: {
+                                        LevelRow(level: level)
+                                                .id(level)
+                                                .padding(.top, level == 1 ? deviceHeight / 21 : 0)
+                                                .opacity( level <= userPersistedData.highestLevel ? 1.0 : 0.4)
+                                        
                                     }
-                                    .id(level)
-                                    .padding(.top, level == 1 ? deviceHeight / 21 : 0)
-                                    .opacity( level <= userPersistedData.highestLevel ? 1.0 : 0.4)
+                                    .offset(x: sin(CGFloat(level) * .pi / 6) * (idiom == .pad ? deviceWidth / 4.5 : deviceWidth / 3.6))
                                 }
                             }
                         }
@@ -368,7 +369,6 @@ struct LevelsView: View {
 // LevelRow to display individual level information
 struct LevelRow: View {
     var level: Int
-    var isUnlocked: Bool
 
     var body: some View {
         ZStack {
@@ -387,7 +387,7 @@ struct LevelRow: View {
                 
         }
         .customTextStroke(width: 3)
-        .offset(x: sin(CGFloat(level) * .pi / 6) * (idiom == .pad ? deviceWidth / 4.5 : deviceWidth / 3.6))
+        
     }
 }
 
