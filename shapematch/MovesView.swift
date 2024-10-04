@@ -34,14 +34,16 @@ struct MovesView: View {
                         .font(.system(size: deviceWidth / 21))
                         .customTextStroke(width: 1.5)
                         .multilineTextAlignment(.leading)
+                        .fixedSize()
                     Spacer()
                 }
                 HStack {
-                Text("Tip 2️⃣ : Remember, each swap\nmoves 2 shapes, make sure\nyour swaps are efficient and are\nmoving both shapes in the correct direction")
+                Text("Tip 2️⃣ : Remember, each swap\nmoves 2 shapes, make sure\nyour swaps are efficient and are\nmoving both shapes in the\ncorrect direction")
                     .bold()
                     .font(.system(size: deviceWidth / 21))
                     .customTextStroke(width: 1.5)
                     .multilineTextAlignment(.leading)
+                    .fixedSize()
                     Spacer()
                 }
                 .padding(.vertical)
@@ -51,6 +53,7 @@ struct MovesView: View {
                         .font(.system(size: deviceWidth / 21))
                         .customTextStroke(width: 1.5)
                         .multilineTextAlignment(.leading)
+                        .fixedSize()
                     Spacer()
                 }
             }
