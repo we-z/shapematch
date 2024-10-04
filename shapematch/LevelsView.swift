@@ -135,9 +135,7 @@ struct LevelsView: View {
                                         (moves, shapes) = appModel.determineLevelSettings(level: chosenLevel)
                                         shufflePreview()
                                         showLevelDetails = true
-                                        if level <= userPersistedData.highestLevel {
-                                            impactLight.impactOccurred()
-                                        }
+                                        impactLight.impactOccurred()
                                     }
                                     .id(level)
                                     .padding(.top, level == 1 ? deviceHeight / 21 : 0)
