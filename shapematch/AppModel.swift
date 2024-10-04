@@ -50,6 +50,7 @@ class AppModel: ObservableObject {
     @Published var shuffleBackground = false
     @Published var shapeWidth = 0.0
     @Published var shapeScale = 1.0
+    @Published var showMovesCard = false
 //    @Published var grid.count = 3
     @Published var swapsNeeded = 1
     @Published var undosLeft = 3
