@@ -139,6 +139,10 @@ struct CelebrationEffect: View {
                                 if userPersistedData.level == 2 {
                                     appModel.showNewGoal.toggle()
                                 }
+                                if !userPersistedData.showedMovesCard {
+                                    userPersistedData.showedMovesCard = true
+                                    appModel.showMovesCard = true
+                                }
                             }
                         }
                     }

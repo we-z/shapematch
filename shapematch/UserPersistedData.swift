@@ -22,10 +22,11 @@ class UserPersistedData: ObservableObject {
     @Published var gemBalance: Int = 999
     @Published var firstGamePlayed: Bool = false
     @Published var hasShared: Bool = false
+    @Published var showedMovesCard: Bool = false
     @Published var gridData: String = ""
     @Published var targetGridData: String = ""
     @Published var highestLevel: Int = 0
-    @Published var level: Int = 256 {
+    @Published var level: Int = 1 {
         didSet {
             if level > highestLevel {
                 highestLevel = level
