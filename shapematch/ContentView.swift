@@ -25,8 +25,8 @@ struct ContentView: View {
                 .ignoresSafeArea()
             Color.black.opacity(colorScheme == .dark ? 0.8 : 0.1)
                 .ignoresSafeArea()
-            BackgroundView()
-                .opacity(0.2)
+//            BackgroundView()
+//                .opacity(0.2)
             Group {
                 VStack(spacing: 0) {
                     HStack{
@@ -70,7 +70,7 @@ struct ContentView: View {
                                         .bold()
                                         .font(.system(size: deviceWidth/15))
                                         .fixedSize()
-                                        .customTextStroke(width: 1.5)
+                                        .customTextStroke(width: 1.8)
                                     Text("\(userPersistedData.level)")
                                         .bold()
                                         .font(.system(size: userPersistedData.level  > 99 ? deviceWidth/8 : deviceWidth/6))
@@ -112,7 +112,7 @@ struct ContentView: View {
                                     Color.white.opacity(0.3)
                                 } else {
                                     Color.white
-                                    Color.black.opacity(0.15)
+                                    Color.black.opacity(0.05)
                                 }
                             }
                             .cornerRadius(idiom == .pad ? 30 : 15)
@@ -161,7 +161,7 @@ struct ContentView: View {
                                 .multilineTextAlignment(.center)
                                 .font(.system(size: deviceWidth/15))
                                 .fixedSize()
-                                .customTextStroke(width: 1.5)
+                                .customTextStroke(width: 1.8)
                             Text("\(appModel.swipesLeft > 0 ? appModel.swipesLeft : 0)")
                                 .bold()
                                 .font(.system(size: userPersistedData.level  > 99 ? deviceWidth/8 : deviceWidth/6))
@@ -191,7 +191,7 @@ struct ContentView: View {
                                     Color.white.opacity(0.3)
                                 } else {
                                     Color.white
-                                    Color.black.opacity(0.15)
+                                    Color.black.opacity(0.05)
                                 }
                             }
                             .aspectRatio(1.0, contentMode: .fill)
