@@ -317,6 +317,7 @@ struct LevelsView: View {
                         .padding(1)
                 }
                 .padding()
+                .scaleEffect(idiom == .pad ? 0.8 : 1)
                 .offset(y: cardOffset)
                 .onAppear{
                     DispatchQueue.main.async {
