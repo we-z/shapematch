@@ -364,7 +364,7 @@ struct LevelRow: View {
     var body: some View {
         ZStack {
             Circle()
-                .frame(width: deviceWidth / 6)
+                .frame(width: deviceWidth / 7)
                 .overlay{
                     LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                         .mask(Circle())
@@ -376,7 +376,7 @@ struct LevelRow: View {
                 
         }
         .customTextStroke(width: 3)
-        .offset(x: sin(CGFloat(level) * .pi / 4) * deviceWidth / 4)
+        .offset(x: sin(CGFloat(level) * .pi / 6) * deviceWidth / 3.6)
     }
 }
 
