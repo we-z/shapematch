@@ -154,8 +154,10 @@ struct LevelsView: View {
 //                                }
                             }
                         }
+                        .frame(width: deviceWidth)
                     }
                 }
+//                .frame(width: .infinity)
             }
             if showLevelDetails {
                 LevelDetailsView
@@ -317,7 +319,7 @@ struct LevelsView: View {
                         .padding(1)
                 }
                 .padding()
-                .scaleEffect(idiom == .pad ? 0.8 : 1)
+                .scaleEffect(idiom == .pad ? 0.6 : 1)
                 .offset(y: cardOffset)
                 .onAppear{
                     DispatchQueue.main.async {
@@ -365,7 +367,7 @@ struct LevelRow: View {
     var body: some View {
         ZStack {
             Circle()
-                .frame(width: idiom == .pad ? deviceWidth / 11 : deviceWidth / 7)
+                .frame(width: idiom == .pad ? deviceWidth / 10 : deviceWidth / 7)
                 .overlay{
                     LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                         .mask(Circle())
