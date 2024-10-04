@@ -275,6 +275,7 @@ struct ContentView: View {
         .onAppear {
             appModel.initialGrid = appModel.grid
             self.notificationManager.registerLocal()
+            appModel.showMovesCard = true
             // 1054, 1109, 1054, 1057, 1114, 1115, 1159, 1166, 1300, 1308, 1313, 1322, 1334
 //            AudioServicesPlaySystemSound(1105)
         }

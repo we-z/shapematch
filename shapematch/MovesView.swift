@@ -58,10 +58,10 @@ struct MovesView: View {
                             Spacer()
                         }
                         HStack {
-                            Text("Match the Pattern in \(appModel.swipesLeft) moves 🙇‍♂️")
+                            Text("Match the Shapes in \(appModel.swipesLeft) moves 🙇‍♂️")
                                 .bold()
                                 .font(.system(size: deviceWidth / 21))
-                                .customTextStroke(width: 1.2)
+                                .customTextStroke(width: 1.5)
                                 .multilineTextAlignment(.leading)
                                 .fixedSize()
                                 .padding(.bottom, 30)
@@ -70,8 +70,8 @@ struct MovesView: View {
                         HStack {
                             Text("Tip 1️⃣ : If a shape is in the right\nplace, don’t move it 🙅‍♀️")
                                 .bold()
-                                .font(.system(size: deviceWidth / 27))
-                                .customTextStroke(width: 1)
+                                .font(.system(size: deviceWidth / 21))
+                                .customTextStroke(width: 1.2)
                                 .multilineTextAlignment(.leading)
                                 .fixedSize()
                             Spacer()
@@ -79,8 +79,8 @@ struct MovesView: View {
                         HStack {
                             Text("Tip 2️⃣ : Make sure your swaps\nare moving both shapes in there\ncorrect directions 👉")
                                 .bold()
-                                .font(.system(size: deviceWidth / 27))
-                                .customTextStroke(width: 1)
+                                .font(.system(size: deviceWidth / 21))
+                                .customTextStroke(width: 1.2)
                                 .multilineTextAlignment(.leading)
                                 .fixedSize()
                             Spacer()
@@ -89,8 +89,8 @@ struct MovesView: View {
                         HStack {
                             Text("Tip 3️⃣ : Count the number of\nmoves for each shape type and\nstart with the one that requires\nthe most moves 🧠")
                                 .bold()
-                                .font(.system(size: deviceWidth / 27))
-                                .customTextStroke(width: 1)
+                                .font(.system(size: deviceWidth / 21))
+                                .customTextStroke(width: 1.2)
                                 .multilineTextAlignment(.leading)
                                 .fixedSize()
                             Spacer()
