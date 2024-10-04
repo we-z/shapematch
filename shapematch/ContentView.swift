@@ -23,7 +23,7 @@ struct ContentView: View {
         ZStack{
             Color.white
                 .ignoresSafeArea()
-            Color.black.opacity(colorScheme == .dark ? 0.8 : 0.1)
+            Color.black.opacity(colorScheme == .dark ? 0.8 : 0.2)
                 .ignoresSafeArea()
 //            BackgroundView()
 //                .opacity(0.2)
@@ -112,7 +112,7 @@ struct ContentView: View {
                                     Color.white.opacity(0.3)
                                 } else {
                                     Color.white
-                                    Color.black.opacity(0.05)
+                                    Color.black.opacity(0.1)
                                 }
                             }
                             .cornerRadius(idiom == .pad ? 30 : 15)
@@ -191,7 +191,7 @@ struct ContentView: View {
                                     Color.white.opacity(0.3)
                                 } else {
                                     Color.white
-                                    Color.black.opacity(0.05)
+                                    Color.black.opacity(0.1)
                                 }
                             }
                             .aspectRatio(1.0, contentMode: .fill)
