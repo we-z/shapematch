@@ -126,7 +126,7 @@ struct LevelsView: View {
                     ScrollViewReader { proxy in
                         ScrollView {
                             LazyVStack {
-                                ForEach(1...10000, id: \.self) { level in
+                                ForEach(1...9999, id: \.self) { level in
                                     LevelRow(level: level,
                                              isUnlocked: level <= userPersistedData.level)
                                     
