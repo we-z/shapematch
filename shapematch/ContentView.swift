@@ -164,7 +164,7 @@ struct ContentView: View {
                                 .customTextStroke(width: 1.5)
                             Text("\(appModel.swipesLeft > 0 ? appModel.swipesLeft : 0)")
                                 .bold()
-                                .font(.system(size: deviceWidth/6))
+                                .font(.system(size: userPersistedData.level  > 99 ? deviceWidth/8 : deviceWidth/6))
                                 .customTextStroke()
                             
                             Spacer()
