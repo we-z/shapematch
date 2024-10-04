@@ -98,7 +98,7 @@ struct LevelsView: View {
                         Text(emojis[i])
                             .font(.system(size: deviceWidth/4))
                             .blur(radius: 0)
-                            .frame(width: 100, height: 100)
+                            .frame(width: 300, height: 300)
                             .rotationEffect(.degrees(180))
                             .tag(emojis[i])
                     }
@@ -150,7 +150,7 @@ struct LevelsView: View {
                             // Jump to the current level
                             DispatchQueue.main.async {
 //                                withAnimation {
-                                    proxy.scrollTo(userPersistedData.level, anchor: .center)
+                                    proxy.scrollTo(userPersistedData.level, anchor: .bottom)
 //                                }
                             }
                         }
@@ -364,7 +364,7 @@ struct LevelRow: View {
     var body: some View {
         ZStack {
             Circle()
-                .frame(width: deviceWidth / 7)
+                .frame(width: idiom == .pad ? deviceWidth / 11 : deviceWidth / 7)
                 .overlay{
                     LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                         .mask(Circle())
@@ -372,11 +372,13 @@ struct LevelRow: View {
             Text("\(level)")
                 .bold()
                 .font(.system(size: level > 999 ? deviceWidth / 21 : level > 99 ? deviceWidth / 15 : deviceWidth / 12))
+                .fixedSize()
+                .scaleEffect(idiom == .pad ? 0.6 : 1)
                 .customTextStroke(width: 1.8)
                 
         }
         .customTextStroke(width: 3)
-        .offset(x: sin(CGFloat(level) * .pi / 6) * deviceWidth / 3.6)
+        .offset(x: sin(CGFloat(level) * .pi / 6) * (idiom == .pad ? deviceWidth / 4.5 : deviceWidth / 3.6))
     }
 }
 
