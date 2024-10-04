@@ -156,17 +156,23 @@ struct ContentView: View {
                             }
                             .buttonStyle(.roundedAndShadow6)
                             Spacer()
-                            Text("Moves")
-                                .bold()
-                                .multilineTextAlignment(.center)
-                                .font(.system(size: deviceWidth/15))
-                                .fixedSize()
-                                .customTextStroke(width: 1.8)
-                            Text("\(appModel.swipesLeft > 0 ? appModel.swipesLeft : 0)")
-                                .bold()
-                                .font(.system(size: userPersistedData.level  > 99 ? deviceWidth/8 : deviceWidth/6))
-                                .customTextStroke()
-                            
+                            Button {
+                                appModel.showMovesCard = true
+                                impactHeavy.impactOccurred()
+                            } label : {
+                                VStack{
+                                    Text("Moves")
+                                        .bold()
+                                        .multilineTextAlignment(.center)
+                                        .font(.system(size: deviceWidth/15))
+                                        .fixedSize()
+                                        .customTextStroke(width: 1.8)
+                                    Text("\(appModel.swipesLeft > 0 ? appModel.swipesLeft : 0)")
+                                        .bold()
+                                        .font(.system(size: userPersistedData.level  > 99 ? deviceWidth/8 : deviceWidth/6))
+                                        .customTextStroke()
+                                }
+                            }
                             Spacer()
                         }
                         .frame(width: deviceWidth/4)
@@ -259,6 +265,9 @@ struct ContentView: View {
                 NoMoreSwipesView()
             }
             CelebrateGems()
+            if appModel.showMovesCard {
+                MovesView()
+            }
         }
         .sheet(isPresented: self.$showLevelsMenu){
             LevelsView()
