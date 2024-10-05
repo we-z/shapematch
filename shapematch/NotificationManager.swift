@@ -15,7 +15,7 @@ class NotificationManager: ObservableObject {
         "Clarity comes not from knowing the answer, but from refining the question.",
         "The best solutions emerge when you stop looking for easy ones.",
         "A problem often teaches more than the solution ever could.",
-        "Solving isn't just about answers, it's about uncovering the right approach.",
+        "Solving prblems is about uncovering the right approach.",
         "Every complex problem is a network of smaller, simpler problems.",
         "A good problem solver is defined by how they handle uncertainty, not how they avoid it.",
         "Insight grows through iteration—each failure sharpens the next attempt.",
@@ -24,7 +24,6 @@ class NotificationManager: ObservableObject {
         "True problem solvers are comfortable with ambiguity and thrive in uncertainty.",
         "To solve effectively, one must first see beyond the obvious.",
         "The process of solving a problem is as important as the solution itself.",
-        "Questions shape the path; answers are just a byproduct of the journey.",
     ]
     
     @objc func registerLocal() {
