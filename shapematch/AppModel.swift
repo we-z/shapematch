@@ -176,6 +176,7 @@ class AppModel: ObservableObject {
             if userPersistedData.level == 2 {
                 secondGamePlayed = true
             }
+            userPersistedData.firstGamePlayed = true
             self.freezeGame = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
                 if !audioController.mute {
