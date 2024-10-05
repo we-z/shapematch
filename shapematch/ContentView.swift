@@ -122,7 +122,7 @@ struct ContentView: View {
                                     .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 4)
                                     .padding(1)
                             }
-                            .pulsingPlaque(speed: 2.0, size: 1.8)
+                            .pulsingPlaque(speed: 1.5, size: 1.5)
 //                            .scaleEffect(idiom == .pad ? 0.8 : 1)
                             Spacer()
                         }
