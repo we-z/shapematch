@@ -58,10 +58,10 @@ struct MovesView: View {
                             Spacer()
                         }
                         HStack {
-                            Text("Match the Shapes in \(appModel.swipesLeft) moves 🙇‍♂️")
+                            Text("Match the Pattern in \(appModel.swipesLeft) moves 🙇‍♂️")
                                 .bold()
                                 .font(.system(size: deviceWidth / 21))
-                                .customTextStroke(width: 1.5)
+                                .customTextStroke(width: 1.2)
                                 .multilineTextAlignment(.leading)
                                 .fixedSize()
                                 .padding(.bottom, 30)
