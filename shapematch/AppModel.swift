@@ -172,7 +172,7 @@ class AppModel: ObservableObject {
             DispatchQueue.main.async { [self] in
                 shouldBurst.toggle()
             }
-            userPersistedData.firstGamePlayed = true
+            
             if userPersistedData.level == 2 {
                 secondGamePlayed = true
             }
@@ -442,6 +442,7 @@ class AppModel: ObservableObject {
     }
     
     func setupLevel(startGrid: [[ShapeType]] = []) {
+        userPersistedData.firstGamePlayed = true
         shuffleBackground.toggle()
         (swapsNeeded, shapes) = determineLevelSettings(level: userPersistedData.level)
         swapsMade = []
