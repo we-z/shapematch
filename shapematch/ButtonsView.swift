@@ -90,7 +90,7 @@ struct ButtonsView: View {
                         Circle()
                             .frame(width: idiom == .pad ? deviceWidth/10 : deviceWidth/9)
                             .overlay {
-                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
+                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                                     .mask(Circle())
                             }
                         VStack(spacing: 6) {
