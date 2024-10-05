@@ -19,7 +19,9 @@ struct NoMoreSwipesView: View {
     func resetGame() {
         appModel.resetLevel()
         appModel.showNoMoreSwipesView = false
-        appModel.showInstruction.toggle()
+        if userPersistedData.level != 1 {
+            appModel.showInstruction.toggle()
+        }
     }
     
     func animateAwayButtonsAndBanner() {
@@ -96,33 +98,35 @@ struct NoMoreSwipesView: View {
                 Spacer()
                 VStack(spacing: idiom == .pad ? 18 : 6){
                     HStack(spacing: idiom == .pad ? 18 : 9){
-                        Button {
-                            animateAwayButtonsAndBanner()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                appModel.showNoMoreSwipesView = false
-                                appModel.setupLevel()
+                        if userPersistedData.level != 1 {
+                            Button {
+                                animateAwayButtonsAndBanner()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                    appModel.showNoMoreSwipesView = false
+                                    appModel.setupLevel()
+                                }
+                            } label: {
+                                HStack {
+                                    Spacer()
+                                    Text("🔀")
+                                        .font(.system(size: deviceWidth/12))
+                                        .customTextStroke(width: 2)
+                                        .fixedSize()
+                                        .padding([.trailing], 9)
+                                    Spacer()
+                                }
+                                .padding()
+                                .background{
+                                    LinearGradient(gradient: Gradient(colors: [.white, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
+                                }
+                                .cornerRadius(15)
+                                .overlay{
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                        .padding(1)
+                                }
+                                .padding(3)
                             }
-                        } label: {
-                            HStack {
-                                Spacer()
-                                Text("🔀")
-                                    .font(.system(size: deviceWidth/12))
-                                    .customTextStroke(width: 2)
-                                    .fixedSize()
-                                    .padding([.trailing], 9)
-                                Spacer()
-                            }
-                            .padding()
-                            .background{
-                                LinearGradient(gradient: Gradient(colors: [.white, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
-                            }
-                            .cornerRadius(15)
-                            .overlay{
-                                RoundedRectangle(cornerRadius: 15)
-                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                    .padding(1)
-                            }
-                            .padding(3)
                         }
                         Button {
                             animateAwayButtonsAndBanner()
@@ -154,48 +158,50 @@ struct NoMoreSwipesView: View {
                     }
                     .buttonStyle(.roundedAndShadow6)
                     .padding(.bottom, 6)
-                    Button {
-                        animateAwayButtonsAndBanner()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                            if 3 > userPersistedData.gemBalance {
-                                appModel.showGemMenu = true
-                            } else {
-                                userPersistedData.decrementBalance(amount: 3)
-                                appModel.swipesLeft += 3
-                                appModel.showNoMoreSwipesView = false
+                    if userPersistedData.level != 1 {
+                        Button {
+                            animateAwayButtonsAndBanner()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                if 3 > userPersistedData.gemBalance {
+                                    appModel.showGemMenu = true
+                                } else {
+                                    userPersistedData.decrementBalance(amount: 3)
+                                    appModel.swipesLeft += 3
+                                    appModel.showNoMoreSwipesView = false
+                                }
                             }
-                        }
-                    } label: {
-                        HStack{
-                            Text("+ 3 Moves")
-                                .bold()
-                                .font(.system(size: deviceWidth/12))
-                                .fixedSize()
-                                .customTextStroke(width: 2.1)
-                                .padding(.leading)
-                            Spacer()
-                            Text("💎")
-                                .bold()
-                                .font(.system(size: deviceWidth/12))
-                                .fixedSize()
-                                .customTextStroke(width: 2.1)
-                                .padding(.trailing)
+                        } label: {
+                            HStack{
+                                Text("+ 3 Moves")
+                                    .bold()
+                                    .font(.system(size: deviceWidth/12))
+                                    .fixedSize()
+                                    .customTextStroke(width: 2.1)
+                                    .padding(.leading)
+                                Spacer()
+                                Text("💎")
+                                    .bold()
+                                    .font(.system(size: deviceWidth/12))
+                                    .fixedSize()
+                                    .customTextStroke(width: 2.1)
+                                    .padding(.trailing)
+                                
+                            }
+                            .padding()
+                            .background{
+                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                            }
+                            .cornerRadius(21)
+                            .overlay{
+                                RoundedRectangle(cornerRadius: 21)
+                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                    .padding(1)
+                            }
+                            .padding(.bottom, 15)
                             
                         }
-                        .padding()
-                        .background{
-                            LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                        }
-                        .cornerRadius(21)
-                        .overlay{
-                            RoundedRectangle(cornerRadius: 21)
-                                .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                .padding(1)
-                        }
-                        .padding(.bottom, 15)
-                        
+                        .buttonStyle(.roundedAndShadow6)
                     }
-                    .buttonStyle(.roundedAndShadow6)
                 }
                 .offset(y: buttonsnOffset)
                 

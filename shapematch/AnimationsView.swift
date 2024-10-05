@@ -139,6 +139,7 @@ struct CelebrationEffect: View {
                                 if userPersistedData.level == 2 {
                                     appModel.showNewGoal.toggle()
                                 }
+                                appModel.showInstruction.toggle()
                             }
                         }
                     }
@@ -453,11 +454,23 @@ struct ScalingPlaque: ViewModifier {
             .scaleEffect(scale)
             .offset(y: (scale - 1.0) * (deviceHeight / 21))
             .onAppear {
-                if !userPersistedData.firstGamePlayed{
-                    runAnimation()
+                if userPersistedData.level == 1 {
+                    scale = 1.5
+                } else {
+                    if !userPersistedData.firstGamePlayed && userPersistedData.level != 1 {
+                        runAnimation()
+                    }
+                }
+            }
+            .onChange(of: userPersistedData.level) { level in
+                if level == 1 {
+                    scale = 1.5
                 }
             }
             .onChange(of: appModel.showInstruction) { _ in
+                runAnimation()
+            }
+            .onChange(of: userPersistedData.firstGamePlayed) { _ in
                 runAnimation()
             }
     }
@@ -473,20 +486,20 @@ struct ScalingPlaque: ViewModifier {
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 2) {
-            withAnimation(.easeInOut(duration: speed)) {
-                scale = size
-            }
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 3) {
-            withAnimation(.easeInOut(duration: speed)) {
-                scale = 1.0
-            }
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 2) {
+//            withAnimation(.easeInOut(duration: speed)) {
+//                scale = size
+//            }
+//        }
+//        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 3) {
+//            withAnimation(.easeInOut(duration: speed)) {
+//                scale = 1.0
+//            }
+//        }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + speed * 2) {
-            if userPersistedData.level < 3 {
+            if userPersistedData.level == 1 {
                 runAnimation()
             }
         }

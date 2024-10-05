@@ -183,7 +183,7 @@ class AppModel: ObservableObject {
                     AudioServicesPlaySystemSound(1320)
                 }
                 userPersistedData.level += 1
-                showInstruction.toggle()
+                
                 setupLevel()
                 swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
                 
