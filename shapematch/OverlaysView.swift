@@ -13,7 +13,7 @@ struct OverlaysView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     var body: some View {
         ZStack {
-            if userPersistedData.level == 1 && !userPersistedData.firstGamePlayed {
+            if userPersistedData.level == 1 && !appModel.freezeGame {
                 HandSwipeView()
                     .scaleEffect(idiom == .pad ? 0.8 : 1)
             }
