@@ -30,7 +30,6 @@ struct ContentView: View {
             Group {
                 VStack(spacing: 0) {
                     HStack{
-//                        Spacer()
                         VStack{
                             Button {
                                 appModel.showGemMenu = true
@@ -121,6 +120,12 @@ struct ContentView: View {
                                 RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
                                     .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 4)
                                     .padding(1)
+                            }
+                            .onTapGesture {
+                                if userPersistedData.level != 1 {
+                                    impactHeavy.impactOccurred()
+                                    appModel.showInstruction.toggle()
+                                }
                             }
                             .pulsingPlaque(speed: 1.5, size: userPersistedData.level == 1 ? 1.5 : 1.8)
 //                            .scaleEffect(idiom == .pad ? 0.8 : 1)
