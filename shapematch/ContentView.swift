@@ -121,10 +121,11 @@ struct ContentView: View {
                                     .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 4)
                                     .padding(1)
                             }
-                            .pulsingPlaque()
+                            .pulsingPlaque(speed: 1.5, size: 1.8)
 //                            .scaleEffect(idiom == .pad ? 0.8 : 1)
                             Spacer()
                         }
+                        .zIndex(1)
                         Spacer()
                         VStack{
                             Button{
@@ -179,16 +180,17 @@ struct ContentView: View {
                         
                     }
                     .padding(.horizontal)
+                    .zIndex(1)
                     ZStack{
                         ButtonsView()
 //                        if !userPersistedData.firstGamePlayed {
-                            InstructionView()
-                                .frame(height: 1)
+//                            InstructionView()
+//                                .frame(height: 1)
 //                        }
 
                     }
                     .padding(.vertical, idiom == .pad ? 41 : 3)
-                    .zIndex(1)
+//                    .zIndex(1)
                     ZStack{
                         Rectangle()
                             .overlay{
@@ -275,7 +277,7 @@ struct ContentView: View {
         .onAppear {
             appModel.initialGrid = appModel.grid
             self.notificationManager.registerLocal()
-            appModel.showMovesCard = true
+//            appModel.showMovesCard = true
             // 1054, 1109, 1054, 1057, 1114, 1115, 1159, 1166, 1300, 1308, 1313, 1322, 1334
 //            AudioServicesPlaySystemSound(1105)
         }

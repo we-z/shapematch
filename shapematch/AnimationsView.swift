@@ -451,6 +451,7 @@ struct ScalingPlaque: ViewModifier {
     func body(content: Content) -> some View {
         content
             .scaleEffect(scale)
+            .offset(y: (scale - 1.0) * (deviceHeight / 21))
             .onAppear {
                 if !userPersistedData.firstGamePlayed{
                     runAnimation()
@@ -474,7 +475,7 @@ struct ScalingPlaque: ViewModifier {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + speed * 2) {
             withAnimation(.easeInOut(duration: speed)) {
-                scale = 1.1
+                scale = size
             }
         }
         
