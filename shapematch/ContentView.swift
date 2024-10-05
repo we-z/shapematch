@@ -26,7 +26,7 @@ struct ContentView: View {
             Color.black.opacity(colorScheme == .dark ? 0.8 : 0.2)
                 .ignoresSafeArea()
             BackgroundView()
-                .opacity(0.2)
+                .opacity(userPersistedData.level == 1 ? 0.0 : 0.2)
             Group {
                 VStack(spacing: 0) {
                     HStack{

@@ -203,7 +203,11 @@ class AppModel: ObservableObject {
                 AudioServicesPlaySystemSound (1053)
             }
             AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
-            showNoMoreSwipesView = true
+            if userPersistedData.level == 1 {
+                resetLevel()
+            } else {
+                showNoMoreSwipesView = true
+            }
             print("Level failed")
         }
     }
