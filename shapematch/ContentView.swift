@@ -259,7 +259,7 @@ struct ContentView: View {
                 .allowsHitTesting(!appModel.freezeGame)
                 OverlaysView()
             }
-            .scaleEffect(idiom == .pad ? 0.8 : 1)
+            .scaleEffect(idiom == .pad ? 0.75 : 1)
             CelebrationEffect()
             if appModel.showGemMenu {
                 GemMenuView()
