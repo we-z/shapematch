@@ -455,7 +455,7 @@ struct ScalingPlaque: ViewModifier {
             .offset(y: (scale - 1.0) * (deviceHeight / 21))
             .onAppear {
                 if userPersistedData.level == 1 {
-                    scale = 1.5
+                    scale = size
                 } else {
                     if !userPersistedData.firstGamePlayed && userPersistedData.level != 1 {
                         runAnimation()
