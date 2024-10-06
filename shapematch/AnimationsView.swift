@@ -498,11 +498,11 @@ struct ScalingPlaque: ViewModifier {
 //            }
 //        }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 2) {
-            if userPersistedData.level == 1 {
-                runAnimation()
-            }
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 2) {
+//            if userPersistedData.level == 1 {
+//                runAnimation()
+//            }
+//        }
     }
 }
 
