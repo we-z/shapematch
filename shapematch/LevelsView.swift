@@ -154,7 +154,7 @@ struct LevelsView: View {
                             // Jump to the current level
                             DispatchQueue.main.async {
 //                                withAnimation {
-                                    proxy.scrollTo(userPersistedData.level, anchor: .bottom)
+                                    proxy.scrollTo(userPersistedData.highestLevel, anchor: .bottom)
 //                                }
                             }
                         }
