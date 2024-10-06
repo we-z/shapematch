@@ -81,7 +81,7 @@ struct ContentView: View {
                             Spacer()
                         }
                         .frame(width: deviceWidth/4)
-                        .opacity((userPersistedData.level != 1 && userPersistedData.firstGamePlayed) ? 1 : 0)
+                        .opacity((userPersistedData.level != 1) ? 1 : 0)
                         Spacer()
                         VStack {
                             Spacer()
@@ -183,14 +183,14 @@ struct ContentView: View {
                             Spacer()
                         }
                         .frame(width: deviceWidth/4)
-                        .opacity((userPersistedData.level != 1 && userPersistedData.firstGamePlayed) ? 1 : 0)
+                        .opacity((userPersistedData.level != 1) ? 1 : 0)
                         
                     }
                     .padding(.horizontal)
                     .zIndex(3)
                     ZStack{
                         ButtonsView()
-                            .opacity((userPersistedData.level != 1 && userPersistedData.firstGamePlayed) ? 1 : 0)
+                            .opacity((userPersistedData.level != 1) ? 1 : 0)
                     }
                     .padding(.vertical, idiom == .pad ? 41 : 3)
                     .zIndex(2)
