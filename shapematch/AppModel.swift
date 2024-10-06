@@ -442,7 +442,24 @@ class AppModel: ObservableObject {
         userPersistedData.targetGrid = targetGrid
     }
     
+    func setupFirstLevel() {
+        grid = [
+            [.triangle, .circle, .triangle],
+            [.circle, .triangle, .circle],
+            [.square, .square, .square]
+        ]
+        
+        targetGrid = [
+            [.triangle, .circle, .triangle],
+            [.circle, .square, .circle],
+            [.square, .triangle, .square]
+        ]
+    }
+    
     func setupLevel(startGrid: [[ShapeType]] = []) {
+        if userPersistedData.level == 1 {
+            setupFirstLevel()
+        }
         userPersistedData.firstGamePlayed = true
         shuffleBackground.toggle()
         (swapsNeeded, shapes) = determineLevelSettings(level: userPersistedData.level)

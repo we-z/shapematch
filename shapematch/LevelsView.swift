@@ -128,10 +128,16 @@ struct LevelsView: View {
                             LazyVStack {
                                 ForEach(1...9999, id: \.self) { level in
                                     Button {
-                                        chosenLevel = level
-                                        (moves, shapes) = appModel.determineLevelSettings(level: chosenLevel)
-                                        shufflePreview()
-                                        showLevelDetails = true
+                                        if level == 1 {
+                                            userPersistedData.level = chosenLevel
+                                            appModel.setupFirstLevel()
+                                            dismiss()
+                                        } else {
+                                            chosenLevel = level
+                                            (moves, shapes) = appModel.determineLevelSettings(level: chosenLevel)
+                                            shufflePreview()
+                                            showLevelDetails = true
+                                        }
                                         impactLight.impactOccurred()
                                     } label: {
                                         LevelRow(level: level)
