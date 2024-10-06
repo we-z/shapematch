@@ -26,7 +26,7 @@ class UserPersistedData: ObservableObject {
     @Published var gridData: String = ""
     @Published var targetGridData: String = ""
     @Published var highestLevel: Int = 0
-    @Published var level: Int = 1 {
+    @Published var level: Int = 16 {
         didSet {
             if level > highestLevel {
                 highestLevel = level
