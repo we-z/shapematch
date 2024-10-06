@@ -456,10 +456,6 @@ struct ScalingPlaque: ViewModifier {
             .onAppear {
                 if userPersistedData.level == 1 {
                     scale = size
-                } else {
-                    if !userPersistedData.firstGamePlayed && userPersistedData.level != 1 {
-                        runAnimation()
-                    }
                 }
             }
             .onChange(of: userPersistedData.level) { level in
@@ -468,9 +464,6 @@ struct ScalingPlaque: ViewModifier {
                 }
             }
             .onChange(of: appModel.showInstruction) { _ in
-                runAnimation()
-            }
-            .onChange(of: userPersistedData.firstGamePlayed) { _ in
                 runAnimation()
             }
     }
@@ -486,23 +479,6 @@ struct ScalingPlaque: ViewModifier {
             }
         }
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 2) {
-//            withAnimation(.easeInOut(duration: speed)) {
-//                scale = size
-//            }
-//        }
-//        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 3) {
-//            withAnimation(.easeInOut(duration: speed)) {
-//                scale = 1.0
-//            }
-//        }
-
-//        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 2) {
-//            if userPersistedData.level == 1 {
-//                runAnimation()
-//            }
-//        }
     }
 }
 

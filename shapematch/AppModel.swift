@@ -173,6 +173,9 @@ class AppModel: ObservableObject {
                 shouldBurst.toggle()
             }
             userPersistedData.firstGamePlayed = true
+            if userPersistedData.level == 1 {
+                showInstruction.toggle()
+            }
             self.freezeGame = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
                 if !audioController.mute {
