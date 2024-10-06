@@ -91,6 +91,7 @@ class AppModel: ObservableObject {
     }
     
     func handleSwipeGesture(gesture: DragGesture.Value, row: Int, col: Int) {
+        print("handleSwipeGesture called")
         let direction: SwipeDirection
         
         if abs(gesture.translation.width) > abs(gesture.translation.height) {
@@ -116,6 +117,7 @@ class AppModel: ObservableObject {
     }
     
     func swapShapes(start: (row: Int, col: Int), end: (row: Int, col: Int), offset: CGSize) {
+        print("swapShapes called")
         DispatchQueue.main.async { [self] in
             self.swaping = true
             withAnimation(.linear(duration: 0.2)) {
@@ -203,7 +205,7 @@ class AppModel: ObservableObject {
             }
             AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
             if userPersistedData.level == 1 {
-                resetLevel()
+                setupFirstLevel()
             } else {
                 showNoMoreSwipesView = true
             }
@@ -457,6 +459,8 @@ class AppModel: ObservableObject {
             [.circle, .square, .circle],
             [.square, .triangle, .square]
         ]
+        
+        swipesLeft = 1
     }
     
     func setupLevel(startGrid: [[ShapeType]] = []) {

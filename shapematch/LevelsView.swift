@@ -136,7 +136,6 @@ struct LevelsView: View {
                                                 .onTapGesture{
                                                     if level == 1 {
                                                         userPersistedData.level = chosenLevel
-                                                        appModel.swipesLeft = 1
                                                         appModel.setupFirstLevel()
                                                         dismiss()
                                                     } else {
