@@ -227,15 +227,23 @@ class AppModel: ObservableObject {
             swapsNeeded = 3
         case 6...7:
             swapsNeeded = 4
-        case 7...8:
+        case 7...9:
             swapsNeeded = 5
-        case 9...11:
+        case 10...12:
             swapsNeeded = 6
-        case 12...15:
+        case 13...15:
             swapsNeeded = 7
-        case 16...27:
+        case 16...18:
+            swapsNeeded = 4
+        case 19...21:
+            swapsNeeded = 5
+        case 22...24:
+            swapsNeeded = 6
+        case 25...27:
+            swapsNeeded = 7
+        case 28...33:
             swapsNeeded = 8
-        case 28...39:
+        case 34...39:
             swapsNeeded = 9
         case 40...70:
             swapsNeeded = 10
