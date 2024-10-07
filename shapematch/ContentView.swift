@@ -123,7 +123,6 @@ struct ContentView: View {
                             }
                             .onTapGesture {
                                 if userPersistedData.level != 1 {
-                                    impactLight.impactOccurred()
                                     appModel.showInstruction.toggle()
                                 }
                             }

@@ -471,6 +471,7 @@ struct ScalingPlaque: ViewModifier {
     }
 
     private func runAnimation() {
+        impactLight.impactOccurred()
         withAnimation(.easeInOut(duration: speed)) {
             scale = size
         }
@@ -478,9 +479,13 @@ struct ScalingPlaque: ViewModifier {
         DispatchQueue.main.asyncAfter(deadline: .now() + speed) {
             withAnimation(.easeInOut(duration: speed)) {
                 scale = 1.0
+                
             }
         }
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + speed * 2) {
+            impactLight.impactOccurred()
+        }
     }
 }
 
