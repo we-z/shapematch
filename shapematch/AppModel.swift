@@ -219,40 +219,48 @@ class AppModel: ObservableObject {
         var swapsNeeded = 0
         var shapes: [ShapeType] = []
         switch level {
-        case 1...6:
-            swapsNeeded = level
-            case 7...10:
-                swapsNeeded = 6
-            case 11...15:
-                swapsNeeded = 7
-            case 16...27:
-                swapsNeeded = 8
-            case 28...39:
-                swapsNeeded = 9
-            case 40...70:
-                swapsNeeded = 10
-            case 71...100:
-                swapsNeeded = 11
-            case 101...150:
-                swapsNeeded = 12
-            case 151...200:
-                swapsNeeded = 13
-            case 201...300:
-                swapsNeeded = 14
-            case 301...499:
-                swapsNeeded = 15
-            case 500...750:
-                swapsNeeded = 16
-            case 751...999:
-                swapsNeeded = 17
-            case 1000...3000:
-                swapsNeeded = 18
-            case 3001...6000:
-                swapsNeeded = 19
-            case 6001...9999:
-                swapsNeeded = 20
-            default:
-                swapsNeeded = 21
+        case 1:
+            swapsNeeded = 1
+        case 2...3:
+            swapsNeeded = 2
+        case 4...5:
+            swapsNeeded = 3
+        case 6...7:
+            swapsNeeded = 4
+        case 7...8:
+            swapsNeeded = 5
+        case 9...11:
+            swapsNeeded = 6
+        case 12...15:
+            swapsNeeded = 7
+        case 16...27:
+            swapsNeeded = 8
+        case 28...39:
+            swapsNeeded = 9
+        case 40...70:
+            swapsNeeded = 10
+        case 71...100:
+            swapsNeeded = 11
+        case 101...150:
+            swapsNeeded = 12
+        case 151...200:
+            swapsNeeded = 13
+        case 201...300:
+            swapsNeeded = 14
+        case 301...499:
+            swapsNeeded = 15
+        case 500...750:
+            swapsNeeded = 16
+        case 751...999:
+            swapsNeeded = 17
+        case 1000...3000:
+            swapsNeeded = 18
+        case 3001...6000:
+            swapsNeeded = 19
+        case 6001...9999:
+            swapsNeeded = 20
+        default:
+            swapsNeeded = 21
         }
 
         
