@@ -139,7 +139,9 @@ struct CelebrationEffect: View {
                                 if userPersistedData.level == 2 {
                                     appModel.showNewGoal.toggle()
                                 }
-                                appModel.showInstruction.toggle()
+                                if userPersistedData.level < 5 {
+                                    appModel.showInstruction.toggle()
+                                }
                             }
                         }
                     }
