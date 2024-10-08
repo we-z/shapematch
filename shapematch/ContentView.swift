@@ -267,12 +267,14 @@ struct ContentView: View {
             CelebrationEffect()
             if appModel.showGemMenu {
                 GemMenuView()
+                    .padding(.bottom, idiom == .pad ? 60 : 0)
             } else if appModel.showNoMoreSwipesView {
                 NoMoreSwipesView()
             }
             CelebrateGems()
             if appModel.showMovesCard {
                 MovesView()
+                    .padding(.bottom, idiom == .pad ? 150 : 0)
             }
         }
         .sheet(isPresented: self.$showLevelsMenu){

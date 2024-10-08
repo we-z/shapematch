@@ -9,6 +9,7 @@
 import SwiftUI
 import LinkPresentation
 import UniformTypeIdentifiers
+import StoreKit
 
 class ActivityItemProvider: NSObject, UIActivityItemSource {
     let image: UIImage
@@ -57,6 +58,11 @@ struct ShareView: UIViewControllerRepresentable {
                 }
             } else {
                 print("User canceled the share.")
+            }
+            if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                DispatchQueue.main.async {
+                    SKStoreReviewController.requestReview(in: scene)
+                }
             }
         }
 

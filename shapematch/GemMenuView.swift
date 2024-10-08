@@ -315,13 +315,6 @@ struct GemMenuView: View {
                 }
             }
         }
-        .onDisappear{
-            if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-                DispatchQueue.main.async {
-                    SKStoreReviewController.requestReview(in: scene)
-                }
-            }
-        }
         .sheet(isPresented: $sheetPresented, content: {
                 
             if let data = render(), let url = URL(string: "https://apple.co/4ea9see") {
