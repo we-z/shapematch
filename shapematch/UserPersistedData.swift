@@ -12,36 +12,35 @@ import CloudStorage
 class UserPersistedData: ObservableObject {
     static let sharedUserPersistedData = UserPersistedData()
     
-//    @CloudStorage("gemBalance") var gemBalance: Int = 0
-//    @CloudStorage("firstGamePlayed") var firstGamePlayed: Bool = false
-//    @CloudStorage("hasShared") var hasShared: Bool = false
-//    @CloudStorage("gridData") var gridData: String = ""
-//    @CloudStorage("targetGridData") var targetGridData: String = ""
-//    @CloudStorage("highestLevel") var highestLevel: Int = 0
-//    @CloudStorage("level") var level: Int = 1 {
-//        didSet {
-//            if level > highestLevel {
-//                highestLevel = level
-//            }
-//        }
-//    }
-
-    @Published var gemBalance: Int = 0
-    @Published var firstGamePlayed: Bool = false
-    @Published var hasShared: Bool = false
-    @Published var showedMovesCard: Bool = false
-    @Published var gridData: String = ""
-    @Published var targetGridData: String = ""
-    @Published var highestLevel: Int = 0
-    @Published var level: Int = 16 {
+    @CloudStorage("gemBalance") var gemBalance: Int = 0
+    @CloudStorage("firstGamePlayed") var firstGamePlayed: Bool = false
+    @CloudStorage("hasShared") var hasShared: Bool = false
+    @CloudStorage("gridData") var gridData: String = ""
+    @CloudStorage("targetGridData") var targetGridData: String = ""
+    @CloudStorage("highestLevel") var highestLevel: Int = 0
+    @CloudStorage("level") var level: Int = 1 {
         didSet {
             if level > highestLevel {
                 highestLevel = level
             }
         }
     }
+
+//    @Published var gemBalance: Int = 0
+//    @Published var firstGamePlayed: Bool = false
+//    @Published var hasShared: Bool = false
+//    @Published var showedMovesCard: Bool = false
+//    @Published var gridData: String = ""
+//    @Published var targetGridData: String = ""
+//    @Published var highestLevel: Int = 0
+//    @Published var level: Int = 16 {
+//        didSet {
+//            if level > highestLevel {
+//                highestLevel = level
+//            }
+//        }
+//    }
 //
-//    @CloudStorage("hasSharedShapeSwap") var hasSharedShapeSwap: Bool = false
 //    @CloudStorage("lastLaunch") var lastLaunch: String = ""
     
     init() {
