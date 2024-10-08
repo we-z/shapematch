@@ -223,41 +223,41 @@ class AppModel: ObservableObject {
             swapsNeeded = 1
         case 2...3:
             swapsNeeded = 2
-        case 4...5:
+        case 4...6:
             swapsNeeded = 3
-        case 6...7:
+        case 7...10:
             swapsNeeded = 4
-        case 8...9:
+        case 11...15:
             swapsNeeded = 5
-        case 10...12:
+        case 16...21:
             swapsNeeded = 6
-        case 13...15:
+        case 22...28:
             swapsNeeded = 7
-        case 16...18:
+        case 29...32:
             swapsNeeded = 4
-        case 19...21:
+        case 33...37:
             swapsNeeded = 5
-        case 22...24:
+        case 38...43:
             swapsNeeded = 6
-        case 25...27:
+        case 44...50:
             swapsNeeded = 7
-        case 28...33:
+        case 51...58:
             swapsNeeded = 8
-        case 34...39:
+        case 59...67:
             swapsNeeded = 9
-        case 40...70:
+        case 68...77:
             swapsNeeded = 10
-        case 71...100:
+        case 78...88:
             swapsNeeded = 11
-        case 101...150:
+        case 89...100:
             swapsNeeded = 12
-        case 151...200:
+        case 101...112:
             swapsNeeded = 13
-        case 201...300:
+        case 113...125:
             swapsNeeded = 14
-        case 301...499:
+        case 126...140:
             swapsNeeded = 15
-        case 500...750:
+        case 141...750:
             swapsNeeded = 16
         case 751...999:
             swapsNeeded = 17
@@ -275,7 +275,7 @@ class AppModel: ObservableObject {
         switch level {
         case 1...15:
             shapes = [.circle, .square, .triangle]
-        case 16...499:
+        case 28...141:
             shapes =  [.circle, .square, .triangle, .star]
         default: 
             shapes =  [.circle, .square, .triangle, .star, .heart]
