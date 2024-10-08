@@ -97,68 +97,6 @@ struct NoMoreSwipesView: View {
                 )
                 Spacer()
                 VStack(spacing: idiom == .pad ? 18 : 6){
-                    HStack(spacing: idiom == .pad ? 18 : 9){
-                        if userPersistedData.level != 1 {
-                            Button {
-                                animateAwayButtonsAndBanner()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                    appModel.showNoMoreSwipesView = false
-                                    appModel.setupLevel()
-                                }
-                            } label: {
-                                HStack {
-                                    Spacer()
-                                    Text("🔀")
-                                        .font(.system(size: deviceWidth/12))
-                                        .customTextStroke(width: 2)
-                                        .fixedSize()
-                                        .padding([.trailing], 9)
-                                    Spacer()
-                                }
-                                .padding()
-                                .background{
-                                    LinearGradient(gradient: Gradient(colors: [.white, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
-                                }
-                                .cornerRadius(15)
-                                .overlay{
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                        .padding(1)
-                                }
-                                .padding(3)
-                            }
-                        }
-                        Button {
-                            animateAwayButtonsAndBanner()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                resetGame()
-                            }
-                        } label: {
-                            HStack{
-                                Spacer()
-                                Text("🔁")
-                                    .font(.system(size: deviceWidth/12))
-                                    .customTextStroke(width: 2)
-                                    .fixedSize()
-                                    .padding([.trailing], 9)
-                                Spacer()
-                            }
-                            .padding()
-                            .background{
-                                LinearGradient(gradient: Gradient(colors: [.white, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
-                            }
-                            .cornerRadius(15)
-                            .overlay{
-                                RoundedRectangle(cornerRadius: 15)
-                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                    .padding(1)
-                            }
-                            .padding(3)
-                        }
-                    }
-                    .buttonStyle(.roundedAndShadow6)
-                    .padding(.bottom, 6)
-                    if userPersistedData.level != 1 {
                         Button {
                             animateAwayButtonsAndBanner()
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
@@ -197,11 +135,68 @@ struct NoMoreSwipesView: View {
                                     .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                     .padding(1)
                             }
-                            .padding(.bottom, 15)
+                            .padding(.bottom, 9)
                             
                         }
                         .buttonStyle(.roundedAndShadow6)
+                    HStack(spacing: idiom == .pad ? 18 : 9){
+                            Button {
+                                animateAwayButtonsAndBanner()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                    appModel.showNoMoreSwipesView = false
+                                    appModel.setupLevel()
+                                }
+                            } label: {
+                                HStack {
+                                    Spacer()
+                                    Text("🔀")
+                                        .font(.system(size: deviceWidth/12))
+                                        .customTextStroke(width: 2)
+                                        .fixedSize()
+                                        .padding([.trailing], 9)
+                                    Spacer()
+                                }
+                                .padding()
+                                .background{
+                                    LinearGradient(gradient: Gradient(colors: [.white, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
+                                }
+                                .cornerRadius(15)
+                                .overlay{
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                        .padding(1)
+                                }
+                                .padding(3)
+                            }
+                        Button {
+                            animateAwayButtonsAndBanner()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                resetGame()
+                            }
+                        } label: {
+                            HStack{
+                                Spacer()
+                                Text("🔁")
+                                    .font(.system(size: deviceWidth/12))
+                                    .customTextStroke(width: 2)
+                                    .fixedSize()
+                                    .padding([.trailing], 9)
+                                Spacer()
+                            }
+                            .padding()
+                            .background{
+                                LinearGradient(gradient: Gradient(colors: [.white, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
+                            }
+                            .cornerRadius(15)
+                            .overlay{
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                    .padding(1)
+                            }
+                            .padding(3)
+                        }
                     }
+                    .buttonStyle(.roundedAndShadow6)
                 }
                 .offset(y: buttonsnOffset)
                 
