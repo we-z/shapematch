@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct GemMenuView: View {
     @State var isProcessingPurchase = false
@@ -311,6 +312,13 @@ struct GemMenuView: View {
             DispatchQueue.main.async {
                 withAnimation(.interpolatingSpring(mass: 2.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                     cardOffset = 0
+                }
+            }
+        }
+        .onDisappear{
+            if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                DispatchQueue.main.async {
+                    SKStoreReviewController.requestReview(in: scene)
                 }
             }
         }
