@@ -457,12 +457,12 @@ struct ScalingPlaque: ViewModifier {
             .offset(y: (scale - 1.0) * (deviceHeight / 9))
             .onAppear {
                 if userPersistedData.level == 1 {
-                    scale = size
+                    scale = 1.5
                 }
             }
             .onChange(of: userPersistedData.level) { level in
                 if level == 1 {
-                    scale = size
+                    scale = 1.5
                 }
             }
             .onChange(of: appModel.showInstruction) { _ in
