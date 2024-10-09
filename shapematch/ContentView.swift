@@ -126,7 +126,7 @@ struct ContentView: View {
                                     appModel.showInstruction.toggle()
                                 }
                             }
-                            .pulsingPlaque(speed: 1.2, size: userPersistedData.level == 1 ? 1.5 : 3)
+                            .pulsingPlaque(speed: 1.2, size: userPersistedData.level == 1 ? 1.5 : 2.7)
 //                            .scaleEffect(idiom == .pad ? 0.8 : 1)
                             Spacer()
                         }

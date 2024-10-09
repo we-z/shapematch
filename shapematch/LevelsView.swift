@@ -285,7 +285,6 @@ struct LevelsView: View {
                         .padding(.vertical)
                         if chosenLevel <= userPersistedData.highestLevel {
                             Button {
-                                userPersistedData.firstGamePlayed = true
                                 animateAwayButtonsAndBanner()
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
                                     userPersistedData.level = chosenLevel

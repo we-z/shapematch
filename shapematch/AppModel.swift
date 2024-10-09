@@ -477,6 +477,7 @@ class AppModel: ObservableObject {
         ]
         
         swipesLeft = 1
+        persistData()
     }
     
     func setupLevel(startGrid: [[ShapeType]] = []) {
