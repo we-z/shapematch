@@ -273,9 +273,9 @@ class AppModel: ObservableObject {
 
         
         switch level {
-        case 1...15:
+        case 1...28:
             shapes = [.circle, .square, .triangle]
-        case 28...141:
+        case 29...141:
             shapes =  [.circle, .square, .triangle, .star]
         default: 
             shapes =  [.circle, .square, .triangle, .star, .heart]
