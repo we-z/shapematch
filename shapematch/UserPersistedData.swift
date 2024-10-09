@@ -44,7 +44,7 @@ class UserPersistedData: ObservableObject {
 //    @CloudStorage("lastLaunch") var lastLaunch: String = ""
     
     init() {
-        highestLevel = highestLevel == 0 ? level : highestLevel
+        highestLevel = highestLevel == 1 ? level : highestLevel
     }
     
     var grid: [[ShapeType]] {
