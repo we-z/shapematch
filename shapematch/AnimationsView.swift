@@ -153,6 +153,7 @@ struct CelebrationEffect: View {
                     .italic()
                     .font(.system(size: deviceWidth / 9))
                     .customTextStroke(width: 2.4)
+                    .fixedSize()
                     .rotationEffect(.degrees(animateMessage ? 0 : -180))
                     .scaleEffect(animateMessage ? 1 : 0.1)
                     .offset(y: animateMessage ? 0 : -(deviceHeight/2))
@@ -167,6 +168,7 @@ struct CelebrationEffect: View {
                     .multilineTextAlignment(.center)
                     .font(.system(size: deviceWidth / 4.5))
                     .customTextStroke(width: 3.3)
+                    .fixedSize()
                     .rotationEffect(.degrees(showLevel ? 0 : -180))
                     .offset(y: -(deviceWidth / 7.5))
             }
@@ -241,6 +243,7 @@ struct CelebrateGems: View {
                     .italic()
                     .font(.system(size: deviceWidth / 9))
                     .customTextStroke(width: 2.4)
+                    .fixedSize()
                     .rotationEffect(.degrees(animateMessage ? 0 : -180))
                     .scaleEffect(animateMessage ? 1 : 0.1)
                     .offset(y: animateMessage ? 0 : -(deviceHeight/2))
@@ -252,6 +255,7 @@ struct CelebrateGems: View {
                         .bold()
                         .font(.system(size: deviceWidth/9))
                         .customTextStroke(width: 2.4)
+                        .fixedSize()
                     Spacer()
                 }
                 .padding(12)
