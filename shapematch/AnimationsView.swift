@@ -12,7 +12,7 @@ import AVFoundation
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        HandSwipeView()
+        CelebrationEffect()
             .onAppear {
                 appModel.shouldBurst.toggle()
             }
@@ -101,7 +101,6 @@ struct CelebrationEffect: View {
                             .tag("circle")
                     }
                     .onChange(of: appModel.shouldBurst) { newValue in
-                        
                         DispatchQueue.main.async {
                             showMessage = true
                             hapticManager.notification(type: .error)
@@ -485,7 +484,7 @@ struct ScalingPlaque: ViewModifier {
         }
         withAnimation(.easeInOut(duration: speed)) {
             scale = size
-            Yoffset = deviceWidth / 9
+            Yoffset = deviceWidth / 6
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + speed) {

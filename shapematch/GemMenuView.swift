@@ -88,7 +88,7 @@ struct GemMenuView: View {
                     Text("Gem Shop")
                         .bold()
                         .font(.system(size: deviceWidth/9))
-                        .customTextStroke()
+                        .customTextStroke(width: 3)
                     
                     VStack(spacing: 21) {
                         Button {
@@ -110,7 +110,7 @@ struct GemMenuView: View {
                                 Text("10")
                                     .bold()
                                     .font(.system(size: deviceWidth/12))
-                                    .customTextStroke(width: 1.8)
+                                    .customTextStroke(width: 2.7)
                                     .fixedSize()
                                 Spacer()
                                 Text("$1.99")
@@ -160,7 +160,7 @@ struct GemMenuView: View {
                                 Text("100")
                                     .bold()
                                     .font(.system(size: deviceWidth/12))
-                                    .customTextStroke(width: 1.8)
+                                    .customTextStroke(width: 2.7)
                                     .fixedSize()
                                 
                                 Spacer()
@@ -211,7 +211,7 @@ struct GemMenuView: View {
                                 Text("1000")
                                     .bold()
                                     .font(.system(size: deviceWidth/12))
-                                    .customTextStroke(width: 1.8)
+                                    .customTextStroke(width: 2.7)
                                     .fixedSize()
                                 Spacer()
                                 Text("$99.99")

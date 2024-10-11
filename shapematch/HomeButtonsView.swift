@@ -21,9 +21,9 @@ struct HomeButtonsView: View {
                     Spacer()
                     Text("💎 \(userPersistedData.gemBalance)")
                         .bold()
-                        .font(.system(size: userPersistedData.gemBalance > 99 ?  deviceWidth/21 : deviceWidth/15))
+                        .font(.system(size: deviceWidth/15))
                         .lineLimit(1)
-                        .customTextStroke(width: 1.5)
+                        .customTextStroke(width: 1.8)
                         .fixedSize()
                     Spacer()
                     

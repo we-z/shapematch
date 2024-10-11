@@ -107,11 +107,11 @@ struct LevelsView: View {
                 
                 // Top title displaying grid dimensions and shapes
                 HomeButtonsView()
-              Text("Shape Swap")
-                    .bold()
-                    .font(.system(size: deviceWidth / 12))
-                    .customTextStroke()
-                    .padding(.top)
+//              Text("Shape Swap")
+//                    .bold()
+//                    .font(.system(size: deviceWidth / 9))
+//                    .customTextStroke(width: 3)
+//                    .padding(.top)
                 // ScrollView with lazy loading
                 ZStack {
                     ScrollViewReader { proxy in
