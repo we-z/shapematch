@@ -58,7 +58,6 @@ class AppModel: ObservableObject {
     @Published var amountBought = 5
     @Published var shapes: [ShapeType] = []
     @Published var swapsMade: [(Position, Position)] = []
-    @Published var selectedTab = 1
     
     @ObservedObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
@@ -80,7 +79,7 @@ class AppModel: ObservableObject {
         ] : userPersistedData.targetGrid
         
         if userPersistedData.level == 1 {
-            swipesLeft
+            swipesLeft = 1
         } else {
             swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid) + 2
         }

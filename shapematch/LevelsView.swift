@@ -104,9 +104,14 @@ struct LevelsView: View {
             .ignoresSafeArea()
 
             VStack {
+                
                 // Top title displaying grid dimensions and shapes
                 HomeButtonsView()
-//                    .padding(.top, 30)
+              Text("Shape Swap")
+                    .bold()
+                    .font(.system(size: deviceWidth / 12))
+                    .customTextStroke()
+                    .padding(.top)
                 // ScrollView with lazy loading
                 ZStack {
                     ScrollViewReader { proxy in
@@ -124,7 +129,7 @@ struct LevelsView: View {
                                                         userPersistedData.level = 1
                                                         appModel.setupFirstLevel()
                                                         withAnimation {
-                                                            appModel.selectedTab = 1
+                                                            userPersistedData.selectedTab = 1
                                                         }
                                                     } else {
                                                         chosenLevel = level
@@ -284,7 +289,7 @@ struct LevelsView: View {
                                     userPersistedData.level = chosenLevel
                                     appModel.setupLevel(startGrid: previewGrid)
                                     withAnimation {
-                                        appModel.selectedTab = 1
+                                        userPersistedData.selectedTab = 1
                                         showLevelDetails = false
                                     }
                                 }

@@ -16,7 +16,7 @@ struct GameButtonsView: View {
         HStack(spacing: idiom == .pad ? 21 : 9){
             Button{
                 withAnimation {
-                    appModel.selectedTab = 0
+                    userPersistedData.selectedTab = 0
                 }
             } label: {
                 HStack{

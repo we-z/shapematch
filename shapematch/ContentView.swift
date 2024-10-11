@@ -22,7 +22,7 @@ struct ContentView: View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 .ignoresSafeArea()
-            TabView(selection: $appModel.selectedTab) {
+            TabView(selection: $userPersistedData.selectedTab) {
                 ZStack {
                     RotatingSunView()
                         .frame(width: 1, height: 1)
