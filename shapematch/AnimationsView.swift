@@ -458,7 +458,7 @@ struct ScalingPlaque: ViewModifier {
     func body(content: Content) -> some View {
         content
             .scaleEffect(scale)
-            .offset(y: (scale - 1.0) * (deviceHeight / 9))
+//            .offset(y: (scale - 1.0) * (deviceHeight / 9))
             .onAppear {
                 if userPersistedData.level == 1 {
                     scale = 1.5

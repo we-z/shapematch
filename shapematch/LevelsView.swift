@@ -21,7 +21,6 @@ struct LevelsView: View {
     @State private var scrollProxy: ScrollViewProxy? = nil
     @State var showLevelDetails = false
     @Environment(\.colorScheme) var colorScheme
-    @Environment(\.dismiss) private var dismiss
     let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "⛵", "🏝️", "🏖️", "🪼"]
     
     @State var previewGrid: [[ShapeType]] = [] {
@@ -124,7 +123,9 @@ struct LevelsView: View {
                                                     if level == 1 {
                                                         userPersistedData.level = 1
                                                         appModel.setupFirstLevel()
-                                                        dismiss()
+                                                        withAnimation {
+                                                            appModel.selectedTab = 1
+                                                        }
                                                     } else {
                                                         chosenLevel = level
                                                         (moves, shapes) = appModel.determineLevelSettings(level: chosenLevel)
@@ -276,7 +277,10 @@ struct LevelsView: View {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
                                     userPersistedData.level = chosenLevel
                                     appModel.setupLevel(startGrid: previewGrid)
-                                    dismiss()
+                                    withAnimation {
+                                        appModel.selectedTab = 1
+                                        showLevelDetails = false
+                                    }
                                 }
                             } label: {
                                 HStack{
