@@ -64,15 +64,16 @@ struct NoMoreSwipesView: View {
             VStack{
                 HStack {
                     Spacer()
-                    Text("0 Moves left ✋")
+                    Text("0 Moves left! ✋")
                         .bold()
                         .font(.system(size: deviceWidth/9))
                         .customTextStroke(width: 2.4)
+                        .fixedSize()
                     Spacer()
                 }
                 .padding(12)
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
+                    LinearGradient(gradient: Gradient(colors: [.red, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
                 }
                 .cornerRadius(21)
                 .overlay{
@@ -119,7 +120,7 @@ struct NoMoreSwipesView: View {
                                 Spacer()
                                 Text("💎")
                                     .bold()
-                                    .font(.system(size: deviceWidth/12))
+                                    .font(.system(size: deviceWidth/9))
                                     .fixedSize()
                                     .customTextStroke(width: 2.1)
                                     .padding(.trailing)
@@ -140,34 +141,6 @@ struct NoMoreSwipesView: View {
                         }
                         .buttonStyle(.roundedAndShadow6)
                     HStack(spacing: idiom == .pad ? 18 : 9){
-                            Button {
-                                animateAwayButtonsAndBanner()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                    appModel.showNoMoreSwipesView = false
-                                    appModel.setupLevel()
-                                }
-                            } label: {
-                                HStack {
-                                    Spacer()
-                                    Text("🔀")
-                                        .font(.system(size: deviceWidth/12))
-                                        .customTextStroke(width: 2)
-                                        .fixedSize()
-                                        .padding([.trailing], 9)
-                                    Spacer()
-                                }
-                                .padding()
-                                .background{
-                                    LinearGradient(gradient: Gradient(colors: [.white, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
-                                }
-                                .cornerRadius(15)
-                                .overlay{
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                        .padding(1)
-                                }
-                                .padding(3)
-                            }
                         Button {
                             animateAwayButtonsAndBanner()
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
@@ -176,20 +149,20 @@ struct NoMoreSwipesView: View {
                         } label: {
                             HStack{
                                 Spacer()
-                                Text("🔁")
+                                Text("❌")
                                     .font(.system(size: deviceWidth/12))
-                                    .customTextStroke(width: 2)
+                                    .customTextStroke(width: 3)
                                     .fixedSize()
                                     .padding([.trailing], 9)
                                 Spacer()
                             }
                             .padding()
                             .background{
-                                LinearGradient(gradient: Gradient(colors: [.white, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
+                                LinearGradient(gradient: Gradient(colors: [.red, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
                             }
-                            .cornerRadius(15)
+                            .cornerRadius(21)
                             .overlay{
-                                RoundedRectangle(cornerRadius: 15)
+                                RoundedRectangle(cornerRadius: 21)
                                     .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                     .padding(1)
                             }
@@ -206,14 +179,15 @@ struct NoMoreSwipesView: View {
             .scaleEffect(idiom == .pad ? 0.84 : 1)
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                    buttonsnOffset = 0
-                }
-            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+//                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+//                    buttonsnOffset = 0
+//                }
+//            }
             DispatchQueue.main.async { [self] in
                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                     bannerOffset = 0
+                    buttonsnOffset = 0
                 }
             }
         }
