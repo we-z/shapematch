@@ -98,6 +98,11 @@ struct NoMoreSwipesView: View {
                 )
                 Spacer()
                 VStack(spacing: idiom == .pad ? 18 : 6){
+                    Text("Continue?")
+                        .bold()
+                        .font(.system(size: deviceWidth / 9))
+                        .customTextStroke(width: 2.4)
+                        .padding()
                         Button {
                             animateAwayButtonsAndBanner()
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
@@ -118,7 +123,7 @@ struct NoMoreSwipesView: View {
                                     .customTextStroke(width: 2.1)
                                     .padding(.leading)
                                 Spacer()
-                                Text("💎")
+                                Text("💎 3")
                                     .bold()
                                     .font(.system(size: deviceWidth/9))
                                     .fixedSize()

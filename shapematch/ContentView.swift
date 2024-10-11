@@ -49,34 +49,6 @@ struct ContentView: View {
                             .zIndex(2)
                             HStack{
                                 VStack{
-                                    //                            Button {
-                                    //                                appModel.showGemMenu = true
-                                    //                            } label: {
-                                    //                                HStack{
-                                    //                                    Spacer()
-                                    //                                    Text("⬅️")
-                                    //                                        .bold()
-                                    //                                        .font(.system(size: userPersistedData.gemBalance > 99 ?  deviceWidth/21 : deviceWidth/15))
-                                    //                                        .lineLimit(1)
-                                    //                                        .customTextStroke(width: 1.5)
-                                    //                                        .fixedSize()
-                                    //                                    Spacer()
-                                    //
-                                    //                                }
-                                    //                                .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
-                                    //                                .background{
-                                    //                                    LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                                    //                                }
-                                    //                                .cornerRadius(18)
-                                    //                                .overlay{
-                                    //                                    RoundedRectangle(cornerRadius: 18)
-                                    //                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                    //                                        .padding(1)
-                                    //                                }
-                                    //                                .padding(3)
-                                    //
-                                    //                            }
-                                    //                            .buttonStyle(.roundedAndShadow6)
                                     Spacer()
                                     VStack {
                                         Text("Level")
@@ -267,7 +239,7 @@ struct ContentView: View {
                     .padding(.bottom, idiom == .pad ? 150 : 0)
             }
         }
-        .ignoresSafeArea()
+//        .ignoresSafeArea()
 //        .indexViewStyle(.never)
         .onAppear {
             appModel.initialGrid = appModel.grid
