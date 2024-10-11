@@ -79,7 +79,11 @@ class AppModel: ObservableObject {
             [.square, .triangle, .square]
         ] : userPersistedData.targetGrid
         
-        swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid) + 2
+        if userPersistedData.level == 1 {
+            swipesLeft
+        } else {
+            swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid) + 2
+        }
         if grid.count == 3 {
             shapeWidth = deviceWidth / 4.0
             shapeScale = deviceWidth / 390

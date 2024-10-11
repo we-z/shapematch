@@ -62,6 +62,7 @@ struct SettingsView: View {
                                 .customTextStroke()
                                 .padding(.vertical)
                         }
+                        
                         HStack {
                             Text("🎵")
                                 .bold()
@@ -71,10 +72,12 @@ struct SettingsView: View {
                                 .fixedSize()
                             Spacer()
                             Toggle("", isOn: $audioController.musicOn )
-                                .offset(x: -(deviceWidth/9))
+                                .offset(x: -(deviceWidth/12))
                                 .scaleEffect(1.5)
-                            
-                            
+                        }
+                        .padding(.horizontal)
+                        .onChange(of: audioController.musicOn) { _ in
+                            audioController.setAllAudioVolume()
                         }
                         HStack {
                             Text("🔊")
@@ -85,10 +88,10 @@ struct SettingsView: View {
                                 .fixedSize()
                             Spacer()
                             Toggle("", isOn: $userPersistedData.soundOn )
-                                .offset(x: -(deviceWidth/9))
+                                .offset(x: -(deviceWidth/12))
                                 .scaleEffect(1.5)
                         }
-                        .padding(.vertical)
+                        .padding(.horizontal)
                         HStack {
                             Text("📳")
                                 .bold()
@@ -98,10 +101,10 @@ struct SettingsView: View {
                                 .fixedSize()
                             Spacer()
                             Toggle("", isOn: $userPersistedData.hapticsOn )
-                                .offset(x: -(deviceWidth/9))
+                                .offset(x: -(deviceWidth/12))
                                 .scaleEffect(1.5)
                         }
-                        .padding(.bottom, 30)
+                        .padding(.horizontal)
                     }
                     .padding(30)
                 }

@@ -177,14 +177,6 @@ struct ContentView: View {
                             ZStack{
                                 Rectangle()
                                     .overlay{
-                                        //                                if colorScheme == .dark {
-                                        //                                    Color.black
-                                        //                                    Color.white.opacity(0.36)
-                                        //                                } else {
-                                        //                                    Color.white
-                                        //                                    Color.black.opacity(0.15)
-                                        //                                }
-                                        //                                LinearGradient(gradient: Gradient(colors: [.purple, .purple]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                                         ZStack{
                                             Color.white
                                             Color.blue.opacity(0.6)

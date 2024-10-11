@@ -485,7 +485,7 @@ struct ScalingPlaque: ViewModifier {
         }
         withAnimation(.easeInOut(duration: speed)) {
             scale = size
-            Yoffset = deviceWidth / 12
+            Yoffset = deviceWidth / 9
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + speed) {
