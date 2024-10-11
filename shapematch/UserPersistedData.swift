@@ -12,40 +12,67 @@ import CloudStorage
 class UserPersistedData: ObservableObject {
     static let sharedUserPersistedData = UserPersistedData()
     
-//    @CloudStorage("gemBalance") var gemBalance: Int = 0
-//    @CloudStorage("firstGamePlayed") var firstGamePlayed: Bool = false
-//    @CloudStorage("hasShared") var hasShared: Bool = false
-//    @CloudStorage("gridData") var gridData: String = ""
-//    @CloudStorage("targetGridData") var targetGridData: String = ""
-//    @CloudStorage("highestLevel") var highestLevel: Int = 0
-//    @CloudStorage("level") var level: Int = 1 {
-//        didSet {
-//            if level > highestLevel {
-//                highestLevel = level
-//            }
-//        }
-//    }
-
-    @Published var gemBalance: Int = 0
-    @Published var firstGamePlayed: Bool = false
-    @Published var hasShared: Bool = false
-    @Published var showedMovesCard: Bool = false
-    @Published var gridData: String = ""
-    @Published var targetGridData: String = ""
-    @Published var highestLevel: Int = 0
-    @Published var level: Int = 1 {
+    @CloudStorage("gemBalance") var gemBalance: Int = 0
+    @CloudStorage("firstGamePlayed") var firstGamePlayed: Bool = false
+    @CloudStorage("hasShared") var hasShared: Bool = false
+    @CloudStorage("gridData") var gridData: String = ""
+    @CloudStorage("targetGridData") var targetGridData: String = ""
+    @CloudStorage("highestLevel") var highestLevel: Int = 0
+    @CloudStorage(wrappedValue: "{}", "levelStars") private var levelStarsString: String
+    @CloudStorage("level") var level: Int = 1 {
         didSet {
             if level > highestLevel {
                 highestLevel = level
             }
         }
     }
+    
+    var levelStars: [Int: Int] {
+        get {
+            stringToDictionary(levelStarsString)
+        }
+        set {
+            levelStarsString = dictionaryToString(newValue)
+        }
+    }
+
+//    @Published var gemBalance: Int = 0
+//    @Published var firstGamePlayed: Bool = false
+//    @Published var hasShared: Bool = false
+//    @Published var showedMovesCard: Bool = false
+//    @Published var gridData: String = ""
+//    @Published var targetGridData: String = ""
+//    @Published var highestLevel: Int = 0
+//    @Published var level: Int = 16 {
+//        didSet {
+//            if level > highestLevel {
+//                highestLevel = level
+//            }
+//        }
+//    }
 //
 //    @CloudStorage("lastLaunch") var lastLaunch: String = ""
     
     init() {
         highestLevel = highestLevel == 1 ? level : highestLevel
     }
+    
+    // Helper functions to serialize and deserialize
+    func dictionaryToString(_ dictionary: [Int: Int]) -> String {
+        if let jsonData = try? JSONSerialization.data(withJSONObject: dictionary, options: []) {
+            return String(data: jsonData, encoding: .utf8) ?? "{}"
+        }
+        return "{}"
+    }
+
+    func stringToDictionary(_ string: String) -> [Int: Int] {
+        if let jsonData = string.data(using: .utf8),
+           let dictionary = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [Int: Int] {
+            return dictionary
+        }
+        return [:]
+    }
+
     
     var grid: [[ShapeType]] {
         get { decodeGrid(from: gridData) }

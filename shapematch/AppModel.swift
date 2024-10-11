@@ -57,6 +57,7 @@ class AppModel: ObservableObject {
     @Published var amountBought = 5
     @Published var shapes: [ShapeType] = []
     @Published var swapsMade: [(Position, Position)] = []
+    @Published var selectedTab = 1
     
     @ObservedObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
@@ -77,7 +78,7 @@ class AppModel: ObservableObject {
             [.square, .triangle, .square]
         ] : userPersistedData.targetGrid
         
-        swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
+        swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid) + 2
         if grid.count == 3 {
             shapeWidth = deviceWidth / 4.0
             shapeScale = deviceWidth / 390
@@ -186,8 +187,6 @@ class AppModel: ObservableObject {
                 userPersistedData.level += 1
                 
                 setupLevel()
-                swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
-                
             }
             // 1335, 1114
             if !audioController.mute {
@@ -455,7 +454,6 @@ class AppModel: ObservableObject {
     
     func persistData() {
         // The grid now requires exactly `swapsNeeded` swaps to solve
-        swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
         initialGrid = grid
         
         // Persist the grid and targetGrid for the current level
@@ -521,7 +519,7 @@ class AppModel: ObservableObject {
             }
             
         }
-        swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
+        swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid) + 2
         persistData()
     }
     
@@ -531,7 +529,7 @@ class AppModel: ObservableObject {
         swapsMade = []
         undosLeft = 3
         // Reset the swipes left to the initial calculated value
-        swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid)
+        swipesLeft = approximateMinimumSwipes(from: grid, to: targetGrid) + 2
     }
     
 }

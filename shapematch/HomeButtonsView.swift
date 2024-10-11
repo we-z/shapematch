@@ -1,43 +1,40 @@
 //
-//  ButtonsView.swift
+//  HomeButtonsView.swift
 //  Shape Swap
 //
-//  Created by Wheezy Capowdis on 9/17/24.
+//  Created by Wheezy Capowdis on 10/11/24.
 //
 
 import SwiftUI
 
-struct GameButtonsView: View {
+struct HomeButtonsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @StateObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @State var showLevelsMenu = false
     var body: some View {
         HStack(spacing: idiom == .pad ? 21 : 9){
-            Button{
-                withAnimation {
-                    appModel.selectedTab = 0
-                }
+            Button {
+                appModel.showGemMenu = true
             } label: {
                 HStack{
                     Spacer()
-                    Text("⬅️")
+                    Text("💎 \(userPersistedData.gemBalance)")
                         .bold()
-                        .italic()
-                        .customTextStroke(width: 1.2)
+                        .font(.system(size: userPersistedData.gemBalance > 99 ?  deviceWidth/21 : deviceWidth/15))
+                        .lineLimit(1)
+                        .customTextStroke(width: 1.5)
                         .fixedSize()
-                        .font(.system(size: deviceWidth/21))
-                        .scaleEffect(idiom == .pad ? 1 : 1.2)
                     Spacer()
-                        
+                    
                 }
                 .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.red, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
-                .cornerRadius(15)
+                .cornerRadius(18)
                 .overlay{
-                    RoundedRectangle(cornerRadius: 15)
+                    RoundedRectangle(cornerRadius: 18)
                         .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                         .padding(1)
                 }
@@ -144,5 +141,5 @@ struct GameButtonsView: View {
 }
 
 #Preview {
-    GameButtonsView()
+    HomeButtonsView()
 }

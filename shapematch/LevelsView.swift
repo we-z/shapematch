@@ -22,7 +22,7 @@ struct LevelsView: View {
     @State var showLevelDetails = false
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) private var dismiss
-    let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "🛥️", "⛴️", "🛳️", "🚢", "⛵", "🏝️", "🏖️", "🪼"]
+    let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "⛵", "🏝️", "🏖️", "🪼"]
     
     @State var previewGrid: [[ShapeType]] = [] {
         didSet {
@@ -79,10 +79,6 @@ struct LevelsView: View {
     var body: some View {
         ZStack {
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                RotatingSunView()
-                    .frame(width: 1, height: 1)
-                    .offset(y: -(deviceHeight / 2))
                 VortexView(createBubbles()) {
                     Circle()
                         .fill(.blue)
@@ -96,7 +92,7 @@ struct LevelsView: View {
                 VortexView(createEmojis()) {
                     ForEach(0...emojis.count - 1, id: \.self) { i in
                         Text(emojis[i])
-                            .font(.system(size: deviceWidth/4))
+                            .font(.system(size: idiom == .pad ? deviceWidth/8 : deviceWidth/4))
                             .blur(radius: 0)
                             .frame(width: 300, height: 300)
                             .rotationEffect(.degrees(180))
@@ -109,17 +105,8 @@ struct LevelsView: View {
             .ignoresSafeArea()
 
             VStack {
-                Capsule()
-                    .foregroundColor(.blue)
-                    .frame(width: 45, height: 9)
-                    .padding(.top, 15)
-                    .customTextStroke()
                 // Top title displaying grid dimensions and shapes
-                Text("Levels")
-//                    .italic()
-                    .bold()
-                    .font(.system(size: deviceWidth / 12))
-                    .customTextStroke()
+                HomeButtonsView()
 //                    .padding(.top, 30)
                 // ScrollView with lazy loading
                 ZStack {
@@ -372,25 +359,45 @@ struct LevelsView: View {
 
 // LevelRow to display individual level information
 struct LevelRow: View {
+    @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     var level: Int
 
     var body: some View {
-        ZStack {
-            Circle()
-                .frame(width: idiom == .pad ? deviceWidth / 10 : deviceWidth / 7)
-                .overlay{
-                    LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                        .mask(Circle())
-                }
-            Text("\(level)")
-                .bold()
-                .font(.system(size: level > 999 ? deviceWidth / 21 : level > 99 ? deviceWidth / 15 : deviceWidth / 12))
-                .fixedSize()
-                .scaleEffect(idiom == .pad ? 0.6 : 1)
-                .customTextStroke(width: 1.8)
+        VStack {
+            ZStack {
+                Circle()
+                    .frame(width: idiom == .pad ? deviceWidth / 18 : deviceWidth / 7)
+                    .overlay{
+                        LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                            .mask(Circle())
+                    }
+                Text("\(level)")
+                    .bold()
+                    .font(.system(size: idiom == .pad ? deviceWidth / 33 : deviceWidth / 12 ))
+                    .scaleEffect(level > 999 ? 0.5 : level > 99 ? 0.78 : 1)
+                    .fixedSize()
+                    .customTextStroke(width: idiom == .pad ? 1.2 : 1.8)
                 
+            }
+            .customTextStroke(width: idiom == .pad ? 1.8 : 3)
+            HStack {
+                if level <= userPersistedData.highestLevel {
+                    Text("⭐️")
+                        .offset(y: -12)
+                        .rotationEffect(.degrees(21))
+                    Text("⭐️")
+                        .opacity(userPersistedData.levelStars[level] ?? 1 > 1 ? 1 : 0.3)
+                    Text("⭐️")
+                        .offset(y: -12)
+                        .rotationEffect(.degrees(-21))
+                        .opacity(userPersistedData.levelStars[level] ?? 1 > 2 ? 1 : 0.3)
+                }
+            }
+            .customTextStroke(width:1)
+            .offset(y: idiom == .pad ? -1 : -3)
+            .font(.system(size: idiom == .pad ? deviceWidth / 60 : deviceWidth / 21))
+            .frame(height: idiom == .pad ? deviceWidth / 36 : deviceWidth / 27)
         }
-        .customTextStroke(width: 3)
         
     }
 }

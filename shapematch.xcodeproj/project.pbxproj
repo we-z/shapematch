@@ -27,6 +27,7 @@
 		7639F9CA2C7587C800E2B371 /* NoMoreSwipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F9C92C7587C800E2B371 /* NoMoreSwipesView.swift */; };
 		7639F9CE2C759A2E00E2B371 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F9CD2C759A2E00E2B371 /* AudioManager.swift */; };
 		7639F9D02C759B2100E2B371 /* ShapeMatchMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */; };
+		7669B74E2CB96BC400EBA34F /* HomeButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7669B74D2CB96BC400EBA34F /* HomeButtonsView.swift */; };
 		766EF08D2C7E2EEA00B2C380 /* RandomGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766EF08C2C7E2EEA00B2C380 /* RandomGradientView.swift */; };
 		766EF08F2C7EB1C500B2C380 /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766EF08E2C7EB1C500B2C380 /* InstructionView.swift */; };
 		7677131E2C86DCF800C9E2C9 /* iconview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7677131D2C86DCF800C9E2C9 /* iconview.swift */; };
@@ -74,6 +75,7 @@
 		7639F9C92C7587C800E2B371 /* NoMoreSwipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMoreSwipesView.swift; sourceTree = "<group>"; };
 		7639F9CD2C759A2E00E2B371 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = ShapeMatchMusic.mp3; path = ../../../../Downloads/ShapeMatchMusic.mp3; sourceTree = "<group>"; };
+		7669B74D2CB96BC400EBA34F /* HomeButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtonsView.swift; sourceTree = "<group>"; };
 		766EF08C2C7E2EEA00B2C380 /* RandomGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGradientView.swift; sourceTree = "<group>"; };
 		766EF08E2C7EB1C500B2C380 /* InstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionView.swift; sourceTree = "<group>"; };
 		7677131D2C86DCF800C9E2C9 /* iconview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iconview.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				7639F9602C713D8100E2B371 /* ContentView.swift */,
 				76B774062C968EF70053B72B /* Extensions.swift */,
 				761A44452C7841A30017B53B /* GemMenuView.swift */,
+				7669B74D2CB96BC400EBA34F /* HomeButtonsView.swift */,
 				7677131D2C86DCF800C9E2C9 /* iconview.swift */,
 				766EF08E2C7EB1C500B2C380 /* InstructionView.swift */,
 				76BE41E02CAADB4900C5492C /* LevelsView.swift */,
@@ -322,6 +325,7 @@
 				761A444B2C78E8320017B53B /* StoreKitManager.swift in Sources */,
 				7639F9CA2C7587C800E2B371 /* NoMoreSwipesView.swift in Sources */,
 				76B774072C968EF70053B72B /* Extensions.swift in Sources */,
+				7669B74E2CB96BC400EBA34F /* HomeButtonsView.swift in Sources */,
 				7639F98A2C71460D00E2B371 /* Tempview.swift in Sources */,
 				761EA3202CB062A800458B27 /* MovesView.swift in Sources */,
 				766EF08D2C7E2EEA00B2C380 /* RandomGradientView.swift in Sources */,
@@ -472,7 +476,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = shapematch/shapematch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2.7;
+				CURRENT_PROJECT_VERSION = 1.2.8;
 				DEVELOPMENT_ASSET_PATHS = "\"shapematch/Preview Content\"";
 				DEVELOPMENT_TEAM = 3Y2Y4CJNN6;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -493,7 +497,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = io.shapematch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -511,7 +515,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = shapematch/shapematch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2.7;
+				CURRENT_PROJECT_VERSION = 1.2.8;
 				DEVELOPMENT_ASSET_PATHS = "\"shapematch/Preview Content\"";
 				DEVELOPMENT_TEAM = 3Y2Y4CJNN6;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -532,7 +536,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = io.shapematch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;

@@ -12,7 +12,7 @@ import AVFoundation
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        CelebrationEffect()
+        HandSwipeView()
             .onAppear {
                 appModel.shouldBurst.toggle()
             }
@@ -374,7 +374,7 @@ struct HandSwipeView: View {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 withAnimation(Animation.easeInOut(duration: 1.5)) {
-                    offsetAmount = -(deviceWidth/3.3)
+                    offsetAmount = -(deviceWidth/6)
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
