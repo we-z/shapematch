@@ -451,6 +451,7 @@ struct ScalingPlaque: ViewModifier {
     var size: CGFloat = 1.1
     
     @State private var scale: CGFloat = 1.0
+    @State private var Yoffset: CGFloat = 0.0
     @State private var repeatAnimation = false
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
@@ -458,15 +459,17 @@ struct ScalingPlaque: ViewModifier {
     func body(content: Content) -> some View {
         content
             .scaleEffect(scale)
-//            .offset(y: (scale - 1.0) * (deviceHeight / 9))
+            .offset(y: Yoffset)
             .onAppear {
                 if userPersistedData.level == 1 {
                     scale = 1.5
+                    Yoffset = -(deviceWidth / 12)
                 }
             }
             .onChange(of: userPersistedData.level) { level in
                 if level == 1 {
                     scale = 1.5
+                    Yoffset = 0
                 }
             }
             .onChange(of: appModel.showInstruction) { _ in
@@ -478,12 +481,13 @@ struct ScalingPlaque: ViewModifier {
         impactLight.impactOccurred()
         withAnimation(.easeInOut(duration: speed)) {
             scale = size
+            Yoffset = deviceWidth / 12
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + speed) {
             withAnimation(.easeInOut(duration: speed)) {
                 scale = 1.0
-                
+                Yoffset = 0.0
             }
         }
         
