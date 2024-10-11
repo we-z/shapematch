@@ -41,9 +41,7 @@ struct HomeButtonsView: View {
                 .padding(3)
             }
             .buttonStyle(.roundedAndShadow6)
-            .onChange(of: audioController.mute) { newSetting in
-                audioController.setAllAudioVolume()
-            }
+
             ZStack{
                 Button {
                     appModel.showMovesCard = true
@@ -102,7 +100,7 @@ struct HomeButtonsView: View {
             }
             .zIndex(1)
             Button{
-                appModel.showMovesCard = true
+                appModel.showSettings = true
             } label: {
                 HStack{
                     Spacer()
@@ -129,9 +127,7 @@ struct HomeButtonsView: View {
                 .padding(3)
             }
             .buttonStyle(.roundedAndShadow6)
-            .onChange(of: audioController.mute) { newSetting in
-                audioController.setAllAudioVolume()
-            }
+
         }
         .padding(.horizontal)
         .sheet(isPresented: self.$showLevelsMenu){

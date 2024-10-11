@@ -15,6 +15,8 @@ class UserPersistedData: ObservableObject {
     @CloudStorage("gemBalance") var gemBalance: Int = 0
     @CloudStorage("firstGamePlayed") var firstGamePlayed: Bool = false
     @CloudStorage("hasShared") var hasShared: Bool = false
+    @CloudStorage("soundOn") var soundOn: Bool = true
+    @CloudStorage("hapticsOn") var hapticsOn: Bool = true
     @CloudStorage("gridData") var gridData: String = ""
     @CloudStorage("targetGridData") var targetGridData: String = ""
     @CloudStorage("highestLevel") var highestLevel: Int = 0

@@ -152,34 +152,6 @@ struct ContentView: View {
                                 .zIndex(1)
                                 Spacer()
                                 VStack{
-                                    //                            Button{
-                                    //                                audioController.mute.toggle()
-                                    //                            } label: {
-                                    //                                HStack{
-                                    //                                    Spacer()
-                                    //                                    Text("⚙️")
-                                    //                                        .bold()
-                                    //                                        .italic()
-                                    //                                        .customTextStroke(width: 1.2)
-                                    //                                        .fixedSize()
-                                    //                                        .font(.system(size: deviceWidth/21))
-                                    //                                        .scaleEffect(idiom == .pad ? 1 : 1.3)
-                                    //                                    Spacer()
-                                    //
-                                    //                                }
-                                    //                                .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
-                                    //                                .background{
-                                    //                                    LinearGradient(gradient: Gradient(colors: [.purple, .indigo]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                                    //                                }
-                                    //                                .cornerRadius(18)
-                                    //                                .overlay{
-                                    //                                    RoundedRectangle(cornerRadius: 18)
-                                    //                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                    //                                        .padding(1)
-                                    //                                }
-                                    //                                .padding(3)
-                                    //                            }
-                                    //                            .buttonStyle(.roundedAndShadow6)
                                     Spacer()
                                     VStack{
                                         Text("Moves")
@@ -244,7 +216,9 @@ struct ContentView: View {
                                                         DragGesture(minimumDistance: 1)
                                                             .onChanged { gesture in
                                                                 if !firstChange {
-                                                                    impactLight.impactOccurred()
+                                                                    if userPersistedData.hapticsOn {
+                                                                        impactLight.impactOccurred()
+                                                                    }
                                                                     tappedRow = row
                                                                     tappedColumn = column
                                                                     DispatchQueue.main.async { [self] in
@@ -294,6 +268,10 @@ struct ContentView: View {
             CelebrateGems()
             if appModel.showMovesCard {
                 MovesView()
+                    .padding(.bottom, idiom == .pad ? 150 : 0)
+            }
+            if appModel.showSettings {
+                SettingsView()
                     .padding(.bottom, idiom == .pad ? 150 : 0)
             }
         }

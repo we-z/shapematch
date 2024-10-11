@@ -132,7 +132,9 @@ struct LevelsView: View {
                                                         shufflePreview()
                                                         showLevelDetails = true
                                                     }
-                                                    impactLight.impactOccurred()
+                                                    if userPersistedData.hapticsOn {
+                                                        impactLight.impactOccurred()
+                                                    }
                                                 }
                                 }
                             }
@@ -174,7 +176,9 @@ struct LevelsView: View {
                         withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                             cardOffset = deviceWidth * 2
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                impactLight.impactOccurred()
+                                if userPersistedData.hapticsOn {
+                                    impactLight.impactOccurred()
+                                }
                                 showLevelDetails = false
                             }
                         }
@@ -188,7 +192,9 @@ struct LevelsView: View {
                                     withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                                         cardOffset = deviceWidth * 2
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                            impactLight.impactOccurred()
+                                            if userPersistedData.hapticsOn {
+                                                impactLight.impactOccurred()
+                                            }
                                             showLevelDetails = false
                                         }
                                     }
@@ -342,7 +348,9 @@ struct LevelsView: View {
                                     withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                                         cardOffset = deviceWidth * 2
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                            impactLight.impactOccurred()
+                                            if userPersistedData.hapticsOn {
+                                                impactLight.impactOccurred()
+                                            }
                                             showLevelDetails = false
                                         }
                                     }
@@ -369,12 +377,19 @@ struct LevelRow: View {
     var body: some View {
         VStack {
             ZStack {
+                if level == userPersistedData.highestLevel {
+                    RotatingSunView()
+                        .frame(width: 1, height: 1)
+                        .foregroundColor(.white)
+                        .scaleEffect(0.3)
+                }
                 Circle()
                     .frame(width: idiom == .pad ? deviceWidth / 18 : deviceWidth / 7)
                     .overlay{
                         LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                             .mask(Circle())
                     }
+                    .customTextStroke(width: idiom == .pad ? 1.8 : 3)
                 Text("\(level)")
                     .bold()
                     .font(.system(size: idiom == .pad ? deviceWidth / 33 : deviceWidth / 12 ))
@@ -383,7 +398,7 @@ struct LevelRow: View {
                     .customTextStroke(width: idiom == .pad ? 1.2 : 1.8)
                 
             }
-            .customTextStroke(width: idiom == .pad ? 1.8 : 3)
+            
             HStack {
                 if level <= userPersistedData.highestLevel {
                     Text("⭐️")

@@ -313,7 +313,7 @@ extension ButtonStyle where Self == RoundedAndShadowButtonStyle6 {
 
 struct RoundedAndShadowButtonStyle6:ButtonStyle {
     @State var isPressed = false
-    @ObservedObject var audioController = AudioManager.sharedAudioManager
+    @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .compositingGroup()
@@ -322,8 +322,10 @@ struct RoundedAndShadowButtonStyle6:ButtonStyle {
             .animation(.easeInOut(duration: 0.1), value: isPressed)
             .onChange(of: configuration.isPressed) { currentlyPressing in
                 if currentlyPressing {
-                    impactHeavy.impactOccurred()
-                    if !audioController.mute {
+                    if userPersistedData.hapticsOn {
+                        impactHeavy.impactOccurred()
+                    }
+                    if userPersistedData.soundOn {
                         AudioServicesPlaySystemSound(1105)
                     }
                 }
@@ -331,7 +333,9 @@ struct RoundedAndShadowButtonStyle6:ButtonStyle {
                 if !currentlyPressing {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [self] in
                         isPressed = false
-                        impactHeavy.impactOccurred()
+                        if userPersistedData.hapticsOn {
+                            impactHeavy.impactOccurred()
+                        }
                     }
                 }
             }

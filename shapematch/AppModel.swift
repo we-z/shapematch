@@ -51,6 +51,7 @@ class AppModel: ObservableObject {
     @Published var shapeWidth = 0.0
     @Published var shapeScale = 1.0
     @Published var showMovesCard = false
+    @Published var showSettings = false
 //    @Published var grid.count = 3
     @Published var swapsNeeded = 1
     @Published var undosLeft = 3
@@ -139,13 +140,15 @@ class AppModel: ObservableObject {
             hapticManager.notification(type: .error)
             return
         }
-        if !audioController.mute {
+        if userPersistedData.soundOn {
             AudioServicesPlaySystemSound(1105)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
             self.swipesLeft -= 1
             swapsMade.append((Position(row: start.row, col: start.col), Position(row: end.row, col: end.col)))
-            impactLight.impactOccurred()
+            if userPersistedData.hapticsOn {
+                impactLight.impactOccurred()
+            }
             checkWinCondition()
         }
     }
@@ -154,7 +157,7 @@ class AppModel: ObservableObject {
         if !swapsMade.isEmpty {
             undosLeft -= 1
             let lastSwap = swapsMade.removeLast()
-            if !audioController.mute {
+            if userPersistedData.soundOn {
                 AudioServicesPlaySystemSound(1105)
             }
             DispatchQueue.main.asyncAfter(deadline: .now()) { [self] in
@@ -181,7 +184,7 @@ class AppModel: ObservableObject {
             }
             self.freezeGame = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
-                if !audioController.mute {
+                if audioController.musicOn {
                     AudioServicesPlaySystemSound(1320)
                 }
                 userPersistedData.level += 1
@@ -189,20 +192,22 @@ class AppModel: ObservableObject {
                 setupLevel()
             }
             // 1335, 1114
-            if !audioController.mute {
+            if userPersistedData.soundOn {
                 AudioServicesPlaySystemSound(1114)
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 6) { [self] in
-                if !audioController.mute {
+                if audioController.musicOn {
                     audioController.musicPlayer.setVolume(1, fadeDuration: 1)
                 }
             }
             print("You win!")
         } else if swipesLeft <= 0 {
-            if !audioController.mute {
+            if userPersistedData.soundOn {
                 AudioServicesPlaySystemSound (1053)
             }
-            AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
+            if userPersistedData.hapticsOn {
+                AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
+            }
             if userPersistedData.level == 1 {
                 setupFirstLevel()
             } else {

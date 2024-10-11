@@ -1,16 +1,17 @@
 //
-//  MovesView.swift
+//  SettingsView.swift
 //  Shape Swap
 //
-//  Created by Wheezy Capowdis on 10/4/24.
+//  Created by Wheezy Capowdis on 10/11/24.
 //
 
 import SwiftUI
 
-struct MovesView: View {
+struct SettingsView: View {
+    @StateObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject private var appModel = AppModel.sharedAppModel
-    @State var cardOffset: CGFloat = deviceHeight
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
+    @State var cardOffset: CGFloat = deviceHeight
     var body: some View {
         ZStack{
             Color.gray.opacity(0.5)
@@ -23,7 +24,7 @@ struct MovesView: View {
                                 if userPersistedData.hapticsOn {
                                     impactLight.impactOccurred()
                                 }
-                                appModel.showMovesCard = false
+                                appModel.showSettings = false
                             }
                         }
                     }
@@ -39,7 +40,7 @@ struct MovesView: View {
                                             if userPersistedData.hapticsOn {
                                                 impactLight.impactOccurred()
                                             }
-                                            appModel.showMovesCard = false
+                                            appModel.showSettings = false
                                         }
                                     }
                                 }
@@ -55,50 +56,50 @@ struct MovesView: View {
                             .frame(width: 45, height: 9)
                             .customTextStroke()
                         HStack {
-                            Text("How To Play 🧑‍🏫")
+                            Text("Settings ⚙️")
                                 .bold()
                                 .font(.system(size: deviceWidth / 12))
                                 .customTextStroke()
                                 .padding(.vertical)
-                            Spacer()
                         }
                         HStack {
-                            Text("Match the Pattern in \(appModel.swipesLeft) moves 🙇‍♂️")
+                            Text("🎵")
                                 .bold()
-                                .font(.system(size: deviceWidth / 21))
-                                .customTextStroke(width: 1.2)
-                                .multilineTextAlignment(.leading)
-                                .fixedSize()
-                                .padding(.bottom, 30)
-                            Spacer()
-                        }
-                        HStack {
-                            Text("Tip 1️⃣ : If a shape is in the right\nplace, don’t move it 🙅‍♀️")
-                                .bold()
-                                .font(.system(size: deviceWidth / 21))
+                                .font(.system(size: deviceWidth / 9))
                                 .customTextStroke(width: 1.2)
                                 .multilineTextAlignment(.leading)
                                 .fixedSize()
                             Spacer()
+                            Toggle("", isOn: $audioController.musicOn )
+                                .offset(x: -(deviceWidth/9))
+                                .scaleEffect(1.5)
+                            
+                            
                         }
                         HStack {
-                            Text("Tip 2️⃣ : Make sure your swaps\nare moving both shapes in there\ncorrect directions 👉")
+                            Text("🔊")
                                 .bold()
-                                .font(.system(size: deviceWidth / 21))
-                                .customTextStroke(width: 1.2)
+                                .font(.system(size: deviceWidth / 9))
+                                .customTextStroke(width: 1.8)
                                 .multilineTextAlignment(.leading)
                                 .fixedSize()
                             Spacer()
+                            Toggle("", isOn: $userPersistedData.soundOn )
+                                .offset(x: -(deviceWidth/9))
+                                .scaleEffect(1.5)
                         }
                         .padding(.vertical)
                         HStack {
-                            Text("Tip 3️⃣ : Count the number of\nmoves for each shape type and\nstart with the one that requires\nthe most moves 🧠")
+                            Text("📳")
                                 .bold()
-                                .font(.system(size: deviceWidth / 21))
-                                .customTextStroke(width: 1.2)
+                                .font(.system(size: deviceWidth / 9))
+                                .customTextStroke(width: 1.8)
                                 .multilineTextAlignment(.leading)
                                 .fixedSize()
                             Spacer()
+                            Toggle("", isOn: $userPersistedData.hapticsOn )
+                                .offset(x: -(deviceWidth/9))
+                                .scaleEffect(1.5)
                         }
                         .padding(.bottom, 30)
                     }
@@ -128,7 +129,7 @@ struct MovesView: View {
                                             if userPersistedData.hapticsOn {
                                                 impactLight.impactOccurred()
                                             }
-                                            appModel.showMovesCard = false
+                                            appModel.showSettings = false
                                         }
                                     }
                                 }
@@ -152,9 +153,8 @@ struct MovesView: View {
             }
         }
     }
-    
 }
 
 #Preview {
-    MovesView()
+    SettingsView()
 }

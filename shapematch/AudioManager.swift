@@ -8,7 +8,7 @@
 import Foundation
 import AVFoundation
 
-let muteKey = "Mute"
+let musicOnKey = "musicOnKey"
 
 class AudioManager: ObservableObject {
     static let sharedAudioManager = AudioManager()
@@ -20,32 +20,32 @@ class AudioManager: ObservableObject {
         setAllAudioVolume()
     }
     
-    @Published var mute: Bool = false {
+    @Published var musicOn: Bool = true {
         didSet{
             saveAudiotSetting()
         }
     }
     
     func saveAudiotSetting() {
-        if let muteSetting = try? JSONEncoder().encode(mute){
-            UserDefaults.standard.set(muteSetting, forKey: muteKey)
+        if let musicOnSetting = try? JSONEncoder().encode(musicOn){
+            UserDefaults.standard.set(musicOnSetting, forKey: musicOnKey)
         }
     }
     
     func getAudioSetting(){
         guard
-            let muteData = UserDefaults.standard.data(forKey: muteKey),
-            let savedMuteSetting = try? JSONDecoder().decode(Bool.self, from: muteData)
+            let musicOnData = UserDefaults.standard.data(forKey: musicOnKey),
+            let savedMusicOnSetting = try? JSONDecoder().decode(Bool.self, from: musicOnData)
         else {return}
         
-        self.mute = savedMuteSetting
+        self.musicOn = savedMusicOnSetting
     }
     
     func setAllAudioVolume() {
-        if mute == true {
-            self.musicPlayer.setVolume(0, fadeDuration: 0)
-        } else {
+        if musicOn == true {
             self.musicPlayer.setVolume(1, fadeDuration: 0)
+        } else {
+            self.musicPlayer.setVolume(0, fadeDuration: 0)
         }
     }
     

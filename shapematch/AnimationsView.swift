@@ -117,7 +117,9 @@ struct CelebrationEffect: View {
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
                                 hapticManager.notification(type: .error)
-                                audioController.musicPlayer.setVolume(0, fadeDuration: 1)
+                                if audioController.musicOn {
+                                    audioController.musicPlayer.setVolume(0, fadeDuration: 1)
+                                }
                                 withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                                     animateMessage = false
                                 }
@@ -478,7 +480,9 @@ struct ScalingPlaque: ViewModifier {
     }
 
     private func runAnimation() {
-        impactLight.impactOccurred()
+        if userPersistedData.hapticsOn {
+            impactLight.impactOccurred()
+        }
         withAnimation(.easeInOut(duration: speed)) {
             scale = size
             Yoffset = deviceWidth / 12
@@ -492,7 +496,9 @@ struct ScalingPlaque: ViewModifier {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + speed * 2) {
-            impactLight.impactOccurred()
+            if userPersistedData.hapticsOn {
+                impactLight.impactOccurred()
+            }
         }
     }
 }

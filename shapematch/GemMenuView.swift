@@ -51,7 +51,9 @@ struct GemMenuView: View {
                         withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                             cardOffset = deviceWidth * 2
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                impactLight.impactOccurred()
+                                if userPersistedData.hapticsOn {
+                                    impactLight.impactOccurred()
+                                }
                                 appModel.showGemMenu = false
                             }
                         }
@@ -65,7 +67,9 @@ struct GemMenuView: View {
                                     withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                                         cardOffset = deviceWidth * 2
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                            impactLight.impactOccurred()
+                                            if userPersistedData.hapticsOn {
+                                                impactLight.impactOccurred()
+                                            }
                                             appModel.showGemMenu = false
                                         }
                                     }
@@ -81,7 +85,7 @@ struct GemMenuView: View {
                         .frame(width: 45, height: 9)
                         .padding(.top, 15)
                         .customTextStroke()
-                    Text("💎 Gems 💎")
+                    Text("Gem Shop")
                         .bold()
                         .font(.system(size: deviceWidth/9))
                         .customTextStroke()
@@ -94,7 +98,7 @@ struct GemMenuView: View {
                             }
                         } label: {
                             HStack{
-                                Text("🐟")
+                                Text("💎")
                                     .bold()
                                     .italic()
                                     .font(.system(size: deviceWidth/15))
@@ -144,7 +148,7 @@ struct GemMenuView: View {
                             }
                         } label: {
                             HStack{
-                                Text("🐬")
+                                Text("💎")
                                     .bold()
                                     .italic()
                                     .font(.system(size: deviceWidth/15))
@@ -195,7 +199,7 @@ struct GemMenuView: View {
                             }
                         } label: {
                             HStack{
-                                Text("🦈")
+                                Text("💎")
                                     .bold()
                                     .italic()
                                     .font(.system(size: deviceWidth/15))
@@ -239,7 +243,9 @@ struct GemMenuView: View {
                         }
                         .buttonStyle(.roundedAndShadow6)
                             Button {
-                                impactLight.impactOccurred()
+                                if userPersistedData.hapticsOn {
+                                    impactLight.impactOccurred()
+                                }
                                 self.sheetPresented = true
                             } label: {
                                 Text("Share! 📲")
@@ -282,7 +288,9 @@ struct GemMenuView: View {
                                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                                     cardOffset = deviceWidth * 2
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                        impactLight.impactOccurred()
+                                        if userPersistedData.hapticsOn {
+                                            impactLight.impactOccurred()
+                                        }
                                         appModel.showGemMenu = false
                                     }
                                 }
