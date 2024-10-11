@@ -129,7 +129,7 @@ struct LevelsView: View {
                                                         userPersistedData.level = 1
                                                         appModel.setupFirstLevel()
                                                         withAnimation {
-                                                            userPersistedData.selectedTab = 1
+                                                            appModel.selectedTab = 1
                                                         }
                                                     } else {
                                                         chosenLevel = level
@@ -289,7 +289,7 @@ struct LevelsView: View {
                                     userPersistedData.level = chosenLevel
                                     appModel.setupLevel(startGrid: previewGrid)
                                     withAnimation {
-                                        userPersistedData.selectedTab = 1
+                                        appModel.selectedTab = 1
                                         showLevelDetails = false
                                     }
                                 }

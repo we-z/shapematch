@@ -58,11 +58,18 @@ class AppModel: ObservableObject {
     @Published var amountBought = 5
     @Published var shapes: [ShapeType] = []
     @Published var swapsMade: [(Position, Position)] = []
+    @Published var selectedTab = 1 {
+        didSet {
+            userPersistedData.selectedTab = selectedTab
+        }
+    }
     
     @ObservedObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     
     init() {
+        
+        selectedTab = userPersistedData.selectedTab
         // Initialize the grids from persisted data
         (swapsNeeded, shapes) = determineLevelSettings(level: userPersistedData.level)
         
