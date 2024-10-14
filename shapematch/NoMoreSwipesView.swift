@@ -123,9 +123,9 @@ struct NoMoreSwipesView: View {
                                     .customTextStroke(width: 2.1)
                                     .padding(.leading)
                                 Spacer()
-                                Text("💎 3")
+                                Text("💎 900")
                                     .bold()
-                                    .font(.system(size: deviceWidth/9))
+                                    .font(.system(size: deviceWidth/12))
                                     .fixedSize()
                                     .customTextStroke(width: 2.1)
                                     .padding(.trailing)
@@ -172,6 +172,7 @@ struct NoMoreSwipesView: View {
                                     .padding(1)
                             }
                             .padding(3)
+                            .padding(.bottom)
                         }
                     }
                     .buttonStyle(.roundedAndShadow6)

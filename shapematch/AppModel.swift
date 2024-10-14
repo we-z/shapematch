@@ -164,22 +164,31 @@ class AppModel: ObservableObject {
     }
     
     func undoSwap() {
-        if !swapsMade.isEmpty {
-            undosLeft -= 1
-            let lastSwap = swapsMade.removeLast()
-            if userPersistedData.soundOn {
-                AudioServicesPlaySystemSound(1105)
+        if undosLeft == 0 {
+            if userPersistedData.gemBalance >= 300 {
+                userPersistedData.decrementBalance(amount: 300)
+                undosLeft += 3
+            } else {
+                showGemMenu = true
             }
-            DispatchQueue.main.asyncAfter(deadline: .now()) { [self] in
-                let temp = grid[lastSwap.0.row][lastSwap.0.col]
-                grid[lastSwap.0.row][lastSwap.0.col] = grid[lastSwap.1.row][lastSwap.1.col]
-                grid[lastSwap.1.row][lastSwap.1.col] = temp
+        } else {
+            if !swapsMade.isEmpty {
+                undosLeft -= 1
+                let lastSwap = swapsMade.removeLast()
+                if userPersistedData.soundOn {
+                    AudioServicesPlaySystemSound(1105)
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now()) { [self] in
+                    let temp = grid[lastSwap.0.row][lastSwap.0.col]
+                    grid[lastSwap.0.row][lastSwap.0.col] = grid[lastSwap.1.row][lastSwap.1.col]
+                    grid[lastSwap.1.row][lastSwap.1.col] = temp
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now()) { [self] in
+                    self.swipesLeft += 1
+                }
+                
             }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now()) { [self] in
-                self.swipesLeft += 1
-            }
-            
         }
     }
     

@@ -11,7 +11,6 @@
 		760776182C7A1A17003E2AD2 /* CloudStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 760776172C7A1A17003E2AD2 /* CloudStorage */; };
 		761107422CB9C4B6001C2607 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761107412CB9C4B6001C2607 /* SettingsView.swift */; };
 		761107442CB9F0FC001C2607 /* LevelCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761107432CB9F0FC001C2607 /* LevelCompleteView.swift */; };
-		761107462CBCA738001C2607 /* GameButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761107452CBCA738001C2607 /* GameButtonsView.swift */; };
 		761A44462C7841A30017B53B /* GemMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A44452C7841A30017B53B /* GemMenuView.swift */; };
 		761A44492C78E7DB0017B53B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 761A44482C78E7DB0017B53B /* StoreKit.framework */; };
 		761A444B2C78E8320017B53B /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A444A2C78E8320017B53B /* StoreKitManager.swift */; };
@@ -58,7 +57,6 @@
 		760776142C7A18C7003E2AD2 /* UserPersistedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPersistedData.swift; sourceTree = "<group>"; };
 		761107412CB9C4B6001C2607 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		761107432CB9F0FC001C2607 /* LevelCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelCompleteView.swift; sourceTree = "<group>"; };
-		761107452CBCA738001C2607 /* GameButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameButtonsView.swift; sourceTree = "<group>"; };
 		761A44452C7841A30017B53B /* GemMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemMenuView.swift; sourceTree = "<group>"; };
 		761A44482C78E7DB0017B53B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		761A444A2C78E8320017B53B /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 				76B7740E2C9AA20F0053B72B /* ButtonsView.swift */,
 				7639F9602C713D8100E2B371 /* ContentView.swift */,
 				76B774062C968EF70053B72B /* Extensions.swift */,
-				761107452CBCA738001C2607 /* GameButtonsView.swift */,
 				761A44452C7841A30017B53B /* GemMenuView.swift */,
 				7669B74D2CB96BC400EBA34F /* HomeButtonsView.swift */,
 				7677131D2C86DCF800C9E2C9 /* iconview.swift */,
@@ -332,7 +329,6 @@
 				76B774092C96B6F50053B72B /* NotificationManager.swift in Sources */,
 				7639F95F2C713D8100E2B371 /* shapematchApp.swift in Sources */,
 				76D489792CA72557004060FA /* BackgroundView.swift in Sources */,
-				761107462CBCA738001C2607 /* GameButtonsView.swift in Sources */,
 				76ADAF042C76A92C006B2844 /* OverlaysView.swift in Sources */,
 				761A444B2C78E8320017B53B /* StoreKitManager.swift in Sources */,
 				7639F9CA2C7587C800E2B371 /* NoMoreSwipesView.swift in Sources */,

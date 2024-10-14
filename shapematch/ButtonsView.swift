@@ -47,11 +47,11 @@ struct ButtonsView: View {
 
             ZStack{
                 Button {
-                    appModel.showMovesCard = true
+                    appModel.undoSwap()
                 } label: {
                     HStack{
                         Spacer()
-                        Text("↩️ 3")
+                        Text("↩️  \(appModel.undosLeft)")
                             .bold()
                             .customTextStroke(width: 1.2)
                             .font(.system(size: deviceWidth/21))
@@ -76,11 +76,11 @@ struct ButtonsView: View {
                 if appModel.undosLeft <= 0 {
                     ZStack {
                         Circle()
-                            .frame(width: deviceWidth/8)
+                            .frame(width: deviceWidth/6)
                             .foregroundColor(.black)
                             .scaleEffect(idiom == .pad ? 1.2 : 1)
                         Circle()
-                            .frame(width: idiom == .pad ? deviceWidth/10 : deviceWidth/9)
+                            .frame(width: idiom == .pad ? deviceWidth/10 : deviceWidth/7)
                             .overlay {
                                 LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                                     .mask(Circle())
@@ -88,16 +88,17 @@ struct ButtonsView: View {
                         VStack(spacing: 6) {
                             Text("+ 3")
                                 .bold()
+                                .font(.system(size: deviceWidth / 21))
                                 .customTextStroke(width: 1)
                                 .fixedSize()
-                            Text("1 💎")
+                            Text("💎 300")
                                 .bold()
                                 .customTextStroke(width: 1)
                                 .fixedSize()
                         }
                         .font(.system(size: idiom == .pad ? 36 : 12))
                     }
-                    .offset(x: deviceWidth/18, y: idiom == .pad ? deviceWidth/12 : deviceWidth/12)
+                    .offset(x: deviceWidth/12, y: idiom == .pad ? deviceWidth/12 : deviceWidth/9)
                     .compositingGroup()
                 }
             }
