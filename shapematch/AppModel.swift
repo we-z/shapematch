@@ -74,15 +74,15 @@ class AppModel: ObservableObject {
         (swapsNeeded, shapes) = determineLevelSettings(level: userPersistedData.level)
         
         grid = userPersistedData.grid.isEmpty ? [
-            [.triangle, .circle, .triangle],
-            [.circle, .triangle, .circle],
-            [.square, .square, .square]
+            [.circle, .circle, .circle],
+            [.square, .triangle, .square],
+            [.triangle, .square, .triangle]
         ] : userPersistedData.grid
         
         targetGrid = userPersistedData.targetGrid.isEmpty ? [
-            [.triangle, .circle, .triangle],
-            [.circle, .square, .circle],
-            [.square, .triangle, .square]
+            [.circle, .circle, .circle],
+            [.square, .square, .square],
+            [.triangle, .triangle, .triangle]
         ] : userPersistedData.targetGrid
         
         if userPersistedData.level == 1 {
@@ -478,15 +478,15 @@ class AppModel: ObservableObject {
     
     func setupFirstLevel() {
         grid = [
-            [.triangle, .circle, .triangle],
-            [.circle, .triangle, .circle],
-            [.square, .square, .square]
+            [.triangle, .triangle, .triangle],
+            [.circle, .square, .circle],
+            [.square, .circle, .square]
         ]
         
         targetGrid = [
-            [.triangle, .circle, .triangle],
-            [.circle, .square, .circle],
-            [.square, .triangle, .square]
+            [.triangle, .triangle, .triangle],
+            [.circle, .circle, .circle],
+            [.square, .square, .square]
         ]
         
         swipesLeft = 1

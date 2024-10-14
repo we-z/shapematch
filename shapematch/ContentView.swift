@@ -31,121 +31,38 @@ struct ContentView: View {
                 }
                     .tag(0)
                 ZStack{
-                    //            Color.white
-                    //                .ignoresSafeArea()
-                    //            Color.black.opacity(colorScheme == .dark ? 0.8 : 0.3)
-                    //                .ignoresSafeArea()
-                    //            BackgroundView()
-                    //                .opacity(userPersistedData.level == 1 ? 0.0 : 0.2)
-                    //            Color.blue
-                    //                .ignoresSafeArea()
                     Group {
                         VStack(spacing: 0) {
                             ZStack{
-                                GameButtonsView()
+                                ButtonsView()
                                     .opacity((userPersistedData.level != 1) ? 1 : 0)
                             }
                             .padding(.vertical, idiom == .pad ? 41 : 3)
                             .zIndex(2)
-                            HStack{
-                                VStack{
-                                    Spacer()
-                                    VStack {
-                                        Text("Level")
-                                            .bold()
-                                            .font(.system(size: deviceWidth/15))
-                                            .fixedSize()
-                                            .customTextStroke(width: 1.8)
-                                        Text("\(userPersistedData.level)")
-                                            .bold()
-                                            .font(.system(size: userPersistedData.level  > 99 ? deviceWidth/8 : deviceWidth/6))
-                                            .minimumScaleFactor(0.1)
-                                            .fixedSize()
-                                            .customTextStroke()
-                                    }
-                                    Spacer()
-                                }
-                                .frame(width: deviceWidth/4)
-                                .opacity((userPersistedData.level != 1) ? 1 : 0)
+                            if userPersistedData.level == 1 {
+                                Text("Line up\nthe shapes")
+                                    .bold()
+                                    .multilineTextAlignment(.center)
+                                    .font(.system(size: deviceWidth/6))
+                                    .customTextStroke(width: 3.6)
+                                    .fixedSize()
+                            } else {
                                 Spacer()
-                                VStack {
-                                    Spacer()
-                                    VStack{
-                                        Text("Match")
-                                            .bold()
-                                            .font(.system(size: deviceWidth/15))
-                                            .fixedSize()
-                                            .customTextStroke(width: 1.8)
-                                        VStack{
-                                            ForEach(0..<appModel.grid.count, id: \.self) { row in
-                                                HStack {
-                                                    ForEach(0..<appModel.grid.count, id: \.self) { column in
-                                                        ShapeView(shapeType: appModel.targetGrid[row][column])
-                                                            .frame(width: appModel.shapeWidth / 3.9, height: appModel.shapeWidth / 3.9)
-                                                            .scaleEffect(appModel.shapeScale / 3.3)
-                                                            .scaleEffect(idiom == .pad ? 0.5 : 1)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                    .padding( idiom == .pad ? 30 : 18)
-                                    .background{
-                                        //                                if colorScheme == .dark {
-                                        //                                    Color.black
-                                        //                                    Color.white.opacity(0.36)
-                                        //                                } else {
-                                        //                                    Color.white
-                                        //                                    Color.black.opacity(0.15)
-                                        //                                }
-                                        //                                LinearGradient(gradient: Gradient(colors: [.purple, .purple]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                                        ZStack{
-                                            Color.white
-                                            Color.blue.opacity(0.6)
-                                        }
-                                    }
-                                    .cornerRadius(idiom == .pad ? 30 : 15)
-                                    .overlay {
-                                        RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
-                                            .stroke(Color.yellow, lineWidth: idiom == .pad ? 9 : 4)
-                                            .padding(1)
-                                            .shadow(radius: 3)
-                                    }
-                                    .shadow(radius: 3)
-                                    .onTapGesture {
-                                        if userPersistedData.level != 1 {
-                                            appModel.showInstruction.toggle()
-                                        }
-                                    }
-                                    .pulsingPlaque(speed: 1.2, size: userPersistedData.level == 1 ? 1.5 : 2.7)
-                                    //                            .scaleEffect(idiom == .pad ? 0.8 : 1)
-                                    Spacer()
-                                }
-                                .zIndex(1)
-                                Spacer()
-                                VStack{
-                                    Spacer()
-                                    VStack{
-                                        Text("Moves")
-                                            .bold()
-                                            .multilineTextAlignment(.center)
-                                            .font(.system(size: deviceWidth/15))
-                                            .fixedSize()
-                                            .customTextStroke(width: 1.8)
-                                        Text("\(appModel.swipesLeft > 0 ? appModel.swipesLeft : 0)")
-                                            .bold()
-                                            .font(.system(size: userPersistedData.level  > 99 ? deviceWidth/8 : deviceWidth/6))
-                                            .customTextStroke()
-                                    }
-                                    Spacer()
-                                }
-                                .frame(width: deviceWidth/4)
-                                .opacity((userPersistedData.level != 1) ? 1 : 0)
-                                
+                                Text("Moves:")
+                                    .bold()
+                                    .font(.system(size: deviceWidth/9))
+                                    .customTextStroke(width: 2.4)
+                                    .fixedSize()
+                                Text("\(appModel.swipesLeft)")
+                                    .bold()
+                                    .italic()
+                                    .font(.system(size: deviceWidth/4))
+                                    .customTextStroke(width: 3)
+                                    .fixedSize()
+                                    .offset(y: 12)
+                                    .scaleEffect(1.2)
                             }
-                            .padding(.horizontal)
-                            .zIndex(3)
-                            //                    .zIndex(1)
+                            Spacer()
                             ZStack{
                                 Rectangle()
                                     .overlay{
@@ -154,7 +71,7 @@ struct ContentView: View {
                                             Color.blue.opacity(0.6)
                                         }
                                     }
-                                    .aspectRatio(1.0, contentMode: .fill)
+                                    .aspectRatio(1.0, contentMode: .fit)
                                     .cornerRadius(30)
                                     .overlay {
                                         RoundedRectangle(cornerRadius: 30)
@@ -211,6 +128,7 @@ struct ContentView: View {
                                 }
                                 .scaleEffect(idiom == .pad ? 1.1 : 1)
                             }
+                            .frame(width: deviceWidth)
                             .zIndex(1)
                         }
                         .allowsHitTesting(!appModel.freezeGame)

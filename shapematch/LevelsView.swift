@@ -296,7 +296,7 @@ struct LevelsView: View {
                             } label: {
                                 HStack{
                                     Spacer()
-                                    Text("Play!")
+                                    Text("Play!  ➡️")
                                         .italic()
                                         .bold()
                                         .font(.system(size: deviceWidth/12))

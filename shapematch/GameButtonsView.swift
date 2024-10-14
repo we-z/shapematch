@@ -1,13 +1,13 @@
 //
-//  ButtonsView.swift
+//  GameButtonsView.swift
 //  Shape Swap
 //
-//  Created by Wheezy Capowdis on 9/17/24.
+//  Created by Wheezy Capowdis on 10/13/24.
 //
 
 import SwiftUI
 
-struct ButtonsView: View {
+struct GameButtonsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @StateObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
@@ -21,7 +21,7 @@ struct ButtonsView: View {
             } label: {
                 HStack{
                     Spacer()
-                    Text("⬅️")
+                    Text("🔁")
                         .bold()
                         .italic()
                         .customTextStroke(width: 1.2)
@@ -51,7 +51,7 @@ struct ButtonsView: View {
                 } label: {
                     HStack{
                         Spacer()
-                        Text("↩️ 3")
+                        Text("👨‍🏫")
                             .bold()
                             .customTextStroke(width: 1.2)
                             .font(.system(size: deviceWidth/21))
@@ -107,9 +107,8 @@ struct ButtonsView: View {
             } label: {
                 HStack{
                     Spacer()
-                    Text("⚙️")
+                    Text("↩️ 3")
                         .bold()
-                        .italic()
                         .customTextStroke(width: 1.2)
                         .fixedSize()
                         .font(.system(size: deviceWidth/21))
@@ -139,5 +138,5 @@ struct ButtonsView: View {
 }
 
 #Preview {
-    ButtonsView()
+    GameButtonsView()
 }
