@@ -192,8 +192,36 @@ class AppModel: ObservableObject {
         }
     }
     
+    func isAlignedHorizontally(grid: [[ShapeType]]) -> Bool {
+        for row in grid {
+            if Set(row).count != 1 {
+                return false
+            }
+        }
+        return true
+    }
+
+    func isAlignedVertically(grid: [[ShapeType]]) -> Bool {
+        let columnCount = grid[0].count
+        for col in 0..<columnCount {
+            var columnShapes = [ShapeType]()
+            for row in grid {
+                columnShapes.append(row[col])
+            }
+            if Set(columnShapes).count != 1 {
+                return false
+            }
+        }
+        return true
+    }
+
+    func isWinningGrid(grid: [[ShapeType]]) -> Bool {
+        return isAlignedHorizontally(grid: grid) || isAlignedVertically(grid: grid)
+    }
+
+    
     func checkWinCondition() {
-        if grid == targetGrid {
+        if isWinningGrid(grid: grid) {
             DispatchQueue.main.async { [self] in
                 shouldBurst.toggle()
             }
