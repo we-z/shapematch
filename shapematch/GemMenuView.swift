@@ -98,20 +98,14 @@ struct GemMenuView: View {
                             }
                         } label: {
                             HStack{
-                                Text("💎")
+                                Text("💎 1,000")
                                     .bold()
-                                    .italic()
                                     .font(.system(size: deviceWidth/15))
                                     .fixedSize()
-                                    .scaleEffect(1.5)
+                                    .scaleEffect(1.2)
                                     .customTextStroke()
                                     .padding(12)
                                     .padding(.horizontal, idiom == .pad ? 30 : 0)
-                                Text("10")
-                                    .bold()
-                                    .font(.system(size: deviceWidth/12))
-                                    .customTextStroke(width: 2.7)
-                                    .fixedSize()
                                 Spacer()
                                 Text("$1.99")
                                     .bold()
@@ -148,20 +142,14 @@ struct GemMenuView: View {
                             }
                         } label: {
                             HStack{
-                                Text("💎")
+                                Text("💎 10,000")
                                     .bold()
-                                    .italic()
                                     .font(.system(size: deviceWidth/15))
                                     .fixedSize()
-                                    .scaleEffect(1.5)
+                                    .scaleEffect(1.2)
                                     .customTextStroke()
                                     .padding(12)
                                     .padding(.horizontal, idiom == .pad ? 30 : 0)
-                                Text("100")
-                                    .bold()
-                                    .font(.system(size: deviceWidth/12))
-                                    .customTextStroke(width: 2.7)
-                                    .fixedSize()
                                 
                                 Spacer()
                                 Text("$14.99")
@@ -199,20 +187,14 @@ struct GemMenuView: View {
                             }
                         } label: {
                             HStack{
-                                Text("💎")
+                                Text("💎 100,000")
                                     .bold()
-                                    .italic()
                                     .font(.system(size: deviceWidth/15))
                                     .fixedSize()
-                                    .scaleEffect(1.5)
+                                    .scaleEffect(1.2)
                                     .customTextStroke()
                                     .padding(12)
                                     .padding(.horizontal, idiom == .pad ? 30 : 0)
-                                Text("1000")
-                                    .bold()
-                                    .font(.system(size: deviceWidth/12))
-                                    .customTextStroke(width: 2.7)
-                                    .fixedSize()
                                 Spacer()
                                 Text("$99.99")
                                     .bold()

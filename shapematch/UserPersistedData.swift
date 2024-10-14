@@ -12,7 +12,7 @@ import CloudStorage
 class UserPersistedData: ObservableObject {
     static let sharedUserPersistedData = UserPersistedData()
     
-    @CloudStorage("gemBalance") var gemBalance: Int = 0
+    @CloudStorage("gemBalance") var gemBalance: Int = 1000
     @CloudStorage("firstGamePlayed") var firstGamePlayed: Bool = false
     @CloudStorage("hasShared") var hasShared: Bool = false
     @CloudStorage("soundOn") var soundOn: Bool = true
