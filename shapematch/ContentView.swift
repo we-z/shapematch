@@ -88,11 +88,11 @@ struct ContentView: View {
                                     .cornerRadius(30)
                                     .overlay {
                                         RoundedRectangle(cornerRadius: 30)
-                                            .stroke(Color.yellow, lineWidth: idiom == .pad ? 11 : 6)
+                                            .stroke(Color.black, lineWidth: idiom == .pad ? 11 : 6)
                                             .padding(1)
-                                            .shadow(radius: 3)
+//                                            .shadow(radius: 3)
                                     }
-                                    .shadow(radius: 3)
+//                                    .shadow(radius: 3)
                                     .padding()
                                 VStack {
                                     ForEach(0..<appModel.grid.count, id: \.self) { row in
@@ -140,12 +140,19 @@ struct ContentView: View {
                                     }
                                 }
                                 .scaleEffect(idiom == .pad ? 1.1 : 1)
+                                if userPersistedData.level == 1 && !appModel.freezeGame {
+                                    HandSwipeView()
+                                        .scaleEffect(idiom == .pad ? 0.8 : 1)
+                                        .fixedSize()
+//                                        .frame(width: 1, height: 1)
+//                                        .zIndex(1)
+                                        .offset(y: deviceWidth / 3.75)
+                                }
                             }
                             .frame(width: deviceWidth)
                             .zIndex(1)
                         }
                         .allowsHitTesting(!appModel.freezeGame)
-                        OverlaysView()
                     }
                     .scaleEffect(idiom == .pad ? 0.75 : 1)
                 }

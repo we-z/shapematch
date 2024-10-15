@@ -12,10 +12,10 @@ import AVFoundation
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        CelebrationEffect()
-            .onAppear {
-                appModel.shouldBurst.toggle()
-            }
+        HandSwipeView()
+//            .onAppear {
+//                appModel.shouldBurst.toggle()
+//            }
     }
 }
 
@@ -355,7 +355,7 @@ struct HandSwipeView: View {
                     
             }
         }
-        .offset(y: idiom == .pad ? 51 : -33)
+        .offset(y: idiom == .pad ? 51 : -24)
         .onAppear {
             animate()
         }

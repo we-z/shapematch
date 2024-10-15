@@ -83,7 +83,7 @@ class AppModel: ObservableObject {
         if userPersistedData.level == 1 {
             swipesLeft = 1
         } else {
-            swipesLeft = swapsNeeded + 2
+            swipesLeft = swapsNeeded
         }
         if grid.count == 3 {
             shapeWidth = deviceWidth / 4.0
@@ -563,7 +563,7 @@ class AppModel: ObservableObject {
             }
             
         }
-        swipesLeft = swapsNeeded + 2
+        swipesLeft = swapsNeeded
         persistData()
     }
     
@@ -573,7 +573,7 @@ class AppModel: ObservableObject {
         swapsMade = []
         undosLeft = 3
         // Reset the swipes left to the initial calculated value
-        swipesLeft = swapsNeeded + 2
+        swipesLeft = swapsNeeded
     }
     
 }
