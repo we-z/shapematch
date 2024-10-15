@@ -360,7 +360,17 @@ extension View {
 }
 
 
-struct Position: Hashable {
+struct Position: Hashable, Comparable {
     let row: Int
     let col: Int
+
+    // Implement the < operator to provide an ordering between two Positions.
+    static func < (lhs: Position, rhs: Position) -> Bool {
+        // Compare based on row first, and if rows are equal, compare by col.
+        if lhs.row == rhs.row {
+            return lhs.col < rhs.col
+        } else {
+            return lhs.row < rhs.row
+        }
+    }
 }

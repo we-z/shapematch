@@ -63,7 +63,7 @@ struct MovesView: View {
                             Spacer()
                         }
                         HStack {
-                            Text("Line up the shapes in \(appModel.swipesLeft) moves 🙇‍♂️")
+                            Text("Line up the shapes in a\nlimited number of moves 🙇‍♂️")
                                 .bold()
                                 .font(.system(size: deviceWidth / 21))
                                 .customTextStroke(width: 1.2)

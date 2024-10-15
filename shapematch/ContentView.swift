@@ -33,36 +33,47 @@ struct ContentView: View {
                 ZStack{
                     Group {
                         VStack(spacing: 0) {
+                            
+                            if userPersistedData.level == 1 {
+                                Spacer()
+                                Spacer()
+                                Text("Line up\nthe shapes")
+                                    .bold()
+                                    .multilineTextAlignment(.center)
+                                    .font(.system(size: deviceWidth/6))
+                                    .customTextStroke(width: 3)
+                                    .fixedSize()
+                            } else {
+                                HStack {
+                                    Text("Level: \(userPersistedData.level)")
+                                        .bold()
+                                        .font(.system(size: deviceWidth/12))
+                                        .customTextStroke(width: 1.8)
+                                        .fixedSize()
+                                        
+                                    Spacer()
+                                }
+                                .padding(.leading)
+                                Spacer()
+                                Text("Moves:")
+                                    .bold()
+                                    .font(.system(size: deviceWidth/10))
+                                    .customTextStroke(width: 2.1)
+                                    .fixedSize()
+                                Text("\(appModel.swipesLeft)")
+                                    .bold()
+                                    .italic()
+                                    .font(.system(size: deviceWidth/4.5))
+                                    .customTextStroke(width: 2.7)
+                                    .fixedSize()
+                            }
+                            Spacer()
                             ZStack{
                                 ButtonsView()
                                     .opacity((userPersistedData.level != 1) ? 1 : 0)
                             }
                             .padding(.vertical, idiom == .pad ? 41 : 3)
                             .zIndex(2)
-                            if userPersistedData.level == 1 {
-                                Text("Line up\nthe shapes")
-                                    .bold()
-                                    .multilineTextAlignment(.center)
-                                    .font(.system(size: deviceWidth/6))
-                                    .customTextStroke(width: 3.6)
-                                    .fixedSize()
-                            } else {
-                                Spacer()
-                                Text("Moves:")
-                                    .bold()
-                                    .font(.system(size: deviceWidth/9))
-                                    .customTextStroke(width: 2.4)
-                                    .fixedSize()
-                                Text("\(appModel.swipesLeft)")
-                                    .bold()
-                                    .italic()
-                                    .font(.system(size: deviceWidth/4))
-                                    .customTextStroke(width: 3)
-                                    .fixedSize()
-                                    .offset(y: 12)
-                                    .scaleEffect(1.2)
-                            }
-                            Spacer()
                             ZStack{
                                 Rectangle()
                                     .overlay{

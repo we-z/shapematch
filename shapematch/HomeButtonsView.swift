@@ -19,9 +19,9 @@ struct HomeButtonsView: View {
             } label: {
                 HStack{
                     Spacer()
-                    Text("💎  \(userPersistedData.gemBalance)")
+                    Text("💎 \(userPersistedData.gemBalance)")
                         .bold()
-                        .font(.system(size: deviceWidth/21))
+                        .font(.system(size: deviceWidth/15))
                         .lineLimit(1)
                         .customTextStroke(width: 1.8)
                         .fixedSize()
@@ -70,33 +70,6 @@ struct HomeButtonsView: View {
                     .padding(3)
                 }
                 .buttonStyle(.roundedAndShadow6)
-                if appModel.undosLeft <= 0 {
-                    ZStack {
-                        Circle()
-                            .frame(width: deviceWidth/8)
-                            .foregroundColor(.black)
-                            .scaleEffect(idiom == .pad ? 1.2 : 1)
-                        Circle()
-                            .frame(width: idiom == .pad ? deviceWidth/10 : deviceWidth/9)
-                            .overlay {
-                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                                    .mask(Circle())
-                            }
-                        VStack(spacing: 6) {
-                            Text("+ 3")
-                                .bold()
-                                .customTextStroke(width: 1)
-                                .fixedSize()
-                            Text("1 💎")
-                                .bold()
-                                .customTextStroke(width: 1)
-                                .fixedSize()
-                        }
-                        .font(.system(size: idiom == .pad ? 36 : 12))
-                    }
-                    .offset(x: deviceWidth/18, y: idiom == .pad ? deviceWidth/12 : deviceWidth/12)
-                    .compositingGroup()
-                }
             }
             .zIndex(1)
             Button{

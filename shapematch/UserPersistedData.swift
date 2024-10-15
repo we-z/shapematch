@@ -12,13 +12,12 @@ import CloudStorage
 class UserPersistedData: ObservableObject {
     static let sharedUserPersistedData = UserPersistedData()
     
-    @CloudStorage("gemBalance") var gemBalance: Int = 1000
+    @CloudStorage("gemBalance") var gemBalance: Int = 5
     @CloudStorage("firstGamePlayed") var firstGamePlayed: Bool = false
     @CloudStorage("hasShared") var hasShared: Bool = false
     @CloudStorage("soundOn") var soundOn: Bool = true
     @CloudStorage("hapticsOn") var hapticsOn: Bool = true
     @CloudStorage("gridData") var gridData: String = ""
-    @CloudStorage("targetGridData") var targetGridData: String = ""
     @CloudStorage("highestLevel") var highestLevel: Int = 0
     @CloudStorage(wrappedValue: "{}", "levelStars") var levelStarsString: String
     @CloudStorage("selectedTab") var selectedTab = 1
@@ -44,7 +43,6 @@ class UserPersistedData: ObservableObject {
 //    @Published var hasShared: Bool = false
 //    @Published var showedMovesCard: Bool = false
 //    @Published var gridData: String = ""
-//    @Published var targetGridData: String = ""
 //    @Published var highestLevel: Int = 0
 //    @Published var level: Int = 16 {
 //        didSet {
@@ -80,11 +78,6 @@ class UserPersistedData: ObservableObject {
     var grid: [[ShapeType]] {
         get { decodeGrid(from: gridData) }
         set { gridData = encodeGrid(newValue) }
-    }
-
-    var targetGrid: [[ShapeType]] {
-        get { decodeGrid(from: targetGridData) }
-        set { targetGridData = encodeGrid(newValue) }
     }
     
     private func encodeGrid(_ grid: [[ShapeType]]) -> String {
