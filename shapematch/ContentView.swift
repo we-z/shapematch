@@ -31,12 +31,14 @@ struct ContentView: View {
                 }
                     .tag(0)
                 ZStack{
+                    Color.blue
+                        .ignoresSafeArea()
                     Group {
                         VStack(spacing: 0) {
-                            
+                            Spacer()
                             if userPersistedData.level == 1 {
                                 Spacer()
-                                Spacer()
+                                
                                 Text("Line up\nthe shapes")
                                     .bold()
                                     .multilineTextAlignment(.center)
@@ -51,19 +53,19 @@ struct ContentView: View {
                                         .customTextStroke(width: 1.8)
                                         .fixedSize()
                                         
-                                    Spacer()
+//                                    Spacer()
                                 }
-                                .padding(.leading)
+//                                .padding(.leading)
                                 Spacer()
                                 Text("Moves:")
                                     .bold()
-                                    .font(.system(size: deviceWidth/10))
-                                    .customTextStroke(width: 2.1)
+                                    .font(.system(size: deviceWidth/12))
+                                    .customTextStroke(width: 1.8)
                                     .fixedSize()
                                 Text("\(appModel.swipesLeft)")
                                     .bold()
                                     .italic()
-                                    .font(.system(size: deviceWidth/4.5))
+                                    .font(.system(size: deviceWidth/4.2))
                                     .customTextStroke(width: 2.7)
                                     .fixedSize()
                             }
