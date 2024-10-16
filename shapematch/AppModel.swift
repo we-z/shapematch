@@ -55,8 +55,13 @@ class AppModel: ObservableObject {
     @Published var swapsNeeded = 1
     @Published var undosLeft = 3
     @Published var amountBought = 5
-    @Published var shapes: [ShapeType] = []
+    @Published var shapes: [ShapeType] = [] {
+        didSet {
+            self.winningGrids = generateAllWinningGrids(shapes: shapes)
+        }
+    }
     @Published var swapsMade: [(Position, Position)] = []
+    @Published var winningGrids:[[[ShapeType]]] = []
     @Published var selectedTab = 1 {
         didSet {
             userPersistedData.selectedTab = selectedTab
@@ -384,8 +389,6 @@ class AppModel: ObservableObject {
     }
     
     func approximateMinimumSwipes(generatedGrid: [[ShapeType]]) -> Int {
-        
-        let winningGrids = generateAllWinningGrids(shapes: shapes)
         
         var costs:[Int] = []
         for winningGrid in winningGrids {
