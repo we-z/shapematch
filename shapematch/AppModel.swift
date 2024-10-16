@@ -31,7 +31,6 @@ class AppModel: ObservableObject {
         }
     }
     
-    @Published var targetGrid: [[ShapeType]] = []
     
     @Published var offsets: [[CGSize]] = Array(
         repeating: Array(repeating: .zero, count: 5),
@@ -514,12 +513,6 @@ class AppModel: ObservableObject {
             [.square, .circle, .square]
         ]
         
-        targetGrid = [
-            [.triangle, .triangle, .triangle],
-            [.circle, .circle, .circle],
-            [.square, .square, .square]
-        ]
-        
         swipesLeft = 1
         persistData()
     }
@@ -558,7 +551,7 @@ class AppModel: ObservableObject {
                 }
                 
             } else {
-                targetGrid = generatedTargetGrid
+                grid = generatedTargetGrid
                 swapsNeededMet = true
             }
             
