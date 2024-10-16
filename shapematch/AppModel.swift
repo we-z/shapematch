@@ -334,19 +334,76 @@ class AppModel: ObservableObject {
         return (swapsNeeded, shapes)
     }
     
-    func approximateMinimumSwipes(from startGrid: [[ShapeType]], to targetGrid: [[ShapeType]]) -> Int {
-        var totalCost = 0
-        let shapeTypes = Set(startGrid.flatMap { $0 })
+    func permutationsOf<T>(_ elements: [T]) -> [[T]] {
+        var result = [[T]]()
+        var elements = elements
+        permute(&elements, start: 0, result: &result)
+        return result
+    }
+    
+    func permute<T>(_ elements: inout [T], start: Int, result: inout [[T]]) {
+        if start == elements.count {
+            result.append(elements)
+        } else {
+            for i in start..<elements.count {
+                elements.swapAt(start, i)
+                permute(&elements, start: start + 1, result: &result)
+                elements.swapAt(start, i)
+            }
+        }
+    }
+    
+    func generateAllWinningGrids(shapes: [ShapeType]) -> [[[ShapeType]]] {
+        let N = shapes.count
+        var winningGrids = [[[ShapeType]]]()
+        let permutations = permutationsOf(shapes)
         
-        for shapeType in shapeTypes {
-            let startPositions = positions(of: shapeType, in: startGrid)
-            let targetPositions = positions(of: shapeType, in: targetGrid)
-            let cost = minimalTotalMatchingCost(startPositions: startPositions, targetPositions: targetPositions)
-            totalCost += cost
+        // Horizontal alignment
+        for perm in permutations {
+            var grid = [[ShapeType]](repeating: [ShapeType](repeating: shapes[0], count: N), count: N)
+            for i in 0..<N {
+                let shape = perm[i]
+                grid[i] = [ShapeType](repeating: shape, count: N)
+            }
+            winningGrids.append(grid)
         }
         
-        // the higher the first number is, the more likely we are to end up with an extra swap
-        return Int(ceil (Double(totalCost) / 2.0))
+        // Vertical alignment
+        for perm in permutations {
+            var grid = [[ShapeType]](repeating: [ShapeType](repeating: shapes[0], count: N), count: N)
+            for i in 0..<N {
+                let shape = perm[i]
+                for j in 0..<N {
+                    grid[j][i] = shape
+                }
+            }
+            winningGrids.append(grid)
+        }
+        
+        return winningGrids
+    }
+    
+    func approximateMinimumSwipes(generatedGrid: [[ShapeType]]) -> Int {
+        
+        let winningGrids = generateAllWinningGrids(shapes: shapes)
+        
+        var costs:[Int] = []
+        for winningGrid in winningGrids {
+            var totalCost = 0
+            let shapeTypes = Set(grid.flatMap { $0 })
+            
+            for shapeType in shapeTypes {
+                let startPositions = positions(of: shapeType, in: grid)
+                let targetPositions = positions(of: shapeType, in: winningGrid)
+                let cost = minimalTotalMatchingCost(startPositions: startPositions, targetPositions: targetPositions)
+                totalCost += cost
+            }
+            
+            // the higher the first number is, the more likely we are to end up with an extra swap
+            costs.append( Int(ceil (Double(totalCost) / 2.0)))
+        }
+        
+        return costs.min()!
     }
 
     func positions(of shapeType: ShapeType, in grid: [[ShapeType]]) -> [Position] {
@@ -525,15 +582,7 @@ class AppModel: ObservableObject {
         swapsMade = []
         undosLeft = 3
         
-        if startGrid.isEmpty {
-            grid = []
-            
-            for _ in 0..<shapes.count {
-                grid.append(shapes.shuffled())
-            }
-        } else {
-            grid = startGrid
-        }
+        randomGridStart()
         
         var swapsNeededMet = false
         
@@ -542,13 +591,9 @@ class AppModel: ObservableObject {
             // optimize
             let generatedTargetGrid = generateTargetGrid(from: grid, with: swapsNeeded)
             
-            if swapsNeeded > approximateMinimumSwipes(from: grid, to: generatedTargetGrid) {
+            if swapsNeeded > approximateMinimumSwipes(generatedGrid: generatedTargetGrid) {
                 print("trying again")
-                grid = []
-                
-                for _ in 0..<shapes.count {
-                    grid.append(shapes.shuffled())
-                }
+                randomGridStart()
                 
             } else {
                 grid = generatedTargetGrid
@@ -558,6 +603,28 @@ class AppModel: ObservableObject {
         }
         swipesLeft = swapsNeeded
         persistData()
+    }
+    
+    func randomGridStart() {
+        let alignmentIsHorizontal = Bool.random()
+        let shuffledShapes = shapes.shuffled()
+        let gridSize = shapes.count
+        grid = []
+        if alignmentIsHorizontal {
+            // Horizontal alignment
+            for shape in shuffledShapes {
+                let row = [ShapeType](repeating: shape, count: gridSize)
+                grid.append(row)
+            }
+        } else {
+            // Vertical alignment
+            grid = Array(repeating: Array(repeating: .circle, count: gridSize), count: gridSize)
+            for (colIndex, shape) in shuffledShapes.enumerated() {
+                for rowIndex in 0..<gridSize {
+                    grid[rowIndex][colIndex] = shape
+                }
+            }
+        }
     }
     
     func resetLevel() {
