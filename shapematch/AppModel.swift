@@ -497,57 +497,67 @@ class AppModel: ObservableObject {
 
     func generateTargetGrid(from startGrid: [[ShapeType]], with swapsNeeded: Int) -> [[ShapeType]] {
         var targetGrid = startGrid
-        var previousPositions: [ShapeType: Set<Position>] = [:]
+//        var previousPositions: [ShapeType: Set<Position>] = [:]
+        var possiblePositions: [Position] = []
         let gridSize = startGrid.count
 
-        // Initialize previousPositions with the starting positions
-        for row in 0..<gridSize {
-            for col in 0..<gridSize {
-                let shape = startGrid[row][col]
-                let position = Position(row: row, col: col)
-                previousPositions[shape, default: []].insert(position)
+        // Initialize possiblePositions with the starting positions
+        func setPossiblePositions() {
+            for row in 0..<gridSize {
+                for col in 0..<gridSize {
+                    let position = Position(row: row, col: col)
+                    possiblePositions.append(position)
+                }
             }
         }
-
+        
+        setPossiblePositions()
+        
         var swapsMade = 0
         var iterations = 0
         let maxIterations = 100
 
         while swapsMade < swapsNeeded && iterations < maxIterations {
             iterations += 1
-            let row = Int.random(in: 0..<gridSize)
-            let col = Int.random(in: 0..<gridSize)
+            let currentPosition = possiblePositions.randomElement() ?? Position(row: 0, col: 0)
 
             var possibleSwaps = [(Int, Int)]()
-            if row > 0 { possibleSwaps.append((row - 1, col)) }
-            if row < gridSize - 1 { possibleSwaps.append((row + 1, col)) }
-            if col > 0 { possibleSwaps.append((row, col - 1)) }
-            if col < gridSize - 1 { possibleSwaps.append((row, col + 1)) }
-
-            possibleSwaps.shuffle()
-
+            if currentPosition.row > 0 && targetGrid[currentPosition.row][currentPosition.col] != targetGrid[currentPosition.row - 1][currentPosition.col] {
+                possibleSwaps.append((currentPosition.row - 1, currentPosition.col))
+            }
+            if currentPosition.row < gridSize - 1 && targetGrid[currentPosition.row][currentPosition.col] != targetGrid[currentPosition.row + 1][currentPosition.col] {
+                possibleSwaps.append((currentPosition.row + 1, currentPosition.col))
+            }
+            if currentPosition.col > 0 && targetGrid[currentPosition.row][currentPosition.col] != targetGrid[currentPosition.row][currentPosition.col - 1] {
+                possibleSwaps.append((currentPosition.row, currentPosition.col - 1))
+            }
+            if currentPosition.col < gridSize - 1 && targetGrid[currentPosition.row][currentPosition.col] != targetGrid[currentPosition.row][currentPosition.col + 1] {
+                possibleSwaps.append((currentPosition.row, currentPosition.col + 1))
+            }
+            
             for (swapRow, swapCol) in possibleSwaps {
-                let pos1 = Position(row: row, col: col)
+                let pos1 = Position(row: currentPosition.row, col: currentPosition.col)
                 let pos2 = Position(row: swapRow, col: swapCol)
                 let shape1 = targetGrid[pos1.row][pos1.col]
                 let shape2 = targetGrid[pos2.row][pos2.col]
-
-                // Ensure shapes are different and swapping doesn't return shapes to previous positions
-                if shape1 != shape2,
-                   !previousPositions[shape1, default: []].contains(pos2),
-                   !previousPositions[shape2, default: []].contains(pos1) {
-
-                    // Perform the swap
-                    targetGrid.swapAt((pos1.row, pos1.col), (pos2.row, pos2.col))
-
-                    // Update previous positions
-                    previousPositions[shape1, default: []].insert(pos2)
-                    previousPositions[shape2, default: []].insert(pos1)
-
+                
+                // Perform the swap
+                targetGrid.swapAt((pos1.row, pos1.col), (pos2.row, pos2.col))
+                
+                let newMinMoves = approximateMinimumSwipes(generatedGrid: targetGrid)
+                
+                if newMinMoves > swapsMade {
+                    
                     swapsMade += 1
+                    setPossiblePositions()
                     break
+                } else {
+                    targetGrid.swapAt((pos1.row, pos1.col), (pos2.row, pos2.col))
                 }
             }
+            
+            possiblePositions.removeAll(where: { $0 == currentPosition })
+                
         }
 
         if iterations >= maxIterations {
