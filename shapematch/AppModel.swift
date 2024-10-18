@@ -513,12 +513,14 @@ class AppModel: ObservableObject {
         
         setPossiblePositions()
         
+        var swapMadeOnPosition = false
         var swapsMade = 0
         var iterations = 0
         let maxIterations = 100
 
         while swapsMade < swapsNeeded && iterations < maxIterations {
             iterations += 1
+            swapMadeOnPosition = false
             let currentPosition = possiblePositions.randomElement() ?? Position(row: 0, col: 0)
 
             var possibleSwaps = [(Int, Int)]()
@@ -547,7 +549,7 @@ class AppModel: ObservableObject {
                 let newMinMoves = approximateMinimumSwipes(generatedGrid: targetGrid)
                 
                 if newMinMoves > swapsMade {
-                    
+                    swapMadeOnPosition = true
                     swapsMade += 1
                     setPossiblePositions()
                     break
@@ -556,7 +558,9 @@ class AppModel: ObservableObject {
                 }
             }
             
-            possiblePositions.removeAll(where: { $0 == currentPosition })
+            if !swapMadeOnPosition {
+                possiblePositions.removeAll(where: { $0 == currentPosition })
+            }
                 
         }
 
