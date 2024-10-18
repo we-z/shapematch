@@ -389,11 +389,10 @@ class AppModel: ObservableObject {
     }
     
     func approximateMinimumSwipes(generatedGrid: [[ShapeType]]) -> Int {
-        
+        let shapeTypes = Set(grid.flatMap { $0 })
         var costs:[Int] = []
         for winningGrid in winningGrids {
             var totalCost = 0
-            let shapeTypes = Set(grid.flatMap { $0 })
             
             for shapeType in shapeTypes {
                 let startPositions = positions(of: shapeType, in: grid)
@@ -405,7 +404,7 @@ class AppModel: ObservableObject {
             // the higher the first number is, the more likely we are to end up with an extra swap
             costs.append( Int(ceil (Double(totalCost) / 2.0)))
         }
-        
+        print("costs: \(costs)")
         return costs.min()!
     }
 
@@ -540,12 +539,13 @@ class AppModel: ObservableObject {
             for (swapRow, swapCol) in possibleSwaps {
                 let pos1 = Position(row: currentPosition.row, col: currentPosition.col)
                 let pos2 = Position(row: swapRow, col: swapCol)
-
                 
                 // Perform the swap
                 targetGrid.swapAt((pos1.row, pos1.col), (pos2.row, pos2.col))
                 
                 let newMinMoves = approximateMinimumSwipes(generatedGrid: targetGrid)
+                
+                print("newMinMoves \(newMinMoves)")
                 
                 if newMinMoves > swapsMade {
                     swapMadeOnPosition = true
@@ -600,23 +600,26 @@ class AppModel: ObservableObject {
         
         randomGridStart()
         
-        var swapsNeededMet = false
+//        var swapsNeededMet = false
+//        
+//        while !swapsNeededMet {
+//                        
+//            // optimize
+//            let generatedTargetGrid = generateTargetGrid(from: grid, with: swapsNeeded)
+//            
+//            if swapsNeeded > approximateMinimumSwipes(generatedGrid: generatedTargetGrid) {
+//                print("trying again")
+//                randomGridStart()
+//                
+//            } else {
+//                grid = generatedTargetGrid
+//                swapsNeededMet = true
+//            }
+//            
+//        }
         
-        while !swapsNeededMet {
-                        
-            // optimize
-            let generatedTargetGrid = generateTargetGrid(from: grid, with: swapsNeeded)
-            
-            if swapsNeeded > approximateMinimumSwipes(generatedGrid: generatedTargetGrid) {
-                print("trying again")
-                randomGridStart()
-                
-            } else {
-                grid = generatedTargetGrid
-                swapsNeededMet = true
-            }
-            
-        }
+        grid = generateTargetGrid(from: grid, with: swapsNeeded)
+        
         swipesLeft = swapsNeeded
         persistData()
     }
