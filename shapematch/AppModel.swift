@@ -540,8 +540,7 @@ class AppModel: ObservableObject {
             for (swapRow, swapCol) in possibleSwaps {
                 let pos1 = Position(row: currentPosition.row, col: currentPosition.col)
                 let pos2 = Position(row: swapRow, col: swapCol)
-                let shape1 = targetGrid[pos1.row][pos1.col]
-                let shape2 = targetGrid[pos2.row][pos2.col]
+
                 
                 // Perform the swap
                 targetGrid.swapAt((pos1.row, pos1.col), (pos2.row, pos2.col))
