@@ -395,7 +395,7 @@ class AppModel: ObservableObject {
             var totalCost = 0
             
             for shapeType in shapeTypes {
-                let startPositions = positions(of: shapeType, in: grid)
+                let startPositions = positions(of: shapeType, in: generatedGrid)
                 let targetPositions = positions(of: shapeType, in: winningGrid)
                 let cost = minimalTotalMatchingCost(startPositions: startPositions, targetPositions: targetPositions)
                 totalCost += cost
