@@ -388,7 +388,7 @@ class AppModel: ObservableObject {
         return winningGrids
     }
     
-    func approximateMinimumSwipes(generatedGrid: [[ShapeType]]) -> Int {
+    func minimumMovesToSolve(generatedGrid: [[ShapeType]]) -> Int {
         let shapeTypes = Set(grid.flatMap { $0 })
         var costs:[Int] = []
         for winningGrid in winningGrids {
@@ -543,7 +543,7 @@ class AppModel: ObservableObject {
                 // Perform the swap
                 targetGrid.swapAt((pos1.row, pos1.col), (pos2.row, pos2.col))
                 
-                let newMinMoves = approximateMinimumSwipes(generatedGrid: targetGrid)
+                let newMinMoves = minimumMovesToSolve(generatedGrid: targetGrid)
                 
                 print("newMinMoves \(newMinMoves)")
                 
@@ -599,24 +599,6 @@ class AppModel: ObservableObject {
         undosLeft = 3
         
         randomGridStart()
-        
-//        var swapsNeededMet = false
-//        
-//        while !swapsNeededMet {
-//                        
-//            // optimize
-//            let generatedTargetGrid = generateTargetGrid(from: grid, with: swapsNeeded)
-//            
-//            if swapsNeeded > approximateMinimumSwipes(generatedGrid: generatedTargetGrid) {
-//                print("trying again")
-//                randomGridStart()
-//                
-//            } else {
-//                grid = generatedTargetGrid
-//                swapsNeededMet = true
-//            }
-//            
-//        }
         
         grid = generateTargetGrid(from: grid, with: swapsNeeded)
         
