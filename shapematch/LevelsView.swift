@@ -40,13 +40,6 @@ struct LevelsView: View {
     
     @State var cardOffset: CGFloat = deviceHeight
     
-    func shufflePreview() {
-        previewGrid = []
-        for _ in 0..<shapes.count {
-            previewGrid.append(shapes.shuffled())
-        }
-    }
-    
     func createBubbles() -> VortexSystem {
         let system = VortexSystem(tags: ["circle"])
         system.position = [0.5, 0]
@@ -135,7 +128,7 @@ struct LevelsView: View {
                                                     } else {
                                                         chosenLevel = level
                                                         (moves, shapes) = appModel.determineLevelSettings(level: chosenLevel)
-                                                        shufflePreview()
+                                                        previewGrid = appModel.generateTargetGrid(with: moves)
                                                         showLevelDetails = true
                                                     }
                                                     if userPersistedData.hapticsOn {
@@ -215,8 +208,7 @@ struct LevelsView: View {
                         Capsule()
                             .overlay {
                                 ZStack{
-                                    Color.white
-                                    Color.blue.opacity(0.6)
+                                    Color.blue
                                 }
                             }
                             .frame(width: 45, height: 9)
@@ -289,7 +281,7 @@ struct LevelsView: View {
                                 }
                                 .padding()
                                 .background{
-                                    LinearGradient(gradient: Gradient(colors: [.green, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                                    LinearGradient(gradient: Gradient(colors: [.mint, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.3))
                                 }
                                 .cornerRadius(21)
                                 .overlay{
@@ -306,7 +298,7 @@ struct LevelsView: View {
                 }
                 .padding()
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.blue, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
                 .cornerRadius(30)
                 .overlay{

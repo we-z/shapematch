@@ -31,7 +31,7 @@ struct ContentView: View {
                 }
                     .tag(0)
                 ZStack{
-                    Color.blue
+                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                         .ignoresSafeArea()
                     Group {
                         VStack(spacing: 0) {

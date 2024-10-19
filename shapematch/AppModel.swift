@@ -494,11 +494,11 @@ class AppModel: ObservableObject {
         return -v[0]
     }
 
-    func generateTargetGrid(from startGrid: [[ShapeType]], with swapsNeeded: Int) -> [[ShapeType]] {
-        var targetGrid = startGrid
+    func generateTargetGrid(with swapsNeeded: Int) -> [[ShapeType]] {
+        var targetGrid = randomAlignedGrid()
 //        var previousPositions: [ShapeType: Set<Position>] = [:]
         var possiblePositions: [Position] = []
-        let gridSize = startGrid.count
+        let gridSize = grid.count
 
         // Initialize possiblePositions with the starting positions
         func setPossiblePositions() {
@@ -601,35 +601,38 @@ class AppModel: ObservableObject {
         (swapsNeeded, shapes) = determineLevelSettings(level: userPersistedData.level)
         swapsMade = []
         undosLeft = 3
-        
-        randomGridStart()
-        
-        grid = generateTargetGrid(from: grid, with: swapsNeeded)
+        if startGrid.isEmpty {
+            grid = generateTargetGrid(with: swapsNeeded)
+        } else {
+            grid = startGrid
+        }
         
         swipesLeft = swapsNeeded
         persistData()
     }
     
-    func randomGridStart() {
+    func randomAlignedGrid() -> [[ShapeType]] {
         let alignmentIsHorizontal = Bool.random()
         let shuffledShapes = shapes.shuffled()
         let gridSize = shapes.count
-        grid = []
+        var randomGrid:[[ShapeType]] = []
         if alignmentIsHorizontal {
             // Horizontal alignment
             for shape in shuffledShapes {
                 let row = [ShapeType](repeating: shape, count: gridSize)
-                grid.append(row)
+                randomGrid.append(row)
             }
         } else {
             // Vertical alignment
-            grid = Array(repeating: Array(repeating: .circle, count: gridSize), count: gridSize)
+            randomGrid = Array(repeating: Array(repeating: .circle, count: gridSize), count: gridSize)
             for (colIndex, shape) in shuffledShapes.enumerated() {
                 for rowIndex in 0..<gridSize {
-                    grid[rowIndex][colIndex] = shape
+                    randomGrid[rowIndex][colIndex] = shape
                 }
             }
         }
+        
+        return randomGrid
     }
     
     func resetLevel() {
