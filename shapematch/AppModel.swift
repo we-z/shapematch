@@ -383,35 +383,61 @@ class AppModel: ObservableObject {
     }
     
     func minimumMovesToSolve(generatedGrid: [[ShapeType]]) -> Int {
-        let shapeTypes = Set(generatedGrid.flatMap { $0 })
-        var costs:[Int] = []
-        for winningGrid in winningGrids {
-            var totalCost = 0
-            
-            for shapeType in shapeTypes {
-                let startPositions = positions(of: shapeType, in: generatedGrid)
-                let targetPositions = positions(of: shapeType, in: winningGrid)
-                let cost = minimalTotalMatchingCost(startPositions: startPositions, targetPositions: targetPositions)
-                totalCost += cost
-            }
-            
-            // the higher the first number is, the more likely we are to end up with an extra swap
-            costs.append( Int(ceil (Double(totalCost) / 2.0)))
-        }
-        print("costs: \(costs)")
-        return costs.min()!
+        let shapeTypes = Array(Set(generatedGrid.flatMap { $0 }))
+        let N = generatedGrid.count
+
+        var minTotalCost = Int.max
+
+        // Compute minimal total cost for horizontal alignment
+        let horizontalCost = computeMinimalTotalCost(generatedGrid: generatedGrid, alignment: .horizontal, shapeTypes: shapeTypes)
+        minTotalCost = min(minTotalCost, horizontalCost)
+
+        // Compute minimal total cost for vertical alignment
+        let verticalCost = computeMinimalTotalCost(generatedGrid: generatedGrid, alignment: .vertical, shapeTypes: shapeTypes)
+        minTotalCost = min(minTotalCost, verticalCost)
+
+        return Int(ceil(Double(minTotalCost) / 2.0))
     }
 
-    func positions(of shapeType: ShapeType, in grid: [[ShapeType]]) -> [Position] {
-        var positions = [Position]()
-        for (rowIndex, row) in grid.enumerated() {
-            for (colIndex, cell) in row.enumerated() {
-                if cell == shapeType {
-                    positions.append(Position(row: rowIndex, col: colIndex))
+    enum Alignment {
+        case horizontal
+        case vertical
+    }
+
+    func computeMinimalTotalCost(generatedGrid: [[ShapeType]], alignment: Alignment, shapeTypes: [ShapeType]) -> Int {
+        let N = generatedGrid.count
+        var costMatrix = [[Int]](repeating: [Int](repeating: 0, count: N), count: N)
+
+        // currentPositions[s]: positions of shapeType s (indexed by sIndex)
+        var currentPositions = [[Position]](repeating: [], count: N)
+        for (rowIndex, row) in generatedGrid.enumerated() {
+            for (colIndex, shape) in row.enumerated() {
+                if let sIndex = shapeTypes.firstIndex(of: shape) {
+                    currentPositions[sIndex].append(Position(row: rowIndex, col: colIndex))
                 }
             }
         }
-        return positions
+
+        for sIndex in 0..<N {
+            for r in 0..<N {
+                var targetPositions = [Position]()
+                if alignment == .horizontal {
+                    for col in 0..<N {
+                        targetPositions.append(Position(row: r, col: col))
+                    }
+                } else {
+                    for row in 0..<N {
+                        targetPositions.append(Position(row: row, col: r))
+                    }
+                }
+                let cost = minimalTotalMatchingCost(startPositions: currentPositions[sIndex], targetPositions: targetPositions)
+                costMatrix[sIndex][r] = cost
+            }
+        }
+
+        // Solve the Assignment Problem using the Hungarian Algorithm
+        let totalCost = hungarianAlgorithm(costMatrix: costMatrix)
+        return totalCost
     }
 
     func minimalTotalMatchingCost(startPositions: [Position], targetPositions: [Position]) -> Int {
@@ -509,7 +535,7 @@ class AppModel: ObservableObject {
         var swapMadeOnPosition = false
         var swapsMade = 0
         var iterations = 0
-        let maxIterations = 100
+        let maxIterations = 1000
 
         while swapsMade < swapsNeeded && iterations < maxIterations {
             iterations += 1
