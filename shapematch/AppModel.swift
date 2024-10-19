@@ -313,8 +313,10 @@ class AppModel: ObservableObject {
             swapsNeeded = 19
         case 615...674:
             swapsNeeded = 20
-        default:
+        case 675...737:
             swapsNeeded = 21
+        default:
+            swapsNeeded = 22
         }
 
         
