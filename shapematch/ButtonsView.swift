@@ -91,7 +91,7 @@ struct ButtonsView: View {
                                 .font(.system(size: deviceWidth / 21))
                                 .customTextStroke(width: 1)
                                 .fixedSize()
-                            Text("💎 300")
+                            Text("💎 1")
                                 .bold()
                                 .customTextStroke(width: 1)
                                 .fixedSize()

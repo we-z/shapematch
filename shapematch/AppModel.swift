@@ -164,8 +164,8 @@ class AppModel: ObservableObject {
     
     func undoSwap() {
         if undosLeft == 0 {
-            if userPersistedData.gemBalance >= 300 {
-                userPersistedData.decrementBalance(amount: 300)
+            if userPersistedData.gemBalance >= 3 {
+                userPersistedData.decrementBalance(amount: 3)
                 undosLeft += 3
             } else {
                 showGemMenu = true

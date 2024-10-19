@@ -98,7 +98,7 @@ struct GemMenuView: View {
                             }
                         } label: {
                             HStack{
-                                Text("💎 1,000")
+                                Text("💎 10")
                                     .bold()
                                     .font(.system(size: deviceWidth/15))
                                     .fixedSize()
@@ -142,7 +142,7 @@ struct GemMenuView: View {
                             }
                         } label: {
                             HStack{
-                                Text("💎 10,000")
+                                Text("💎 100")
                                     .bold()
                                     .font(.system(size: deviceWidth/15))
                                     .fixedSize()
@@ -187,7 +187,7 @@ struct GemMenuView: View {
                             }
                         } label: {
                             HStack{
-                                Text("💎 100,000")
+                                Text("💎 1,000")
                                     .bold()
                                     .font(.system(size: deviceWidth/15))
                                     .fixedSize()

@@ -106,7 +106,7 @@ struct NoMoreSwipesView: View {
                         Button {
                             animateAwayButtonsAndBanner()
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                if 3 > userPersistedData.gemBalance {
+                                if 9 > userPersistedData.gemBalance {
                                     appModel.showGemMenu = true
                                 } else {
                                     userPersistedData.decrementBalance(amount: 3)
@@ -123,7 +123,7 @@ struct NoMoreSwipesView: View {
                                     .customTextStroke(width: 2.1)
                                     .padding(.leading)
                                 Spacer()
-                                Text("💎 900")
+                                Text("💎 9")
                                     .bold()
                                     .font(.system(size: deviceWidth/12))
                                     .fixedSize()
