@@ -560,7 +560,11 @@ class AppModel: ObservableObject {
             if !swapMadeOnPosition {
                 possiblePositions.removeAll(where: { $0 == currentPosition })
             }
-                
+            
+            if possiblePositions.isEmpty {
+                print("ran out of possible Positions")
+                break
+            }
         }
 
         if iterations >= maxIterations {

@@ -273,7 +273,7 @@ struct LevelsView: View {
                                     .font(.system(size: deviceWidth/15))
                                     .fixedSize()
                                     .customTextStroke(width: 1.5)
-                                Text("\(moves + 2)")
+                                Text("\(moves)")
                                     .bold()
                                     .font(.system(size: chosenLevel > 999 ? deviceWidth/12 : chosenLevel > 99 ? deviceWidth/9 : deviceWidth/6))
                                     .customTextStroke()
