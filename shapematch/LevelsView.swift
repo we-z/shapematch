@@ -224,7 +224,7 @@ struct LevelsView: View {
                             .font(.system(size: deviceWidth/15))
                             .fixedSize()
                             .customTextStroke(width: 1.5)
-                        Text("Moves: \(moves)")
+                        Text("Moves: \(moves + 2)")
                             .bold()
                             .multilineTextAlignment(.center)
                             .font(.system(size: deviceWidth/15))

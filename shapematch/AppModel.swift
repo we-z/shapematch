@@ -632,7 +632,7 @@ class AppModel: ObservableObject {
             grid = startGrid
         }
         
-        swipesLeft = swapsNeeded
+        swipesLeft = swapsNeeded + 2
         persistData()
     }
     
@@ -666,7 +666,7 @@ class AppModel: ObservableObject {
         swapsMade = []
         undosLeft = 3
         // Reset the swipes left to the initial calculated value
-        swipesLeft = swapsNeeded
+        swipesLeft = swapsNeeded + 2
     }
     
 }
