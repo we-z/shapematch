@@ -383,7 +383,7 @@ class AppModel: ObservableObject {
     }
     
     func minimumMovesToSolve(generatedGrid: [[ShapeType]]) -> Int {
-        let shapeTypes = Set(grid.flatMap { $0 })
+        let shapeTypes = Set(generatedGrid.flatMap { $0 })
         var costs:[Int] = []
         for winningGrid in winningGrids {
             var totalCost = 0
@@ -488,11 +488,11 @@ class AppModel: ObservableObject {
         return -v[0]
     }
 
-    func generateTargetGrid(with swapsNeeded: Int) -> [[ShapeType]] {
-        var targetGrid = randomAlignedGrid()
+    func generateTargetGrid(from shapes: [ShapeType], with swapsNeeded: Int) -> [[ShapeType]] {
+        var targetGrid = randomAlignedGrid(shapes: shapes)
 //        var previousPositions: [ShapeType: Set<Position>] = [:]
         var possiblePositions: [Position] = []
-        let gridSize = grid.count
+        let gridSize = shapes.count
 
         // Initialize possiblePositions with the starting positions
         func setPossiblePositions() {
@@ -596,7 +596,7 @@ class AppModel: ObservableObject {
         swapsMade = []
         undosLeft = 3
         if startGrid.isEmpty {
-            grid = generateTargetGrid(with: swapsNeeded)
+            grid = generateTargetGrid(from: shapes, with: swapsNeeded)
         } else {
             grid = startGrid
         }
@@ -605,7 +605,7 @@ class AppModel: ObservableObject {
         persistData()
     }
     
-    func randomAlignedGrid() -> [[ShapeType]] {
+    func randomAlignedGrid(shapes: [ShapeType]) -> [[ShapeType]] {
         let alignmentIsHorizontal = Bool.random()
         let shuffledShapes = shapes.shuffled()
         let gridSize = shapes.count

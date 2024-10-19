@@ -17,7 +17,11 @@ struct LevelsView: View {
     @State var moves = 1
     @State var shapeWidth = 0.0
     @State var shapeScale = 1.0
-    @State var shapes: [ShapeType] = []
+    @State var shapes: [ShapeType] = [] {
+        didSet {
+            appModel.winningGrids = appModel.generateAllWinningGrids(shapes: shapes)
+        }
+    }
     @State private var scrollProxy: ScrollViewProxy? = nil
     @State var showLevelDetails = false
     @Environment(\.colorScheme) var colorScheme
@@ -128,7 +132,7 @@ struct LevelsView: View {
                                                     } else {
                                                         chosenLevel = level
                                                         (moves, shapes) = appModel.determineLevelSettings(level: chosenLevel)
-                                                        previewGrid = appModel.generateTargetGrid(with: moves)
+                                                        previewGrid = appModel.generateTargetGrid(from: shapes, with: moves)
                                                         showLevelDetails = true
                                                     }
                                                     if userPersistedData.hapticsOn {
