@@ -38,7 +38,7 @@ struct LevelsView: View {
         }
     }
     
-    @State var cardOffset: CGFloat = deviceWidth
+    @State var cardOffset: CGFloat = deviceHeight
     
     func shufflePreview() {
         previewGrid = []
@@ -168,7 +168,7 @@ struct LevelsView: View {
     func animateAwayButtonsAndBanner() {
         DispatchQueue.main.async { [self] in
             withAnimation(.linear(duration: 0.3)) {
-                cardOffset = deviceWidth
+                cardOffset = deviceWidth * 3
             }
         }
     }
@@ -179,8 +179,8 @@ struct LevelsView: View {
                 .ignoresSafeArea()
                 .onTapGesture {
                     DispatchQueue.main.async { [self] in
-                        withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                            cardOffset = deviceWidth * 2
+                        withAnimation(.interpolatingSpring(mass: 6.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                            cardOffset = deviceWidth * 3
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
                                 if userPersistedData.hapticsOn {
                                     impactLight.impactOccurred()
@@ -195,8 +195,8 @@ struct LevelsView: View {
                         .onEnded { gesture in
                             if gesture.translation.height > 0 {
                                 DispatchQueue.main.async { [self] in
-                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                        cardOffset = deviceWidth * 2
+                                    withAnimation(.interpolatingSpring(mass: 6.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                        cardOffset = deviceWidth * 3
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
                                             if userPersistedData.hapticsOn {
                                                 impactLight.impactOccurred()
@@ -217,71 +217,41 @@ struct LevelsView: View {
                             .frame(width: 45, height: 9)
                             .padding(.bottom, 15)
                             .customTextStroke()
-                        HStack{
-                            Spacer()
+                        Text("Level: \(chosenLevel)")
+                            .bold()
+                            .font(.system(size: deviceWidth/15))
+                            .fixedSize()
+                            .customTextStroke(width: 1.5)
+                        Text("Moves: \(moves)")
+                            .bold()
+                            .multilineTextAlignment(.center)
+                            .font(.system(size: deviceWidth/15))
+                            .fixedSize()
+                            .customTextStroke(width: 1.5)
                             VStack{
-                                
-                                VStack() {
-                                    Text("Level")
-                                        .bold()
-                                        .font(.system(size: deviceWidth/15))
-                                        .fixedSize()
-                                        .customTextStroke(width: 1.5)
-                                    Text("\(chosenLevel)")
-                                        .bold()
-                                        .font(.system(size: chosenLevel > 999 ? deviceWidth/12 : chosenLevel > 99 ? deviceWidth/9 : deviceWidth/6))
-                                        .minimumScaleFactor(0.1)
-                                        .fixedSize()
-                                        .customTextStroke()
-                                    
-                                }
-                            }
-                            .frame(width: deviceWidth/5)
-                            Spacer()
-                            VStack {
                                 VStack{
-                                    VStack{
-                                        ForEach(0..<shapes.count, id: \.self) { row in
-                                            HStack {
-                                                ForEach(0..<shapes.count, id: \.self) { column in
-                                                    ShapeView(shapeType: previewGrid[row][column])
-                                                        .frame(width: shapeWidth / 3.9, height: shapeWidth / 3.9)
-                                                        .scaleEffect( shapeScale / 3.3)
-                                                        .scaleEffect(idiom == .pad ? 0.5 : 1)
-                                                }
+                                    ForEach(0..<shapes.count, id: \.self) { row in
+                                        HStack {
+                                            ForEach(0..<shapes.count, id: \.self) { column in
+                                                ShapeView(shapeType: previewGrid[row][column])
+                                                    .frame(width: shapeWidth / 1.2, height: shapeWidth / 1.2)
+                                                    .scaleEffect( shapeScale / 1.2)
+                                                    .scaleEffect(idiom == .pad ? 0.5 : 1)
                                             }
                                         }
                                     }
                                 }
-                                .padding( idiom == .pad ? 30 : 18)
-                                .background{
-                                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                                }
-                                .cornerRadius(idiom == .pad ? 30 : 15)
-                                .overlay {
-                                    RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
-                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                        .padding(1)
-                                }
-                                //                            .scaleEffect(idiom == .pad ? 0.8 : 1)
                             }
-                            Spacer()
-                            VStack{
-                                Text("Moves")
-                                    .bold()
-                                    .multilineTextAlignment(.center)
-                                    .font(.system(size: deviceWidth/15))
-                                    .fixedSize()
-                                    .customTextStroke(width: 1.5)
-                                Text("\(moves)")
-                                    .bold()
-                                    .font(.system(size: chosenLevel > 999 ? deviceWidth/12 : chosenLevel > 99 ? deviceWidth/9 : deviceWidth/6))
-                                    .customTextStroke()
-                                
+                            .padding( idiom == .pad ? 30 : 18)
+                            .background{
+                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                             }
-                            .frame(width: deviceWidth/5)
-                            Spacer()
-                        }
+                            .cornerRadius(idiom == .pad ? 30 : 18)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 18)
+                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                    .padding(1)
+                            }
                         .padding(.vertical)
                         if chosenLevel <= userPersistedData.highestLevel {
                             Button {
@@ -307,7 +277,7 @@ struct LevelsView: View {
                                 }
                                 .padding()
                                 .background{
-                                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                                    LinearGradient(gradient: Gradient(colors: [.green, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                                 }
                                 .cornerRadius(21)
                                 .overlay{
@@ -337,8 +307,8 @@ struct LevelsView: View {
                 .offset(y: cardOffset)
                 .onAppear{
                     DispatchQueue.main.async {
-                        cardOffset = deviceWidth
-                        withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                        cardOffset = deviceHeight
+                        withAnimation(.interpolatingSpring(mass: 6.0, stiffness: 100.0, damping: 30.0, initialVelocity: 0.0)) {
                             cardOffset = 0
                         }
                     }
@@ -351,8 +321,8 @@ struct LevelsView: View {
                         .onEnded { gesture in
                             if gesture.translation.height > 0 {
                                 DispatchQueue.main.async { [self] in
-                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                        cardOffset = deviceWidth * 2
+                                    withAnimation(.interpolatingSpring(mass: 6.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                        cardOffset = deviceWidth * 3
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
                                             if userPersistedData.hapticsOn {
                                                 impactLight.impactOccurred()
@@ -363,7 +333,7 @@ struct LevelsView: View {
                                 }
                             } else {
                                 DispatchQueue.main.async { [self] in
-                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                    withAnimation(.interpolatingSpring(mass: 6.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                                         cardOffset = 0
                                     }
                                 }
