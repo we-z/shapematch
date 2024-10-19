@@ -176,7 +176,6 @@ struct CelebrationEffect: View {
                 
                 .scaleEffect(showLevel ? 1 : 0.001)
         }
-        .allowsHitTesting(false)
     }
 }
 
