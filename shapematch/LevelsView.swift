@@ -213,8 +213,14 @@ struct LevelsView: View {
                 ZStack {
                     VStack(spacing: 0){
                         Capsule()
-                            .foregroundColor(.blue)
+                            .overlay {
+                                ZStack{
+                                    Color.white
+                                    Color.blue.opacity(0.6)
+                                }
+                            }
                             .frame(width: 45, height: 9)
+                            .cornerRadius(15)
                             .padding(.bottom, 15)
                             .customTextStroke()
                         Text("Level: \(chosenLevel)")
@@ -228,6 +234,7 @@ struct LevelsView: View {
                             .font(.system(size: deviceWidth/15))
                             .fixedSize()
                             .customTextStroke(width: 1.5)
+                            .padding()
                             VStack{
                                 VStack{
                                     ForEach(0..<shapes.count, id: \.self) { row in
@@ -244,14 +251,19 @@ struct LevelsView: View {
                             }
                             .padding( idiom == .pad ? 30 : 18)
                             .background{
-                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                                ZStack{
+                                    Color.white
+                                    Color.blue.opacity(0.6)
+                                }
                             }
                             .cornerRadius(idiom == .pad ? 30 : 18)
                             .overlay {
                                 RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 18)
-                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                    .stroke(Color.yellow, lineWidth: idiom == .pad ? 9 : 7)
                                     .padding(1)
+                                    .shadow(radius: 3)
                             }
+                            .shadow(radius: 3)
                         .padding(.vertical)
                         if chosenLevel <= userPersistedData.highestLevel {
                             Button {
@@ -294,7 +306,7 @@ struct LevelsView: View {
                 }
                 .padding()
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    LinearGradient(gradient: Gradient(colors: [.blue, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
                 .cornerRadius(30)
                 .overlay{

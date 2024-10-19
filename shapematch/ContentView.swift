@@ -88,11 +88,11 @@ struct ContentView: View {
                                     .cornerRadius(30)
                                     .overlay {
                                         RoundedRectangle(cornerRadius: 30)
-                                            .stroke(Color.black, lineWidth: idiom == .pad ? 11 : 6)
+                                            .stroke(Color.yellow, lineWidth: idiom == .pad ? 11 : 7)
                                             .padding(1)
-//                                            .shadow(radius: 3)
+                                            .shadow(radius: 3)
                                     }
-//                                    .shadow(radius: 3)
+                                    .shadow(radius: 3)
                                     .padding()
                                 VStack {
                                     ForEach(0..<appModel.grid.count, id: \.self) { row in
