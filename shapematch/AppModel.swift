@@ -556,8 +556,9 @@ class AppModel: ObservableObject {
             }
             
             if possiblePositions.isEmpty {
-                print("ran out of possible Positions")
-                break
+                print("ran out of possible Positions. trying again")
+                swapsMade = 0
+                setPossiblePositions()
             }
         }
 
