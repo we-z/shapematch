@@ -12,7 +12,7 @@ struct NoMoreSwipesView: View {
     
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @State var buttonsnOffset = deviceWidth
-    @State var bannerOffset = -(deviceWidth/2)
+    @State var bannerOffset = -(deviceWidth)
     @State var pulseText = true
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     
@@ -28,7 +28,7 @@ struct NoMoreSwipesView: View {
         DispatchQueue.main.async { [self] in
             withAnimation(.linear(duration: 0.3)) {
                 buttonsnOffset = deviceWidth
-                bannerOffset = -(deviceWidth/2)
+                bannerOffset = -(deviceWidth)
             }
         }
     }
@@ -37,65 +37,83 @@ struct NoMoreSwipesView: View {
         ZStack {
             Color.gray.opacity(0.7)
                 .ignoresSafeArea()
-                .onTapGesture {
-                    animateAwayButtonsAndBanner()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                        resetGame()
-                    }
-                }
-                .gesture(
-                    DragGesture()
-                        .onChanged { gesture in
-                            if gesture.translation.height > 0 {
-                                buttonsnOffset = gesture.translation.height
-                            } else if gesture.translation.height < 0 {
-                                bannerOffset = gesture.translation.height
-                            }
-                        }
-                        .onEnded { _ in
-                            DispatchQueue.main.async { [self] in
-                                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                    buttonsnOffset = 0
-                                    bannerOffset = 0
-                                }
-                            }
-                        }
-                )
+//                .onTapGesture {
+//                    animateAwayButtonsAndBanner()
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+//                        resetGame()
+//                    }
+//                }
+//                .gesture(
+//                    DragGesture()
+//                        .onChanged { gesture in
+//                            if gesture.translation.height > 0 {
+//                                buttonsnOffset = gesture.translation.height
+//                            } else if gesture.translation.height < 0 {
+//                                bannerOffset = gesture.translation.height
+//                            }
+//                        }
+//                        .onEnded { _ in
+//                            DispatchQueue.main.async { [self] in
+//                                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+//                                    buttonsnOffset = 0
+//                                    bannerOffset = 0
+//                                }
+//                            }
+//                        }
+//                )
             VStack{
-                HStack {
-                    Spacer()
-                    Text("0 Moves left! ✋")
-                        .bold()
-                        .font(.system(size: deviceWidth/9))
-                        .customTextStroke(width: 2.4)
-                        .fixedSize()
-                    Spacer()
-                }
-                .padding(12)
-                .background{
-                    LinearGradient(gradient: Gradient(colors: [.red, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
-                }
-                .cornerRadius(21)
-                .overlay{
-                    RoundedRectangle(cornerRadius: 21)
-                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
-                        .padding(1)
-                }
-                .padding(.top)
-                .offset(y: bannerOffset)
-                .gesture(
-                    DragGesture(minimumDistance: 1, coordinateSpace: .local)
-                        .onEnded { value in
-                            if value.translation.height < 0 {
-                                // Swipe up detected
-                                DispatchQueue.main.async { [self] in
-                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                        bannerOffset = -(deviceWidth/2)
-                                    }
-                                }
+                VStack {
+                    HStack {
+                        Button {
+                            appModel.showGemMenu = true
+                        } label: {
+                            HStack{
+                                Text("💎 \(userPersistedData.gemBalance)")
+                                    .bold()
+                                    .font(.system(size: deviceWidth/15))
+                                    .lineLimit(1)
+                                    .customTextStroke(width: 1.8)
+                                    .fixedSize()
+                                    .padding(.horizontal)
+                                
                             }
+                            .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
+                            .background{
+                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                            }
+                            .cornerRadius(18)
+                            .overlay{
+                                RoundedRectangle(cornerRadius: 18)
+                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                    .padding(1)
+                            }
+                            .padding(3)
                         }
-                )
+                        .buttonStyle(.roundedAndShadow6)
+                        Spacer()
+                    }
+                    HStack {
+                        Spacer()
+                        Text("0 Moves left! ✋")
+                            .bold()
+                            .font(.system(size: deviceWidth/9))
+                            .customTextStroke(width: 2.4)
+                            .fixedSize()
+                        Spacer()
+                    }
+                    .padding(12)
+                    .background{
+                        LinearGradient(gradient: Gradient(colors: [.red, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
+                    }
+                    .cornerRadius(21)
+                    .overlay{
+                        RoundedRectangle(cornerRadius: 21)
+                            .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 6)
+                            .padding(1)
+                    }
+                    .padding(.top)
+                }
+                .offset(y: bannerOffset)
                 Spacer()
                 VStack(spacing: idiom == .pad ? 18 : 6){
                     Text("Continue?")
