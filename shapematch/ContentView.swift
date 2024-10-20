@@ -161,11 +161,12 @@ struct ContentView: View {
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .ignoresSafeArea()
             CelebrationEffect()
+            if appModel.showNoMoreSwipesView {
+                NoMoreSwipesView()
+            }
             if appModel.showGemMenu {
                 GemMenuView()
                     .padding(.bottom, idiom == .pad ? 60 : 0)
-            } else if appModel.showNoMoreSwipesView {
-                NoMoreSwipesView()
             }
             CelebrateGems()
             if appModel.showMovesCard {
