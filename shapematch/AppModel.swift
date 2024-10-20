@@ -226,8 +226,8 @@ class AppModel: ObservableObject {
                 }
             } else {
                 userPersistedData.incrementBalance(amount: 1)
+                userPersistedData.levelStars[userPersistedData.level] = 3
             }
-            userPersistedData.levelStars[userPersistedData.level] = 3
         } else if swipesLeft > 0 {
             if let levelStars = userPersistedData.levelStars[userPersistedData.level] {
                 if levelStars <= 2 {
@@ -417,7 +417,6 @@ class AppModel: ObservableObject {
     
     func minimumMovesToSolve(generatedGrid: [[ShapeType]]) -> Int {
         let shapeTypes = Array(Set(generatedGrid.flatMap { $0 }))
-        let N = generatedGrid.count
 
         var minTotalCost = Int.max
 
