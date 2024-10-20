@@ -10,6 +10,18 @@ import SwiftUI
 struct LevelCompleteView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @ObservedObject private var appModel = AppModel.sharedAppModel
+    @State var buttonsnOffset = deviceWidth * 2
+    @State var bannerOffset = -(deviceWidth)
+    
+    func animateAwayButtonsAndBanner() {
+        DispatchQueue.main.async { [self] in
+            withAnimation(.linear(duration: 0.3)) {
+                buttonsnOffset = deviceWidth * 2
+                bannerOffset = -(deviceWidth)
+            }
+        }
+    }
+    
     var body: some View {
         VStack{
             HStack {
@@ -42,6 +54,7 @@ struct LevelCompleteView: View {
                 .buttonStyle(.roundedAndShadow6)
                 Spacer()
             }
+            .offset(y: bannerOffset)
             Spacer()
                 
                 VStack{
@@ -147,6 +160,15 @@ struct LevelCompleteView: View {
                 }
                 .shadow(radius: 3)
                 .padding()
+                .offset(y: buttonsnOffset)
+        }
+        .onAppear {
+            DispatchQueue.main.async { [self] in
+                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                    bannerOffset = 0
+                    buttonsnOffset = 0
+                }
+            }
         }
     }
 }
