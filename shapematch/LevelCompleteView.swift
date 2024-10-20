@@ -12,6 +12,9 @@ struct LevelCompleteView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @State var buttonsnOffset = deviceWidth * 2
     @State var bannerOffset = -(deviceWidth)
+    @State var show1Star = false
+    @State var show2Stars = false
+    @State var show3Stars = false
     
     func animateAwayButtonsAndBanner() {
         DispatchQueue.main.async { [self] in
@@ -96,15 +99,19 @@ struct LevelCompleteView: View {
                             Text("⭐️")
                                 .customTextStroke(width: 2.7)
                                 .opacity(0.2)
-                            Text("⭐️")
-                                .customTextStroke(width: 2.7)
+                            if show1Star {
+                                Text("⭐️")
+                                    .customTextStroke(width: 2.7)
+                            }
                         }
                         ZStack {
                             Text("⭐️")
                                 .customTextStroke(width: 2.7)
                                 .opacity(0.2)
-                            Text("⭐️")
-                                .customTextStroke(width: 2.7)
+                            if show2Stars {
+                                Text("⭐️")
+                                    .customTextStroke(width: 2.7)
+                            }
                                 
                         }
                         .padding(.horizontal)
@@ -112,8 +119,10 @@ struct LevelCompleteView: View {
                             Text("⭐️")
                                 .customTextStroke(width: 2.7)
                                 .opacity(0.2)
-                            Text("⭐️")
-                                .customTextStroke(width: 2.7)
+                            if show3Stars {
+                                Text("⭐️")
+                                    .customTextStroke(width: 2.7)
+                            }
                         }
                     }
                     .font(.system(size: deviceWidth / 6))
@@ -164,9 +173,24 @@ struct LevelCompleteView: View {
         }
         .onAppear {
             DispatchQueue.main.async { [self] in
-                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 24.0, initialVelocity: 0.0)) {
                     bannerOffset = 0
                     buttonsnOffset = 0
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [self] in
+                if appModel.swipesLeft >= 0 {
+                    show1Star = true
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
+                if appModel.swipesLeft >= 1 {
+                    show2Stars = true
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) { [self] in
+                if appModel.swipesLeft >= 0 {
+                    show3Stars = true
                 }
             }
         }
