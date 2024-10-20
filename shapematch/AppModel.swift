@@ -218,6 +218,30 @@ class AppModel: ObservableObject {
         return isAlignedHorizontally(grid: grid) || isAlignedVertically(grid: grid)
     }
 
+    func updateStars() {
+        if swipesLeft > 1 {
+            if userPersistedData.levelStars[userPersistedData.level] != 3 {
+                userPersistedData.incrementBalance(amount: 1)
+            }
+            userPersistedData.levelStars[userPersistedData.level] = 3
+        } else if swipesLeft > 0 {
+            if let levelStars = userPersistedData.levelStars[userPersistedData.level] {
+                if levelStars <= 2 {
+                    userPersistedData.levelStars[userPersistedData.level] = 2
+                }
+            } else {
+                userPersistedData.levelStars[userPersistedData.level] = 2
+            }
+        } else {
+            if let levelStars = userPersistedData.levelStars[userPersistedData.level] {
+                if levelStars <= 1 {
+                    userPersistedData.levelStars[userPersistedData.level] = 1
+                }
+            } else {
+                userPersistedData.levelStars[userPersistedData.level] = 1
+            }
+        }
+    }
     
     func checkWinCondition() {
         if isWinningGrid(grid: grid) {
@@ -229,6 +253,7 @@ class AppModel: ObservableObject {
                 showInstruction.toggle()
             }
             self.freezeGame = true
+//            updateStars()
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
                 if audioController.musicOn {
                     AudioServicesPlaySystemSound(1320)

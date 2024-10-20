@@ -37,22 +37,6 @@ class UserPersistedData: ObservableObject {
             levelStarsString = dictionaryToString(newValue)
         }
     }
-
-//    @Published var gemBalance: Int = 0
-//    @Published var firstGamePlayed: Bool = false
-//    @Published var hasShared: Bool = false
-//    @Published var showedMovesCard: Bool = false
-//    @Published var gridData: String = ""
-//    @Published var highestLevel: Int = 0
-//    @Published var level: Int = 16 {
-//        didSet {
-//            if level > highestLevel {
-//                highestLevel = level
-//            }
-//        }
-//    }
-//
-//    @CloudStorage("lastLaunch") var lastLaunch: String = ""
     
     init() {
         highestLevel = highestLevel == 1 ? level : highestLevel
