@@ -15,6 +15,10 @@ struct LevelCompleteView: View {
     @State var show1Star = false
     @State var show2Stars = false
     @State var show3Stars = false
+    @State var star1Size = 1.8
+    @State var star2Size = 1.8
+    @State var star3Size = 1.8
+    
     
     func animateAwayButtonsAndBanner() {
         DispatchQueue.main.async { [self] in
@@ -102,6 +106,7 @@ struct LevelCompleteView: View {
                             if show1Star {
                                 Text("⭐️")
                                     .customTextStroke(width: 2.7)
+                                    .scaleEffect(star1Size)
                             }
                         }
                         ZStack {
@@ -111,6 +116,7 @@ struct LevelCompleteView: View {
                             if show2Stars {
                                 Text("⭐️")
                                     .customTextStroke(width: 2.7)
+                                    .scaleEffect(star2Size)
                             }
                                 
                         }
@@ -122,6 +128,7 @@ struct LevelCompleteView: View {
                             if show3Stars {
                                 Text("⭐️")
                                     .customTextStroke(width: 2.7)
+                                    .scaleEffect(star3Size)
                             }
                         }
                     }
@@ -181,16 +188,25 @@ struct LevelCompleteView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [self] in
                 if appModel.swipesLeft >= 0 {
                     show1Star = true
+                    withAnimation {
+                        star1Size = 1
+                    }
                 }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
                 if appModel.swipesLeft >= 1 {
                     show2Stars = true
+                    withAnimation {
+                        star2Size = 1
+                    }
                 }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) { [self] in
-                if appModel.swipesLeft >= 0 {
+                if appModel.swipesLeft >= 2 {
                     show3Stars = true
+                    withAnimation {
+                        star3Size = 1
+                    }
                 }
             }
         }
