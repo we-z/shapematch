@@ -9,8 +9,39 @@ import SwiftUI
 
 struct LevelCompleteView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
+    @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
         VStack{
+            HStack {
+                Button {
+                    appModel.showGemMenu = true
+                } label: {
+                    HStack{
+                        Text("💎 \(userPersistedData.gemBalance)")
+                            .bold()
+                            .font(.system(size: deviceWidth/15))
+                            .lineLimit(1)
+                            .customTextStroke(width: 1.8)
+                            .fixedSize()
+                            .padding(.horizontal)
+                        
+                    }
+                    .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
+                    .background{
+                        LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    }
+                    .cornerRadius(18)
+                    .overlay{
+                        RoundedRectangle(cornerRadius: 18)
+                            .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                            .padding(1)
+                    }
+                    .padding(3)
+                    .padding(.horizontal)
+                }
+                .buttonStyle(.roundedAndShadow6)
+                Spacer()
+            }
             Spacer()
                 
                 VStack{
@@ -19,6 +50,7 @@ struct LevelCompleteView: View {
                             .bold()
                             .font(.system(size: deviceWidth / 12))
                             .customTextStroke(width: 1.5)
+                            .fixedSize()
                             .padding(.top)
                             .opacity(0)
                         Spacer()
@@ -26,6 +58,7 @@ struct LevelCompleteView: View {
                             .bold()
                             .font(.system(size: deviceWidth / 9))
                             .customTextStroke(width: 2.1)
+                            .fixedSize()
                             .padding(.top)
                         Spacer()
                         Button {
@@ -35,6 +68,7 @@ struct LevelCompleteView: View {
                                 .bold()
                                 .font(.system(size: deviceWidth / 12))
                                 .customTextStroke(width: 1.5)
+                                .fixedSize()
                                 .padding(.top)
                         }
                     }
@@ -43,7 +77,7 @@ struct LevelCompleteView: View {
                         .font(.system(size: deviceWidth / 6))
                         .customTextStroke(width: 2.7)
                         .padding(.bottom, 18)
-                        .padding(.top, 1)
+                        .padding(.top, -6)
                     HStack{
                         ZStack {
                             Text("⭐️")
