@@ -107,6 +107,7 @@ struct LevelCompleteView: View {
                                 Text("⭐️")
                                     .customTextStroke(width: 2.7)
                                     .scaleEffect(star1Size)
+                                    .rotationEffect(.degrees((star1Size - 1) * 300))
                             }
                         }
                         ZStack {
@@ -117,6 +118,7 @@ struct LevelCompleteView: View {
                                 Text("⭐️")
                                     .customTextStroke(width: 2.7)
                                     .scaleEffect(star2Size)
+                                    .rotationEffect(.degrees((star2Size - 1) * 300))
                             }
                                 
                         }
@@ -129,6 +131,7 @@ struct LevelCompleteView: View {
                                 Text("⭐️")
                                     .customTextStroke(width: 2.7)
                                     .scaleEffect(star3Size)
+                                    .rotationEffect(.degrees((star3Size - 1) * 300))
                             }
                         }
                     }
