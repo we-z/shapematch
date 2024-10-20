@@ -29,7 +29,7 @@ class UserPersistedData: ObservableObject {
         }
     }
     
-    var levelStars: [Int: Int] {
+    var levelStars: [String: Int] {
         get {
             stringToDictionary(levelStarsString)
         }
@@ -43,16 +43,16 @@ class UserPersistedData: ObservableObject {
     }
     
     // Helper functions to serialize and deserialize
-    func dictionaryToString(_ dictionary: [Int: Int]) -> String {
+    func dictionaryToString(_ dictionary: [String: Int]) -> String {
         if let jsonData = try? JSONSerialization.data(withJSONObject: dictionary, options: []) {
             return String(data: jsonData, encoding: .utf8) ?? "{}"
         }
         return "{}"
     }
 
-    func stringToDictionary(_ string: String) -> [Int: Int] {
+    func stringToDictionary(_ string: String) -> [String: Int] {
         if let jsonData = string.data(using: .utf8),
-           let dictionary = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [Int: Int] {
+           let dictionary = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Int] {
             return dictionary
         }
         return [:]
