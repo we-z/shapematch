@@ -28,25 +28,49 @@ struct LevelCompleteView: View {
                             .customTextStroke(width: 2.1)
                             .padding(.top)
                         Spacer()
-                        Text("❌")
-                            .bold()
-                            .font(.system(size: deviceWidth / 12))
-                            .customTextStroke(width: 1.5)
-                            .padding(.top)
+                        Button {
+
+                        } label: {
+                            Text("❌")
+                                .bold()
+                                .font(.system(size: deviceWidth / 12))
+                                .customTextStroke(width: 1.5)
+                                .padding(.top)
+                        }
                     }
                     .padding(.horizontal, 30)
-//                    Text("🥳")
-//                        .font(.system(size: deviceWidth / 3))
-//                        .customTextStroke(width: 3)
-//                        .padding(.bottom, 1)
+                    Text("🥳")
+                        .font(.system(size: deviceWidth / 6))
+                        .customTextStroke(width: 2.7)
+                        .padding(.bottom, 18)
+                        .padding(.top, 1)
                     HStack{
-                        Text("⭐️")
-                        Text("⭐️")
-                            .padding(.horizontal)
-                        Text("⭐️")
+                        ZStack {
+                            Text("⭐️")
+                                .customTextStroke(width: 2.7)
+                                .opacity(0.2)
+                            Text("⭐️")
+                                .customTextStroke(width: 2.7)
+                        }
+                        ZStack {
+                            Text("⭐️")
+                                .customTextStroke(width: 2.7)
+                                .opacity(0.2)
+                            Text("⭐️")
+                                .customTextStroke(width: 2.7)
+                                
+                        }
+                        .padding(.horizontal)
+                        ZStack {
+                            Text("⭐️")
+                                .customTextStroke(width: 2.7)
+                                .opacity(0.2)
+                            Text("⭐️")
+                                .customTextStroke(width: 2.7)
+                        }
                     }
                     .font(.system(size: deviceWidth / 6))
-                    .customTextStroke(width: 2.7)
+                    
                     .padding(1)
                     Button {
 
