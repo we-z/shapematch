@@ -83,7 +83,15 @@ struct LevelCompleteView: View {
                             .padding(.top)
                         Spacer()
                         Button {
-
+                            DispatchQueue.main.async { [self] in
+                                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                    animateAwayButtonsAndBanner()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                        appModel.showLevelComplete = false
+                                        appModel.selectedTab = 0
+                                    }
+                                }
+                            }
                         } label: {
                             Text("❌")
                                 .bold()
@@ -140,7 +148,14 @@ struct LevelCompleteView: View {
                     
                     .padding(1)
                     Button {
-
+                        DispatchQueue.main.async { [self] in
+                            withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                animateAwayButtonsAndBanner()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                    appModel.showLevelComplete = false
+                                }
+                            }
+                        }
                     } label: {
                         HStack{
                             Spacer()
