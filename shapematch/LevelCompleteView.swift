@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Vortex
 
 struct LevelCompleteView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
@@ -167,8 +168,27 @@ struct LevelCompleteView: View {
                     .buttonStyle(.roundedAndShadow6)
                 }
                 .background{
-                    Color.white
-                    Color.blue.opacity(0.6)
+                    ZStack {
+                        Color.white
+                        Color.blue.opacity(0.6)
+                        VortexViewReader { proxy in
+                            VortexView(.confetti) {
+                                Rectangle()
+                                    .fill(.white)
+                                    .frame(width: 30, height: 30)
+                                    .tag("square")
+                                
+                                Circle()
+                                    .fill(.white)
+                                    .frame(width: 30)
+                                    .tag("circle")
+                            }
+                            .onChange(of: appModel.shouldBurst) { _ in
+                                proxy.burst()
+                            }
+                        }
+                        .offset(y: -(deviceWidth / 6))
+                    }
                 }
                 .cornerRadius(30)
                 .overlay {
@@ -194,6 +214,7 @@ struct LevelCompleteView: View {
                     withAnimation {
                         star1Size = 1
                     }
+                    appModel.shouldBurst.toggle()
                 }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
