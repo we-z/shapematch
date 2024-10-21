@@ -116,9 +116,6 @@ struct CelebrationEffect: View {
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
                                 hapticManager.notification(type: .error)
-                                if audioController.musicOn {
-                                    audioController.musicPlayer.setVolume(0, fadeDuration: 1)
-                                }
                                 withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                                     animateMessage = false
                                 }

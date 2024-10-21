@@ -69,42 +69,12 @@ struct LevelCompleteView: View {
                 Spacer()
                 
                 VStack{
-                    HStack{
-                        Text("❌")
-                            .bold()
-                            .font(.system(size: deviceWidth / 12))
-                            .customTextStroke(width: 1.5)
-                            .fixedSize()
-                            .padding(.top)
-                            .opacity(0)
-                        Spacer()
                         Text("Level \(userPersistedData.level)")
                             .bold()
                             .font(.system(size: deviceWidth / 9))
                             .customTextStroke(width: 2.1)
                             .fixedSize()
                             .padding(.top)
-                        Spacer()
-                        Button {
-                            DispatchQueue.main.async { [self] in
-                                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                    animateAwayButtonsAndBanner()
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                        appModel.showLevelComplete = false
-                                        appModel.selectedTab = 0
-                                    }
-                                }
-                            }
-                        } label: {
-                            Text("❌")
-                                .bold()
-                                .font(.system(size: deviceWidth / 12))
-                                .customTextStroke(width: 1.5)
-                                .fixedSize()
-                                .padding(.top)
-                        }
-                    }
-                    .padding(.horizontal, 30)
                     Text("🥳")
                         .font(.system(size: deviceWidth / 6))
                         .customTextStroke(width: 2.7)

@@ -160,7 +160,10 @@ struct ContentView: View {
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .ignoresSafeArea()
-            CelebrationEffect()
+//            CelebrationEffect()
+            if appModel.showLevelComplete {
+                LevelCompleteView()
+            }
             if appModel.showNoMoreSwipesView {
                 NoMoreSwipesView()
             }
