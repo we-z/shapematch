@@ -100,7 +100,9 @@ struct CelebrationEffect: View {
                     .onAppear {
                         DispatchQueue.main.async {
                             showMessage = true
-                            hapticManager.notification(type: .error)
+                            if userPersistedData.hapticsOn {
+                                hapticManager.notification(type: .error)
+                            }
                             withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 200.0, damping: 13.0, initialVelocity: -10.0)) {
                                 showAnimation = true
                                 animateMessage = true
@@ -112,7 +114,9 @@ struct CelebrationEffect: View {
                             proxy.burst()
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
-                                hapticManager.notification(type: .error)
+                                if userPersistedData.hapticsOn {
+                                    hapticManager.notification(type: .error)
+                                }
                                 withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                                     animateMessage = false
 //                                    showAnimation = false
@@ -178,6 +182,7 @@ struct CelebrateGems: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @State var bannerOffset = -(deviceWidth/2)
     @StateObject var audioController = AudioManager.sharedAudioManager
+    @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     
     // State to hold the current message
     @State private var showMessage = false
@@ -207,7 +212,9 @@ struct CelebrateGems: View {
                         AudioServicesPlaySystemSound(1335)
                         DispatchQueue.main.async {
                             showMessage = true
-                            hapticManager.notification(type: .error)
+                            if userPersistedData.hapticsOn {
+                                hapticManager.notification(type: .error)
+                            }
                             withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 200.0, damping: 13.0, initialVelocity: -10.0)) {
                                 animateMessage = true
                                 bannerOffset = 0
@@ -218,7 +225,9 @@ struct CelebrateGems: View {
                             proxy.burst()
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
-                                hapticManager.notification(type: .error)
+                                if userPersistedData.hapticsOn {
+                                    hapticManager.notification(type: .error)
+                                }
                                 withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                                     animateMessage = false
                                     bannerOffset = -(deviceWidth/2)

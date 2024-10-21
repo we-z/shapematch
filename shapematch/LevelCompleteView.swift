@@ -34,6 +34,9 @@ struct LevelCompleteView: View {
         DispatchQueue.main.async { [self] in
             withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                 animateAwayButtonsAndBanner()
+                if userPersistedData.hapticsOn {
+                    impactLight.impactOccurred()
+                }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
                     withAnimation {
                         appModel.showCelebration = false
@@ -275,6 +278,9 @@ struct LevelCompleteView: View {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [self] in
                 if appModel.swipesLeft >= 0 || userPersistedData.level == 1 {
+                    if userPersistedData.hapticsOn {
+                        hapticManager.notification(type: .error)
+                    }
                     show1Star = true
                     withAnimation {
                         star1Size = 1
@@ -283,6 +289,9 @@ struct LevelCompleteView: View {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
                 if appModel.swipesLeft >= 1 || userPersistedData.level == 1 {
+                    if userPersistedData.hapticsOn {
+                        hapticManager.notification(type: .error)
+                    }
                     show2Stars = true
                     withAnimation {
                         star2Size = 1
@@ -291,6 +300,9 @@ struct LevelCompleteView: View {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) { [self] in
                 if appModel.swipesLeft >= 2 || userPersistedData.level == 1 {
+                    if userPersistedData.hapticsOn {
+                        hapticManager.notification(type: .error)
+                    }
                     show3Stars = true
                     withAnimation {
                         star3Size = 1
