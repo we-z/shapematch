@@ -53,6 +53,7 @@ class AppModel: ObservableObject {
     @Published var showSettings = false
     @Published var showLevelComplete = false
     @Published var showCelebration = false
+    @Published var showNewLevelAnimation = false
 //    @Published var grid.count = 3
     @Published var swapsNeeded = 1
     @Published var undosLeft = 3
@@ -647,6 +648,7 @@ class AppModel: ObservableObject {
         undosLeft = 3
         if startGrid.isEmpty {
             grid = generateTargetGrid(from: shapes, with: swapsNeeded)
+            showNewLevelAnimation = true
         } else {
             grid = startGrid
         }

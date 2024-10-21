@@ -12,7 +12,7 @@ import AVFoundation
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        CelebrationEffect()
+        NewLevelAnimation()
     }
 }
 
@@ -174,6 +174,90 @@ struct CelebrationEffect: View {
             }
                 
                 .scaleEffect(showLevel ? 1 : 0.001)
+        }
+    }
+}
+
+struct NewLevelAnimation: View {
+    @ObservedObject private var appModel = AppModel.sharedAppModel
+    @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
+    // Array of congratulatory messages
+    
+    // State to hold the current message
+    @State private var currentMessage = ""
+    @State private var showAnimation = false
+    @State private var showLevel = false
+    @State private var animateMessage = false
+
+    var body: some View {
+        ZStack{
+            if showAnimation {
+                Color.gray.opacity(0.7)
+                    .ignoresSafeArea()
+                    
+            }
+            VStack{
+                VortexViewReader { proxy in
+                    VortexView(.confetti) {
+                        Rectangle()
+                            .fill(.white)
+                            .frame(width: 30, height: 30)
+                            .tag("square")
+                        
+                        Circle()
+                            .fill(.white)
+                            .frame(width: 30)
+                            .tag("circle")
+                    }
+                    .onAppear {
+                        DispatchQueue.main.async {
+                            if userPersistedData.hapticsOn {
+                                hapticManager.notification(type: .error)
+                            }
+                            withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 200.0, damping: 13.0, initialVelocity: -10.0)) {
+                                showAnimation = true
+                                showLevel = true
+                            }
+                            
+                            // Ensure particles are emitting before the burst
+                            proxy.particleSystem?.isEmitting = true
+                            proxy.burst()
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
+                                if userPersistedData.hapticsOn {
+                                    hapticManager.notification(type: .error)
+                                }
+                                withAnimation() {
+                                    animateMessage = false
+                                    showAnimation = false
+                                    showLevel = false
+                                    appModel.showNewLevelAnimation = false
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            ZStack{
+                RotatingSunView()
+                    .frame(width: 1, height: 1)
+//                    .offset(y: deviceWidth / 7.5)
+                Text("Level\n\(userPersistedData.level)")
+                    .bold()
+                    .italic()
+                    .multilineTextAlignment(.center)
+                    .font(.system(size: deviceWidth / 4.5))
+                    .customTextStroke(width: 3.3)
+                    .fixedSize()
+                    .rotationEffect(.degrees(showLevel ? 0 : -180))
+                    .offset(y: -(deviceWidth / 7.5))
+            }
+                
+                .scaleEffect(showLevel ? 1 : 0.001)
+        }
+        .onTapGesture {
+            appModel.showNewLevelAnimation = false
         }
     }
 }
@@ -360,6 +444,9 @@ struct HandSwipeView: View {
         }
         .offset(y: idiom == .pad ? 51 : -24)
         .onAppear {
+            offsetAmount = 0
+            rotateHand = false
+            fade = false
             animate()
         }
         .allowsHitTesting(false)

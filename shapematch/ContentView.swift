@@ -163,6 +163,9 @@ struct ContentView: View {
             if appModel.showCelebration {
                 CelebrationEffect()
             }
+            if appModel.showNewLevelAnimation {
+                NewLevelAnimation()
+            }
             if appModel.showLevelComplete {
                 LevelCompleteView()
             }
