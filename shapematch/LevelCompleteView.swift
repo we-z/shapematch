@@ -126,6 +126,7 @@ struct LevelCompleteView: View {
                                 animateAwayButtonsAndBanner()
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
                                     appModel.showLevelComplete = false
+                                    appModel.showCelebration = false
                                     userPersistedData.level += 1
                                     appModel.setupLevel()
                                 }

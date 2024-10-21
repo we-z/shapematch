@@ -52,6 +52,7 @@ class AppModel: ObservableObject {
     @Published var showMovesCard = false
     @Published var showSettings = false
     @Published var showLevelComplete = false
+    @Published var showCelebration = false
 //    @Published var grid.count = 3
     @Published var swapsNeeded = 1
     @Published var undosLeft = 3
@@ -251,7 +252,6 @@ class AppModel: ObservableObject {
     func checkWinCondition() {
         if isWinningGrid(grid: grid) {
             updateStars()
-            showLevelComplete = true
             userPersistedData.firstGamePlayed = true
             // 1335, 1114
             if userPersistedData.soundOn {
@@ -259,6 +259,12 @@ class AppModel: ObservableObject {
             }
             if userPersistedData.level == userPersistedData.highestLevel {
                 userPersistedData.highestLevel += 1
+            }
+            DispatchQueue.main.async { [self] in
+                showCelebration = true
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [self] in
+                showLevelComplete = true
             }
             print("You win!")
         } else if swipesLeft <= 0 {
