@@ -250,31 +250,11 @@ class AppModel: ObservableObject {
     
     func checkWinCondition() {
         if isWinningGrid(grid: grid) {
-            DispatchQueue.main.async { [self] in
-                shouldBurst.toggle()
-            }
-            userPersistedData.firstGamePlayed = true
-            if userPersistedData.level == 1 {
-                showInstruction.toggle()
-            }
-            self.freezeGame = true
             updateStars()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [self] in
-                if audioController.musicOn {
-                    AudioServicesPlaySystemSound(1320)
-                }
-                userPersistedData.level += 1
-                
-                setupLevel()
-            }
+            showLevelComplete = true
             // 1335, 1114
             if userPersistedData.soundOn {
                 AudioServicesPlaySystemSound(1114)
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 6) { [self] in
-                if audioController.musicOn {
-                    audioController.musicPlayer.setVolume(1, fadeDuration: 1)
-                }
             }
             print("You win!")
         } else if swipesLeft <= 0 {

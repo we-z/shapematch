@@ -31,39 +31,42 @@ struct LevelCompleteView: View {
     }
     
     var body: some View {
-        VStack{
-            HStack {
-                Button {
-                    appModel.showGemMenu = true
-                } label: {
-                    HStack{
-                        Text("💎 \(userPersistedData.gemBalance)")
-                            .bold()
-                            .font(.system(size: deviceWidth/15))
-                            .lineLimit(1)
-                            .customTextStroke(width: 1.8)
-                            .fixedSize()
-                            .padding(.horizontal)
-                        
+        ZStack {
+            Color.gray.opacity(0.5)
+                .ignoresSafeArea()
+            VStack{
+                HStack {
+                    Button {
+                        appModel.showGemMenu = true
+                    } label: {
+                        HStack{
+                            Text("💎 \(userPersistedData.gemBalance)")
+                                .bold()
+                                .font(.system(size: deviceWidth/15))
+                                .lineLimit(1)
+                                .customTextStroke(width: 1.8)
+                                .fixedSize()
+                                .padding(.horizontal)
+                            
+                        }
+                        .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
+                        .background{
+                            LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                        }
+                        .cornerRadius(18)
+                        .overlay{
+                            RoundedRectangle(cornerRadius: 18)
+                                .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                .padding(1)
+                        }
+                        .padding(3)
+                        .padding(.horizontal)
                     }
-                    .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
-                    .background{
-                        LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                    }
-                    .cornerRadius(18)
-                    .overlay{
-                        RoundedRectangle(cornerRadius: 18)
-                            .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                            .padding(1)
-                    }
-                    .padding(3)
-                    .padding(.horizontal)
+                    .buttonStyle(.roundedAndShadow6)
+                    Spacer()
                 }
-                .buttonStyle(.roundedAndShadow6)
+                .offset(y: bannerOffset)
                 Spacer()
-            }
-            .offset(y: bannerOffset)
-            Spacer()
                 
                 VStack{
                     HStack{
@@ -129,7 +132,7 @@ struct LevelCompleteView: View {
                                     .scaleEffect(star2Size)
                                     .rotationEffect(.degrees((star2Size - 1) * 300))
                             }
-                                
+                            
                         }
                         .padding(.horizontal)
                         ZStack {
@@ -153,6 +156,8 @@ struct LevelCompleteView: View {
                                 animateAwayButtonsAndBanner()
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
                                     appModel.showLevelComplete = false
+                                    userPersistedData.level += 1
+                                    appModel.setupLevel()
                                 }
                             }
                         }
@@ -215,6 +220,7 @@ struct LevelCompleteView: View {
                 .shadow(radius: 3)
                 .padding()
                 .offset(y: buttonsnOffset)
+            }
         }
         .onAppear {
             DispatchQueue.main.async { [self] in
