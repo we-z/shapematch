@@ -24,7 +24,7 @@ struct TempView: View {
         [.circle, .triangle, .square, .star]
     ]
     
-    let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "🛥️", "⛴️", "🛳️", "🚢", "⛵", "🌅", "🏝️", "🏖️", "🪼"]
+    let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "🛥️", "⛴️", "🛳️", "🚢", "⛵", "🌅", "🏝️", "🏖️"]
     
     var body: some View {
         ZStack {
@@ -57,45 +57,6 @@ struct TempView: View {
     }
     
 }
-
-
-struct EmojiFloatingView: View {
-    // Array of emojis
-    let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "🛥️", "⛴️", "🛳️", "🚢", "⛵", "🌅", "🏝️", "🏖️", "🪼"]
-    
-    @State private var animationValues: [Bool] = Array(repeating: false, count: 28)
-    
-    var body: some View {
-        ZStack {
-            ForEach(0..<emojis.count, id: \.self) { index in
-                EmojiView(emoji: emojis[index], animationTrigger: $animationValues[index])
-                    .offset(y: animationValues[index] ? -700 : 400) // Move vertically from bottom to top
-                    .animation(Animation.easeInOut(duration: Double.random(in: 12...15)).repeatForever(autoreverses: false), value: animationValues[index])
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 0...5)) {
-                            animationValues[index] = true
-                        }
-                    }
-            }
-        }
-        .background(Color.blue.opacity(0.1)) // Optional: Background color
-        .ignoresSafeArea() // Make it full screen
-    }
-}
-
-struct EmojiView: View {
-    var emoji: String
-    @Binding var animationTrigger: Bool
-    
-    var body: some View {
-        Text(emoji)
-            .font(.system(size: 50)) // Adjust the emoji size
-            .position(x: CGFloat.random(in: 0...deviceWidth), y: deviceHeight) // Random X axis position, starts from bottom
-//            .rotationEffect(.degrees(animationTrigger ? 15 : -15), anchor: .center) // Slight rotation as they move up
-            .animation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true), value: animationTrigger)
-    }
-}
-
 
 #Preview {
     TempView()

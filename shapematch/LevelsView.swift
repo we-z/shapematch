@@ -25,7 +25,7 @@ struct LevelsView: View {
     @State private var scrollProxy: ScrollViewProxy? = nil
     @State var showLevelDetails = false
     @Environment(\.colorScheme) var colorScheme
-    let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "⛵", "🏝️", "🏖️", "🪼"]
+    let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "⛵", "🏝️", "🏖️"]
     
     @State var previewGrid: [[ShapeType]] = [] {
         didSet {

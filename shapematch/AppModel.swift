@@ -252,6 +252,7 @@ class AppModel: ObservableObject {
         if isWinningGrid(grid: grid) {
             updateStars()
             showLevelComplete = true
+            userPersistedData.firstGamePlayed = true
             // 1335, 1114
             if userPersistedData.soundOn {
                 AudioServicesPlaySystemSound(1114)

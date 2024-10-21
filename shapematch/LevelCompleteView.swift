@@ -161,23 +161,6 @@ struct LevelCompleteView: View {
                     ZStack {
                         Color.white
                         Color.blue.opacity(0.6)
-                        VortexViewReader { proxy in
-                            VortexView(.confetti) {
-                                Rectangle()
-                                    .fill(.white)
-                                    .frame(width: 30, height: 30)
-                                    .tag("square")
-                                
-                                Circle()
-                                    .fill(.white)
-                                    .frame(width: 30)
-                                    .tag("circle")
-                            }
-                            .onChange(of: appModel.shouldBurst) { _ in
-                                proxy.burst()
-                            }
-                        }
-                        .offset(y: -(deviceWidth / 6))
                     }
                 }
                 .cornerRadius(30)
@@ -191,25 +174,42 @@ struct LevelCompleteView: View {
                 .padding()
                 .offset(y: buttonsnOffset)
             }
+//            VortexViewReader { proxy in
+//                VortexView(.confetti) {
+//                    Rectangle()
+//                        .fill(.white)
+//                        .frame(width: 30, height: 30)
+//                        .tag("square")
+//                    
+//                    Circle()
+//                        .fill(.white)
+//                        .frame(width: 30)
+//                        .tag("circle")
+//                }
+//                .onChange(of: appModel.shouldBurst) { _ in
+//                    proxy.burst()
+//                }
+//            }
+//            .allowsHitTesting(false)
         }
         .onAppear {
             DispatchQueue.main.async { [self] in
                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 24.0, initialVelocity: 0.0)) {
                     bannerOffset = 0
                     buttonsnOffset = 0
+                    appModel.shouldBurst.toggle()
                 }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [self] in
-                if appModel.swipesLeft >= 0 {
+                if appModel.swipesLeft >= 0 || userPersistedData.level == 1 {
                     show1Star = true
                     withAnimation {
                         star1Size = 1
                     }
-                    appModel.shouldBurst.toggle()
                 }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
-                if appModel.swipesLeft >= 1 {
+                if appModel.swipesLeft >= 1 || userPersistedData.level == 1 {
                     show2Stars = true
                     withAnimation {
                         star2Size = 1
@@ -217,7 +217,7 @@ struct LevelCompleteView: View {
                 }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) { [self] in
-                if appModel.swipesLeft >= 2 {
+                if appModel.swipesLeft >= 2 || userPersistedData.level == 1 {
                     show3Stars = true
                     withAnimation {
                         star3Size = 1
