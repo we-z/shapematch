@@ -224,8 +224,9 @@ class AppModel: ObservableObject {
     func updateStars() {
         if swipesLeft > 1 || userPersistedData.level == 1 {
             if let levelStars = userPersistedData.levelStars[String(userPersistedData.level)] {
-                if levelStars != 3 {
+                if levelStars < 3 {
                     userPersistedData.incrementBalance(amount: 1)
+                    userPersistedData.levelStars[String(userPersistedData.level)] = 3
                 }
             } else {
                 userPersistedData.incrementBalance(amount: 1)
