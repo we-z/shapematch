@@ -72,7 +72,7 @@ struct LevelCompleteView: View {
                         Text("Level \(userPersistedData.level)")
                             .bold()
                             .font(.system(size: deviceWidth / 9))
-                            .customTextStroke(width: 2.1)
+                            .customTextStroke(width: 2.4)
                             .fixedSize()
                             .padding(.top)
                     Text("🥳")
@@ -140,12 +140,12 @@ struct LevelCompleteView: View {
                                 .bold()
                                 .font(.system(size: deviceWidth/12))
                                 .fixedSize()
-                                .customTextStroke(width: 1.8)
+                                .customTextStroke(width: 2.1)
                             Spacer()
                         }
                         .padding()
                         .background{
-                            LinearGradient(gradient: Gradient(colors: [.green, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.3))
+                            LinearGradient(gradient: Gradient(colors: [.mint, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.3))
                         }
                         .cornerRadius(21)
                         .overlay{
@@ -159,15 +159,12 @@ struct LevelCompleteView: View {
                     .buttonStyle(.roundedAndShadow6)
                 }
                 .background{
-                    ZStack {
-                        Color.white
-                        Color.blue.opacity(0.6)
-                    }
+                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
                 .cornerRadius(30)
                 .overlay {
                     RoundedRectangle(cornerRadius: 30)
-                        .stroke(Color.yellow, lineWidth: idiom == .pad ? 11 : 6)
+                        .stroke(Color.yellow, lineWidth: idiom == .pad ? 11 : 9)
                         .padding(1)
                         .shadow(radius: 3)
                 }
