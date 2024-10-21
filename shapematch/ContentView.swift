@@ -140,7 +140,7 @@ struct ContentView: View {
                                     }
                                 }
                                 .scaleEffect(idiom == .pad ? 1.1 : 1)
-                                if userPersistedData.level == 1 && !appModel.freezeGame {
+                                if userPersistedData.level == 1 && !appModel.showLevelComplete && !appModel.showCelebration {
                                     HandSwipeView()
                                         .scaleEffect(idiom == .pad ? 0.8 : 1)
                                         .fixedSize()
