@@ -11,7 +11,7 @@ import Vortex
 struct LevelCompleteView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @ObservedObject private var appModel = AppModel.sharedAppModel
-    @State var buttonsnOffset = deviceWidth * 2
+    @State var cardOffset = deviceWidth * 2
     @State var bannerOffset = -(deviceWidth)
     @State var show1Star = false
     @State var show2Stars = false
@@ -24,16 +24,48 @@ struct LevelCompleteView: View {
     func animateAwayButtonsAndBanner() {
         DispatchQueue.main.async { [self] in
             withAnimation(.linear(duration: 0.3)) {
-                buttonsnOffset = deviceWidth * 2
+                cardOffset = deviceWidth * 2
                 bannerOffset = -(deviceWidth)
             }
         }
     }
     
+    func goBack() {
+        DispatchQueue.main.async { [self] in
+            withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                animateAwayButtonsAndBanner()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                    withAnimation {
+                        appModel.showCelebration = false
+                        appModel.showLevelComplete = false
+                        appModel.selectedTab = 0
+                    }
+                }
+            }
+        }
+    }
+    
+    
     var body: some View {
         ZStack {
-            Color.gray.opacity(0.5)
+            Color.gray
+                .opacity(0.0001)
                 .ignoresSafeArea()
+                .onTapGesture {
+                    goBack()
+                }
+                .gesture(
+                    DragGesture()
+                        .onEnded { gesture in
+                            if gesture.translation.height > 0 {
+                                DispatchQueue.main.async { [self] in
+                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                        goBack()
+                                    }
+                                }
+                            }
+                        }
+                )
             VStack{
                 HStack {
                     Button {
@@ -69,12 +101,34 @@ struct LevelCompleteView: View {
                 Spacer()
                 
                 VStack{
-                        Text("Level \(userPersistedData.level)")
-                            .bold()
-                            .font(.system(size: deviceWidth / 9))
-                            .customTextStroke(width: 2.4)
-                            .fixedSize()
-                            .padding(.top)
+                    HStack{
+                       Text("❌")
+                           .bold()
+                           .font(.system(size: deviceWidth / 12))
+                           .customTextStroke(width: 1.5)
+                           .fixedSize()
+                           .padding(.top)
+                           .opacity(0)
+                       Spacer()
+                       Text("Level \(userPersistedData.level)")
+                           .bold()
+                           .font(.system(size: deviceWidth / 9))
+                           .customTextStroke(width: 2.4)
+                           .fixedSize()
+                           .padding(.top)
+                       Spacer()
+                       Button {
+                           goBack()
+                       } label: {
+                           Text("❌")
+                               .bold()
+                               .font(.system(size: deviceWidth / 12))
+                               .customTextStroke(width: 1.8)
+                               .fixedSize()
+                               .padding(.top)
+                       }
+                   }
+                   .padding(.horizontal, 30)
                     Text("🥳")
                         .font(.system(size: deviceWidth / 6))
                         .customTextStroke(width: 2.7)
@@ -121,7 +175,7 @@ struct LevelCompleteView: View {
                     
                     .padding(1)
                     Button {
-                        DispatchQueue.main.async { [self] in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
                             withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                                 animateAwayButtonsAndBanner()
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
@@ -145,7 +199,7 @@ struct LevelCompleteView: View {
                         }
                         .padding()
                         .background{
-                            LinearGradient(gradient: Gradient(colors: [.mint, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.3))
+                            LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                         }
                         .cornerRadius(21)
                         .overlay{
@@ -159,18 +213,39 @@ struct LevelCompleteView: View {
                     .buttonStyle(.roundedAndShadow6)
                 }
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.6))
                 }
                 .cornerRadius(30)
                 .overlay {
                     RoundedRectangle(cornerRadius: 30)
-                        .stroke(Color.yellow, lineWidth: idiom == .pad ? 11 : 9)
+                        .stroke(Color.yellow, lineWidth: idiom == .pad ? 12 : 9)
                         .padding(1)
                         .shadow(radius: 3)
                 }
                 .shadow(radius: 3)
                 .padding()
-                .offset(y: buttonsnOffset)
+                .offset(y: cardOffset)
+                .gesture(
+                    DragGesture()
+                        .onChanged { gesture in
+                            cardOffset = gesture.translation.height
+                        }
+                        .onEnded { gesture in
+                            if gesture.translation.height > 0 {
+                                DispatchQueue.main.async { [self] in
+                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                        goBack()
+                                    }
+                                }
+                            } else {
+                                DispatchQueue.main.async { [self] in
+                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                                        cardOffset = 0
+                                    }
+                                }
+                            }
+                        }
+                )
             }
 //            VortexViewReader { proxy in
 //                VortexView(.confetti) {
@@ -194,7 +269,7 @@ struct LevelCompleteView: View {
             DispatchQueue.main.async { [self] in
                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 24.0, initialVelocity: 0.0)) {
                     bannerOffset = 0
-                    buttonsnOffset = 0
+                    cardOffset = 0
                     appModel.shouldBurst.toggle()
                 }
             }
