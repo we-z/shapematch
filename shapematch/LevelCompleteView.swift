@@ -52,7 +52,7 @@ struct LevelCompleteView: View {
     var body: some View {
         ZStack {
             Color.gray
-                .opacity(0.0001)
+                .opacity(0.7)
                 .ignoresSafeArea()
                 .onTapGesture {
                     goBack()

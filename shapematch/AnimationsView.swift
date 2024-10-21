@@ -119,6 +119,11 @@ struct CelebrationEffect: View {
                                 }
                                 withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                                     animateMessage = false
+                                    DispatchQueue.main.async { [self] in
+                                        withAnimation {
+                                            showAnimation = false
+                                        }
+                                    }
 //                                    showAnimation = false
                                 }
 //                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
@@ -174,6 +179,10 @@ struct CelebrationEffect: View {
             }
                 
                 .scaleEffect(showLevel ? 1 : 0.001)
+        }
+        .onTapGesture {
+            appModel.showCelebration = false
+            appModel.showLevelComplete = true
         }
     }
 }

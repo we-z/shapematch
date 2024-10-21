@@ -124,9 +124,9 @@ struct LevelsView: View {
                                                 .offset(x: sin(CGFloat(level) * .pi / 6) * (idiom == .pad ? deviceWidth / 4.5 : deviceWidth / 3.6))
                                                 .onTapGesture{
                                                     if level == 1 {
-                                                        userPersistedData.level = 1
-                                                        appModel.setupFirstLevel()
                                                         withAnimation {
+                                                            userPersistedData.level = 1
+                                                            appModel.setupFirstLevel()
                                                             appModel.selectedTab = 1
                                                         }
                                                     } else {
