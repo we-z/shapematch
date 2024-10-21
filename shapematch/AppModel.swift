@@ -256,6 +256,9 @@ class AppModel: ObservableObject {
             if userPersistedData.soundOn {
                 AudioServicesPlaySystemSound(1114)
             }
+            if userPersistedData.level == userPersistedData.highestLevel {
+                userPersistedData.highestLevel += 1
+            }
             print("You win!")
         } else if swipesLeft <= 0 {
             if userPersistedData.soundOn {
