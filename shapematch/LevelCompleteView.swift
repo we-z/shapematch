@@ -48,6 +48,9 @@ struct LevelCompleteView: View {
         }
     }
     
+    func rewardGem() {
+        
+    }
     
     var body: some View {
         ZStack {
@@ -306,6 +309,13 @@ struct LevelCompleteView: View {
                     show3Stars = true
                     withAnimation {
                         star3Size = 1
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
+//                        if let levelStars = userPersistedData.levelStars[String(userPersistedData.level)] {
+//                            if levelStars < 3 {
+                                rewardGem()
+//                            }
+//                        }
                     }
                 }
             }
