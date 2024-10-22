@@ -212,7 +212,7 @@ struct LevelsView: View {
                         Capsule()
                             .overlay {
                                 ZStack{
-                                    Color.blue
+                                    Color.teal
                                 }
                             }
                             .frame(width: 45, height: 9)
@@ -285,7 +285,7 @@ struct LevelsView: View {
                                 }
                                 .padding()
                                 .background{
-                                    LinearGradient(gradient: Gradient(colors: [.mint, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.3))
+                                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                                 }
                                 .cornerRadius(21)
                                 .overlay{
@@ -302,7 +302,7 @@ struct LevelsView: View {
                 }
                 .padding()
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
                 .cornerRadius(30)
                 .overlay{

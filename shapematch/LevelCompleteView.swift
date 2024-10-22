@@ -19,6 +19,9 @@ struct LevelCompleteView: View {
     @State var star1Size = 1.8
     @State var star2Size = 1.8
     @State var star3Size = 1.8
+    @State var gemXoffset = 0.0
+    @State var gemYoffset: CGFloat = -deviceHeight
+    @State var gemScale = 1.0
     
     
     func animateAwayButtonsAndBanner() {
@@ -49,7 +52,19 @@ struct LevelCompleteView: View {
     }
     
     func rewardGem() {
-        
+        withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 21.0, initialVelocity: 0.0)) {
+            gemYoffset = -(deviceWidth / 2)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) { [self] in
+            withAnimation {
+                gemXoffset = -(deviceWidth / 2.8)
+                gemYoffset = -(deviceHeight / 2.5)
+                gemScale = 0.0
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
+                userPersistedData.incrementBalance(amount: 1)
+            }
+        }
     }
     
     var body: some View {
@@ -72,6 +87,18 @@ struct LevelCompleteView: View {
                             }
                         }
                 )
+            ZStack {
+                RotatingSunView()
+                    .frame(width: 1, height: 1)
+                    .fixedSize()
+                    .scaleEffect(0.75)
+                Text("💎")
+                    .font(.system(size: deviceWidth / 3))
+                    .customTextStroke(width: 4)
+                    
+            }
+            .scaleEffect(gemScale)
+            .offset(x: gemXoffset, y: gemYoffset)
             VStack{
                 HStack {
                     Button {
@@ -296,11 +323,11 @@ struct LevelCompleteView: View {
                         star3Size = 1
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
-//                        if let levelStars = userPersistedData.levelStars[String(userPersistedData.level)] {
-//                            if levelStars < 3 {
+                        if let levelStars = userPersistedData.levelStars[String(userPersistedData.level)] {
+                            if levelStars < 3 {
                                 rewardGem()
-//                            }
-//                        }
+                            }
+                        }
                     }
                 }
             }
