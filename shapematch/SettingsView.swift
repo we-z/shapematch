@@ -72,7 +72,7 @@ struct SettingsView: View {
                                 .fixedSize()
                             Spacer()
                             Toggle("", isOn: $audioController.musicOn )
-                                .offset(x: -(deviceWidth/12))
+                                .offset(x: idiom == .pad ? -(deviceWidth/6) : -(deviceWidth/12))
                                 .scaleEffect(1.5)
                         }
                         .padding(.horizontal)
@@ -88,7 +88,7 @@ struct SettingsView: View {
                                 .fixedSize()
                             Spacer()
                             Toggle("", isOn: $userPersistedData.soundOn )
-                                .offset(x: -(deviceWidth/12))
+                                .offset(x: idiom == .pad ? -(deviceWidth/6) : -(deviceWidth/12))
                                 .scaleEffect(1.5)
                         }
                         .padding(.horizontal)
@@ -101,7 +101,7 @@ struct SettingsView: View {
                                 .fixedSize()
                             Spacer()
                             Toggle("", isOn: $userPersistedData.hapticsOn )
-                                .offset(x: -(deviceWidth/12))
+                                .offset(x: idiom == .pad ? -(deviceWidth/6) : -(deviceWidth/12))
                                 .scaleEffect(1.5)
                         }
                         .padding(.horizontal)
