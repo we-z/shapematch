@@ -52,9 +52,9 @@ struct SettingsView: View {
                 VStack {
                     VStack{
                         Capsule()
-                            .foregroundColor(.teal)
+                            .foregroundColor(.black)
                             .frame(width: 45, height: 9)
-                            .customTextStroke()
+//                            .customTextStroke()
                         HStack {
                             Text("Settings ⚙️")
                                 .bold()
@@ -109,7 +109,7 @@ struct SettingsView: View {
                     .padding(30)
                 }
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.blue, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    LinearGradient(gradient: Gradient(colors: [.white, .gray]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
                 .cornerRadius(30)
                 .overlay{
