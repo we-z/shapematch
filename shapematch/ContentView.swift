@@ -61,7 +61,7 @@ struct ContentView: View {
                                         .customTextStroke(width: 1.8)
                                         .fixedSize()
                                     Spacer()
-                                    if idiom != .pad {if idiom != .pad {
+                                    if idiom == .pad {
                                         HStack {
                                             Text("Moves:")
                                                 .bold()
@@ -75,7 +75,6 @@ struct ContentView: View {
                                                 .fixedSize()
                                         }
                                         Spacer()
-                                    }
                                     }
                                 }
                                 Spacer()
