@@ -435,7 +435,6 @@ struct HandSwipeView: View {
                     
             }
         }
-        .offset(y: idiom == .pad ? 51 : -24)
         .onAppear {
             offsetAmount = 0
             rotateHand = false

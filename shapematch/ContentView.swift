@@ -37,45 +37,71 @@ struct ContentView: View {
                         VStack(spacing: 0) {
                             Spacer()
                             if userPersistedData.level == 1 {
-                                Spacer()
-                                
-                                Text("Line up\nthe shapes")
-                                    .bold()
-                                    .multilineTextAlignment(.center)
-                                    .font(.system(size: deviceWidth/6))
-                                    .customTextStroke(width: 3)
-                                    .fixedSize()
+                                if idiom == .pad {
+                                    Text("Line up\nthe shapes")
+                                        .bold()
+                                        .multilineTextAlignment(.center)
+                                        .font(.system(size: deviceWidth/9))
+                                        .customTextStroke(width: 3)
+                                        .fixedSize()
+                                } else {
+                                    Text("Line up\nthe shapes")
+                                        .bold()
+                                        .multilineTextAlignment(.center)
+                                        .font(.system(size: deviceWidth/6))
+                                        .customTextStroke(width: 3)
+                                        .fixedSize()
+                                }
                             } else {
                                 HStack {
+                                    Spacer()
                                     Text("Level: \(userPersistedData.level)")
                                         .bold()
                                         .font(.system(size: deviceWidth/12))
                                         .customTextStroke(width: 1.8)
                                         .fixedSize()
-                                        
-//                                    Spacer()
+                                    Spacer()
+                                    if idiom != .pad {if idiom != .pad {
+                                        HStack {
+                                            Text("Moves:")
+                                                .bold()
+                                                .font(.system(size: deviceWidth/12))
+                                                .customTextStroke(width: 1.8)
+                                                .fixedSize()
+                                            Text(" \(appModel.swipesLeft)")
+                                                .bold()
+                                                .font(.system(size: deviceWidth/12))
+                                                .customTextStroke(width: 1.8)
+                                                .fixedSize()
+                                        }
+                                        Spacer()
+                                    }
+                                    }
                                 }
-//                                .padding(.leading)
                                 Spacer()
-                                Text("Moves:")
-                                    .bold()
-                                    .font(.system(size: deviceWidth/12))
-                                    .customTextStroke(width: 1.8)
-                                    .fixedSize()
-                                Text("\(appModel.swipesLeft)")
-                                    .bold()
-                                    .italic()
-                                    .font(.system(size: deviceWidth/4.2))
-                                    .customTextStroke(width: 2.7)
-                                    .fixedSize()
+                                if idiom != .pad {
+                                    Text("Moves:")
+                                        .bold()
+                                        .font(.system(size: deviceWidth/12))
+                                        .customTextStroke(width: 1.8)
+                                        .fixedSize()
+                                
+                                    Text("\(appModel.swipesLeft)")
+                                        .bold()
+                                        .italic()
+                                        .font(.system(size: deviceWidth/4.2))
+                                        .customTextStroke(width: 2.7)
+                                        .fixedSize()
+                                }
                             }
                             Spacer()
-                            ZStack{
-                                ButtonsView()
-                                    .opacity((userPersistedData.level != 1) ? 1 : 0)
+                            if userPersistedData.level != 1 {
+                                ZStack{
+                                    ButtonsView()
+                                }
+                                .padding(.vertical, idiom == .pad ? 21 : 3)
+                                .zIndex(2)
                             }
-                            .padding(.vertical, idiom == .pad ? 41 : 3)
-                            .zIndex(2)
                             ZStack{
                                 Rectangle()
                                     .overlay{
@@ -139,14 +165,14 @@ struct ContentView: View {
                                         }
                                     }
                                 }
-                                .scaleEffect(idiom == .pad ? 1.1 : 1)
+                                .scaleEffect(idiom == .pad ? 1.2 : 1)
                                 if userPersistedData.level == 1 && !appModel.showLevelComplete && !appModel.showCelebration {
                                     HandSwipeView()
                                         .scaleEffect(idiom == .pad ? 0.8 : 1)
                                         .fixedSize()
 //                                        .frame(width: 1, height: 1)
 //                                        .zIndex(1)
-                                        .offset(y: deviceWidth / 3.75)
+                                        .offset(y: idiom == .pad ? deviceWidth / 4.1 : deviceWidth / 4.8)
                                 }
                             }
                             .frame(width: deviceWidth)
@@ -154,7 +180,7 @@ struct ContentView: View {
                         }
                         .allowsHitTesting(!appModel.freezeGame)
                     }
-                    .scaleEffect(idiom == .pad ? 0.75 : 1)
+//                    .scaleEffect(idiom == .pad ? 0.75 : 1)
                 }
                 .tag(1)
             }

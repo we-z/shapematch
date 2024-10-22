@@ -72,8 +72,8 @@ struct SettingsView: View {
                                 .fixedSize()
                             Spacer()
                             Toggle("", isOn: $audioController.musicOn )
-                                .offset(x: idiom == .pad ? -(deviceWidth/6) : -(deviceWidth/12))
-                                .scaleEffect(1.5)
+                                .offset(x: idiom == .pad ? -(deviceWidth/3.9) : -(deviceWidth/12))
+                                .scaleEffect(idiom == .pad ? 3 : 1.5)
                         }
                         .padding(.horizontal)
                         .onChange(of: audioController.musicOn) { _ in
@@ -88,8 +88,8 @@ struct SettingsView: View {
                                 .fixedSize()
                             Spacer()
                             Toggle("", isOn: $userPersistedData.soundOn )
-                                .offset(x: idiom == .pad ? -(deviceWidth/6) : -(deviceWidth/12))
-                                .scaleEffect(1.5)
+                                .offset(x: idiom == .pad ? -(deviceWidth/3.9) : -(deviceWidth/12))
+                                .scaleEffect(idiom == .pad ? 3 : 1.5)
                         }
                         .padding(.horizontal)
                         HStack {
@@ -101,8 +101,8 @@ struct SettingsView: View {
                                 .fixedSize()
                             Spacer()
                             Toggle("", isOn: $userPersistedData.hapticsOn )
-                                .offset(x: idiom == .pad ? -(deviceWidth/6) : -(deviceWidth/12))
-                                .scaleEffect(1.5)
+                                .offset(x: idiom == .pad ? -(deviceWidth/3.9) : -(deviceWidth/12))
+                                .scaleEffect(idiom == .pad ? 3 : 1.5)
                         }
                         .padding(.horizontal)
                     }
