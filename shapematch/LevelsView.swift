@@ -368,7 +368,7 @@ struct LevelRow: View {
                         .scaleEffect(0.3)
                 }
                 Circle()
-                    .frame(width: idiom == .pad ? deviceWidth / 18 : deviceWidth / 7)
+                    .frame(width: idiom == .pad ? deviceWidth / 12 : deviceWidth / 7)
                     .overlay{
                         LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                             .mask(Circle())
@@ -376,7 +376,7 @@ struct LevelRow: View {
                     .customTextStroke(width: idiom == .pad ? 1.8 : 3)
                 Text("\(level)")
                     .bold()
-                    .font(.system(size: idiom == .pad ? deviceWidth / 33 : deviceWidth / 12 ))
+                    .font(.system(size: idiom == .pad ? deviceWidth / 21 : deviceWidth / 12 ))
                     .scaleEffect(level > 999 ? 0.5 : level > 99 ? 0.78 : 1)
                     .fixedSize()
                     .customTextStroke(width: idiom == .pad ? 1.2 : 1.8)
@@ -398,8 +398,8 @@ struct LevelRow: View {
             }
             .customTextStroke(width:1)
             .offset(y: idiom == .pad ? -1 : -3)
-            .font(.system(size: idiom == .pad ? deviceWidth / 60 : deviceWidth / 21))
-            .frame(height: idiom == .pad ? deviceWidth / 36 : deviceWidth / 27)
+            .font(.system(size: idiom == .pad ? deviceWidth / 39 : deviceWidth / 21))
+            .frame(height: idiom == .pad ? deviceWidth / 27 : deviceWidth / 27)
         }
         
     }
