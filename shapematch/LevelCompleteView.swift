@@ -253,23 +253,6 @@ struct LevelCompleteView: View {
                         }
                 )
             }
-//            VortexViewReader { proxy in
-//                VortexView(.confetti) {
-//                    Rectangle()
-//                        .fill(.white)
-//                        .frame(width: 30, height: 30)
-//                        .tag("square")
-//                    
-//                    Circle()
-//                        .fill(.white)
-//                        .frame(width: 30)
-//                        .tag("circle")
-//                }
-//                .onChange(of: appModel.shouldBurst) { _ in
-//                    proxy.burst()
-//                }
-//            }
-//            .allowsHitTesting(false)
         }
         .onAppear {
             DispatchQueue.main.async { [self] in
@@ -292,6 +275,7 @@ struct LevelCompleteView: View {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
                 if appModel.swipesLeft >= 1 || userPersistedData.level == 1 {
+                    appModel.swipesLeft -= 1
                     if userPersistedData.hapticsOn {
                         hapticManager.notification(type: .error)
                     }
@@ -302,7 +286,8 @@ struct LevelCompleteView: View {
                 }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) { [self] in
-                if appModel.swipesLeft >= 2 || userPersistedData.level == 1 {
+                if appModel.swipesLeft >= 1 || userPersistedData.level == 1 {
+                    appModel.swipesLeft -= 1
                     if userPersistedData.hapticsOn {
                         hapticManager.notification(type: .error)
                     }

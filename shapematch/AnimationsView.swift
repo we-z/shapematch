@@ -12,7 +12,7 @@ import AVFoundation
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        NewLevelAnimation()
+        CelebrationEffect()
     }
 }
 
@@ -161,24 +161,8 @@ struct CelebrationEffect: View {
                     .fixedSize()
                     .rotationEffect(.degrees(animateMessage ? 0 : -180))
                     .scaleEffect(animateMessage ? 1 : 0.1)
-                    .offset(y: animateMessage ? 0 : -(deviceHeight/2))
+                    .offset(y: animateMessage ? 0 : -(deviceHeight/1.8))
             }
-            ZStack{
-                RotatingSunView()
-                    .frame(width: 1, height: 1)
-//                    .offset(y: deviceWidth / 7.5)
-                Text("Level\n\(userPersistedData.level)")
-                    .bold()
-                    .italic()
-                    .multilineTextAlignment(.center)
-                    .font(.system(size: deviceWidth / 4.5))
-                    .customTextStroke(width: 3.3)
-                    .fixedSize()
-                    .rotationEffect(.degrees(showLevel ? 0 : -180))
-                    .offset(y: -(deviceWidth / 7.5))
-            }
-                
-                .scaleEffect(showLevel ? 1 : 0.001)
         }
         .onTapGesture {
             appModel.showCelebration = false
