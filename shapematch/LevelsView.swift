@@ -219,18 +219,23 @@ struct LevelsView: View {
                             .cornerRadius(15)
                             .padding(.bottom, 15)
                             .customTextStroke()
-                        Text("Level: \(chosenLevel)")
-                            .bold()
-                            .font(.system(size: deviceWidth/15))
-                            .fixedSize()
-                            .customTextStroke(width: 1.5)
-                        Text("Moves: \(moves + 2)")
-                            .bold()
-                            .multilineTextAlignment(.center)
-                            .font(.system(size: deviceWidth/15))
-                            .fixedSize()
-                            .customTextStroke(width: 1.5)
-                            .padding()
+                        HStack {
+                            Spacer()
+                            Text("Level: \(chosenLevel)")
+                                .bold()
+                                .font(.system(size: deviceWidth/15))
+                                .fixedSize()
+                                .customTextStroke(width: 1.5)
+                            Spacer()
+                            Text("Moves: \(moves + 2)")
+                                .bold()
+                                .multilineTextAlignment(.center)
+                                .font(.system(size: deviceWidth/15))
+                                .fixedSize()
+                                .customTextStroke(width: 1.5)
+                            Spacer()
+                        }
+//                        .padding(.vertical)
                             VStack{
                                 VStack{
                                     ForEach(0..<shapes.count, id: \.self) { row in
@@ -311,7 +316,7 @@ struct LevelsView: View {
                         .padding(1)
                 }
                 .padding()
-                .scaleEffect(idiom == .pad ? 0.6 : 1)
+//                .scaleEffect(idiom == .pad ? 0.6 : 1)
                 .offset(y: cardOffset)
                 .onAppear{
                     DispatchQueue.main.async {
