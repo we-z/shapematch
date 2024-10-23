@@ -199,16 +199,13 @@ struct ContentView: View {
             }
             if appModel.showGemMenu {
                 GemMenuView()
-                    .padding(.bottom, idiom == .pad ? 60 : 0)
             }
             CelebrateGems()
             if appModel.showMovesCard {
                 MovesView()
-                    .padding(.bottom, idiom == .pad ? 150 : 0)
             }
             if appModel.showSettings {
                 SettingsView()
-                    .padding(.bottom, idiom == .pad ? 150 : 0)
             }
         }
 //        .ignoresSafeArea()
