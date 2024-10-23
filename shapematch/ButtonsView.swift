@@ -76,11 +76,11 @@ struct ButtonsView: View {
                 if appModel.undosLeft <= 0 {
                     ZStack {
                         Circle()
-                            .frame(width: deviceWidth/6)
+                            .frame(width: idiom == .pad ? deviceWidth/8.5 : deviceWidth/6)
                             .foregroundColor(.black)
                             .scaleEffect(idiom == .pad ? 1.2 : 1)
                         Circle()
-                            .frame(width: idiom == .pad ? deviceWidth/10 : deviceWidth/7)
+                            .frame(width: idiom == .pad ? deviceWidth/8 : deviceWidth/7)
                             .overlay {
                                 LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                                     .mask(Circle())
@@ -93,6 +93,7 @@ struct ButtonsView: View {
                                 .fixedSize()
                             Text("💎 1")
                                 .bold()
+                                .font(.system(size: deviceWidth / 27))
                                 .customTextStroke(width: 1)
                                 .fixedSize()
                         }

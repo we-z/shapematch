@@ -80,6 +80,8 @@ class AppModel: ObservableObject {
         // Initialize the grids from persisted data
         (swapsNeeded, shapes) = determineLevelSettings(level: userPersistedData.level)
         
+        swapsNeeded += 2
+        
         grid = userPersistedData.grid.isEmpty ? [
             [.circle, .circle, .circle],
             [.square, .triangle, .square],
