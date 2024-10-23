@@ -94,7 +94,7 @@ struct LevelCompleteView: View {
                     .fixedSize()
                     .scaleEffect(0.75)
                 Text("💎")
-                    .font(.system(size: deviceWidth / 3))
+                    .font(.system(size: idiom == .pad ?  deviceWidth / 6 : deviceWidth / 3))
                     .customTextStroke(width: 4)
                     
             }
@@ -281,8 +281,9 @@ struct LevelCompleteView: View {
                         }
                 )
             }
+            .padding(idiom == .pad ? 30 : 0)
         }
-        .padding(idiom == .pad ? 30 : 0)
+        
         .onAppear {
             DispatchQueue.main.async { [self] in
                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 24.0, initialVelocity: 0.0)) {
