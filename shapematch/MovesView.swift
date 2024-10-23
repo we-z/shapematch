@@ -51,7 +51,7 @@ struct MovesView: View {
                 VStack {
                     VStack{
                         Capsule()
-                            .foregroundColor(.teal)
+                            .foregroundColor(.red)
                             .frame(width: 45, height: 9)
                             .customTextStroke()
                         HStack {
