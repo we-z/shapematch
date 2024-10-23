@@ -644,9 +644,6 @@ class AppModel: ObservableObject {
     }
     
     func setupLevel(startGrid: [[ShapeType]] = []) {
-        if userPersistedData.level == 1 {
-            setupFirstLevel()
-        }
         (swapsNeeded, shapes) = determineLevelSettings(level: userPersistedData.level)
         swapsMade = []
         undosLeft = 3

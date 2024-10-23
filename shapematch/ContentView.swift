@@ -177,7 +177,6 @@ struct ContentView: View {
                         }
                         .allowsHitTesting(!appModel.freezeGame)
                     }
-//                    .scaleEffect(idiom == .pad ? 0.75 : 1)
                 }
                 .tag(1)
             }
