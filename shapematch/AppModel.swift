@@ -648,7 +648,6 @@ class AppModel: ObservableObject {
         undosLeft = 3
         if startGrid.isEmpty {
             grid = generateTargetGrid(from: shapes, with: swapsNeeded)
-            showNewLevelAnimation = true
         } else {
             grid = startGrid
         }

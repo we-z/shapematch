@@ -217,6 +217,7 @@ struct LevelCompleteView: View {
                                     appModel.showCelebration = false
                                     userPersistedData.level += 1
                                     appModel.setupLevel()
+                                    appModel.showNewLevelAnimation = true
                                 }
                             }
                         }
