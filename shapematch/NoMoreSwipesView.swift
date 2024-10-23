@@ -74,7 +74,7 @@ struct NoMoreSwipesView: View {
                                     .lineLimit(1)
                                     .customTextStroke(width: 1.8)
                                     .fixedSize()
-                                    .padding(.horizontal, 30)
+                                    .padding(.horizontal, idiom == .pad ? 30 : 15)
                                 
                             }
                             .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
@@ -200,7 +200,8 @@ struct NoMoreSwipesView: View {
             }
             .padding(.horizontal, 18)
             .background(.clear)
-            .scaleEffect(idiom == .pad ? 0.84 : 1)
+            .padding(idiom == .pad ? 30 : 0)
+//            .scaleEffect(idiom == .pad ? 0.84 : 1)
         }
         .onAppear {
 //            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in

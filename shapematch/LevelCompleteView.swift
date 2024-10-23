@@ -112,7 +112,7 @@ struct LevelCompleteView: View {
                                 .lineLimit(1)
                                 .customTextStroke(width: 1.8)
                                 .fixedSize()
-                                .padding(.horizontal, 30)
+                                .padding(.horizontal, idiom == .pad ? 30 : 15)
                             
                         }
                         .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
@@ -126,7 +126,7 @@ struct LevelCompleteView: View {
                                 .padding(1)
                         }
                         .padding(3)
-                        .padding(.horizontal, 30)
+                        .padding(.horizontal, idiom == .pad ? 30 : 15)
                     }
                     .buttonStyle(.roundedAndShadow6)
                     Spacer()
