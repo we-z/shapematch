@@ -12,7 +12,7 @@ import AVFoundation
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        NewLevelAnimation()
+        CelebrationEffect()
     }
 }
 
@@ -119,12 +119,8 @@ struct CelebrationEffect: View {
                                 }
                                 withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
                                     animateMessage = false
-                                    DispatchQueue.main.async { [self] in
-                                        withAnimation {
-                                            showAnimation = false
-                                        }
-                                    }
                                 }
+                                showAnimation = false
                             }
                         }
                     }

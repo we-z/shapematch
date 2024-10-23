@@ -169,8 +169,6 @@ struct ContentView: View {
                                     HandSwipeView()
                                         .scaleEffect(idiom == .pad ? 0.8 : 1)
                                         .fixedSize()
-//                                        .frame(width: 1, height: 1)
-//                                        .zIndex(1)
                                         .offset(y: idiom == .pad ? deviceWidth / 4.1 : deviceWidth / 4.8)
                                 }
                             }
