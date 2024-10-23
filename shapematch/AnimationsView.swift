@@ -124,30 +124,8 @@ struct CelebrationEffect: View {
                                             showAnimation = false
                                         }
                                     }
-//                                    showAnimation = false
                                 }
-//                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
-//                                    showMessage = false
-//                                    proxy.burst()
-//                                    withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 200.0, damping: 13.0, initialVelocity: -10.0)) {
-//                                        showLevel = true
-//                                    }
-//                                }
                             }
-                            
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [self] in
-//                                appModel.freezeGame = false
-//                                withAnimation(.linear) {
-//                                    showLevel = false
-//                                    showAnimation = false
-//                                }
-//                                if userPersistedData.level == 2 {
-//                                    appModel.showNewGoal.toggle()
-//                                }
-//                                if userPersistedData.level < 5 {
-//                                    appModel.showInstruction.toggle()
-//                                }
-//                            }
                         }
                     }
                 }
