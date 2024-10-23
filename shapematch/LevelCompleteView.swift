@@ -46,6 +46,7 @@ struct LevelCompleteView: View {
                         appModel.showLevelComplete = false
                         appModel.selectedTab = 0
                     }
+                    appModel.setupLevel()
                 }
             }
         }
