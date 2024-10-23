@@ -57,7 +57,13 @@ struct LevelCompleteView: View {
         withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 21.0, initialVelocity: 0.0)) {
             gemYoffset = -(deviceWidth / 2)
         }
+        if userPersistedData.hapticsOn {
+            impactLight.impactOccurred()
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) { [self] in
+            if userPersistedData.hapticsOn {
+                impactLight.impactOccurred()
+            }
             withAnimation {
                 gemXoffset = -(deviceWidth / 2.8)
                 gemYoffset = -(deviceHeight / 2.5)
