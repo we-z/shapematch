@@ -33,26 +33,10 @@ struct ContentView: View {
                 ZStack{
                     LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                         .ignoresSafeArea()
-                    Group {
-                        VStack(spacing: 0) {
-                            Spacer()
-                            if userPersistedData.level == 1 {
-                                if idiom == .pad {
-                                    Text("Line up\nthe shapes")
-                                        .bold()
-                                        .multilineTextAlignment(.center)
-                                        .font(.system(size: deviceWidth/9))
-                                        .customTextStroke(width: 3)
-                                        .fixedSize()
-                                } else {
-                                    Text("Line up\nthe shapes")
-                                        .bold()
-                                        .multilineTextAlignment(.center)
-                                        .font(.system(size: deviceWidth/6))
-                                        .customTextStroke(width: 3)
-                                        .fixedSize()
-                                }
-                            } else {
+                    VStack {
+                        Group {
+                            VStack(spacing: 0) {
+                                Spacer()
                                 HStack {
                                     Spacer()
                                     Text("Level: \(userPersistedData.level)")
@@ -84,7 +68,7 @@ struct ContentView: View {
                                         .font(.system(size: deviceWidth/12))
                                         .customTextStroke(width: 1.8)
                                         .fixedSize()
-                                
+                                    
                                     Text("\(appModel.swipesLeft)")
                                         .bold()
                                         .italic()
@@ -92,15 +76,15 @@ struct ContentView: View {
                                         .customTextStroke(width: 2.7)
                                         .fixedSize()
                                 }
-                            }
-                            Spacer()
-                            if userPersistedData.level != 1 {
+                                Spacer()
                                 ZStack{
                                     ButtonsView()
                                 }
                                 .padding(.vertical, idiom == .pad ? 21 : 3)
                                 .zIndex(2)
                             }
+                        }
+                            .opacity(userPersistedData.level == 1 ? 0 : 1)
                             ZStack{
                                 Rectangle()
                                     .overlay{
@@ -109,7 +93,7 @@ struct ContentView: View {
                                             Color.blue.opacity(0.6)
                                         }
                                     }
-                                    .aspectRatio(1.0, contentMode: .fit)
+                                    .aspectRatio(1.0, contentMode: .fill)
                                     .cornerRadius(30)
                                     .overlay {
                                         RoundedRectangle(cornerRadius: 30)
@@ -174,8 +158,17 @@ struct ContentView: View {
                             }
                             .frame(width: deviceWidth)
                             .zIndex(1)
-                        }
-                        .allowsHitTesting(!appModel.freezeGame)
+                        
+                    }
+                    .allowsHitTesting(!appModel.freezeGame)
+                    if userPersistedData.level == 1 {
+                        Text("Line up\nthe shapes")
+                            .bold()
+                            .multilineTextAlignment(.center)
+                            .font(.system(size: idiom == .pad ? deviceWidth/9 : deviceWidth/6))
+                            .customTextStroke(width: 3)
+                            .fixedSize()
+                            .offset(y: -(deviceWidth / 2))
                     }
                 }
                 .tag(1)
