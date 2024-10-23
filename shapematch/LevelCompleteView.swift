@@ -328,18 +328,11 @@ struct LevelCompleteView: View {
                         star3Size = 1
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
-                        if let levelStars = userPersistedData.levelStars[String(userPersistedData.level)] {
-                            if levelStars < 3 {
-                                rewardGem()
-                            }
-                        } else {
+                        if appModel.shouldRewardGem {
                             rewardGem()
+                            appModel.shouldRewardGem = false
                         }
-                        
                     }
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                    appModel.updateStars()
                 }
             }
         }

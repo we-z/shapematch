@@ -54,7 +54,7 @@ class AppModel: ObservableObject {
     @Published var showLevelComplete = false
     @Published var showCelebration = false
     @Published var showNewLevelAnimation = false
-//    @Published var grid.count = 3
+    @Published var shouldRewardGem = false
     @Published var swapsNeeded = 1
     @Published var undosLeft = 3
     @Published var amountBought = 5
@@ -222,13 +222,16 @@ class AppModel: ObservableObject {
     }
 
     func updateStars() {
+        print("updateStars called")
         if swipesLeft > 1 || userPersistedData.level == 1 {
             if let levelStars = userPersistedData.levelStars[String(userPersistedData.level)] {
                 if levelStars < 3 {
                     userPersistedData.levelStars[String(userPersistedData.level)] = 3
+                    shouldRewardGem = true
                 }
             } else {
                 userPersistedData.levelStars[String(userPersistedData.level)] = 3
+                shouldRewardGem = true
             }
         } else if swipesLeft > 0 {
             if let levelStars = userPersistedData.levelStars[String(userPersistedData.level)] {
@@ -259,6 +262,7 @@ class AppModel: ObservableObject {
             if userPersistedData.level == userPersistedData.highestLevel {
                 userPersistedData.highestLevel += 1
             }
+            updateStars()
             DispatchQueue.main.async { [self] in
                 showCelebration = true
             }
