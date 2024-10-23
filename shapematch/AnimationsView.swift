@@ -12,7 +12,7 @@ import AVFoundation
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        HandSwipeView()
+        NewLevelAnimation()
     }
 }
 
@@ -224,6 +224,9 @@ struct NewLevelAnimation: View {
                                     animateMessage = false
                                     showAnimation = false
                                     showLevel = false
+                                   
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
                                     appModel.showNewLevelAnimation = false
                                 }
                             }
