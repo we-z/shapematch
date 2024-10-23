@@ -46,6 +46,7 @@ struct LevelCompleteView: View {
                         appModel.showLevelComplete = false
                         appModel.selectedTab = 0
                     }
+                    userPersistedData.level += 1
                     appModel.setupLevel()
                 }
             }
