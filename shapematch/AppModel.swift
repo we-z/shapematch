@@ -80,8 +80,6 @@ class AppModel: ObservableObject {
         // Initialize the grids from persisted data
         (swapsNeeded, shapes) = determineLevelSettings(level: userPersistedData.level)
         
-        swapsNeeded += 2
-        
         grid = userPersistedData.grid.isEmpty ? [
             [.circle, .circle, .circle],
             [.square, .triangle, .square],
@@ -92,7 +90,7 @@ class AppModel: ObservableObject {
         if userPersistedData.level == 1 {
             swipesLeft = 1
         } else {
-            swipesLeft = swapsNeeded
+            swipesLeft = swapsNeeded + 2
         }
         if grid.count == 3 {
             shapeWidth = deviceWidth / 4.0
@@ -270,16 +268,18 @@ class AppModel: ObservableObject {
             }
             print("You win!")
         } else if swipesLeft <= 0 {
+            if userPersistedData.level == 1 {
+                DispatchQueue.main.async { [self] in
+                    setupFirstLevel()
+                }
+            } else {
+                showNoMoreSwipesView = true
+            }
             if userPersistedData.soundOn {
                 AudioServicesPlaySystemSound (1053)
             }
             if userPersistedData.hapticsOn {
                 AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
-            }
-            if userPersistedData.level == 1 {
-                setupFirstLevel()
-            } else {
-                showNoMoreSwipesView = true
             }
             print("Level failed")
         }

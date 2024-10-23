@@ -314,11 +314,13 @@ extension ButtonStyle where Self == RoundedAndShadowButtonStyle6 {
 struct RoundedAndShadowButtonStyle6:ButtonStyle {
     @State var isPressed = false
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
+    @State var positiveDepth:CGFloat = idiom == .pad ? 12 : 6
+    @State var negativeDepth:CGFloat = idiom == .pad ? -12 : -6
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .compositingGroup()
-            .shadow(color: .black, radius: 0.1, x: isPressed ? 0 : -6, y: isPressed ? 0 : 6)
-            .offset(x: isPressed ? -6 : 0, y: isPressed ? 6 : 0)
+            .shadow(color: .black, radius: 0.1, x: isPressed ? 0 : negativeDepth, y: isPressed ? 0 : positiveDepth)
+            .offset(x: isPressed ? negativeDepth : 0, y: isPressed ? positiveDepth : 0)
             .animation(.easeInOut(duration: 0.1), value: isPressed)
             .onChange(of: configuration.isPressed) { currentlyPressing in
                 if currentlyPressing {
