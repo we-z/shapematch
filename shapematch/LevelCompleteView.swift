@@ -334,8 +334,11 @@ struct LevelCompleteView: View {
                         } else {
                             rewardGem()
                         }
-                        appModel.updateStars()
+                        
                     }
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                    appModel.updateStars()
                 }
             }
         }
