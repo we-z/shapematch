@@ -251,7 +251,6 @@ class AppModel: ObservableObject {
     
     func checkWinCondition() {
         if isWinningGrid(grid: grid) {
-            updateStars()
             userPersistedData.firstGamePlayed = true
             // 1335, 1114
             if userPersistedData.soundOn {

@@ -241,7 +241,7 @@ struct LevelCompleteView: View {
                                 .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                 .padding(1)
                         }
-                        .padding(30)
+                        .padding(idiom == .pad ? 60 : 30)
                         
                     }
                     .buttonStyle(.roundedAndShadow6)
@@ -282,6 +282,7 @@ struct LevelCompleteView: View {
                 )
             }
         }
+        .padding(idiom == .pad ? 30 : 0)
         .onAppear {
             DispatchQueue.main.async { [self] in
                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 24.0, initialVelocity: 0.0)) {
@@ -328,7 +329,10 @@ struct LevelCompleteView: View {
                             if levelStars < 3 {
                                 rewardGem()
                             }
+                        } else {
+                            rewardGem()
                         }
+                        appModel.updateStars()
                     }
                 }
             }
