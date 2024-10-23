@@ -74,16 +74,16 @@ struct NoMoreSwipesView: View {
                                     .lineLimit(1)
                                     .customTextStroke(width: 1.8)
                                     .fixedSize()
-                                    .padding(.horizontal)
+                                    .padding(.horizontal, 30)
                                 
                             }
                             .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
                             .background{
                                 LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                             }
-                            .cornerRadius(18)
+                            .cornerRadius(idiom == .pad ? 30 : 15)
                             .overlay{
-                                RoundedRectangle(cornerRadius: 18)
+                                RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
                                     .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                     .padding(1)
                             }

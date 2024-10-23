@@ -13,7 +13,7 @@ struct ButtonsView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @State var showLevelsMenu = false
     var body: some View {
-        HStack(spacing: idiom == .pad ? 21 : 9){
+        HStack(spacing: idiom == .pad ? 39 : 9){
             Button{
                 withAnimation {
                     appModel.selectedTab = 0
@@ -35,9 +35,9 @@ struct ButtonsView: View {
                 .background{
                     LinearGradient(gradient: Gradient(colors: [.red, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
-                .cornerRadius(15)
+                .cornerRadius(idiom == .pad ? 30 : 15)
                 .overlay{
-                    RoundedRectangle(cornerRadius: 15)
+                    RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
                         .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                         .padding(1)
                 }
@@ -64,9 +64,9 @@ struct ButtonsView: View {
                     .background{
                         LinearGradient(gradient: Gradient(colors: [.yellow, .yellow]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
                     }
-                    .cornerRadius(15)
+                    .cornerRadius(idiom == .pad ? 30 : 15)
                     .overlay{
-                        RoundedRectangle(cornerRadius: 15)
+                        RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
                             .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                             .padding(1)
                     }
@@ -123,9 +123,9 @@ struct ButtonsView: View {
                 .background{
                     LinearGradient(gradient: Gradient(colors: [.green, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
-                .cornerRadius(15)
+                .cornerRadius(idiom == .pad ? 30 : 15)
                 .overlay{
-                    RoundedRectangle(cornerRadius: 15)
+                    RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
                         .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                         .padding(1)
                 }
@@ -133,7 +133,7 @@ struct ButtonsView: View {
             }
             .buttonStyle(.roundedAndShadow6)
         }
-        .padding(.horizontal)
+        .padding(.horizontal, idiom == .pad ? 39 : 15)
         .sheet(isPresented: self.$showLevelsMenu){
             LevelsView()
         }
