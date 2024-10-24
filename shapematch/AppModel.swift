@@ -267,7 +267,9 @@ class AppModel: ObservableObject {
                 showCelebration = true
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [self] in
-                showLevelComplete = true
+                if selectedTab == 1 {
+                    showLevelComplete = true
+                }
             }
             print("You win!")
         } else if swipesLeft <= 0 {

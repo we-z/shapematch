@@ -139,6 +139,7 @@ struct CelebrationEffect: View {
             }
         }
         .onTapGesture {
+            print("tapped Celebration")
             appModel.showCelebration = false
             appModel.showLevelComplete = true
         }

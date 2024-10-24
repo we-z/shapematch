@@ -40,16 +40,16 @@ struct LevelCompleteView: View {
                 if userPersistedData.hapticsOn {
                     impactLight.impactOccurred()
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                    withAnimation {
-                        appModel.showCelebration = false
-                        appModel.showLevelComplete = false
-                        appModel.selectedTab = 0
-                    }
-                    userPersistedData.level += 1
-                    appModel.setupLevel()
-                }
             }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+            withAnimation {
+                appModel.selectedTab = 0
+            }
+            appModel.showCelebration = false
+            appModel.showLevelComplete = false
+            userPersistedData.level += 1
+            appModel.setupLevel()
         }
     }
     
@@ -80,21 +80,21 @@ struct LevelCompleteView: View {
             Color.gray
                 .opacity(0.7)
                 .ignoresSafeArea()
-                .onTapGesture {
-                    goBack()
-                }
-                .gesture(
-                    DragGesture()
-                        .onEnded { gesture in
-                            if gesture.translation.height > 0 {
-                                DispatchQueue.main.async { [self] in
-                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                        goBack()
-                                    }
-                                }
-                            }
-                        }
-                )
+//                .onTapGesture {
+//                    goBack()
+//                }
+//                .gesture(
+//                    DragGesture()
+//                        .onEnded { gesture in
+//                            if gesture.translation.height > 0 {
+//                                DispatchQueue.main.async { [self] in
+//                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+//                                        goBack()
+//                                    }
+//                                }
+//                            }
+//                        }
+//                )
             ZStack {
                 RotatingSunView()
                     .frame(width: 1, height: 1)
