@@ -62,9 +62,9 @@ class AppModel: ObservableObject {
     @Published var showNewGoal = false
     @Published var swaping = false
     @Published var shuffleBackground = false
-    @Published var shapeWidth = 0.0
+    @Published var shapeWidth = 1.0
     @Published var shapeScale = 1.0
-    @Published var previewShapeWidth = 0.0
+    @Published var previewShapeWidth = 1.0
     @Published var previewShapeScale = 1.0
     @Published var showMovesCard = false
     @Published var showSettings = false
@@ -111,7 +111,7 @@ class AppModel: ObservableObject {
             [.triangle, .square, .triangle]
         ] : userPersistedData.grid
         
-        
+        previewGrid = grid
         if userPersistedData.level == 1 {
             swipesLeft = 1
         } else {

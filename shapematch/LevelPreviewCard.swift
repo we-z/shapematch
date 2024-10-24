@@ -68,7 +68,7 @@ struct LevelPreviewCard: View {
                             }
                             .frame(width: 45, height: 9)
                             .cornerRadius(15)
-                            .padding(.bottom, 15)
+                            .padding()
                             .customTextStroke()
                         HStack {
                             Spacer()
@@ -86,36 +86,35 @@ struct LevelPreviewCard: View {
                                 .customTextStroke(width: 1.5)
                             Spacer()
                         }
-//                        .padding(.vertical)
+                        VStack{
                             VStack{
-                                VStack{
-                                    ForEach(0..<appModel.shapes.count, id: \.self) { row in
-                                        HStack {
-                                            ForEach(0..<appModel.shapes.count, id: \.self) { column in
-                                                ShapeView(shapeType: appModel.previewGrid[row][column])
-                                                    .frame(width: appModel.previewShapeWidth / 1.2, height: appModel.previewShapeWidth / 1.2)
-                                                    .scaleEffect( appModel.previewShapeScale / 1.2)
-                                                    .scaleEffect(idiom == .pad ? 0.5 : 1)
-                                            }
+                                ForEach(0..<appModel.shapes.count, id: \.self) { row in
+                                    HStack {
+                                        ForEach(0..<appModel.shapes.count, id: \.self) { column in
+                                            ShapeView(shapeType: appModel.previewGrid[row][column])
+                                                .frame(width: appModel.previewShapeWidth / 1.2, height: appModel.previewShapeWidth / 1.2)
+                                                .scaleEffect( appModel.previewShapeScale / 1.2)
+                                                .scaleEffect(idiom == .pad ? 0.55 : 1)
                                         }
                                     }
                                 }
                             }
-                            .padding( idiom == .pad ? 30 : 18)
-                            .background{
-                                ZStack{
-                                    Color.white
-                                    Color.blue.opacity(0.6)
-                                }
+                        }
+                        .padding( idiom == .pad ? 30 : 18)
+                        .background{
+                            ZStack{
+                                Color.white
+                                Color.blue.opacity(0.6)
                             }
-                            .cornerRadius(idiom == .pad ? 30 : 18)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 18)
-                                    .stroke(Color.yellow, lineWidth: idiom == .pad ? 9 : 7)
-                                    .padding(1)
-                                    .shadow(radius: 3)
-                            }
-                            .shadow(radius: 3)
+                        }
+                        .cornerRadius(idiom == .pad ? 30 : 18)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 18)
+                                .stroke(Color.yellow, lineWidth: idiom == .pad ? 9 : 7)
+                                .padding(1)
+                                .shadow(radius: 3)
+                        }
+                        .shadow(radius: 3)
                         .padding(.vertical)
                         if appModel.previewLevel <= userPersistedData.highestLevel {
                             Button {
@@ -141,15 +140,16 @@ struct LevelPreviewCard: View {
                                 }
                                 .padding()
                                 .background{
-                                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                                    LinearGradient(gradient: Gradient(colors: [.mint, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.5))
                                 }
-                                .cornerRadius(21)
+                                .cornerRadius(idiom == .pad ? 39: 21)
                                 .overlay{
-                                    RoundedRectangle(cornerRadius: 21)
+                                    RoundedRectangle(cornerRadius: idiom == .pad ? 39 : 21)
                                         .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                         .padding(1)
                                 }
                                 .padding()
+                                .padding(idiom == .pad ? 30 : 0)
                                 
                             }
                             .buttonStyle(.roundedAndShadow6)
