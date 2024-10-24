@@ -55,6 +55,23 @@ struct LevelCompleteView: View {
         }
     }
     
+    func continueNextLevel() {
+        leftScreen = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
+            withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                animateAwayButtonsAndBanner()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                    appModel.showLevelComplete = false
+                    appModel.showCelebration = false
+                    userPersistedData.level += 1
+                    appModel.setupLevel()
+                    appModel.showNewLevelAnimation = true
+                }
+            }
+        }
+    }
+    
     func rewardGem() {
         withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 21.0, initialVelocity: 0.0)) {
             gemYoffset = -(deviceWidth / 2)
@@ -218,17 +235,8 @@ struct LevelCompleteView: View {
                     
                     .padding(1)
                     Button {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                            withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                animateAwayButtonsAndBanner()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                    appModel.showLevelComplete = false
-                                    appModel.showCelebration = false
-                                    userPersistedData.level += 1
-                                    appModel.setupLevel()
-                                    appModel.showNewLevelAnimation = true
-                                }
-                            }
+                        if !leftScreen {
+                            continueNextLevel()
                         }
                     } label: {
                         HStack{
