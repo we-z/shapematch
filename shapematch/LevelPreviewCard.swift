@@ -88,9 +88,9 @@ struct LevelPreviewCard: View {
                         }
                         VStack{
                             VStack{
-                                ForEach(0..<appModel.shapes.count, id: \.self) { row in
+                                ForEach(0..<appModel.previewShapes.count, id: \.self) { row in
                                     HStack {
-                                        ForEach(0..<appModel.shapes.count, id: \.self) { column in
+                                        ForEach(0..<appModel.previewShapes.count, id: \.self) { column in
                                             ShapeView(shapeType: appModel.previewGrid[row][column])
                                                 .frame(width: appModel.previewShapeWidth / 1.2, height: appModel.previewShapeWidth / 1.2)
                                                 .scaleEffect( appModel.previewShapeScale / 1.2)
