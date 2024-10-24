@@ -72,13 +72,12 @@ struct LevelsView: View {
 
             VStack {
                 
-                // Top title displaying grid dimensions and shapes
-                HomeButtonsView()
-//              Text("Shape Swap!")
-//                    .bold()
-//                    .italic()
-//                    .font(.system(size: deviceWidth / 9))
-//                    .customTextStroke(width: 2.2)
+                
+              Text("Shape Swap!")
+                    .bold()
+                    .italic()
+                    .font(.system(size: deviceWidth / 9))
+                    .customTextStroke(width: 3)
 //                    .padding(.top)
                 // ScrollView with lazy loading
                 ZStack {
@@ -89,7 +88,7 @@ struct LevelsView: View {
                                         
                                         LevelRow(level: level)
                                                 .id(level)
-                                                .padding(.top, level == 1 ? deviceHeight / 21 : 0)
+                                                .padding(.top, level == 1 ? deviceHeight / 4 : 0)
                                                 .opacity( level <= userPersistedData.highestLevel ? 1.0 : 0.4)
                                                 .offset(x: sin(CGFloat(level) * .pi / 6) * (deviceWidth / 3.6))
                                                 .onTapGesture{
@@ -124,7 +123,8 @@ struct LevelsView: View {
                         .frame(width: deviceWidth)
                     }
                 }
-//                .frame(width: .infinity)
+                HomeButtonsView()
+                    .padding(.bottom, idiom == .pad ? 30 : 0)
             }
         }
     }

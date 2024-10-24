@@ -65,7 +65,7 @@ struct ButtonsView: View {
                     }
                     .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
                     .background{
-                        LinearGradient(gradient: Gradient(colors: [.yellow, .yellow]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.2))
+                        LinearGradient(gradient: Gradient(colors: [.yellow, .orange]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                     }
                     .cornerRadius(idiom == .pad ? 30 : 15)
                     .overlay{
@@ -124,7 +124,7 @@ struct ButtonsView: View {
                 }
                 .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.green, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    LinearGradient(gradient: Gradient(colors: [.purple, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
                 .cornerRadius(idiom == .pad ? 30 : 15)
                 .overlay{
