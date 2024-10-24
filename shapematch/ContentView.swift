@@ -151,9 +151,8 @@ struct ContentView: View {
                                 .scaleEffect(idiom == .pad ? 1.2 : 1)
                                 if userPersistedData.level == 1 && !appModel.showLevelComplete && !appModel.showCelebration {
                                     HandSwipeView()
-                                        .scaleEffect(idiom == .pad ? 0.8 : 1)
                                         .fixedSize()
-                                        .offset(y: idiom == .pad ? deviceWidth / 4.1 : deviceWidth / 4.8)
+                                        .offset(y: idiom == .pad ? deviceWidth / 4.4 : deviceWidth / 4.8)
                                 }
                             }
                             .frame(width: deviceWidth)

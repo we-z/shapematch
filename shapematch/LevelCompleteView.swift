@@ -46,7 +46,7 @@ struct LevelCompleteView: View {
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
             withAnimation {
-//                appModel.selectedTab = 0
+                appModel.selectedTab = 0
             }
             appModel.showCelebration = false
             appModel.showLevelComplete = false

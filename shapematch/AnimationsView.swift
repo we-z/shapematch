@@ -12,7 +12,7 @@ import AVFoundation
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        CelebrationEffect()
+        HandSwipeView()
     }
 }
 
@@ -387,6 +387,7 @@ struct HandSwipeView: View {
     @State private var offsetAmount: CGFloat = 0
     @State private var rotateHand = false
     @State private var fade = true
+    @State private var viewID = UUID()  // Add a unique identifier to track view appearance
 
     var body: some View {
         
@@ -413,13 +414,30 @@ struct HandSwipeView: View {
                     
             }
         }
+        .id(viewID)  // Ensure the view is reloaded on appearance
         .onAppear {
-            offsetAmount = 0
-            rotateHand = false
-            fade = false
-            animate()
+            resetAndStartAnimation()
+        }
+        .onDisappear {
+            cancelAnimation()  // Cancel animations when the view disappears
         }
         .allowsHitTesting(false)
+    }
+    
+    func resetAndStartAnimation() {
+        // Reset state variables
+        offsetAmount = 0
+        rotateHand = false
+        fade = false
+        
+        // Start the animation
+        animate()
+    }
+
+    func cancelAnimation() {
+        // This function can be used to handle any required cleanup
+        // For example, you could invalidate any timers or DispatchQueues if needed.
+        viewID = UUID()  // Force reloading the view by changing its ID
     }
     
     func animate() {
@@ -453,5 +471,4 @@ struct HandSwipeView: View {
             }
         }
     }
-    
 }
