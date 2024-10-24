@@ -22,7 +22,7 @@ struct LevelCompleteView: View {
     @State var gemXoffset = 0.0
     @State var gemYoffset: CGFloat = -deviceHeight
     @State var gemScale = 1.0
-    
+    @State var hasGoneBack = false  // New state variable
     
     func animateAwayButtonsAndBanner() {
         DispatchQueue.main.async { [self] in
@@ -34,6 +34,8 @@ struct LevelCompleteView: View {
     }
     
     func goBack() {
+        hasGoneBack = true
+        
         DispatchQueue.main.async { [self] in
             withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                 animateAwayButtonsAndBanner()
@@ -44,7 +46,7 @@ struct LevelCompleteView: View {
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
             withAnimation {
-                appModel.selectedTab = 0
+//                appModel.selectedTab = 0
             }
             appModel.showCelebration = false
             appModel.showLevelComplete = false
@@ -301,6 +303,7 @@ struct LevelCompleteView: View {
                 }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [self] in
+                if hasGoneBack { return }
                 if appModel.swipesLeft >= 0 || userPersistedData.level == 1 {
                     if userPersistedData.hapticsOn {
                         hapticManager.notification(type: .error)
@@ -312,6 +315,7 @@ struct LevelCompleteView: View {
                 }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
+                if hasGoneBack { return }
                 if appModel.swipesLeft >= 1 || userPersistedData.level == 1 {
                     appModel.swipesLeft -= 1
                     if userPersistedData.hapticsOn {
@@ -324,6 +328,7 @@ struct LevelCompleteView: View {
                 }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) { [self] in
+                if hasGoneBack { return }
                 if appModel.swipesLeft >= 1 || userPersistedData.level == 1 {
                     appModel.swipesLeft -= 1
                     if userPersistedData.hapticsOn {
