@@ -12,7 +12,7 @@ struct LevelsView: View {
     @ObservedObject var appModel = AppModel.sharedAppModel
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @State private var scrollProxy: ScrollViewProxy? = nil
-    let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "⛵", "🏝️", "🏖️"]
+    let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸"]
     
     func createBubbles() -> VortexSystem {
         let system = VortexSystem(tags: ["circle"])
