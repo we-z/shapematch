@@ -126,6 +126,7 @@ struct LevelPreviewCard: View {
                                         appModel.selectedTab = 1
                                         appModel.showLevelDetails = false
                                     }
+                                    appModel.showNewLevelAnimation = true
                                 }
                             } label: {
                                 HStack{

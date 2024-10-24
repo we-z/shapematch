@@ -45,6 +45,7 @@ struct LevelsView: View {
     var body: some View {
         ZStack {
             ZStack {
+                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 VortexView(createBubbles()) {
                     Circle()
                         .fill(.blue)
@@ -67,64 +68,91 @@ struct LevelsView: View {
                 }
                 .rotationEffect(.degrees(180))
                 .opacity(0.3)
+                
             }
             .ignoresSafeArea()
-
-            VStack {
                 
-                
-              Text("Shape Swap!")
-                    .bold()
-                    .italic()
-                    .font(.system(size: deviceWidth / 9))
-                    .customTextStroke(width: 3)
-//                    .padding(.top)
-                // ScrollView with lazy loading
-                ZStack {
-                    ScrollViewReader { proxy in
-                        ScrollView {
-                            LazyVStack {
-                                ForEach(1...9999, id: \.self) { level in
-                                        
-                                        LevelRow(level: level)
-                                                .id(level)
-                                                .padding(.top, level == 1 ? deviceHeight / 4 : 0)
-                                                .opacity( level <= userPersistedData.highestLevel ? 1.0 : 0.4)
-                                                .offset(x: sin(CGFloat(level) * .pi / 6) * (deviceWidth / 3.6))
-                                                .onTapGesture{
-                                                    if level == 1 {
-                                                        withAnimation {
-                                                            userPersistedData.level = 1
-                                                            appModel.setupFirstLevel()
-                                                            appModel.selectedTab = 1
-                                                        }
-                                                    } else {
-                                                        appModel.previewLevel = level
-                                                        (appModel.previewMoves, appModel.previewShapes) = appModel.determineLevelSettings(level: level)
-                                                        appModel.previewGrid = appModel.generateTargetGrid(from: appModel.previewShapes, with: appModel.previewMoves)
-                                                        appModel.showLevelDetails = true
+            ZStack {
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(1...9999, id: \.self) { level in
+                                    
+                                    LevelRow(level: level)
+                                            .id(level)
+                                            .padding(.top, level == 1 ? deviceHeight / 4 : 0)
+                                            .opacity( level <= userPersistedData.highestLevel ? 1.0 : 0.4)
+                                            .offset(x: sin(CGFloat(level) * .pi / 6) * (deviceWidth / 3.6))
+                                            .onTapGesture{
+                                                if level == 1 {
+                                                    withAnimation {
+                                                        userPersistedData.level = 1
+                                                        appModel.setupFirstLevel()
+                                                        appModel.selectedTab = 1
                                                     }
-                                                    if userPersistedData.hapticsOn {
-                                                        impactLight.impactOccurred()
-                                                    }
+                                                } else {
+                                                    appModel.previewLevel = level
+                                                    (appModel.previewMoves, appModel.previewShapes) = appModel.determineLevelSettings(level: level)
+                                                    appModel.previewGrid = appModel.generateTargetGrid(from: appModel.previewShapes, with: appModel.previewMoves)
+                                                    appModel.showLevelDetails = true
                                                 }
-                                }
+                                                if userPersistedData.hapticsOn {
+                                                    impactLight.impactOccurred()
+                                                }
+                                            }
                             }
                         }
-                        .onAppear {
-                            self.scrollProxy = proxy
-                            // Jump to the current level
-                            DispatchQueue.main.async {
-//                                withAnimation {
-                                    proxy.scrollTo(userPersistedData.level, anchor: .center)
-//                                }
-                            }
-                        }
-                        .frame(width: deviceWidth)
                     }
+                    .onAppear {
+                        self.scrollProxy = proxy
+                        // Jump to the current level
+                        DispatchQueue.main.async {
+//                                withAnimation {
+                                proxy.scrollTo(userPersistedData.level, anchor: .center)
+//                                }
+                        }
+                    }
+                    .frame(width: deviceWidth)
                 }
-                HomeButtonsView()
-                    .padding(.bottom, idiom == .pad ? 30 : 0)
+                VStack {
+                    HomeButtonsView()
+                    Spacer()
+                    Button {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
+                            userPersistedData.level = userPersistedData.highestLevel
+                            appModel.setupLevel()
+                            withAnimation {
+                                appModel.selectedTab = 1
+                            }
+                            appModel.showNewLevelAnimation = true
+                        }
+                    } label: {
+                        HStack{
+                            Spacer()
+                            Text("Level \(userPersistedData.highestLevel)  ➡️")
+                                .italic()
+                                .bold()
+                                .font(.system(size: deviceWidth/12))
+                                .fixedSize()
+                                .customTextStroke(width: 2.1)
+                            Spacer()
+                        }
+                        .padding()
+                        .background{
+                            LinearGradient(gradient: Gradient(colors: [.mint, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.5))
+                        }
+                        .cornerRadius(21)
+                        .overlay{
+                            RoundedRectangle(cornerRadius: 21)
+                                .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                .padding(1)
+                        }
+                        .padding(.horizontal)
+                        .padding(idiom == .pad ? 30 : 0)
+                        
+                    }
+                    .buttonStyle(.roundedAndShadow6)
+                }
             }
         }
     }
