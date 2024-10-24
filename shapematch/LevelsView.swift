@@ -9,40 +9,10 @@ import SwiftUI
 import Vortex
 
 struct LevelsView: View {
-    @State var dissapear = false
     @ObservedObject var appModel = AppModel.sharedAppModel
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
-    @State private var currentLevel = 1
-    @State var chosenLevel = 1
-    @State var moves = 1
-    @State var shapeWidth = 0.0
-    @State var shapeScale = 1.0
-    @State var shapes: [ShapeType] = [] {
-        didSet {
-            appModel.winningGrids = appModel.generateAllWinningGrids(shapes: shapes)
-        }
-    }
     @State private var scrollProxy: ScrollViewProxy? = nil
-    @State var showLevelDetails = false
-    @Environment(\.colorScheme) var colorScheme
     let emojis = ["🐟", "🐠", "🐡", "🦈", "🐬", "🐳", "🐋", "🐙", "🦑", "🦀", "🦞", "🦐", "🐚", "🪸", "🐊", "🌊", "🏄‍♂️", "🏄‍♀️", "🚤", "⛵", "🏝️", "🏖️"]
-    
-    @State var previewGrid: [[ShapeType]] = [] {
-        didSet {
-            if previewGrid.count == 3 {
-                shapeWidth = deviceWidth / 4.0
-                shapeScale = deviceWidth / 390
-            } else if previewGrid.count == 4 {
-                shapeWidth = deviceWidth / 5.3
-                shapeScale = deviceWidth / 540
-            } else if previewGrid.count == 5 {
-                shapeWidth = deviceWidth / 6.6
-                shapeScale = deviceWidth / 690
-            }
-        }
-    }
-    
-    @State var cardOffset: CGFloat = deviceHeight
     
     func createBubbles() -> VortexSystem {
         let system = VortexSystem(tags: ["circle"])
@@ -130,10 +100,10 @@ struct LevelsView: View {
                                                             appModel.selectedTab = 1
                                                         }
                                                     } else {
-                                                        chosenLevel = level
-                                                        (moves, shapes) = appModel.determineLevelSettings(level: chosenLevel)
-                                                        previewGrid = appModel.generateTargetGrid(from: shapes, with: moves)
-                                                        showLevelDetails = true
+                                                        appModel.previewLevel = level
+                                                        (appModel.previewMoves, appModel.previewShapes) = appModel.determineLevelSettings(level: level)
+                                                        appModel.previewGrid = appModel.generateTargetGrid(from: appModel.previewShapes, with: appModel.previewMoves)
+                                                        appModel.showLevelDetails = true
                                                     }
                                                     if userPersistedData.hapticsOn {
                                                         impactLight.impactOccurred()
@@ -155,204 +125,6 @@ struct LevelsView: View {
                     }
                 }
 //                .frame(width: .infinity)
-            }
-            if showLevelDetails {
-                LevelDetailsView
-            }
-        }
-    }
-    
-    func animateAwayButtonsAndBanner() {
-        DispatchQueue.main.async { [self] in
-            withAnimation(.linear(duration: 0.3)) {
-                cardOffset = deviceWidth * 3
-            }
-        }
-    }
-    
-    var LevelDetailsView: some View {
-        ZStack{
-            Color.gray.opacity(0.5)
-                .ignoresSafeArea()
-                .onTapGesture {
-                    DispatchQueue.main.async { [self] in
-                        withAnimation(.interpolatingSpring(mass: 6.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                            cardOffset = deviceWidth * 3
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                if userPersistedData.hapticsOn {
-                                    impactLight.impactOccurred()
-                                }
-                                showLevelDetails = false
-                            }
-                        }
-                    }
-                }
-                .gesture(
-                    DragGesture()
-                        .onEnded { gesture in
-                            if gesture.translation.height > 0 {
-                                DispatchQueue.main.async { [self] in
-                                    withAnimation(.interpolatingSpring(mass: 6.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                        cardOffset = deviceWidth * 3
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                            if userPersistedData.hapticsOn {
-                                                impactLight.impactOccurred()
-                                            }
-                                            showLevelDetails = false
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                )
-            VStack{
-                Spacer()
-                ZStack {
-                    VStack(spacing: 0){
-                        Capsule()
-                            .overlay {
-                                ZStack{
-                                    Color.teal
-                                }
-                            }
-                            .frame(width: 45, height: 9)
-                            .cornerRadius(15)
-                            .padding(.bottom, 15)
-                            .customTextStroke()
-                        HStack {
-                            Spacer()
-                            Text("Level: \(chosenLevel)")
-                                .bold()
-                                .font(.system(size: deviceWidth/15))
-                                .fixedSize()
-                                .customTextStroke(width: 1.5)
-                            Spacer()
-                            Text("Moves: \(moves + 2)")
-                                .bold()
-                                .multilineTextAlignment(.center)
-                                .font(.system(size: deviceWidth/15))
-                                .fixedSize()
-                                .customTextStroke(width: 1.5)
-                            Spacer()
-                        }
-//                        .padding(.vertical)
-                            VStack{
-                                VStack{
-                                    ForEach(0..<shapes.count, id: \.self) { row in
-                                        HStack {
-                                            ForEach(0..<shapes.count, id: \.self) { column in
-                                                ShapeView(shapeType: previewGrid[row][column])
-                                                    .frame(width: shapeWidth / 1.2, height: shapeWidth / 1.2)
-                                                    .scaleEffect( shapeScale / 1.2)
-                                                    .scaleEffect(idiom == .pad ? 0.5 : 1)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            .padding( idiom == .pad ? 30 : 18)
-                            .background{
-                                ZStack{
-                                    Color.white
-                                    Color.blue.opacity(0.6)
-                                }
-                            }
-                            .cornerRadius(idiom == .pad ? 30 : 18)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 18)
-                                    .stroke(Color.yellow, lineWidth: idiom == .pad ? 9 : 7)
-                                    .padding(1)
-                                    .shadow(radius: 3)
-                            }
-                            .shadow(radius: 3)
-                        .padding(.vertical)
-                        if chosenLevel <= userPersistedData.highestLevel {
-                            Button {
-                                animateAwayButtonsAndBanner()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                    userPersistedData.level = chosenLevel
-                                    appModel.setupLevel(startGrid: previewGrid)
-                                    withAnimation {
-                                        appModel.selectedTab = 1
-                                        showLevelDetails = false
-                                    }
-                                }
-                            } label: {
-                                HStack{
-                                    Spacer()
-                                    Text("Play!  ➡️")
-                                        .italic()
-                                        .bold()
-                                        .font(.system(size: deviceWidth/12))
-                                        .fixedSize()
-                                        .customTextStroke(width: 2.1)
-                                    Spacer()
-                                }
-                                .padding()
-                                .background{
-                                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                                }
-                                .cornerRadius(21)
-                                .overlay{
-                                    RoundedRectangle(cornerRadius: 21)
-                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                        .padding(1)
-                                }
-                                .padding()
-                                
-                            }
-                            .buttonStyle(.roundedAndShadow6)
-                        }
-                    }
-                }
-                .padding()
-                .background{
-                    LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                }
-                .cornerRadius(30)
-                .overlay{
-                    RoundedRectangle(cornerRadius: 30)
-                        .stroke(Color.black, lineWidth: 9)
-                        .padding(1)
-                }
-                .padding()
-//                .scaleEffect(idiom == .pad ? 0.6 : 1)
-                .offset(y: cardOffset)
-                .onAppear{
-                    DispatchQueue.main.async {
-                        cardOffset = deviceHeight
-                        withAnimation(.interpolatingSpring(mass: 6.0, stiffness: 100.0, damping: 30.0, initialVelocity: 0.0)) {
-                            cardOffset = 0
-                        }
-                    }
-                }
-                .gesture(
-                    DragGesture()
-                        .onChanged { gesture in
-                            cardOffset = gesture.translation.height
-                        }
-                        .onEnded { gesture in
-                            if gesture.translation.height > 0 {
-                                DispatchQueue.main.async { [self] in
-                                    withAnimation(.interpolatingSpring(mass: 6.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                        cardOffset = deviceWidth * 3
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                            if userPersistedData.hapticsOn {
-                                                impactLight.impactOccurred()
-                                            }
-                                            showLevelDetails = false
-                                        }
-                                    }
-                                }
-                            } else {
-                                DispatchQueue.main.async { [self] in
-                                    withAnimation(.interpolatingSpring(mass: 6.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                        cardOffset = 0
-                                    }
-                                }
-                            }
-                        }
-                )
             }
         }
     }

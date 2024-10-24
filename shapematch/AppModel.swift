@@ -31,6 +31,21 @@ class AppModel: ObservableObject {
         }
     }
     
+    @Published var previewGrid: [[ShapeType]] = [] {
+        didSet {
+            if previewGrid.count == 3 {
+                previewShapeWidth = deviceWidth / 4.0
+                previewShapeScale = deviceWidth / 390
+            } else if previewGrid.count == 4 {
+                previewShapeWidth = deviceWidth / 5.3
+                previewShapeScale = deviceWidth / 540
+            } else if previewGrid.count == 5 {
+                previewShapeWidth = deviceWidth / 6.6
+                previewShapeScale = deviceWidth / 690
+            }
+        }
+    }
+    
     
     @Published var offsets: [[CGSize]] = Array(
         repeating: Array(repeating: .zero, count: 5),
@@ -49,18 +64,28 @@ class AppModel: ObservableObject {
     @Published var shuffleBackground = false
     @Published var shapeWidth = 0.0
     @Published var shapeScale = 1.0
+    @Published var previewShapeWidth = 0.0
+    @Published var previewShapeScale = 1.0
     @Published var showMovesCard = false
     @Published var showSettings = false
     @Published var showLevelComplete = false
     @Published var showCelebration = false
     @Published var showNewLevelAnimation = false
     @Published var shouldRewardGem = false
+    @Published var showLevelDetails = false
+    @Published var previewLevel = 0
+    @Published var previewMoves = 0
     @Published var swapsNeeded = 1
     @Published var undosLeft = 3
     @Published var amountBought = 5
     @Published var shapes: [ShapeType] = [] {
         didSet {
             self.winningGrids = generateAllWinningGrids(shapes: shapes)
+        }
+    }
+    @Published var previewShapes: [ShapeType] = [] {
+        didSet {
+            self.winningGrids = generateAllWinningGrids(shapes: previewShapes)
         }
     }
     @Published var swapsMade: [(Position, Position)] = []

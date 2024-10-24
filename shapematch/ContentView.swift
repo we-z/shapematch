@@ -183,6 +183,9 @@ struct ContentView: View {
             if appModel.showLevelComplete {
                 LevelCompleteView()
             }
+            if appModel.showLevelDetails {
+                LevelPreviewCard()
+            }
             if appModel.showNoMoreSwipesView {
                 NoMoreSwipesView()
             }
