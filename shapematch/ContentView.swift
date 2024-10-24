@@ -81,9 +81,10 @@ struct ContentView: View {
                                     ButtonsView()
                                 }
                                 .padding(.vertical, idiom == .pad ? 21 : 3)
-                                .zIndex(2)
+                                
                             }
                         }
+                        .zIndex(1)
                             .opacity(userPersistedData.level == 1 ? 0 : 1)
                             ZStack{
                                 Rectangle()
@@ -156,7 +157,7 @@ struct ContentView: View {
                                 }
                             }
                             .frame(width: deviceWidth)
-                            .zIndex(1)
+                            .zIndex(0)
                         
                     }
                     .allowsHitTesting(!appModel.freezeGame)
