@@ -193,12 +193,13 @@ struct LevelRow: View {
                     Text("⭐️")
                         .offset(y: -12)
                         .rotationEffect(.degrees(21))
+                        .opacity(userPersistedData.levelStars[String(level)] ?? 0 > 0 ? 1 : 0.3)
                     Text("⭐️")
-                        .opacity(userPersistedData.levelStars[String(level)] ?? 1 > 1 ? 1 : 0.3)
+                        .opacity(userPersistedData.levelStars[String(level)] ?? 0 > 1 ? 1 : 0.3)
                     Text("⭐️")
                         .offset(y: -12)
                         .rotationEffect(.degrees(-21))
-                        .opacity(userPersistedData.levelStars[String(level)] ?? 1 > 2 ? 1 : 0.3)
+                        .opacity(userPersistedData.levelStars[String(level)] ?? 0 > 2 ? 1 : 0.3)
                 }
             }
             .customTextStroke(width:1)
