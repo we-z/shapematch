@@ -22,7 +22,7 @@ struct LevelCompleteView: View {
     @State var gemXoffset = 0.0
     @State var gemYoffset: CGFloat = -deviceHeight
     @State var gemScale = 1.0
-    @State var hasGoneBack = false  // New state variable
+    @State var leftScreen = false  // New state variable
     
     func animateAwayButtonsAndBanner() {
         DispatchQueue.main.async { [self] in
@@ -34,7 +34,7 @@ struct LevelCompleteView: View {
     }
     
     func goBack() {
-        hasGoneBack = true
+        leftScreen = true
         
         DispatchQueue.main.async { [self] in
             withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
@@ -303,7 +303,7 @@ struct LevelCompleteView: View {
                 }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [self] in
-                if hasGoneBack { return }
+                if leftScreen { return }
                 if appModel.swipesLeft >= 0 || userPersistedData.level == 1 {
                     if userPersistedData.hapticsOn {
                         hapticManager.notification(type: .error)
@@ -315,7 +315,7 @@ struct LevelCompleteView: View {
                 }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
-                if hasGoneBack { return }
+                if leftScreen { return }
                 if appModel.swipesLeft >= 1 || userPersistedData.level == 1 {
                     appModel.swipesLeft -= 1
                     if userPersistedData.hapticsOn {
@@ -328,7 +328,7 @@ struct LevelCompleteView: View {
                 }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) { [self] in
-                if hasGoneBack { return }
+                if leftScreen { return }
                 if appModel.swipesLeft >= 1 || userPersistedData.level == 1 {
                     appModel.swipesLeft -= 1
                     if userPersistedData.hapticsOn {
@@ -338,12 +338,12 @@ struct LevelCompleteView: View {
                     withAnimation {
                         star3Size = 1
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
-                        if appModel.shouldRewardGem {
-                            rewardGem()
-                            appModel.shouldRewardGem = false
-                        }
-                    }
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [self] in
+                if appModel.shouldRewardGem {
+                    rewardGem()
+                    appModel.shouldRewardGem = false
                 }
             }
         }
