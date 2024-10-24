@@ -203,9 +203,9 @@ struct LevelRow: View {
                 }
             }
             .customTextStroke(width:1)
-            .offset(y: idiom == .pad ? -1 : -3)
-            .font(.system(size: idiom == .pad ? deviceWidth / 39 : deviceWidth / 21))
-            .frame(height: idiom == .pad ? deviceWidth / 27 : deviceWidth / 27)
+            .offset(y: idiom == .pad ? -6 : -3)
+            .font(.system(size: idiom == .pad ? deviceWidth / 27 : deviceWidth / 21))
+            .frame(height: deviceWidth / 27)
         }
         
     }
