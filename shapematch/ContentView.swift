@@ -42,7 +42,7 @@ struct ContentView: View {
                                     Text("Level: \(userPersistedData.level)")
                                         .bold()
                                         .font(.system(size: deviceWidth/12))
-                                        .customTextStroke(width: 1.8)
+                                        .customTextStroke(width: 2.1)
                                         .fixedSize()
                                     Spacer()
                                     if idiom == .pad {
@@ -50,12 +50,12 @@ struct ContentView: View {
                                             Text("Moves:")
                                                 .bold()
                                                 .font(.system(size: deviceWidth/12))
-                                                .customTextStroke(width: 1.8)
+                                                .customTextStroke(width: 2.1)
                                                 .fixedSize()
                                             Text(" \(appModel.swipesLeft)")
                                                 .bold()
                                                 .font(.system(size: deviceWidth/12))
-                                                .customTextStroke(width: 1.8)
+                                                .customTextStroke(width: 2.1)
                                                 .fixedSize()
                                         }
                                         Spacer()
@@ -66,7 +66,7 @@ struct ContentView: View {
                                     Text("Moves:")
                                         .bold()
                                         .font(.system(size: deviceWidth/12))
-                                        .customTextStroke(width: 1.8)
+                                        .customTextStroke(width: 2.1)
                                         .fixedSize()
                                     
                                     Text("\(appModel.swipesLeft)")
