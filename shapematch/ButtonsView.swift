@@ -15,8 +15,11 @@ struct ButtonsView: View {
     var body: some View {
         HStack(spacing: idiom == .pad ? 39 : 9){
             Button{
-                withAnimation {
-                    appModel.selectedTab = 0
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
+                    appModel.selectedTab = 1
+                    withAnimation {
+                        appModel.selectedTab = 0
+                    }
                 }
             } label: {
                 HStack{
