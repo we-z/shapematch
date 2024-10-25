@@ -44,11 +44,11 @@ struct HomeButtonsView: View {
 
             ZStack{
                 Button {
-                    appModel.showMovesCard = true
+//                    appModel.showMovesCard = true
                 } label: {
                     HStack{
                         Spacer()
-                        Text("👨‍🏫")
+                        Text("🛍️")
                             .bold()
                             .customTextStroke(width: 1.2)
                             .font(.system(size: deviceWidth/21))

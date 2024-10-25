@@ -38,6 +38,13 @@ struct ContentView: View {
                             VStack(spacing: 0) {
                                 Spacer()
                                 HStack {
+                                    Text("❓")
+                                        .bold()
+                                        .font(.system(size: deviceWidth / 12))
+                                        .customTextStroke(width: 1.2)
+                                        .fixedSize()
+                                        .padding(.leading)
+                                        .opacity(0)
                                     Spacer()
                                     Text("Level: \(userPersistedData.level)")
                                         .bold()
@@ -59,6 +66,19 @@ struct ContentView: View {
                                                 .fixedSize()
                                         }
                                         Spacer()
+                                    }
+                                    Button {
+                                        if userPersistedData.hapticsOn {
+                                            impactLight.impactOccurred()
+                                        }
+                                        appModel.showMovesCard = true
+                                    } label: {
+                                        Text("❓")
+                                            .bold()
+                                            .font(.system(size: deviceWidth / 12))
+                                            .customTextStroke(width: 1.2)
+                                            .fixedSize()
+                                            .padding(.trailing)
                                     }
                                 }
                                 Spacer()
