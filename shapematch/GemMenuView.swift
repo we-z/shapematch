@@ -307,8 +307,8 @@ struct GemMenuView: View {
         }
         .sheet(isPresented: $sheetPresented, content: {
                 
-            if let data = render(), let url = URL(string: "https://apple.co/4ea9see") {
-                ShareView(image: data, url: url)
+            if let url = URL(string: "https://apple.co/4ea9see") {
+                ShareView(url: url)
                     .ignoresSafeArea()
             }
             

@@ -12,11 +12,9 @@ import UniformTypeIdentifiers
 import StoreKit
 
 class ActivityItemProvider: NSObject, UIActivityItemSource {
-    let image: UIImage
     let url: URL
 
-    init(image: UIImage, url: URL) {
-        self.image = image
+    init(url: URL) {
         self.url = url
     }
 
@@ -34,19 +32,17 @@ class ActivityItemProvider: NSObject, UIActivityItemSource {
         metadata.originalURL = url
         metadata.url = url
         metadata.title = "Shape Swap!"
-        metadata.imageProvider = NSItemProvider(object: image)  // Use UIImage
         metadata.iconProvider = NSItemProvider(object: appIcon!)
         return metadata
     }
 }
 
 struct ShareView: UIViewControllerRepresentable {
-    let image: UIImage  // Use UIImage here
     let url: URL
     @ObservedObject var userPersistedData = UserPersistedData()
 
     func makeUIViewController(context: Context) -> UIActivityViewController {
-        let activityItems = [ActivityItemProvider(image: image, url: url)]
+        let activityItems = [ActivityItemProvider(url: url)]
         let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
 
         activityViewController.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
