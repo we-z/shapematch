@@ -163,50 +163,61 @@ struct LevelRow: View {
     var level: Int
 
     var body: some View {
-        VStack {
-            ZStack {
-                if level == userPersistedData.highestLevel {
-                    RotatingSunView()
-                        .frame(width: 1, height: 1)
-                        .foregroundColor(.white)
-                        .scaleEffect(0.3)
-                }
-                Circle()
-                    .frame(width: idiom == .pad ? deviceWidth / 12 : deviceWidth / 7)
-                    .overlay{
-                        LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                            .mask(Circle())
+        ZStack {
+            VStack {
+                ZStack {
+                    if level == userPersistedData.highestLevel {
+                        RotatingSunView()
+                            .frame(width: 1, height: 1)
+                            .foregroundColor(.white)
+                            .scaleEffect(0.3)
                     }
-                    .customTextStroke(width: idiom == .pad ? 1.8 : 3)
-                Text("\(level)")
-                    .bold()
-                    .font(.system(size: idiom == .pad ? deviceWidth / 21 : deviceWidth / 12 ))
-                    .scaleEffect(level > 999 ? 0.5 : level > 99 ? 0.78 : 1)
-                    .fixedSize()
-                    .customTextStroke(width: idiom == .pad ? 1.2 : 1.8)
-                
-            }
-            
-            HStack {
-                if level <= userPersistedData.highestLevel {
-                    Text("⭐️")
-                        .offset(y: -12)
-                        .rotationEffect(.degrees(21))
-                        .opacity(userPersistedData.levelStars[String(level)] ?? 0 > 0 ? 1 : 0.3)
-                    Text("⭐️")
-                        .opacity(userPersistedData.levelStars[String(level)] ?? 0 > 1 ? 1 : 0.3)
-                    Text("⭐️")
-                        .offset(y: -12)
-                        .rotationEffect(.degrees(-21))
-                        .opacity(userPersistedData.levelStars[String(level)] ?? 0 > 2 ? 1 : 0.3)
+                    Circle()
+                        .frame(width: idiom == .pad ? deviceWidth / 12 : deviceWidth / 7)
+                        .overlay{
+                            if userPersistedData.levelStars[String(level)] ?? 0 > 2 {
+                                LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                                    .mask(Circle())
+                            } else {
+                                LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                                    .mask(Circle())
+                            }
+                        }
+                        .customTextStroke(width: idiom == .pad ? 1.8 : 3)
+                    Text("\(level)")
+                        .bold()
+                        .font(.system(size: idiom == .pad ? deviceWidth / 21 : deviceWidth / 12 ))
+                        .scaleEffect(level > 999 ? 0.5 : level > 99 ? 0.78 : 1)
+                        .fixedSize()
+                        .customTextStroke(width: idiom == .pad ? 1.2 : 1.8)
                 }
+                
+                HStack {
+                    if level <= userPersistedData.highestLevel {
+                        Text("⭐️")
+                            .offset(y: -12)
+                            .rotationEffect(.degrees(21))
+                            .opacity(userPersistedData.levelStars[String(level)] ?? 0 > 0 ? 1 : 0.3)
+                        Text("⭐️")
+                            .opacity(userPersistedData.levelStars[String(level)] ?? 0 > 1 ? 1 : 0.3)
+                        Text("⭐️")
+                            .offset(y: -12)
+                            .rotationEffect(.degrees(-21))
+                            .opacity(userPersistedData.levelStars[String(level)] ?? 0 > 2 ? 1 : 0.3)
+                    }
+                }
+                .customTextStroke(width:1)
+                .offset(y: idiom == .pad ? -9 : -3)
+                .font(.system(size: idiom == .pad ? deviceWidth / 33 : deviceWidth / 21))
+                .frame(height: deviceWidth / 27)
             }
-            .customTextStroke(width:1)
-            .offset(y: idiom == .pad ? -9 : -3)
-            .font(.system(size: idiom == .pad ? deviceWidth / 33 : deviceWidth / 21))
-            .frame(height: deviceWidth / 27)
+            if userPersistedData.levelStars[String(level)] ?? 0 > 2 {
+                Text("💎")
+                    .customTextStroke(width:1.2)
+                    .font(.system(size: idiom == .pad ? deviceWidth / 33 : deviceWidth / 18))
+                    .offset(x: idiom == .pad ? deviceWidth / 12 : deviceWidth / 8)
+            }
         }
-        
     }
 }
 

@@ -18,8 +18,8 @@ struct iconview: View {
             Color.blue
             LinearGradient(
                 gradient: Gradient(colors: [.purple, .blue, .teal]),
-                startPoint: UnitPoint(x: 0.5, y: 0.2),
-                endPoint: UnitPoint(x: 0.5, y: 0.8)
+                startPoint: UnitPoint(x: 0.4, y: 0.2),
+                endPoint: UnitPoint(x: 0.6, y: 0.8)
             )
             RotatingSunView()
             ZStack {
