@@ -45,7 +45,6 @@ struct LevelsView: View {
     var body: some View {
         ZStack {
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 VortexView(createBubbles()) {
                     Circle()
                         .fill(.blue)
@@ -203,8 +202,8 @@ struct LevelRow: View {
                 }
             }
             .customTextStroke(width:1)
-            .offset(y: idiom == .pad ? -6 : -3)
-            .font(.system(size: idiom == .pad ? deviceWidth / 27 : deviceWidth / 21))
+            .offset(y: idiom == .pad ? -9 : -3)
+            .font(.system(size: idiom == .pad ? deviceWidth / 33 : deviceWidth / 21))
             .frame(height: deviceWidth / 27)
         }
         

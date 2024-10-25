@@ -31,7 +31,7 @@ struct iconview: View {
 //                ShapeView(shapeType: .triangle)
                 Text("💎")
                     .font(.system(size: 270))
-                    .customTextStroke(width: 3)
+                    .customTextStroke(width: 6)
 //                Text("✨")
 //                    .font(.system(size: 120))
 //                    .customTextStroke(width: 3)
