@@ -16,29 +16,17 @@ struct iconview: View {
     var body: some View {
         ZStack {
             Color.blue
-            LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0.3), endPoint: UnitPoint(x: 0.5, y: 0.7))
+            LinearGradient(
+                gradient: Gradient(colors: [.purple, .blue, .teal]),
+                startPoint: UnitPoint(x: 0.5, y: 0.2),
+                endPoint: UnitPoint(x: 0.5, y: 0.8)
+            )
             RotatingSunView()
             ZStack {
-//                ForEach(0..<2) { row in // Updated to 4 rows
-//                    HStack {
-//                        ForEach(0..<2) { column in // Updated to 4 columns
-//                            ShapeView(shapeType: grid[row][column])
-//                                .padding(18)
-//                            
-//                        }
-//                    }
-//                }
-//                ShapeView(shapeType: .triangle)
                 Text("💎")
                     .font(.system(size: 270))
                     .customTextStroke(width: 6)
-//                Text("✨")
-//                    .font(.system(size: 120))
-//                    .customTextStroke(width: 3)
-//                    .offset(x: 90, y: -90)
-                
             }
-//            .scaleEffect(1.5)
         }
     }
 }
