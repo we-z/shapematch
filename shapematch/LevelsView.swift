@@ -147,6 +147,7 @@ struct LevelsView: View {
                                 .padding(1)
                         }
                         .padding(.horizontal, 30)
+                        .padding(.bottom)
                         .padding(idiom == .pad ? 30 : 0)
                         
                     }

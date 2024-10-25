@@ -210,6 +210,9 @@ struct ContentView: View {
             if appModel.showNoMoreSwipesView {
                 NoMoreSwipesView()
             }
+            if appModel.showSkinsMenu {
+                SkinsMenuView()
+            }
             if appModel.showGemMenu {
                 GemMenuView()
             }
