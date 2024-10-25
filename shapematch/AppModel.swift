@@ -73,6 +73,7 @@ class AppModel: ObservableObject {
     @Published var showNewLevelAnimation = false
     @Published var shouldRewardGem = false
     @Published var showLevelDetails = false
+    @Published var showSkinsMenu = false
     @Published var previewLevel = 0
     @Published var previewMoves = 0
     @Published var swapsNeeded = 1

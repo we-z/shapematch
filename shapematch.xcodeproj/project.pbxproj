@@ -35,6 +35,7 @@
 		766EF08F2C7EB1C500B2C380 /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766EF08E2C7EB1C500B2C380 /* InstructionView.swift */; };
 		7677131E2C86DCF800C9E2C9 /* iconview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7677131D2C86DCF800C9E2C9 /* iconview.swift */; };
 		76ADAF042C76A92C006B2844 /* OverlaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ADAF032C76A92B006B2844 /* OverlaysView.swift */; };
+		76B285122CCC12E900A45ADB /* SkinsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B285112CCC12E900A45ADB /* SkinsMenuView.swift */; };
 		76B774072C968EF70053B72B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B774062C968EF70053B72B /* Extensions.swift */; };
 		76B774092C96B6F50053B72B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B774082C96B6F50053B72B /* NotificationManager.swift */; };
 		76B7740B2C99EE950053B72B /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B7740A2C99EE950053B72B /* QRView.swift */; };
@@ -86,6 +87,7 @@
 		766EF08E2C7EB1C500B2C380 /* InstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionView.swift; sourceTree = "<group>"; };
 		7677131D2C86DCF800C9E2C9 /* iconview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iconview.swift; sourceTree = "<group>"; };
 		76ADAF032C76A92B006B2844 /* OverlaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlaysView.swift; sourceTree = "<group>"; };
+		76B285112CCC12E900A45ADB /* SkinsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinsMenuView.swift; sourceTree = "<group>"; };
 		76B774062C968EF70053B72B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		76B774082C96B6F50053B72B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		76B7740A2C99EE950053B72B /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRView.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				7639F95E2C713D8100E2B371 /* shapematchApp.swift */,
 				7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */,
 				76B7740C2C9A006C0053B72B /* ShareView.swift */,
+				76B285112CCC12E900A45ADB /* SkinsMenuView.swift */,
 				761A444A2C78E8320017B53B /* StoreKitManager.swift */,
 				7639F9892C71460D00E2B371 /* Tempview.swift */,
 				760776142C7A18C7003E2AD2 /* UserPersistedData.swift */,
@@ -336,6 +339,7 @@
 				76ADAF042C76A92C006B2844 /* OverlaysView.swift in Sources */,
 				761A444B2C78E8320017B53B /* StoreKitManager.swift in Sources */,
 				7639F9CA2C7587C800E2B371 /* NoMoreSwipesView.swift in Sources */,
+				76B285122CCC12E900A45ADB /* SkinsMenuView.swift in Sources */,
 				76B774072C968EF70053B72B /* Extensions.swift in Sources */,
 				7669B74E2CB96BC400EBA34F /* HomeButtonsView.swift in Sources */,
 				7639F98A2C71460D00E2B371 /* Tempview.swift in Sources */,

@@ -44,7 +44,7 @@ struct HomeButtonsView: View {
 
             ZStack{
                 Button {
-//                    appModel.showMovesCard = true
+                    appModel.showSkinsMenu = true
                 } label: {
                     HStack{
                         Spacer()
