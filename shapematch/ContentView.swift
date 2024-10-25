@@ -38,10 +38,10 @@ struct ContentView: View {
                             VStack(spacing: 0) {
                                 Spacer()
                                 HStack {
-                                    Text("❓")
+                                    Text("🙋‍♂️")
                                         .bold()
                                         .font(.system(size: deviceWidth / 12))
-                                        .customTextStroke(width: 1.2)
+                                        .customTextStroke()
                                         .fixedSize()
                                         .padding(.leading)
                                         .opacity(0)
@@ -73,10 +73,10 @@ struct ContentView: View {
                                         }
                                         appModel.showMovesCard = true
                                     } label: {
-                                        Text("❓")
+                                        Text("🙋‍♂️")
                                             .bold()
                                             .font(.system(size: deviceWidth / 12))
-                                            .customTextStroke(width: 1.2)
+                                            .customTextStroke()
                                             .fixedSize()
                                             .padding(.trailing)
                                     }
