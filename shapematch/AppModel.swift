@@ -106,9 +106,9 @@ class AppModel: ObservableObject {
         (swapsNeeded, shapes) = determineLevelSettings(level: userPersistedData.level)
         
         grid = userPersistedData.grid.isEmpty ? [
-            [.circle, .circle, .circle],
-            [.square, .triangle, .square],
-            [.triangle, .square, .triangle]
+            [.triangle, .triangle, .triangle],
+            [.circle, .square, .circle],
+            [.square, .circle, .square]
         ] : userPersistedData.grid
         
         previewGrid = grid
