@@ -210,9 +210,6 @@ struct ContentView: View {
             if appModel.showNoMoreSwipesView {
                 NoMoreSwipesView()
             }
-            if appModel.showSkinsMenu {
-                SkinsMenuView()
-            }
             if appModel.showGemMenu {
                 GemMenuView()
             }
@@ -224,7 +221,9 @@ struct ContentView: View {
                 SettingsView()
             }
         }
-
+        .sheet(isPresented: self.$appModel.showSkinsMenu ){
+            SkinsMenuView()
+        }
         .onAppear {
             appModel.initialGrid = appModel.grid
             self.notificationManager.registerLocal()
