@@ -65,13 +65,14 @@ struct SkinsMenuView: View {
                         Button {
                         } label: {
                             HStack {
+                                
+                                ForEach(ShapeType.allCases) { shape in
+                                    ShapesView(shapeType: shape)
+                                        .frame(width: deviceWidth / 15, height: deviceWidth / 15)
+                                        .scaleEffect(0.3)
+                                        .fixedSize()
+                                }
 
-                                Text("🔵 🟩 🔻 ⭐️ 💜")
-                                    .bold()
-                                    .font(.system(size: deviceWidth / 15))
-                                    .customTextStroke(width: 1.8)
-                                    .multilineTextAlignment(.leading)
-                                    .fixedSize()
                                 
                                 Spacer()
                                 Text("✅")
