@@ -32,7 +32,7 @@ struct SkinsMenuView: View {
                                 HStack {
                                     
                                     ForEach(ShapeType.allCases) { shape in
-                                        ShapesView(shapeType: shape)
+                                        ShapesView(shapeType: shape, skinType: "shapes")
                                             .frame(width: deviceWidth / 10, height: deviceWidth / 10)
                                             .scaleEffect(0.4)
                                             .fixedSize()
@@ -207,52 +207,52 @@ struct SkinsMenuView: View {
 
 struct ShapesView: View {
     let shapeType: ShapeType
-    
+    let skinType: String
     var body: some View {
         switch shapeType {
-        case .circle:
-            ZStack {
-                Text("🔵")
-                    .font(.system(size: idiom == .pad ? 90 : 53))
-                    .customTextStroke()
-                    .scaleEffect(1.5)
-            }
-            .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-        case .square:
-            ZStack {
-                Text("🟩")
-                    .font(.system(size: idiom == .pad ? 90 : 53))
-                    .customTextStroke()
-                    .scaleEffect(1.5)
-            }
-            .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-        case .triangle:
-            ZStack {
-                Text("🔻")
-                    .font(.system(size: idiom == .pad ? 90 : 53))
-                    .customTextStroke(width: 1)
-                    .scaleEffect(2.4)
-            }
-            .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-            
-        case .star:
-            ZStack {
-                Text("⭐️")
-                    .font(.system(size: idiom == .pad ? 90 : 53))
-                    .customTextStroke()
-                    .scaleEffect(1.7)
-            }
-            .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-
-        case .heart:
-            ZStack {
-                Text("💜")
-                    .font(.system(size: idiom == .pad ? 90 : 53))
-                    .customTextStroke()
-                    .scaleEffect(1.6)
+            case .circle:
+                ZStack {
+                    Text("🔵")
+                        .customTextStroke()
+                        .scaleEffect(1.5)
+                }
+                .frame(width: deviceWidth / 6, height: deviceWidth / 6)
+                .font(.system(size: idiom == .pad ? 90 : 53))
+            case .square:
+                ZStack {
+                    Text("🟩")
+                        .customTextStroke()
+                        .scaleEffect(1.5)
+                }
+                .frame(width: deviceWidth / 6, height: deviceWidth / 6)
+                .font(.system(size: idiom == .pad ? 90 : 53))
+            case .triangle:
+                ZStack {
+                    Text("🔻")
+                        .customTextStroke(width: 1)
+                        .scaleEffect(2.4)
+                }
+                .frame(width: deviceWidth / 6, height: deviceWidth / 6)
+                .font(.system(size: idiom == .pad ? 90 : 53))
                 
-            }
-            .frame(width: deviceWidth / 6, height: deviceWidth / 6)
+            case .star:
+                ZStack {
+                    Text("⭐️")
+                        .customTextStroke()
+                        .scaleEffect(1.7)
+                }
+                .frame(width: deviceWidth / 6, height: deviceWidth / 6)
+                .font(.system(size: idiom == .pad ? 90 : 53))
+
+            case .heart:
+                ZStack {
+                    Text("💜")
+                        .customTextStroke()
+                        .scaleEffect(1.6)
+                    
+                }
+                .frame(width: deviceWidth / 6, height: deviceWidth / 6)
+                .font(.system(size: idiom == .pad ? 90 : 53))
         }
     }
 }

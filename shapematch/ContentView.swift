@@ -128,7 +128,7 @@ struct ContentView: View {
                                     ForEach(0..<appModel.grid.count, id: \.self) { row in
                                         HStack {
                                             ForEach(0..<appModel.grid.count, id: \.self) { column in
-                                                ShapesView(shapeType: appModel.grid[row][column])
+                                                ShapesView(shapeType: appModel.grid[row][column], skinType: userPersistedData.chosenSkin)
                                                     .frame(width: appModel.shapeWidth, height: appModel.shapeWidth)
                                                     .scaleEffect(appModel.shapeScale)
                                                     .scaleEffect(idiom == .pad ? 0.54 : 1)

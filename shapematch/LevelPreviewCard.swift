@@ -91,7 +91,7 @@ struct LevelPreviewCard: View {
                                 ForEach(0..<appModel.previewShapes.count, id: \.self) { row in
                                     HStack {
                                         ForEach(0..<appModel.previewShapes.count, id: \.self) { column in
-                                            ShapesView(shapeType: appModel.previewGrid[row][column])
+                                            ShapesView(shapeType: appModel.previewGrid[row][column], skinType: userPersistedData.chosenSkin)
                                                 .frame(width: appModel.previewShapeWidth / 1.2, height: appModel.previewShapeWidth / 1.2)
                                                 .scaleEffect( appModel.previewShapeScale / 1.2)
                                                 .scaleEffect(idiom == .pad ? 0.55 : 1)
