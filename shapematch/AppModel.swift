@@ -100,6 +100,14 @@ class AppModel: ObservableObject {
     @ObservedObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     
+    @Published var skins: [Skin] = [
+        Skin(SkinID: "shapes", cost: 0),
+        Skin(SkinID: "fruits", cost: 10),
+        Skin(SkinID: "animals", cost: 30),
+        Skin(SkinID: "sweets", cost: 50),
+        Skin(SkinID: "halloween", cost: 100)
+    ]
+    
     init() {
         
         selectedTab = userPersistedData.selectedTab

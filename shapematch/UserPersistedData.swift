@@ -13,6 +13,7 @@ class UserPersistedData: ObservableObject {
     static let sharedUserPersistedData = UserPersistedData()
     
     @CloudStorage("gemBalance") var gemBalance: Int = 5
+    @CloudStorage("chosenSkin") var chosenSkin: String = "shapes"
     @CloudStorage("firstGamePlayed") var firstGamePlayed: Bool = false
     @CloudStorage("hasShared") var hasShared: Bool = false
     @CloudStorage("soundOn") var soundOn: Bool = true
