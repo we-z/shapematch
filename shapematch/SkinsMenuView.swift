@@ -106,7 +106,7 @@ struct SkinsMenuView: View {
                                 Text("💎 10")
                                     .bold()
                                     .font(.system(size: deviceWidth / 21))
-                                    .customTextStroke(width: 1.2)
+                                    .customTextStroke(width: 1.5)
                                     .multilineTextAlignment(.leading)
                                     .fixedSize()
                             }
@@ -137,7 +137,7 @@ struct SkinsMenuView: View {
                                 Text("💎 30")
                                     .bold()
                                     .font(.system(size: deviceWidth / 21))
-                                    .customTextStroke(width: 1.2)
+                                    .customTextStroke(width: 1.5)
                                     .multilineTextAlignment(.leading)
                                     .fixedSize()
                             }
@@ -168,7 +168,7 @@ struct SkinsMenuView: View {
                                 Text("💎 50")
                                     .bold()
                                     .font(.system(size: deviceWidth / 21))
-                                    .customTextStroke(width: 1.2)
+                                    .customTextStroke(width: 1.5)
                                     .multilineTextAlignment(.leading)
                                     .fixedSize()
                             }
@@ -199,7 +199,7 @@ struct SkinsMenuView: View {
                                 Text("💎 100")
                                     .bold()
                                     .font(.system(size: deviceWidth / 21))
-                                    .customTextStroke(width: 1.2)
+                                    .customTextStroke(width: 1.5)
                                     .multilineTextAlignment(.leading)
                                     .fixedSize()
                             }
@@ -272,4 +272,56 @@ struct SkinsMenuView: View {
 
 #Preview {
     SkinsMenuView()
+}
+
+struct ShapesView: View {
+    let shapeType: ShapeType
+    
+    var body: some View {
+        switch shapeType {
+        case .circle:
+            ZStack {
+                Text("🔵")
+                    .font(.system(size: idiom == .pad ? 90 : 53))
+                    .customTextStroke()
+                    .scaleEffect(1.5)
+            }
+            .frame(width: deviceWidth / 6, height: deviceWidth / 6)
+        case .square:
+            ZStack {
+                Text("🟩")
+                    .font(.system(size: idiom == .pad ? 90 : 53))
+                    .customTextStroke()
+                    .scaleEffect(1.5)
+            }
+            .frame(width: deviceWidth / 6, height: deviceWidth / 6)
+        case .triangle:
+            ZStack {
+                Text("🔻")
+                    .font(.system(size: idiom == .pad ? 90 : 53))
+                    .customTextStroke(width: 1)
+                    .scaleEffect(2.4)
+            }
+            .frame(width: deviceWidth / 6, height: deviceWidth / 6)
+            
+        case .star:
+            ZStack {
+                Text("⭐️")
+                    .font(.system(size: idiom == .pad ? 90 : 53))
+                    .customTextStroke()
+                    .scaleEffect(1.7)
+            }
+            .frame(width: deviceWidth / 6, height: deviceWidth / 6)
+
+        case .heart:
+            ZStack {
+                Text("💜")
+                    .font(.system(size: idiom == .pad ? 90 : 53))
+                    .customTextStroke()
+                    .scaleEffect(1.6)
+                
+            }
+            .frame(width: deviceWidth / 6, height: deviceWidth / 6)
+        }
+    }
 }

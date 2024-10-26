@@ -146,8 +146,7 @@ struct LevelsView: View {
                                 .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                 .padding(1)
                         }
-                        .padding(.horizontal, 30)
-                        .padding(.bottom)
+                        .padding(30)
                         .padding(idiom == .pad ? 30 : 0)
                         
                     }
