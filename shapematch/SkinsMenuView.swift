@@ -65,12 +65,14 @@ struct SkinsMenuView: View {
                         Button {
                         } label: {
                             HStack {
+
                                 Text("🔵 🟩 🔻 ⭐️ 💜")
                                     .bold()
                                     .font(.system(size: deviceWidth / 15))
                                     .customTextStroke(width: 1.8)
                                     .multilineTextAlignment(.leading)
                                     .fixedSize()
+                                
                                 Spacer()
                                 Text("✅")
                                     .bold()
@@ -96,7 +98,7 @@ struct SkinsMenuView: View {
                         Button {
                         } label: {
                             HStack {
-                                Text("🐶 🐱 🦊 🐴 🦁")
+                                Text("🍎 🍌 🍊 🍉 🥭")
                                     .bold()
                                     .font(.system(size: deviceWidth / 15))
                                     .customTextStroke(width: 1.8)
@@ -127,7 +129,7 @@ struct SkinsMenuView: View {
                         Button {
                         } label: {
                             HStack {
-                                Text("🍎 🍌 🍊 🍉 🥭")
+                                Text("🐶 😺 🦊 🐵 🦁")
                                     .bold()
                                     .font(.system(size: deviceWidth / 15))
                                     .customTextStroke(width: 1.8)
@@ -158,7 +160,7 @@ struct SkinsMenuView: View {
                         Button {
                         } label: {
                             HStack {
-                                Text("🍬 🍭 🍫 🍩 🍪")
+                                Text("🍬 🍭 🧁 🍩 🍡")
                                     .bold()
                                     .font(.system(size: deviceWidth / 15))
                                     .customTextStroke(width: 1.8)
@@ -189,7 +191,7 @@ struct SkinsMenuView: View {
                         Button {
                         } label: {
                             HStack {
-                                Text("🎃 👻 🧛‍♂️ 🦇 🩸")
+                                Text("🎃 👻 🧛‍♂️ 💀 🩸")
                                     .bold()
                                     .font(.system(size: deviceWidth / 15))
                                     .customTextStroke(width: 1.8)
@@ -324,4 +326,36 @@ struct ShapesView: View {
             .frame(width: deviceWidth / 6, height: deviceWidth / 6)
         }
     }
+}
+
+
+
+enum ShapeType: Int, Identifiable, Equatable, CaseIterable {
+    case circle, square, triangle, star, heart
+    
+    var id: Int { rawValue }
+}
+
+enum AnimalType: Int, Identifiable, Equatable, CaseIterable {
+    case dog, cat, fox, monkey, lion
+    
+    var id: Int { rawValue }
+}
+
+enum FruitType: Int, Identifiable, Equatable, CaseIterable {
+    case apple, banana, orange, watermelon, mango
+    
+    var id: Int { rawValue }
+}
+
+enum SweetType: Int, Identifiable, Equatable, CaseIterable {
+    case candy, lolipop, cupcake, donut, stick
+    
+    var id: Int { rawValue }
+}
+
+enum HalloweenType: Int, Identifiable, Equatable, CaseIterable {
+    case pumpkin, ghost, vampire, skull, blood
+    
+    var id: Int { rawValue }
 }

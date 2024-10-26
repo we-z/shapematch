@@ -41,11 +41,6 @@ enum SwipeDirection {
     case left, right, up, down
 }
 
-enum ShapeType: Int, Identifiable, Equatable, CaseIterable {
-    case circle, square, triangle, star, heart
-    
-    var id: Int { rawValue }
-}
 
 struct StarShape: Shape {
     var points: Int
