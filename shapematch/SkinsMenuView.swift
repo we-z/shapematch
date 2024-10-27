@@ -27,164 +27,42 @@ struct SkinsMenuView: View {
                     }
                     VStack {
                         ScrollView {
-                            Button {
-                            } label: {
-                                HStack {
-                                    
-                                    ForEach(ShapeType.allCases) { shape in
-                                        ShapesView(shapeType: shape, skinType: "shapes")
-                                            .frame(width: deviceWidth / 10, height: deviceWidth / 10)
-                                            .scaleEffect(0.4)
+                            ForEach(0..<appModel.skins.count, id: \.self) { index in
+                                let skinPack = appModel.skins[index]
+                                Button {
+                                } label: {
+                                    HStack {
+                                        
+                                        ForEach(ShapeType.allCases) { shape in
+                                            ShapesView(shapeType: shape, skinType: skinPack.SkinID)
+                                                .frame(width: deviceWidth / 10, height: deviceWidth / 10)
+                                                .scaleEffect(0.4)
+                                                .fixedSize()
+                                        }
+                                        
+                                        Spacer()
+                                        Text(index == 0 ? "✅" : "💎 \(skinPack.cost)")
+                                            .bold()
+                                            .font(.system(size: deviceWidth / 15))
+                                            .customTextStroke(width: 1.8)
+                                            .multilineTextAlignment(.leading)
                                             .fixedSize()
                                     }
-                                    
-                                    
-                                    Spacer()
-                                    Text("✅")
-                                        .bold()
-                                        .font(.system(size: deviceWidth / 15))
-                                        .customTextStroke(width: 1.8)
-                                        .multilineTextAlignment(.leading)
-                                        .fixedSize()
+                                    .padding()
+                                    .background{
+                                        LinearGradient(gradient: Gradient(colors: [.yellow, .orange]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                                    }
+                                    .cornerRadius(21)
+                                    .overlay{
+                                        RoundedRectangle(cornerRadius: 21)
+                                            .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                            .padding(1)
+                                    }
+                                    .padding(.horizontal)
+                                    .padding(.vertical, 9)
                                 }
-                                .padding()
-                                .background{
-                                    LinearGradient(gradient: Gradient(colors: [.yellow, .orange]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                                }
-                                .cornerRadius(21)
-                                .overlay{
-                                    RoundedRectangle(cornerRadius: 21)
-                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                        .padding(1)
-                                }
-                                .padding()
+                                .buttonStyle(.roundedAndShadow6)
                             }
-                            .buttonStyle(.roundedAndShadow6)
-                            
-                            Button {
-                            } label: {
-                                HStack {
-                                    Text("🍎 🍌 🍊 🍉 🥭")
-                                        .bold()
-                                        .font(.system(size: deviceWidth / 11))
-                                        .customTextStroke(width: 1.8)
-                                        .multilineTextAlignment(.leading)
-                                        .fixedSize()
-                                    Spacer()
-                                    Text("💎 10")
-                                        .bold()
-                                        .font(.system(size: deviceWidth / 18))
-                                        .customTextStroke(width: 1.5)
-                                        .multilineTextAlignment(.leading)
-                                        .fixedSize()
-                                }
-                                .padding()
-                                .background{
-                                    LinearGradient(gradient: Gradient(colors: [.yellow, .orange]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                                }
-                                .cornerRadius(21)
-                                .overlay{
-                                    RoundedRectangle(cornerRadius: 21)
-                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                        .padding(1)
-                                }
-                                .padding()
-                            }
-                            .buttonStyle(.roundedAndShadow6)
-                            
-                            Button {
-                            } label: {
-                                HStack {
-                                    Text("🐶 😺 🦊 🐵 🦁")
-                                        .bold()
-                                        .font(.system(size: deviceWidth / 11))
-                                        .customTextStroke(width: 1.8)
-                                        .multilineTextAlignment(.leading)
-                                        .fixedSize()
-                                    Spacer()
-                                    Text("💎 30")
-                                        .bold()
-                                        .font(.system(size: deviceWidth / 18))
-                                        .customTextStroke(width: 1.5)
-                                        .multilineTextAlignment(.leading)
-                                        .fixedSize()
-                                }
-                                .padding()
-                                .background{
-                                    LinearGradient(gradient: Gradient(colors: [.yellow, .orange]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                                }
-                                .cornerRadius(21)
-                                .overlay{
-                                    RoundedRectangle(cornerRadius: 21)
-                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                        .padding(1)
-                                }
-                                .padding()
-                            }
-                            .buttonStyle(.roundedAndShadow6)
-                            
-                            Button {
-                            } label: {
-                                HStack {
-                                    Text("🍬 🍭 🧁 🍩 🍡")
-                                        .bold()
-                                        .font(.system(size: deviceWidth / 11))
-                                        .customTextStroke(width: 1.8)
-                                        .multilineTextAlignment(.leading)
-                                        .fixedSize()
-                                    Spacer()
-                                    Text("💎 50")
-                                        .bold()
-                                        .font(.system(size: deviceWidth / 18))
-                                        .customTextStroke(width: 1.5)
-                                        .multilineTextAlignment(.leading)
-                                        .fixedSize()
-                                }
-                                .padding()
-                                .background{
-                                    LinearGradient(gradient: Gradient(colors: [.yellow, .orange]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                                }
-                                .cornerRadius(21)
-                                .overlay{
-                                    RoundedRectangle(cornerRadius: 21)
-                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                        .padding(1)
-                                }
-                                .padding()
-                            }
-                            .buttonStyle(.roundedAndShadow6)
-                            
-                            Button {
-                            } label: {
-                                HStack {
-                                    Text("🎃 👻 🧛‍♂️ 💀 🩸")
-                                        .bold()
-                                        .font(.system(size: deviceWidth / 11))
-                                        .customTextStroke(width: 1.8)
-                                        .multilineTextAlignment(.leading)
-                                        .fixedSize()
-                                    Spacer()
-                                    Text("💎 100")
-                                        .bold()
-                                        .font(.system(size: deviceWidth / 18))
-                                        .customTextStroke(width: 1.5)
-                                        .multilineTextAlignment(.leading)
-                                        .fixedSize()
-                                }
-                                .padding()
-                                .background{
-                                    LinearGradient(gradient: Gradient(colors: [.yellow, .orange]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                                }
-                                .cornerRadius(21)
-                                .overlay{
-                                    RoundedRectangle(cornerRadius: 21)
-                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                        .padding(1)
-                                }
-                                .padding()
-                            }
-                            .buttonStyle(.roundedAndShadow6)
-                            
                         }
                     }
                 }
@@ -212,43 +90,138 @@ struct ShapesView: View {
         switch shapeType {
             case .circle:
                 ZStack {
-                    Text("🔵")
-                        .customTextStroke()
-                        .scaleEffect(1.5)
+                    switch skinType {
+                    case "fruits":
+                        Text("🍎")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "animals":
+                        Text("🐶")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "sweets":
+                        Text("🍬")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "halloween":
+                        Text("🎃")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    default:
+                        Text("🔵")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    }
                 }
                 .frame(width: deviceWidth / 6, height: deviceWidth / 6)
                 .font(.system(size: idiom == .pad ? 90 : 53))
             case .square:
                 ZStack {
-                    Text("🟩")
-                        .customTextStroke()
-                        .scaleEffect(1.5)
+                    switch skinType {
+                    case "fruits":
+                        Text("🍌")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "animals":
+                        Text("🐱")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "sweets":
+                        Text("🍭")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "halloween":
+                        Text("👻")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    default:
+                        Text("🟩")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    }
                 }
                 .frame(width: deviceWidth / 6, height: deviceWidth / 6)
                 .font(.system(size: idiom == .pad ? 90 : 53))
             case .triangle:
                 ZStack {
-                    Text("🔻")
-                        .customTextStroke(width: 1)
-                        .scaleEffect(2.4)
+                    switch skinType {
+                    case "fruits":
+                        Text("🍊")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "animals":
+                        Text("🦊")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "sweets":
+                        Text("🧁")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "halloween":
+                        Text("🧛‍♂️")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    default:
+                        Text("🔻")
+                            .customTextStroke(width: 1)
+                            .scaleEffect(2.4)
+                    }
                 }
                 .frame(width: deviceWidth / 6, height: deviceWidth / 6)
                 .font(.system(size: idiom == .pad ? 90 : 53))
                 
             case .star:
                 ZStack {
-                    Text("⭐️")
-                        .customTextStroke()
-                        .scaleEffect(1.7)
+                    switch skinType {
+                    case "fruits":
+                        Text("🍉")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "animals":
+                        Text("🐵")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "sweets":
+                        Text("🍩")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "halloween":
+                        Text("💀")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    default:
+                        Text("⭐️")
+                            .customTextStroke()
+                            .scaleEffect(1.7)
+                    }
                 }
                 .frame(width: deviceWidth / 6, height: deviceWidth / 6)
                 .font(.system(size: idiom == .pad ? 90 : 53))
 
             case .heart:
                 ZStack {
-                    Text("💜")
-                        .customTextStroke()
-                        .scaleEffect(1.6)
+                    switch skinType {
+                    case "fruits":
+                        Text("🥭")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "animals":
+                        Text("🦁")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "sweets":
+                        Text("🍡")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "halloween":
+                        Text("🩸")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    default:
+                        Text("💜")
+                            .customTextStroke()
+                            .scaleEffect(1.6)
+                    }
                     
                 }
                 .frame(width: deviceWidth / 6, height: deviceWidth / 6)
