@@ -20,7 +20,7 @@ struct SkinsMenuView: View {
                         .frame(width: 45, height: 9)
                         .customTextStroke()
                     HStack {
-                        Text("🍎  Skins  🐶")
+                        Text("Skin Shop")
                             .bold()
                             .font(.system(size: deviceWidth / 12))
                             .customTextStroke()

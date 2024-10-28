@@ -56,7 +56,7 @@ struct SettingsView: View {
                             .frame(width: 45, height: 9)
                             .customTextStroke()
                         HStack {
-                            Text("Settings ⚙️")
+                            Text("Settings")
                                 .bold()
                                 .font(.system(size: deviceWidth / 12))
                                 .customTextStroke()
