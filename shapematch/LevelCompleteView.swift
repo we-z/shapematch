@@ -344,7 +344,7 @@ struct LevelCompleteView: View {
                     }
                 }
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [self] in
                 if appModel.shouldRewardGem {
                     rewardGem()
                     appModel.shouldRewardGem = false
