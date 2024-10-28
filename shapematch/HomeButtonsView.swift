@@ -44,7 +44,9 @@ struct HomeButtonsView: View {
 
             ZStack{
                 Button {
-                    appModel.showSkinsMenu = true
+                    withAnimation {
+                        appModel.showSkinsMenu = true
+                    }
                 } label: {
                     HStack{
                         Spacer()
@@ -103,9 +105,6 @@ struct HomeButtonsView: View {
 
         }
         .padding(.horizontal, idiom == .pad ? 39 : 15)
-        .sheet(isPresented: self.$showLevelsMenu){
-            LevelsView()
-        }
     }
 }
 

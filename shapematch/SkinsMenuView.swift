@@ -12,93 +12,123 @@ struct SkinsMenuView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @Environment(\.dismiss) private var dismiss
     var body: some View {
-        VStack {
-            VStack {
-                VStack{
-                    Capsule()
-                        .foregroundColor(.red)
-                        .frame(width: 45, height: 9)
-                        .customTextStroke()
-                    HStack {
-                        Text("Skin Shop")
-                            .bold()
-                            .font(.system(size: deviceWidth / 12))
-                            .customTextStroke()
-                            .padding(.vertical)
-                    }
-                    VStack {
-                        ScrollView {
-                            ForEach(0..<appModel.skins.count, id: \.self) { index in
-                                let skinPack = appModel.skins[index]
-                                Button {
-                                    if userPersistedData.purchasedSkins.contains(skinPack.SkinID) {
-                                        userPersistedData.chosenSkin = skinPack.SkinID
-                                    } else {
-                                        if skinPack.cost <= userPersistedData.gemBalance {
-                                            userPersistedData.decrementBalance(amount: skinPack.cost)
-                                            userPersistedData.purchasedSkins += skinPack.SkinID
-                                            userPersistedData.purchasedSkins += ","
-                                            userPersistedData.chosenSkin = skinPack.SkinID
-                                        } else {
-                                            dismiss()
-                                            appModel.showGemMenu = true
-                                        }
-                                    }
-                                } label: {
-                                    HStack {
-                                        
-                                        ForEach(ShapeType.allCases) { shape in
-                                            ShapesView(shapeType: shape, skinType: skinPack.SkinID)
-                                                .frame(width: deviceWidth / 10, height: deviceWidth / 10)
-                                                .scaleEffect(0.4)
-                                                .fixedSize()
-                                        }
-                                        
-                                        Spacer()
-                                        if userPersistedData.purchasedSkins.contains(skinPack.SkinID) {
-                                            Text(skinPack.SkinID == userPersistedData.chosenSkin ? "✅" : "⭕️")
-                                                .bold()
-                                                .font(.system(size: deviceWidth / 15))
-                                                .customTextStroke(width: 1.8)
-                                                .multilineTextAlignment(.leading)
-                                                .fixedSize()
-                                        } else {
-                                            Text("💎 \(skinPack.cost)")
-                                                .bold()
-                                                .font(.system(size: deviceWidth / 15))
-                                                .customTextStroke(width: 1.8)
-                                                .multilineTextAlignment(.leading)
-                                                .fixedSize()
-                                        }
-                                    }
-                                    .padding()
-                                    .background{
-                                        LinearGradient(gradient: Gradient(colors: [.yellow, .orange]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                                    }
-                                    .cornerRadius(21)
-                                    .overlay{
-                                        RoundedRectangle(cornerRadius: 21)
-                                            .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                            .padding(1)
-                                    }
-                                    .padding(.horizontal)
-                                    .padding(.vertical, 9)
-                                }
-                                .buttonStyle(.roundedAndShadow6)
-                            }
+        VStack{
+            HStack {
+                Button{
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
+                        withAnimation {
+                            appModel.showSkinsMenu = false
                         }
                     }
+                } label: {
+                    HStack{
+                        Text("⬅️")
+                            .bold()
+                            .italic()
+                            .customTextStroke(width: 1.2)
+                            .fixedSize()
+                            .font(.system(size: deviceWidth/21))
+                            .scaleEffect(idiom == .pad ? 1 : 1.2)
+                            .padding(.horizontal, idiom == .pad ? 60 : 39)
+                    }
+                    .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
+                    .background{
+                        LinearGradient(gradient: Gradient(colors: [.red, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    }
+                    .cornerRadius(idiom == .pad ? 30 : 15)
+                    .overlay{
+                        RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
+                            .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                            .padding(1)
+                    }
+                    .padding(3)
                 }
-                .padding(.top, 30)
+                .buttonStyle(.roundedAndShadow6)
+                .padding([.top, .leading], idiom == .pad ? 30 : 15)
+                Spacer()
             }
-            
-            .background{
-                LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+            HStack {
+                Text("Skin Shop")
+                    .bold()
+                    .font(.system(size: deviceWidth / 9))
+                    .customTextStroke(width: 2.8)
+                    
             }
-            
-            
+            VStack {
+                ScrollView {
+                    ForEach(0..<appModel.skins.count, id: \.self) { index in
+                        let skinPack = appModel.skins[index]
+                        Button {
+                            if userPersistedData.purchasedSkins.contains(skinPack.SkinID) {
+                                userPersistedData.chosenSkin = skinPack.SkinID
+                            } else {
+                                if skinPack.cost <= userPersistedData.gemBalance {
+                                    userPersistedData.decrementBalance(amount: skinPack.cost)
+                                    userPersistedData.purchasedSkins += skinPack.SkinID
+                                    userPersistedData.purchasedSkins += ","
+                                    userPersistedData.chosenSkin = skinPack.SkinID
+                                } else {
+                                    withAnimation {
+                                        appModel.showSkinsMenu = false
+                                    }
+                                    appModel.showGemMenu = true
+                                }
+                            }
+                        } label: {
+                            HStack {
+                                
+                                ForEach(ShapeType.allCases) { shape in
+                                    ShapesView(shapeType: shape, skinType: skinPack.SkinID)
+                                        .frame(width: deviceWidth / 10, height: deviceWidth / 10)
+                                        .scaleEffect(0.4)
+                                        .fixedSize()
+                                }
+                                
+                                Spacer()
+                                if userPersistedData.purchasedSkins.contains(skinPack.SkinID) {
+                                    Text(skinPack.SkinID == userPersistedData.chosenSkin ? "✅" : "⭕️")
+                                        .bold()
+                                        .font(.system(size: deviceWidth / 15))
+                                        .customTextStroke(width: 1.8)
+                                        .multilineTextAlignment(.leading)
+                                        .fixedSize()
+                                } else {
+                                    Text("💎 \(skinPack.cost)")
+                                        .bold()
+                                        .font(.system(size: deviceWidth / 15))
+                                        .customTextStroke(width: 1.8)
+                                        .multilineTextAlignment(.leading)
+                                        .fixedSize()
+                                }
+                            }
+                            .padding()
+                            .padding(.trailing, idiom == .pad ? 30 : 0)
+                            .background{
+                                LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                            }
+                            .cornerRadius(idiom == .pad ? 42 :21)
+                            .overlay{
+                                RoundedRectangle(cornerRadius: idiom == .pad ? 42 : 21)
+                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                    .padding(1)
+                            }
+                            .padding(.horizontal, idiom == .pad ? 30 : 15)
+                            .padding(.vertical, idiom == .pad ? 15 : 9)
+                        }
+                        .buttonStyle(.roundedAndShadow6)
+                    }
+                }
+            }
         }
-        .ignoresSafeArea()
+        .background{
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    .ignoresSafeArea()
+                RotatingSunView()
+                    .frame(width: 1, height: 1)
+                    .offset(y: -(deviceHeight / 1.8))
+            }
+        }
     }
 }
 

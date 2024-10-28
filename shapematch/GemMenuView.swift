@@ -85,7 +85,7 @@ struct GemMenuView: View {
                         .frame(width: 45, height: 9)
                         .padding(.top, 15)
                         .customTextStroke()
-                    Text("GGemShop")
+                    Text("Gem Shop")
                         .bold()
                         .font(.system(size: deviceWidth/9))
                         .customTextStroke(width: 3)

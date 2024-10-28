@@ -220,9 +220,9 @@ struct ContentView: View {
             if appModel.showSettings {
                 SettingsView()
             }
-        }
-        .sheet(isPresented: self.$appModel.showSkinsMenu ){
             SkinsMenuView()
+                .offset(x: appModel.showSkinsMenu ? 0 : deviceWidth)
+
         }
         .onAppear {
             appModel.initialGrid = appModel.grid
