@@ -10,6 +10,7 @@ import SwiftUI
 struct SkinsMenuView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         VStack {
             VStack {
@@ -30,6 +31,19 @@ struct SkinsMenuView: View {
                             ForEach(0..<appModel.skins.count, id: \.self) { index in
                                 let skinPack = appModel.skins[index]
                                 Button {
+                                    if userPersistedData.purchasedSkins.contains(skinPack.SkinID) {
+                                        userPersistedData.chosenSkin = skinPack.SkinID
+                                    } else {
+                                        if skinPack.cost <= userPersistedData.gemBalance {
+                                            userPersistedData.decrementBalance(amount: skinPack.cost)
+                                            userPersistedData.purchasedSkins += skinPack.SkinID
+                                            userPersistedData.purchasedSkins += ","
+                                            userPersistedData.chosenSkin = skinPack.SkinID
+                                        } else {
+                                            dismiss()
+                                            appModel.showGemMenu = true
+                                        }
+                                    }
                                 } label: {
                                     HStack {
                                         
@@ -41,12 +55,21 @@ struct SkinsMenuView: View {
                                         }
                                         
                                         Spacer()
-                                        Text(index == 0 ? "✅" : "💎 \(skinPack.cost)")
-                                            .bold()
-                                            .font(.system(size: deviceWidth / 15))
-                                            .customTextStroke(width: 1.8)
-                                            .multilineTextAlignment(.leading)
-                                            .fixedSize()
+                                        if userPersistedData.purchasedSkins.contains(skinPack.SkinID) {
+                                            Text(skinPack.SkinID == userPersistedData.chosenSkin ? "✅" : "⭕️")
+                                                .bold()
+                                                .font(.system(size: deviceWidth / 15))
+                                                .customTextStroke(width: 1.8)
+                                                .multilineTextAlignment(.leading)
+                                                .fixedSize()
+                                        } else {
+                                            Text("💎 \(skinPack.cost)")
+                                                .bold()
+                                                .font(.system(size: deviceWidth / 15))
+                                                .customTextStroke(width: 1.8)
+                                                .multilineTextAlignment(.leading)
+                                                .fixedSize()
+                                        }
                                     }
                                     .padding()
                                     .background{
