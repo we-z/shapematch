@@ -332,9 +332,9 @@ class AppModel: ObservableObject {
         switch level {
         case 1:
             swapsNeeded = 1
-        case 2...7:
+        case 2...5:
             swapsNeeded = 2
-        case 8...16:
+        case 5...16:
             swapsNeeded = 3
         case 17...28:
             swapsNeeded = 4
