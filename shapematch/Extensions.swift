@@ -36,6 +36,7 @@ class HapticManager {
 
 let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
 let impactLight = UIImpactFeedbackGenerator(style: .light)
+let impactSoft = UIImpactFeedbackGenerator(style: .soft)
 
 enum SwipeDirection {
     case left, right, up, down

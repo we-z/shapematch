@@ -218,6 +218,11 @@ struct LevelRow: View {
                     .offset(x: idiom == .pad ? deviceWidth / 12 : deviceWidth / 8)
             }
         }
+        .onAppear {
+            if userPersistedData.hapticsOn {
+                impactSoft.impactOccurred()
+            }
+        }
     }
 }
 
