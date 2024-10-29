@@ -81,7 +81,7 @@ struct LevelsView: View {
                                             .id(level)
                                             .padding(.top, level == 1 ? deviceHeight / 4 : 0)
                                             .opacity( level <= userPersistedData.highestLevel ? 1.0 : 0.4)
-                                            .offset(x: sin(CGFloat(level) * .pi / 6) * (deviceWidth / 3.6))
+                                            .offset(x: sin(CGFloat(level) * .pi / 6) * (deviceWidth / 3))
                                             .onTapGesture{
                                                 if level == 1 {
                                                     withAnimation {
