@@ -18,18 +18,17 @@ struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.colorScheme) var colorScheme
     
+
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 .ignoresSafeArea()
-            TabView(selection: $appModel.selectedTab) {
                 ZStack {
                     RotatingSunView()
                         .frame(width: 1, height: 1)
                         .offset(y: -(deviceHeight / 1.8))
                     LevelsView()
                 }
-                    .tag(0)
                 ZStack{
                     LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                         .ignoresSafeArea()
@@ -191,10 +190,7 @@ struct ContentView: View {
                             .offset(y: -(deviceWidth / 2))
                     }
                 }
-                .tag(1)
-            }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            .ignoresSafeArea()
+                .offset(x: appModel.selectedTab == 1 ? 0 : deviceWidth)
             if appModel.showCelebration {
                 CelebrationEffect()
             }
