@@ -35,6 +35,10 @@ struct ContentView: View {
                     VStack {
                         Group {
                             VStack(spacing: 0) {
+                                ZStack{
+                                    ButtonsView()
+                                }
+                                .padding(.vertical, idiom == .pad ? 21 : 3)
                                 Spacer()
                                 HStack {
                                     Text("🙋‍♂️")
@@ -96,10 +100,7 @@ struct ContentView: View {
                                         .fixedSize()
                                 }
                                 Spacer()
-                                ZStack{
-                                    ButtonsView()
-                                }
-                                .padding(.vertical, idiom == .pad ? 21 : 3)
+                                
                                 
                             }
                         }

@@ -59,6 +59,9 @@ struct SkinsMenuView: View {
                     ForEach(0..<appModel.skins.count, id: \.self) { index in
                         let skinPack = appModel.skins[index]
                         Button {
+                            if userPersistedData.hapticsOn {
+                                impactHeavy.impactOccurred()
+                            }
                             if userPersistedData.purchasedSkins.contains(skinPack.SkinID) {
                                 userPersistedData.chosenSkin = skinPack.SkinID
                             } else {
@@ -244,7 +247,7 @@ struct ShapesView: View {
                             .customTextStroke()
                             .scaleEffect(1.5)
                     case "halloween":
-                        Text("💀")
+                        Text("👹")
                             .customTextStroke()
                             .scaleEffect(1.5)
                     default:
