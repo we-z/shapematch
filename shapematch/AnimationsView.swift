@@ -143,6 +143,7 @@ struct CelebrationEffect: View {
                     .bold()
                     .font(.system(size: deviceWidth / 18))
                     .customTextStroke(width: 1.5)
+                    .padding()
             }
         }
         .onTapGesture {
@@ -238,6 +239,7 @@ struct NewLevelAnimation: View {
                     .bold()
                     .font(.system(size: deviceWidth / 18))
                     .customTextStroke(width: 1.5)
+                    .padding()
             }
         }
         .onTapGesture {
