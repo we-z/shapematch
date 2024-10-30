@@ -30,8 +30,8 @@ struct SkinsMenuView: View {
                             .font(.system(size: deviceWidth/21))
                             .scaleEffect(idiom == .pad ? 1 : 1.2)
                             .padding(.horizontal, idiom == .pad ? 60 : 39)
+                            .padding(.vertical, idiom == .pad ? 21 : 15)
                     }
-                    .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
                     .background{
                         LinearGradient(gradient: Gradient(colors: [.red, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                     }
@@ -44,14 +44,14 @@ struct SkinsMenuView: View {
                     .padding(3)
                 }
                 .buttonStyle(.roundedAndShadow6)
-                .padding([.top, .leading], idiom == .pad ? 30 : 15)
+                .padding([.leading], idiom == .pad ? 30 : 15)
                 Spacer()
             }
             HStack {
                 Text("Skin Shop")
                     .bold()
-                    .font(.system(size: deviceWidth / 9))
-                    .customTextStroke(width: 2.8)
+                    .font(.system(size: deviceWidth / 12))
+                    .customTextStroke(width: 2.1)
                     
             }
             VStack {
@@ -76,14 +76,6 @@ struct SkinsMenuView: View {
                             }
                         } label: {
                             HStack {
-                                
-                                ForEach(ShapeType.allCases) { shape in
-                                    ShapesView(shapeType: shape, skinType: skinPack.SkinID)
-                                        .frame(width: deviceWidth / 10, height: deviceWidth / 10)
-                                        .scaleEffect(0.4)
-                                        .fixedSize()
-                                }
-                                
                                 Spacer()
                                 if userPersistedData.purchasedSkins.contains(skinPack.SkinID) {
                                     Text(skinPack.SkinID == userPersistedData.chosenSkin ? "✅" : "⭕️")
@@ -100,22 +92,35 @@ struct SkinsMenuView: View {
                                         .multilineTextAlignment(.leading)
                                         .fixedSize()
                                 }
+                                Spacer()
+                                
+                                HStack {
+                                    ForEach(ShapeType.allCases) { shape in
+                                        ShapesView(shapeType: shape, skinType: skinPack.SkinID)
+                                            .frame(width: deviceWidth / 10, height: deviceWidth / 10)
+                                            .scaleEffect(0.4)
+                                            .fixedSize()
+                                    }
+                                }
+                                .padding()
+                                .background{
+                                    ZStack{
+                                        Color.white
+                                        Color.blue.opacity(0.6)
+                                    }
+                                }
+                                .cornerRadius(idiom == .pad ? 42 :21)
+                                .overlay{
+                                    RoundedRectangle(cornerRadius: idiom == .pad ? 42 : 21)
+                                        .stroke(Color.yellow, lineWidth: idiom == .pad ? 9 : 5)
+                                        .padding(1)
+                                        .shadow(radius: 3)
+                                }
+                                .shadow(radius: 3)
+                                .padding(.trailing, idiom == .pad ? 30 : 15)
+                                .padding(.vertical, idiom == .pad ? 15 : 9)
                             }
-                            .padding()
-                            .padding(.trailing, idiom == .pad ? 30 : 0)
-                            .background{
-                                LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                            }
-                            .cornerRadius(idiom == .pad ? 42 :21)
-                            .overlay{
-                                RoundedRectangle(cornerRadius: idiom == .pad ? 42 : 21)
-                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                    .padding(1)
-                            }
-                            .padding(.horizontal, idiom == .pad ? 30 : 15)
-                            .padding(.vertical, idiom == .pad ? 15 : 9)
                         }
-                        .buttonStyle(.roundedAndShadow6)
                     }
                 }
             }
