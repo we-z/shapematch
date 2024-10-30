@@ -45,7 +45,6 @@ struct LevelCompleteView: View {
             }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-            appModel.showCelebration = false
             appModel.showLevelComplete = false
             appModel.resetLevel()
         }
@@ -59,7 +58,6 @@ struct LevelCompleteView: View {
                 animateAwayButtonsAndBanner()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
                     appModel.showLevelComplete = false
-                    appModel.showCelebration = false
                     userPersistedData.level += 1
                     appModel.setupLevel()
                     appModel.showNewLevelAnimation = true
@@ -300,6 +298,7 @@ struct LevelCompleteView: View {
         
         .onAppear {
             DispatchQueue.main.async { [self] in
+                appModel.showCelebration = false
                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 24.0, initialVelocity: 0.0)) {
                     bannerOffset = 0
                     cardOffset = 0

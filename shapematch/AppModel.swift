@@ -301,7 +301,7 @@ class AppModel: ObservableObject {
             DispatchQueue.main.async { [self] in
                 showCelebration = true
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
                 if selectedTab == 1 && !showLevelComplete && isWinningGrid(grid: grid) {
                     showLevelComplete = true
                 }

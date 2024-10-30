@@ -12,7 +12,7 @@ import AVFoundation
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        HandSwipeView()
+        CelebrationEffect()
     }
 }
 
@@ -113,7 +113,7 @@ struct CelebrationEffect: View {
                             proxy.particleSystem?.isEmitting = true
                             proxy.burst()
                             
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
                                 if userPersistedData.hapticsOn {
                                     hapticManager.notification(type: .error)
                                 }
@@ -136,6 +136,13 @@ struct CelebrationEffect: View {
                     .rotationEffect(.degrees(animateMessage ? 0 : -180))
                     .scaleEffect(animateMessage ? 1 : 0.1)
                     .offset(y: animateMessage ? 0 : -(deviceHeight/1.8))
+            }
+            VStack {
+                Spacer()
+                Text("Tap to skip")
+                    .bold()
+                    .font(.system(size: deviceWidth / 18))
+                    .customTextStroke(width: 1.5)
             }
         }
         .onTapGesture {
@@ -224,8 +231,14 @@ struct NewLevelAnimation: View {
                     .rotationEffect(.degrees(showLevel ? 0 : -180))
                     .offset(y: -(deviceWidth / 7.5))
             }
-                
-                .scaleEffect(showLevel ? 1 : 0.001)
+            .scaleEffect(showLevel ? 1 : 0.001)
+            VStack {
+                Spacer()
+                Text("Tap to skip")
+                    .bold()
+                    .font(.system(size: deviceWidth / 18))
+                    .customTextStroke(width: 1.5)
+            }
         }
         .onTapGesture {
             appModel.showNewLevelAnimation = false
