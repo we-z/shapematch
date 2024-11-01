@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import AVFoundation
+import StoreKit
 
 let hapticManager = HapticManager.instance
 
@@ -304,6 +305,13 @@ class AppModel: ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
                 if selectedTab == 1 && !showLevelComplete && isWinningGrid(grid: grid) {
                     showLevelComplete = true
+                }
+            }
+            if userPersistedData.level == 6 {
+                if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                    DispatchQueue.main.async {
+                        SKStoreReviewController.requestReview(in: scene)
+                    }
                 }
             }
             print("You win!")
