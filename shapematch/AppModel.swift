@@ -644,6 +644,7 @@ class AppModel: ObservableObject {
                 if newMinMoves > swapsMadeToSetup {
                     swapMadeOnPosition = true
                     swapsMadeToSetup += 1
+                    setupSwaps.append((pos1, pos2))
                     setPossiblePositions()
                     break
                 } else {
