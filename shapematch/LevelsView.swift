@@ -111,6 +111,11 @@ struct LevelsView: View {
 //                                }
                         }
                     }
+                    .onChange(of: appModel.selectedTab) { selectedTab in
+                        if selectedTab == 0 {
+                            proxy.scrollTo(userPersistedData.level, anchor: .center)
+                        }
+                    }
                     .frame(width: deviceWidth)
                 }
                 VStack {
