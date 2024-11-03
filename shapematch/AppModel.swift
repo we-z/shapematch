@@ -92,6 +92,7 @@ class AppModel: ObservableObject {
         }
     }
     @Published var swapsMade: [(Position, Position)] = []
+    @Published var setupSwaps: [(Position, Position)] = []
     @Published var winningGrids:[[[ShapeType]]] = []
     @Published var selectedTab = 1 {
         didSet {
@@ -606,11 +607,11 @@ class AppModel: ObservableObject {
         setPossiblePositions()
         
         var swapMadeOnPosition = false
-        var swapsMade = 0
+        var swapsMadeToSetup = 0
         var iterations = 0
         let maxIterations = 1000
 
-        while swapsMade < swapsNeeded && iterations < maxIterations {
+        while swapsMadeToSetup < swapsNeeded && iterations < maxIterations {
             iterations += 1
             swapMadeOnPosition = false
             let currentPosition = possiblePositions.randomElement() ?? Position(row: 0, col: 0)
@@ -640,9 +641,9 @@ class AppModel: ObservableObject {
                 
                 print("newMinMoves \(newMinMoves)")
                 
-                if newMinMoves > swapsMade {
+                if newMinMoves > swapsMadeToSetup {
                     swapMadeOnPosition = true
-                    swapsMade += 1
+                    swapsMadeToSetup += 1
                     setPossiblePositions()
                     break
                 } else {
@@ -656,7 +657,7 @@ class AppModel: ObservableObject {
             
             if possiblePositions.isEmpty {
                 print("ran out of possible Positions. trying again")
-                swapsMade = 0
+                swapsMadeToSetup = 0
                 setPossiblePositions()
             }
         }
