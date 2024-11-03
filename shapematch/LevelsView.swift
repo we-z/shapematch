@@ -183,7 +183,7 @@ struct LevelRow: View {
                                     .mask(Circle())
                             }
                         }
-                        .customTextStroke(width: idiom == .pad ? 1.8 : 3)
+                        .customTextStroke(width: idiom == .pad ? 1.8 : 2.1)
                     Text("\(level)")
                         .bold()
                         .font(.system(size: idiom == .pad ? deviceWidth / 21 : deviceWidth / 13 ))
