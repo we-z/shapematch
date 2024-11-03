@@ -669,7 +669,10 @@ class AppModel: ObservableObject {
 
         return targetGrid
     }
-
+    
+    func hintMove() {
+        
+    }
     
     func persistData() {
         // The grid now requires exactly `swapsNeeded` swaps to solve
