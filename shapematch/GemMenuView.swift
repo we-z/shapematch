@@ -307,7 +307,7 @@ struct GemMenuView: View {
         }
         .sheet(isPresented: $sheetPresented, content: {
                 
-            if let url = URL(string: "https://apple.co/4ea9see") {
+            if let url = URL(string: "https://apps.apple.com/us/app/shape-swap-puzzle/id6670235177") {
                 ShareView(url: url)
                     .ignoresSafeArea()
             }
