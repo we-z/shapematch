@@ -28,11 +28,9 @@ class ActivityItemProvider: NSObject, UIActivityItemSource {
 
     func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
         let metadata = LPLinkMetadata()
-        let appIcon = UIImage(named: "AppIcon")
         metadata.originalURL = url
         metadata.url = url
         metadata.title = "Shape Swap!"
-        metadata.iconProvider = NSItemProvider(object: appIcon!)
         return metadata
     }
 }
