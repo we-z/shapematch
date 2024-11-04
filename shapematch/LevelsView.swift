@@ -126,7 +126,7 @@ struct LevelsView: View {
                                 impactLight.impactOccurred()
                             }
                             withAnimation {
-                                scrollProxy?.scrollTo(1, anchor: .center)
+                                scrollProxy?.scrollTo(1, anchor: .bottom)
                             }
                         } label: {
                             Text("⬆️")
