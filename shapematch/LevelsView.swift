@@ -76,29 +76,28 @@ struct LevelsView: View {
                     ScrollView {
                         LazyVStack {
                             ForEach(1...9999, id: \.self) { level in
-                                    
-                                    LevelRow(level: level)
-                                            .id(level)
-                                            .padding(.top, level == 1 ? deviceHeight / 4 : 0)
-                                            .opacity( level <= userPersistedData.highestLevel ? 1.0 : 0.4)
-                                            .offset(x: sin(CGFloat(level) * .pi / 6) * (deviceWidth / 3))
-                                            .onTapGesture{
-                                                if level == 1 {
-                                                    withAnimation {
-                                                        userPersistedData.level = 1
-                                                        appModel.setupFirstLevel()
-                                                        appModel.selectedTab = 1
-                                                    }
-                                                } else {
-                                                    appModel.previewLevel = level
-                                                    (appModel.previewMoves, appModel.previewShapes) = appModel.determineLevelSettings(level: level)
-                                                    appModel.previewGrid = appModel.generateTargetGrid(from: appModel.previewShapes, with: appModel.previewMoves)
-                                                    appModel.showLevelDetails = true
-                                                }
-                                                if userPersistedData.hapticsOn {
-                                                    impactLight.impactOccurred()
-                                                }
+                                LevelRow(level: level)
+                                    .id(level)
+                                    .padding(.top, level == 1 ? deviceHeight / 4 : 0)
+                                    .opacity( level <= userPersistedData.highestLevel ? 1.0 : 0.4)
+                                    .offset(x: sin(CGFloat(level) * .pi / 6) * (deviceWidth / 3))
+                                    .onTapGesture{
+                                        if level == 1 {
+                                            withAnimation {
+                                                userPersistedData.level = 1
+                                                appModel.setupFirstLevel()
+                                                appModel.selectedTab = 1
                                             }
+                                        } else {
+                                            appModel.previewLevel = level
+                                            (appModel.previewMoves, appModel.previewShapes) = appModel.determineLevelSettings(level: level)
+                                            appModel.previewGrid = appModel.generateTargetGrid(from: appModel.previewShapes, with: appModel.previewMoves)
+                                            appModel.showLevelDetails = true
+                                        }
+                                        if userPersistedData.hapticsOn {
+                                            impactLight.impactOccurred()
+                                        }
+                                    }
                             }
                         }
                     }
