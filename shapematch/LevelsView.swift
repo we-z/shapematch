@@ -119,6 +119,24 @@ struct LevelsView: View {
                 }
                 VStack {
                     HomeButtonsView()
+                    HStack{
+                        Spacer()
+                        Button {
+                            if userPersistedData.hapticsOn {
+                                impactLight.impactOccurred()
+                            }
+                            withAnimation {
+                                scrollProxy?.scrollTo(1, anchor: .center)
+                            }
+                        } label: {
+                            Text("⬆️")
+                                .bold()
+                                .font(.system(size: deviceWidth / 12))
+                                .customTextStroke()
+                                .fixedSize()
+                                .padding()
+                        }
+                    }
                     Spacer()
                     Button {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
