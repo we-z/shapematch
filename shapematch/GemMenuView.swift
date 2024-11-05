@@ -356,7 +356,7 @@ struct HangTight: View {
         .cornerRadius(30)
         .overlay{
             RoundedRectangle(cornerRadius: 30)
-                .stroke(Color.black, lineWidth: 9)
+                .stroke(Color.black, lineWidth: 6)
                 .padding(1)
         }
         .padding()
