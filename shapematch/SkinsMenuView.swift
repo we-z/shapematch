@@ -48,10 +48,11 @@ struct SkinsMenuView: View {
                 Spacer()
             }
             HStack {
-                Text("Skin Shop")
+                Text("Customize!")
+                    .italic()
                     .bold()
-                    .font(.system(size: deviceWidth / 12))
-                    .customTextStroke(width: 2.1)
+                    .font(.system(size: deviceWidth / 9))
+                    .customTextStroke(width: 2)
                     
             }
             VStack {
