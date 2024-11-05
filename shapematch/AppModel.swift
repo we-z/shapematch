@@ -93,6 +93,7 @@ class AppModel: ObservableObject {
     }
     @Published var swapsMade: [(Position, Position)] = []
     @Published var setupSwaps: [(Position, Position)] = []
+    @Published var showSetupSwaps = true
     @Published var winningGrids:[[[ShapeType]]] = []
     @Published var selectedTab = 1 {
         didSet {
