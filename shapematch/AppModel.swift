@@ -213,18 +213,18 @@ class AppModel: ObservableObject {
         if start.row == end.row {
             // positions are horizontal
             if start.col > end.col {
-                offset = CGSize(width: -deviceWidth / ((CGFloat(grid.count))), height: 0)
+                offset = CGSize(width: -deviceWidth / (CGFloat(grid.count) * 1.2), height: 0)
             } else {
-                offset = CGSize(width: deviceWidth / ((CGFloat(grid.count))), height: 0)
+                offset = CGSize(width: deviceWidth / (CGFloat(grid.count) * 1.2), height: 0)
             }
         }
         
         if start.col == end.col {
             // positions are vertical
             if start.row > end.row {
-                offset = CGSize(width: 0, height: -deviceWidth / ((CGFloat(grid.count))))
+                offset = CGSize(width: 0, height: -deviceWidth / (CGFloat(grid.count) * 1.2))
             } else {
-                offset = CGSize(width: 0, height: deviceWidth / ((CGFloat(grid.count))))
+                offset = CGSize(width: 0, height: deviceWidth / (CGFloat(grid.count) * 1.2))
             }
         }
         
@@ -235,20 +235,12 @@ class AppModel: ObservableObject {
                 offsets[end.row][end.col] = CGSize(width: -offset.width, height: -offset.height)
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [self] in
             withAnimation(.linear(duration: 0.2)) {
                 offsets[start.row][start.col] = .zero
                 offsets[end.row][end.col] = .zero
             }
             swaping = false
-        }
-//        if userPersistedData.soundOn {
-//            AudioServicesPlaySystemSound(1105)
-//        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-            if userPersistedData.hapticsOn {
-                impactLight.impactOccurred()
-            }
         }
     }
     
