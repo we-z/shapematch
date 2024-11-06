@@ -93,6 +93,7 @@ class AppModel: ObservableObject {
     }
     @Published var swapsMade: [(Position, Position)] = []
     @Published var setupSwaps: [(Position, Position)] = []
+    @Published var showSetupSwaps = true
     @Published var winningGrids:[[[ShapeType]]] = []
     @Published var selectedTab = 1 {
         didSet {
@@ -744,9 +745,27 @@ class AppModel: ObservableObject {
         } else {
             grid = startGrid
         }
-        
+        if userPersistedData.level == 2 {
+            animateHints()
+        }
         swipesLeft = swapsNeeded + 2
         persistData()
+    }
+    
+    func animateHints() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
+            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { [self] timer in
+                if showSetupSwaps {
+                    if !setupSwaps.isEmpty {
+                        let lastSwap = setupSwaps.last!
+                        hintSwapShapes(start: (row: lastSwap.0.row, col: lastSwap.0.col), end: (row: lastSwap.1.row, col: lastSwap.1.col))
+                    }
+                } else {
+                    // Invalidate the timer after bursting 3 times
+                    timer.invalidate()
+                }
+            }
+        }
     }
     
     func randomAlignedGrid(shapes: [ShapeType]) -> [[ShapeType]] {
