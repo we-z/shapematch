@@ -93,7 +93,6 @@ class AppModel: ObservableObject {
     }
     @Published var swapsMade: [(Position, Position)] = []
     @Published var setupSwaps: [(Position, Position)] = []
-    @Published var showSetupSwaps = true
     @Published var winningGrids:[[[ShapeType]]] = []
     @Published var selectedTab = 1 {
         didSet {
@@ -213,12 +212,20 @@ class AppModel: ObservableObject {
         
         if start.row == end.row {
             // positions are horizontal
-            offset = CGSize(width: deviceWidth / ((CGFloat(grid.count))), height: 0)
+            if start.col > end.col {
+                offset = CGSize(width: -deviceWidth / ((CGFloat(grid.count))), height: 0)
+            } else {
+                offset = CGSize(width: deviceWidth / ((CGFloat(grid.count))), height: 0)
+            }
         }
         
         if start.col == end.col {
             // positions are vertical
-            offset = CGSize(width: 0, height: deviceWidth / ((CGFloat(grid.count))))
+            if start.row > end.row {
+                offset = CGSize(width: 0, height: -deviceWidth / ((CGFloat(grid.count))))
+            } else {
+                offset = CGSize(width: 0, height: deviceWidth / ((CGFloat(grid.count))))
+            }
         }
         
         DispatchQueue.main.async { [self] in
@@ -235,9 +242,9 @@ class AppModel: ObservableObject {
             }
             swaping = false
         }
-        if userPersistedData.soundOn {
-            AudioServicesPlaySystemSound(1105)
-        }
+//        if userPersistedData.soundOn {
+//            AudioServicesPlaySystemSound(1105)
+//        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
             if userPersistedData.hapticsOn {
                 impactLight.impactOccurred()

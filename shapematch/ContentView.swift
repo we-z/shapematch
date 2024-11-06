@@ -166,7 +166,10 @@ struct ContentView: View {
                                                     )
                                                     .onReceive(appModel.timer) { _ in
                                                         if userPersistedData.level == 2 {
-                                                            
+                                                            if !appModel.setupSwaps.isEmpty {
+                                                                let lastSwap = appModel.setupSwaps.last!
+                                                                appModel.hintSwapShapes(start: (row: lastSwap.0.row, col: lastSwap.0.col), end: (row: lastSwap.1.row, col: lastSwap.1.col))
+                                                            }
                                                         }
                                                     }
                                             }
