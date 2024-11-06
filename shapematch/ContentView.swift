@@ -17,7 +17,6 @@ struct ContentView: View {
     @State var tappedColumn = 0
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.colorScheme) var colorScheme
-    
 
     var body: some View {
         ZStack {
@@ -165,6 +164,11 @@ struct ContentView: View {
                                                                 firstChange = false
                                                             }
                                                     )
+                                                    .onReceive(appModel.timer) { _ in
+                                                        if userPersistedData.level == 2 {
+                                                            
+                                                        }
+                                                    }
                                             }
                                         }
                                     }

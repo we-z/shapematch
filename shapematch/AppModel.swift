@@ -114,6 +114,8 @@ class AppModel: ObservableObject {
         // birds: 🕊️🦜🐥🦉🦅
     ]
     
+    let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+    
     init() {
         
         selectedTab = userPersistedData.selectedTab
@@ -202,6 +204,44 @@ class AppModel: ObservableObject {
                 impactLight.impactOccurred()
             }
             checkWinCondition()
+        }
+    }
+    
+    func hintSwapShapes(start: (row: Int, col: Int), end: (row: Int, col: Int)) {
+        print("hintSwapShapes called")
+        var offset = CGSize(width: 0, height: 0)
+        
+        if start.row == end.row {
+            // positions are horizontal
+            offset = CGSize(width: deviceWidth / ((CGFloat(grid.count))), height: 0)
+        }
+        
+        if start.col == end.col {
+            // positions are vertical
+            offset = CGSize(width: 0, height: deviceWidth / ((CGFloat(grid.count))))
+        }
+        
+        DispatchQueue.main.async { [self] in
+            self.swaping = true
+            withAnimation(.linear(duration: 0.2)) {
+                offsets[start.row][start.col] = offset
+                offsets[end.row][end.col] = CGSize(width: -offset.width, height: -offset.height)
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
+            withAnimation(.linear(duration: 0.2)) {
+                offsets[start.row][start.col] = .zero
+                offsets[end.row][end.col] = .zero
+            }
+            swaping = false
+        }
+        if userPersistedData.soundOn {
+            AudioServicesPlaySystemSound(1105)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+            if userPersistedData.hapticsOn {
+                impactLight.impactOccurred()
+            }
         }
     }
     
