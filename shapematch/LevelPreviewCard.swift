@@ -141,7 +141,7 @@ struct LevelPreviewCard: View {
                                 }
                                 .padding()
                                 .background{
-                                    LinearGradient(gradient: Gradient(colors: [.mint, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.5))
+                                    LinearGradient(gradient: Gradient(colors: [.green, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.5))
                                 }
                                 .cornerRadius(idiom == .pad ? 39: 21)
                                 .overlay{

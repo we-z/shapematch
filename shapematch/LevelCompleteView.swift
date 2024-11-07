@@ -236,7 +236,6 @@ struct LevelCompleteView: View {
                         HStack{
                             Spacer()
                             Text("Continue  ➡️")
-                                .italic()
                                 .bold()
                                 .font(.system(size: deviceWidth/12))
                                 .fixedSize()
@@ -245,7 +244,7 @@ struct LevelCompleteView: View {
                         }
                         .padding()
                         .background{
-                            LinearGradient(gradient: Gradient(colors: [.mint, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.5))
+                            LinearGradient(gradient: Gradient(colors: [.green, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.5))
                         }
                         .cornerRadius(21)
                         .overlay{

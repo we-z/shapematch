@@ -35,7 +35,7 @@ struct NoMoreSwipesView: View {
     
     var body: some View {
         ZStack {
-            Color.gray.opacity(0.7)
+            Color.black.opacity(0.3)
                 .ignoresSafeArea()
             VStack{
                 VStack {
@@ -93,6 +93,7 @@ struct NoMoreSwipesView: View {
                 Spacer()
                 VStack(spacing: idiom == .pad ? 18 : 6){
                     Text("Continue?")
+                        .italic()
                         .bold()
                         .font(.system(size: deviceWidth / 9))
                         .customTextStroke(width: 2.4)
@@ -145,13 +146,19 @@ struct NoMoreSwipesView: View {
                             resetGame()
                         } label: {
                             HStack{
+                                Text("Try Again")
+                                    .bold()
+                                    .font(.system(size: deviceWidth/12))
+                                    .customTextStroke(width: 2.4)
+                                    .fixedSize()
+                                    .padding(.leading)
                                 Spacer()
                                 Text("❌")
+                                    .bold()
                                     .font(.system(size: deviceWidth/12))
-                                    .customTextStroke(width: 3)
+                                    .customTextStroke(width: 2.4)
                                     .fixedSize()
-                                    .padding([.trailing], 9)
-                                Spacer()
+                                    .padding(.trailing)
                             }
                             .padding()
                             .background{
