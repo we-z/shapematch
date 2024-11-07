@@ -762,6 +762,8 @@ class AppModel: ObservableObject {
         if userPersistedData.level == 2 {
             showSetupSwaps = true
             animateHints()
+        } else {
+            showSetupSwaps = false
         }
         swipesLeft = swapsNeeded + 2
         persistData()

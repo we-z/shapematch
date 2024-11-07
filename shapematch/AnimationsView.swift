@@ -233,14 +233,14 @@ struct NewLevelAnimation: View {
                     .offset(y: -(deviceWidth / 7.5))
             }
             .scaleEffect(showLevel ? 1 : 0.001)
-            VStack {
-                Spacer()
-                Text("Tap to skip")
-                    .bold()
-                    .font(.system(size: deviceWidth / 18))
-                    .customTextStroke(width: 1.5)
-                    .padding()
-            }
+//            VStack {
+//                Spacer()
+//                Text("Tap to skip")
+//                    .bold()
+//                    .font(.system(size: deviceWidth / 18))
+//                    .customTextStroke(width: 1.5)
+//                    .padding()
+//            }
         }
         .onTapGesture {
             appModel.showNewLevelAnimation = false
