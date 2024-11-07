@@ -347,6 +347,7 @@ class AppModel: ObservableObject {
     
     func checkWinCondition() {
         if isWinningGrid(grid: grid) {
+            showSetupSwaps = false
             userPersistedData.firstGamePlayed = true
             // 1335, 1114
             if userPersistedData.soundOn {
@@ -759,6 +760,7 @@ class AppModel: ObservableObject {
             grid = startGrid
         }
         if userPersistedData.level == 2 {
+            showSetupSwaps = true
             animateHints()
         }
         swipesLeft = swapsNeeded + 2
