@@ -113,9 +113,7 @@ class AppModel: ObservableObject {
         // christmas: 🎄🎅❄️⛄️☕️
         // birds: 🕊️🦜🐥🦉🦅
     ]
-    
-    let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
-    
+        
     init() {
         
         selectedTab = userPersistedData.selectedTab
@@ -202,6 +200,19 @@ class AppModel: ObservableObject {
             swapsMade.append((Position(row: start.row, col: start.col), Position(row: end.row, col: end.col)))
             if userPersistedData.hapticsOn {
                 impactLight.impactOccurred()
+            }
+            if !setupSwaps.isEmpty && userPersistedData.level == 2 {
+                let lastSwapPos1 = setupSwaps.last!.0
+                let lastSwapPos2 = setupSwaps.last!.1
+                
+                
+                if ((lastSwapPos1.col == start.col && lastSwapPos1.row == start.row) && (lastSwapPos2.col == end.col && lastSwapPos2.row == end.row))
+                    ||
+                    ((lastSwapPos1.col == end.col && lastSwapPos1.row == end.row) && (lastSwapPos2.col == start.col && lastSwapPos2.row == start.row) ) {
+                    
+                }
+                
+                
             }
             checkWinCondition()
         }
