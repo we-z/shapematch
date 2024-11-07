@@ -15,11 +15,9 @@ struct SkinsMenuView: View {
         VStack{
             HStack {
                 Button{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
                         withAnimation {
                             appModel.showSkinsMenu = false
                         }
-                    }
                 } label: {
                     HStack{
                         Text("⬅️")

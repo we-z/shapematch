@@ -139,7 +139,7 @@ struct LevelsView: View {
                     }
                     Spacer()
                     Button {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
+                        DispatchQueue.main.async { [self] in
                             userPersistedData.level = userPersistedData.highestLevel
                             appModel.setupLevel()
                             withAnimation {

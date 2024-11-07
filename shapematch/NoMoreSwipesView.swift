@@ -37,30 +37,6 @@ struct NoMoreSwipesView: View {
         ZStack {
             Color.gray.opacity(0.7)
                 .ignoresSafeArea()
-//                .onTapGesture {
-//                    animateAwayButtonsAndBanner()
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-//                        resetGame()
-//                    }
-//                }
-//                .gesture(
-//                    DragGesture()
-//                        .onChanged { gesture in
-//                            if gesture.translation.height > 0 {
-//                                buttonsnOffset = gesture.translation.height
-//                            } else if gesture.translation.height < 0 {
-//                                bannerOffset = gesture.translation.height
-//                            }
-//                        }
-//                        .onEnded { _ in
-//                            DispatchQueue.main.async { [self] in
-//                                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-//                                    buttonsnOffset = 0
-//                                    bannerOffset = 0
-//                                }
-//                            }
-//                        }
-//                )
             VStack{
                 VStack {
                     HStack {
@@ -166,9 +142,7 @@ struct NoMoreSwipesView: View {
                     HStack(spacing: idiom == .pad ? 18 : 9){
                         Button {
                             animateAwayButtonsAndBanner()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                resetGame()
-                            }
+                            resetGame()
                         } label: {
                             HStack{
                                 Spacer()
@@ -204,11 +178,7 @@ struct NoMoreSwipesView: View {
 //            .scaleEffect(idiom == .pad ? 0.84 : 1)
         }
         .onAppear {
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-//                withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-//                    buttonsnOffset = 0
-//                }
-//            }
+
             DispatchQueue.main.async { [self] in
                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                     bannerOffset = 0

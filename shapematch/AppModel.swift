@@ -80,7 +80,6 @@ class AppModel: ObservableObject {
     @Published var swapsNeeded = 1
     @Published var undosLeft = 3
     @Published var amountBought = 5
-    @Published var showListJumpButtons = false
     @Published var shapes: [ShapeType] = [] {
         didSet {
             self.winningGrids = generateAllWinningGrids(shapes: shapes)

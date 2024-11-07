@@ -119,7 +119,7 @@ struct LevelPreviewCard: View {
                         if appModel.previewLevel <= userPersistedData.highestLevel {
                             Button {
                                 animateAwayButtonsAndBanner()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                DispatchQueue.main.async { [self] in
                                     userPersistedData.level = appModel.previewLevel
                                     appModel.setupLevel(startGrid: appModel.previewGrid)
                                     withAnimation {
