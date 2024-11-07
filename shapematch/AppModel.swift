@@ -209,7 +209,9 @@ class AppModel: ObservableObject {
                 if ((lastSwapPos1.col == start.col && lastSwapPos1.row == start.row) && (lastSwapPos2.col == end.col && lastSwapPos2.row == end.row))
                     ||
                     ((lastSwapPos1.col == end.col && lastSwapPos1.row == end.row) && (lastSwapPos2.col == start.col && lastSwapPos2.row == start.row) ) {
-                    
+                    setupSwaps.removeLast()
+                } else {
+                    showSetupSwaps = false
                 }
                 
                 
