@@ -22,12 +22,14 @@ struct ContentView: View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 .ignoresSafeArea()
+            TabView(selection: $appModel.selectedTab) {
                 ZStack {
                     RotatingSunView()
                         .frame(width: 1, height: 1)
                         .offset(y: -(deviceHeight / 1.8))
                     LevelsView()
                 }
+                .tag(0)
                 ZStack{
                     LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                         .ignoresSafeArea()
@@ -104,80 +106,80 @@ struct ContentView: View {
                             }
                         }
                         .zIndex(1)
-                            .opacity(userPersistedData.level == 1 ? 0 : 1)
-                            ZStack{
-                                Rectangle()
-                                    .overlay{
-                                        ZStack{
-                                            Color.white
-                                            Color.blue.opacity(0.6)
-                                        }
+                        .opacity(userPersistedData.level == 1 ? 0 : 1)
+                        ZStack{
+                            Rectangle()
+                                .overlay{
+                                    ZStack{
+                                        Color.white
+                                        Color.blue.opacity(0.6)
                                     }
-                                    .aspectRatio(1.0, contentMode: .fill)
-                                    .cornerRadius(30)
-                                    .overlay {
-                                        RoundedRectangle(cornerRadius: 30)
-                                            .stroke(Color.yellow, lineWidth: idiom == .pad ? 11 : 7)
-                                            .padding(1)
-                                            .shadow(radius: 3)
-                                    }
-                                    .shadow(radius: 3)
-                                    .padding()
-                                VStack {
-                                    ForEach(0..<appModel.grid.count, id: \.self) { row in
-                                        HStack {
-                                            ForEach(0..<appModel.grid.count, id: \.self) { column in
-                                                ShapesView(shapeType: appModel.grid[row][column], skinType: userPersistedData.chosenSkin)
-                                                    .frame(width: appModel.shapeWidth, height: appModel.shapeWidth)
-                                                    .scaleEffect(appModel.shapeScale)
-                                                    .scaleEffect(idiom == .pad ? 0.54 : 1)
-                                                    .background(.white.opacity(0.001))
-                                                    .offset(appModel.offsets[row][column])
-                                                    .scaleEffect((tappedRow == row && tappedColumn == column) ? playingShapeScale : 1)
-                                                    .animation(.easeInOut(duration: 0.1), value: playingShapeScale)
-                                                    .gesture(
-                                                        DragGesture(minimumDistance: 1)
-                                                            .onChanged { gesture in
-                                                                if !firstChange {
-                                                                    if userPersistedData.hapticsOn {
-                                                                        impactLight.impactOccurred()
-                                                                    }
-                                                                    tappedRow = row
-                                                                    tappedColumn = column
-                                                                    DispatchQueue.main.async { [self] in
-                                                                        withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                                                                            self.playingShapeScale = 0.6
-                                                                        }
-                                                                    }
+                                }
+                                .aspectRatio(1.0, contentMode: .fill)
+                                .cornerRadius(30)
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: 30)
+                                        .stroke(Color.yellow, lineWidth: idiom == .pad ? 11 : 7)
+                                        .padding(1)
+                                        .shadow(radius: 3)
+                                }
+                                .shadow(radius: 3)
+                                .padding()
+                            VStack {
+                                ForEach(0..<appModel.grid.count, id: \.self) { row in
+                                    HStack {
+                                        ForEach(0..<appModel.grid.count, id: \.self) { column in
+                                            ShapesView(shapeType: appModel.grid[row][column], skinType: userPersistedData.chosenSkin)
+                                                .frame(width: appModel.shapeWidth, height: appModel.shapeWidth)
+                                                .scaleEffect(appModel.shapeScale)
+                                                .scaleEffect(idiom == .pad ? 0.54 : 1)
+                                                .background(.white.opacity(0.001))
+                                                .offset(appModel.offsets[row][column])
+                                                .scaleEffect((tappedRow == row && tappedColumn == column) ? playingShapeScale : 1)
+                                                .animation(.easeInOut(duration: 0.1), value: playingShapeScale)
+                                                .gesture(
+                                                    DragGesture(minimumDistance: 1)
+                                                        .onChanged { gesture in
+                                                            if !firstChange {
+                                                                if userPersistedData.hapticsOn {
+                                                                    impactLight.impactOccurred()
                                                                 }
-                                                                firstChange = true
-                                                            }
-                                                            .onEnded { gesture in
+                                                                tappedRow = row
+                                                                tappedColumn = column
                                                                 DispatchQueue.main.async { [self] in
                                                                     withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
-                                                                        self.playingShapeScale = 1.0
+                                                                        self.playingShapeScale = 0.6
                                                                     }
                                                                 }
-                                                                if appModel.swipesLeft > 0 {
-                                                                    appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
-                                                                }
-                                                                firstChange = false
                                                             }
-                                                    )
-                                            }
+                                                            firstChange = true
+                                                        }
+                                                        .onEnded { gesture in
+                                                            DispatchQueue.main.async { [self] in
+                                                                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100.0, damping: 10.0, initialVelocity: 0.0)) {
+                                                                    self.playingShapeScale = 1.0
+                                                                }
+                                                            }
+                                                            if appModel.swipesLeft > 0 {
+                                                                appModel.handleSwipeGesture(gesture: gesture, row: row, col: column)
+                                                            }
+                                                            firstChange = false
+                                                        }
+                                                )
                                         }
                                     }
                                 }
-                                .scaleEffect(idiom == .pad ? 1.2 : 1)
-                                if userPersistedData.level == 1 && !appModel.showLevelComplete && !appModel.showCelebration {
-                                    HandSwipeView()
-                                        .fixedSize()
-                                        .offset(y: idiom == .pad ? deviceWidth / 4.4 : deviceWidth / 4.8)
-                                }
                             }
-                            .frame(width: deviceWidth)
-                            .zIndex(0)
-//                            .scaleEffect(0.8)
+                            .scaleEffect(idiom == .pad ? 1.2 : 1)
+                            if userPersistedData.level == 1 && !appModel.showLevelComplete && !appModel.showCelebration {
+                                HandSwipeView()
+                                    .fixedSize()
+                                    .offset(y: idiom == .pad ? deviceWidth / 4.4 : deviceWidth / 4.8)
+                            }
+                        }
+                        .frame(width: deviceWidth)
+                        .zIndex(0)
+                        //                            .scaleEffect(0.8)
                         
                     }
                     .allowsHitTesting(!appModel.freezeGame)
@@ -191,7 +193,11 @@ struct ContentView: View {
                             .offset(y: -(deviceWidth / 2))
                     }
                 }
-                .offset(x: appModel.selectedTab == 1 ? 0 : deviceWidth)
+                .tag(1)
+            }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            .ignoresSafeArea()
+//                .offset(x: appModel.selectedTab == 1 ? 0 : deviceWidth)
             if appModel.showCelebration {
                 CelebrationEffect()
             }
