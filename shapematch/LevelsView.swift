@@ -143,6 +143,8 @@ struct LevelsView: View {
                             if userPersistedData.level != userPersistedData.highestLevel {
                                 userPersistedData.level = userPersistedData.highestLevel
                                 appModel.setupLevel()
+                            } else {
+                                appModel.resetLevel()
                             }
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
                                 withAnimation {
