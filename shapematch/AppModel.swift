@@ -75,6 +75,7 @@ class AppModel: ObservableObject {
     @Published var shouldRewardGem = false
     @Published var showLevelDetails = false
     @Published var showSkinsMenu = false
+    @Published var showQuitButton = false
     @Published var previewLevel = 0
     @Published var previewMoves = 0
     @Published var swapsNeeded = 1
@@ -739,6 +740,7 @@ class AppModel: ObservableObject {
     }
     
     func setupFirstLevel() {
+        showSetupSwaps = false
         grid = [
             [.triangle, .triangle, .triangle],
             [.circle, .square, .circle],
