@@ -90,8 +90,8 @@ struct LevelCompleteView: View {
     
     var body: some View {
         ZStack {
-            Color.gray
-                .opacity(0.7)
+            Color.black
+                .opacity(0.6)
                 .ignoresSafeArea()
 //                .onTapGesture {
 //                    goBack()
@@ -132,7 +132,7 @@ struct LevelCompleteView: View {
                                 .lineLimit(1)
                                 .customTextStroke(width: 1.8)
                                 .fixedSize()
-                                .padding(.horizontal, idiom == .pad ? 30 : 15)
+                                .padding(.horizontal, idiom == .pad ? 30 : 21)
                             
                         }
                         .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
@@ -183,6 +183,7 @@ struct LevelCompleteView: View {
                        }
                    }
                    .padding(.horizontal, 30)
+                   .padding()
                     Text("🥳")
                         .font(.system(size: deviceWidth / 6))
                         .customTextStroke(width: 2.7)
@@ -252,20 +253,21 @@ struct LevelCompleteView: View {
                                 .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                 .padding(1)
                         }
-                        .padding(idiom == .pad ? 60 : 30)
+                        .padding(idiom == .pad ? 60 : 39)
                         
                     }
                     .buttonStyle(.roundedAndShadow6)
                 }
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.6))
+                    LinearGradient(gradient: Gradient(colors: [.blue, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.6))
                 }
-                .cornerRadius(30)
+                .cornerRadius(39)
                 .overlay {
                     RoundedRectangle(cornerRadius: 30)
                         .stroke(Color.yellow, lineWidth: idiom == .pad ? 12 : 9)
                         .padding(1)
                         .shadow(radius: 3)
+                        .padding()
                 }
                 .shadow(radius: 3)
                 .padding()

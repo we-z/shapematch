@@ -93,7 +93,6 @@ struct NoMoreSwipesView: View {
                 Spacer()
                 VStack(spacing: idiom == .pad ? 18 : 6){
                     Text("Continue?")
-                        .italic()
                         .bold()
                         .font(.system(size: deviceWidth / 9))
                         .customTextStroke(width: 2.4)

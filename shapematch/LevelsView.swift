@@ -139,7 +139,7 @@ struct LevelsView: View {
                     }
                     Spacer()
                     Button {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
                             if userPersistedData.level != userPersistedData.highestLevel {
                                 userPersistedData.level = userPersistedData.highestLevel
                                 appModel.setupLevel()
@@ -152,8 +152,7 @@ struct LevelsView: View {
                                 }
                                 appModel.showNewLevelAnimation = true
                             }
-                                
-                        }
+//                        }
                     } label: {
                         HStack{
                             Spacer()

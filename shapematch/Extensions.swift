@@ -327,12 +327,14 @@ struct RoundedAndShadowButtonStyle6:ButtonStyle {
                         AudioServicesPlaySystemSound(1105)
                     }
                 }
-                isPressed = true
-                if !currentlyPressing {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [self] in
-                        isPressed = false
-                        if userPersistedData.hapticsOn {
-                            impactHeavy.impactOccurred()
+                DispatchQueue.main.async {
+                    isPressed = true
+                    if !currentlyPressing {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [self] in
+                            isPressed = false
+                            if userPersistedData.hapticsOn {
+                                impactHeavy.impactOccurred()
+                            }
                         }
                     }
                 }
