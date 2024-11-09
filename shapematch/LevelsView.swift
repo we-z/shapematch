@@ -102,13 +102,8 @@ struct LevelsView: View {
                         }
                     }
                     .onAppear {
+                        proxy.scrollTo(userPersistedData.level, anchor: .center)
                         self.scrollProxy = proxy
-                        // Jump to the current level
-                        DispatchQueue.main.async {
-//                                withAnimation {
-                                proxy.scrollTo(userPersistedData.level, anchor: .center)
-//                                }
-                        }
                     }
                     .onChange(of: appModel.showGame) { showGame in
                         if showGame == false {

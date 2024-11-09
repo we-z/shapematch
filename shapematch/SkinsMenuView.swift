@@ -50,7 +50,7 @@ struct SkinsMenuView: View {
                     .italic()
                     .bold()
                     .font(.system(size: deviceWidth / 9))
-                    .customTextStroke(width: 2)
+                    .customTextStroke(width: 2.1)
                     
             }
             VStack {
