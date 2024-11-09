@@ -12,38 +12,33 @@ struct SettingsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @State var cardOffset: CGFloat = deviceHeight
+    
+    func quit() {
+        DispatchQueue.main.async { [self] in
+            withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                cardOffset = deviceHeight
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                    if userPersistedData.hapticsOn {
+                        impactLight.impactOccurred()
+                    }
+                    appModel.showSettings = false
+                }
+            }
+        }
+    }
+    
     var body: some View {
         ZStack{
             Color.gray.opacity(0.5)
                 .ignoresSafeArea()
                 .onTapGesture {
-                    DispatchQueue.main.async { [self] in
-                        withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                            cardOffset = deviceWidth * 2
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                if userPersistedData.hapticsOn {
-                                    impactLight.impactOccurred()
-                                }
-                                appModel.showSettings = false
-                            }
-                        }
-                    }
+                    quit()
                 }
                 .gesture(
                     DragGesture()
                         .onEnded { gesture in
                             if gesture.translation.height > 0 {
-                                DispatchQueue.main.async { [self] in
-                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                        cardOffset = deviceWidth * 2
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                            if userPersistedData.hapticsOn {
-                                                impactLight.impactOccurred()
-                                            }
-                                            appModel.showSettings = false
-                                        }
-                                    }
-                                }
+                                quit()
                             }
                         }
                 )
@@ -51,18 +46,30 @@ struct SettingsView: View {
                 Spacer()
                 VStack {
                     VStack{
-                        Capsule()
-                            .foregroundColor(.purple)
-                            .frame(width: 45, height: 9)
-                            .customTextStroke()
                         HStack {
-                            Text("Settings")
+                            Text("❌")
                                 .bold()
                                 .font(.system(size: deviceWidth / 12))
+                                .customTextStroke(width: 1.8)
+                                .fixedSize()
+                                .opacity(0)
+                            Spacer()
+                            Text("Settings")
+                                .bold()
+                                .font(.system(size: deviceWidth / 9))
                                 .customTextStroke()
-                                .padding(.vertical)
+                            Spacer()
+                            Button {
+                                quit()
+                            } label: {
+                                Text("❌")
+                                    .bold()
+                                    .font(.system(size: deviceWidth / 12))
+                                    .customTextStroke(width: 1.8)
+                                    .fixedSize()
+                            }
                         }
-                        
+                        .padding(.bottom)
                         HStack {
                             Text("🎵")
                                 .bold()
@@ -106,16 +113,16 @@ struct SettingsView: View {
                         }
                         .padding(.horizontal)
                     }
-                    .padding(30)
+                    .padding(40)
                 }
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    LinearGradient(gradient: Gradient(colors: [.blue, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
-                .cornerRadius(30)
+                .cornerRadius(39)
                 .overlay{
                     RoundedRectangle(cornerRadius: 30)
-                        .stroke(Color.black, lineWidth: 9)
-                        .padding(1)
+                        .stroke(Color.yellow, lineWidth: 9)
+                        .padding()
                 }
                 .offset(y: cardOffset)
                 .gesture(
@@ -125,17 +132,7 @@ struct SettingsView: View {
                         }
                         .onEnded { gesture in
                             if gesture.translation.height > 0 {
-                                DispatchQueue.main.async { [self] in
-                                    withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
-                                        cardOffset = deviceHeight
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                                            if userPersistedData.hapticsOn {
-                                                impactLight.impactOccurred()
-                                            }
-                                            appModel.showSettings = false
-                                        }
-                                    }
-                                }
+                                quit()
                             } else {
                                 DispatchQueue.main.async { [self] in
                                     withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {

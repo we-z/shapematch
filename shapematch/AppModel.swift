@@ -75,7 +75,7 @@ class AppModel: ObservableObject {
     @Published var shouldRewardGem = false
     @Published var showLevelDetails = false
     @Published var showSkinsMenu = false
-    @Published var showQuitButton = false
+    @Published var showQuitView = false
     @Published var previewLevel = 0
     @Published var previewMoves = 0
     @Published var swapsNeeded = 1

@@ -15,12 +15,7 @@ struct ButtonsView: View {
     var body: some View {
         HStack(spacing: idiom == .pad ? 39 : 9){
             Button{
-                DispatchQueue.main.async { [self] in
-                    appModel.selectedTab = 1
-                    withAnimation {
-                        appModel.selectedTab = 0
-                    }
-                }
+                appModel.showQuitView = true 
             } label: {
                 HStack{
                     Spacer()
@@ -65,7 +60,7 @@ struct ButtonsView: View {
                     }
                     .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
                     .background{
-                        LinearGradient(gradient: Gradient(colors: [.mint, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.5))
+                        LinearGradient(gradient: Gradient(colors: [.green, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.5))
                     }
                     .cornerRadius(idiom == .pad ? 30 : 15)
                     .overlay{
@@ -124,7 +119,7 @@ struct ButtonsView: View {
                 }
                 .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.purple, .indigo]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    LinearGradient(gradient: Gradient(colors: [.purple, .purple]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
                 .cornerRadius(idiom == .pad ? 30 : 15)
                 .overlay{

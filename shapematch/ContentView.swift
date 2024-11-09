@@ -192,6 +192,9 @@ struct ContentView: View {
                     }
                 }
                 .offset(x: appModel.selectedTab == 1 ? 0 : deviceWidth)
+            if appModel.showQuitView {
+                QuitView()
+            }
             if appModel.showCelebration {
                 CelebrationEffect()
             }

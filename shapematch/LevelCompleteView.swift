@@ -296,7 +296,6 @@ struct LevelCompleteView: View {
             }
             .padding(idiom == .pad ? 30 : 0)
         }
-        
         .onAppear {
             DispatchQueue.main.async { [self] in
                 appModel.showCelebration = false
