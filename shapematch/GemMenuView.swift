@@ -83,7 +83,7 @@ struct GemMenuView: View {
                     Capsule()
                         .foregroundColor(.blue)
                         .frame(width: 45, height: 9)
-                        .padding(.top, 15)
+                        .padding(.top, 21)
                         .customTextStroke()
                     Text("Gem Shop")
                         .bold()
@@ -126,9 +126,9 @@ struct GemMenuView: View {
                             .background{
                                 LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                             }
-                            .cornerRadius(15)
+                            .cornerRadius(21)
                             .overlay{
-                                RoundedRectangle(cornerRadius: 15)
+                                RoundedRectangle(cornerRadius: 21)
                                     .stroke(Color.black, lineWidth: 6)
                                     .padding(1)
                             }
@@ -171,9 +171,9 @@ struct GemMenuView: View {
                             .background{
                                 LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                             }
-                            .cornerRadius(15)
+                            .cornerRadius(21)
                             .overlay{
-                                RoundedRectangle(cornerRadius: 15)
+                                RoundedRectangle(cornerRadius: 21)
                                     .stroke(Color.black, lineWidth: 6)
                                     .padding(1)
                             }
@@ -215,9 +215,9 @@ struct GemMenuView: View {
                             .background{
                                 LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                             }
-                            .cornerRadius(15)
+                            .cornerRadius(21)
                             .overlay{
-                                RoundedRectangle(cornerRadius: 15)
+                                RoundedRectangle(cornerRadius: 21)
                                     .stroke(Color.black, lineWidth: 6)
                                     .padding(1)
                             }
@@ -245,12 +245,12 @@ struct GemMenuView: View {
                         LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                         RotatingSunView()
                             .frame(width: 1, height: 1)
-                            .offset(y: -(deviceWidth/1.5))
+                            .offset(y: -(deviceWidth/1.4))
                     }
                 }
-                .cornerRadius(30)
+                .cornerRadius(39)
                 .overlay{
-                    RoundedRectangle(cornerRadius: 30)
+                    RoundedRectangle(cornerRadius: 39)
                         .stroke(Color.black, lineWidth: 9)
                         .padding(1)
                 }
