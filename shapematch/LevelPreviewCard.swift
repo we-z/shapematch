@@ -13,11 +13,31 @@ struct LevelPreviewCard: View {
     
     @State var cardOffset: CGFloat = deviceHeight
     
-    func animateAwayButtonsAndBanner() {
+    func animateAwayCard() {
         DispatchQueue.main.async { [self] in
             withAnimation(.linear(duration: 0.3)) {
                 cardOffset = deviceWidth * 3
             }
+        }
+    }
+    
+    func play() {
+        DispatchQueue.main.async { [self] in
+            withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+                animateAwayCard()
+            }
+                        
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+            appModel.showLevelDetails = false
+            userPersistedData.level = appModel.previewLevel
+            appModel.setupLevel(startGrid: appModel.previewGrid)
+            withAnimation {
+                appModel.showGame = true
+                
+            }
+            appModel.showNewLevelAnimation = true
         }
     }
     
@@ -118,16 +138,7 @@ struct LevelPreviewCard: View {
                         .padding(.vertical)
                         if appModel.previewLevel <= userPersistedData.highestLevel {
                             Button {
-                                DispatchQueue.main.async { [self] in
-                                    animateAwayButtonsAndBanner()
-                                    userPersistedData.level = appModel.previewLevel
-                                    appModel.setupLevel(startGrid: appModel.previewGrid)
-                                    withAnimation {
-                                        appModel.showGame = true
-                                        appModel.showLevelDetails = false
-                                    }
-                                    appModel.showNewLevelAnimation = true
-                                }
+                                play()
                             } label: {
                                 HStack{
                                     Spacer()
