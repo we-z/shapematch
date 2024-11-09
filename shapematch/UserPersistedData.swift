@@ -22,7 +22,7 @@ class UserPersistedData: ObservableObject {
     @CloudStorage("gridData") var gridData: String = ""
     @CloudStorage("highestLevel") var highestLevel: Int = 0
     @CloudStorage(wrappedValue: "{}", "levelStars") var levelStarsString: String
-    @CloudStorage("selectedTab") var selectedTab = 1
+//    @CloudStorage("selectedTab") var selectedTab = 1
     @CloudStorage("level") var level: Int = 1 {
         didSet {
             if level > highestLevel {

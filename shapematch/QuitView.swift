@@ -28,8 +28,9 @@ struct QuitView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
             withAnimation() {
                 appModel.showQuitView = false
-                appModel.selectedTab = 0
+                appModel.showGame = false
             }
+            appModel.resetLevel()
         }
     }
     

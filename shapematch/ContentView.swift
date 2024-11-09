@@ -191,7 +191,7 @@ struct ContentView: View {
                             .offset(y: -(deviceWidth / 2))
                     }
                 }
-                .offset(x: appModel.selectedTab == 1 ? 0 : deviceWidth)
+                .offset(x: appModel.showGame == true ? 0 : deviceWidth)
             if appModel.showQuitView {
                 QuitView()
             }

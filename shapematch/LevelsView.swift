@@ -86,7 +86,7 @@ struct LevelsView: View {
                                             withAnimation {
                                                 userPersistedData.level = 1
                                                 appModel.setupFirstLevel()
-                                                appModel.selectedTab = 1
+                                                appModel.showGame = true
                                             }
                                         } else {
                                             appModel.previewLevel = level
@@ -110,8 +110,8 @@ struct LevelsView: View {
 //                                }
                         }
                     }
-                    .onChange(of: appModel.selectedTab) { selectedTab in
-                        if selectedTab == 0 {
+                    .onChange(of: appModel.showGame) { showGame in
+                        if showGame == false {
                             proxy.scrollTo(userPersistedData.level, anchor: .center)
                         }
                     }
@@ -143,15 +143,13 @@ struct LevelsView: View {
                             if userPersistedData.level != userPersistedData.highestLevel {
                                 userPersistedData.level = userPersistedData.highestLevel
                                 appModel.setupLevel()
-                            } else {
-                                appModel.resetLevel()
                             }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
+//                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
                                 withAnimation {
-                                    appModel.selectedTab = 1
+                                    appModel.showGame = true
                                 }
                                 appModel.showNewLevelAnimation = true
-                            }
+//                            }
 //                        }
                     } label: {
                         HStack{

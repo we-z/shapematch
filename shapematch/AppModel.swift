@@ -95,11 +95,7 @@ class AppModel: ObservableObject {
     @Published var setupSwaps: [(Position, Position)] = []
     @Published var showSetupSwaps = true
     @Published var winningGrids:[[[ShapeType]]] = []
-    @Published var selectedTab = 1 {
-        didSet {
-            userPersistedData.selectedTab = selectedTab
-        }
-    }
+    @Published var showGame = false
     
     @ObservedObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
@@ -116,7 +112,7 @@ class AppModel: ObservableObject {
         
     init() {
         
-        selectedTab = userPersistedData.selectedTab
+//        selectedTab = userPersistedData.selectedTab
         // Initialize the grids from persisted data
         (swapsNeeded, shapes) = determineLevelSettings(level: userPersistedData.level)
         
@@ -361,7 +357,7 @@ class AppModel: ObservableObject {
                 showCelebration = true
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
-                if selectedTab == 1 && !showLevelComplete && isWinningGrid(grid: grid) {
+                if showGame == true && !showLevelComplete && isWinningGrid(grid: grid) {
                     showLevelComplete = true
                 }
             }

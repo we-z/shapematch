@@ -123,7 +123,7 @@ struct LevelPreviewCard: View {
                                     userPersistedData.level = appModel.previewLevel
                                     appModel.setupLevel(startGrid: appModel.previewGrid)
                                     withAnimation {
-                                        appModel.selectedTab = 1
+                                        appModel.showGame = true
                                         appModel.showLevelDetails = false
                                     }
                                     appModel.showNewLevelAnimation = true
