@@ -20,7 +20,7 @@ class UserPersistedData: ObservableObject {
     @CloudStorage("soundOn") var soundOn: Bool = true
     @CloudStorage("hapticsOn") var hapticsOn: Bool = true
     @CloudStorage("gridData") var gridData: String = ""
-    @CloudStorage("highestLevel") var highestLevel: Int = 0
+    @CloudStorage("highestLevel") var highestLevel: Int = 1
     @CloudStorage(wrappedValue: "{}", "levelStars") var levelStarsString: String
 //    @CloudStorage("selectedTab") var selectedTab = 1
     @CloudStorage("level") var level: Int = 1 {
