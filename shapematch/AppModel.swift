@@ -796,6 +796,8 @@ class AppModel: ObservableObject {
             showSetupSwaps = false
         }
         swipesLeft = swapsNeeded + 2
+        rowsAligned = 0
+        columnsAligned = 0
         persistData()
     }
     
@@ -844,6 +846,8 @@ class AppModel: ObservableObject {
         grid = initialGrid
         swapsMade = []
         undosLeft = 3
+        rowsAligned = 0
+        columnsAligned = 0
         // Reset the swipes left to the initial calculated value
         swipesLeft = swapsNeeded + 2
     }
