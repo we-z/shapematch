@@ -131,10 +131,11 @@ struct LevelsView: View {
                         } label: {
                             Text("⬆️")
                                 .bold()
-                                .font(.system(size: deviceWidth / 12))
+                                .font(.system(size: idiom == .pad ? deviceWidth / 15 : deviceWidth / 12))
                                 .customTextStroke()
                                 .fixedSize()
                                 .padding()
+                                .padding(idiom == .pad ? 30 : 0)
                         }
                     }
                     Spacer()
@@ -165,9 +166,9 @@ struct LevelsView: View {
                         .background{
                             LinearGradient(gradient: Gradient(colors: [.green, .green]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.5))
                         }
-                        .cornerRadius(21)
+                        .cornerRadius(idiom == .pad ? 42 : 21)
                         .overlay{
-                            RoundedRectangle(cornerRadius: 21)
+                            RoundedRectangle(cornerRadius: idiom == .pad ? 42 : 21)
                                 .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                 .padding(1)
                         }
