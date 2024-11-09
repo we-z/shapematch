@@ -29,7 +29,7 @@ struct SettingsView: View {
     
     var body: some View {
         ZStack{
-            Color.gray.opacity(0.5)
+            Color.black.opacity(0.6)
                 .ignoresSafeArea()
                 .onTapGesture {
                     quit()

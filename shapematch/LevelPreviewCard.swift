@@ -23,7 +23,7 @@ struct LevelPreviewCard: View {
     
     var body: some View {
         ZStack{
-            Color.gray.opacity(0.5)
+            Color.black.opacity(0.6)
                 .ignoresSafeArea()
                 .onTapGesture {
                     DispatchQueue.main.async { [self] in
@@ -118,8 +118,8 @@ struct LevelPreviewCard: View {
                         .padding(.vertical)
                         if appModel.previewLevel <= userPersistedData.highestLevel {
                             Button {
-                                animateAwayButtonsAndBanner()
                                 DispatchQueue.main.async { [self] in
+                                    animateAwayButtonsAndBanner()
                                     userPersistedData.level = appModel.previewLevel
                                     appModel.setupLevel(startGrid: appModel.previewGrid)
                                     withAnimation {
@@ -159,7 +159,7 @@ struct LevelPreviewCard: View {
                 }
                 .padding()
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    LinearGradient(gradient: Gradient(colors: [.blue, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
                 .cornerRadius(30)
                 .overlay{

@@ -25,9 +25,9 @@ struct QuitView: View {
                 }
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-            appModel.showQuitView = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
             withAnimation() {
+                appModel.showQuitView = false
                 appModel.selectedTab = 0
             }
         }
@@ -47,7 +47,7 @@ struct QuitView: View {
                 cardOffset = deviceWidth * 2
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
             appModel.showQuitView = false
         }
     }
@@ -56,7 +56,9 @@ struct QuitView: View {
         ZStack {
             Color.black.opacity(0.6)
                 .ignoresSafeArea()
-            
+                .onTapGesture {
+                    cancel()
+                }
             VStack {
                 Spacer()
                 VStack{
