@@ -166,7 +166,7 @@ struct GameView: View {
                 }
                 .frame(width: deviceWidth)
                 .zIndex(0)
-                //                            .scaleEffect(0.8)
+//                .scaleEffect(0.8)
                 
             }
             .allowsHitTesting(!appModel.freezeGame)
