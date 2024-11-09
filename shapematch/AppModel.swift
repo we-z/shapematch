@@ -76,6 +76,7 @@ class AppModel: ObservableObject {
     @Published var showLevelDetails = false
     @Published var showSkinsMenu = false
     @Published var showQuitView = false
+    @Published var celebrateLineup = false
     @Published var previewLevel = 0
     @Published var previewMoves = 0
     @Published var swapsNeeded = 1
@@ -415,6 +416,7 @@ class AppModel: ObservableObject {
             if alignedRows(grid: grid) > rowsAligned || alignedColumns(grid: grid) > columnsAligned {
                 rowsAligned = alignedRows(grid: grid)
                 columnsAligned = alignedColumns(grid: grid)
+                celebrateLineup.toggle()
                 print("celebrate line up")
             }
         }

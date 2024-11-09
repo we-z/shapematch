@@ -12,7 +12,7 @@ import AVFoundation
 struct AnimationsView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     var body: some View {
-        CelebrationEffect()
+        CelebrateLineup()
     }
 }
 
@@ -160,10 +160,8 @@ struct NewLevelAnimation: View {
     // Array of congratulatory messages
     
     // State to hold the current message
-    @State private var currentMessage = ""
     @State private var showAnimation = false
     @State private var showLevel = false
-    @State private var animateMessage = false
 
     var body: some View {
         ZStack{
@@ -204,7 +202,6 @@ struct NewLevelAnimation: View {
                                     hapticManager.notification(type: .error)
                                 }
                                 withAnimation() {
-                                    animateMessage = false
                                     showAnimation = false
                                     showLevel = false
                                    
@@ -233,18 +230,76 @@ struct NewLevelAnimation: View {
                     .offset(y: -(deviceWidth / 7.5))
             }
             .scaleEffect(showLevel ? 1 : 0.001)
-//            VStack {
-//                Spacer()
-//                Text("Tap to skip")
-//                    .bold()
-//                    .font(.system(size: deviceWidth / 18))
-//                    .customTextStroke(width: 1.5)
-//                    .padding()
-//            }
         }
         .onTapGesture {
             appModel.showNewLevelAnimation = false
         }
+    }
+}
+
+struct CelebrateLineup: View {
+    @ObservedObject private var appModel = AppModel.sharedAppModel
+    @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
+    // Array of congratulatory messages
+    
+    // State to hold the current message
+    @State private var showAnimation = false
+    @State private var showLevel = false
+
+    var body: some View {
+        ZStack{
+            VStack{
+                VortexViewReader { proxy in
+                    VortexView(.confetti) {
+                        Rectangle()
+                            .fill(.white)
+                            .frame(width: 30, height: 30)
+                            .tag("square")
+                        
+                        Circle()
+                            .fill(.white)
+                            .frame(width: 30)
+                            .tag("circle")
+                    }
+                    .onChange(of: appModel.celebrateLineup) { _ in
+                        DispatchQueue.main.async {
+                            if userPersistedData.hapticsOn {
+                                hapticManager.notification(type: .error)
+                            }
+                            withAnimation(.interpolatingSpring(mass: 1.5, stiffness: 200.0, damping: 13.0, initialVelocity: -10.0)) {
+                                showAnimation = true
+                                showLevel = true
+                            }
+                            
+                            // Ensure particles are emitting before the burst
+                            proxy.particleSystem?.isEmitting = true
+                            proxy.burst()
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [self] in
+                                withAnimation() {
+                                    showAnimation = false
+                                    showLevel = false
+                                   
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                                    appModel.showNewLevelAnimation = false
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            ZStack{
+                Text("🙌")
+                    .font(.system(size: deviceWidth / 6))
+                    .customTextStroke(width: 1.8)
+                    .fixedSize()
+                    .rotationEffect(.degrees(showLevel ? 0 : -180))
+            }
+            .scaleEffect(showLevel ? 1 : 0.001)
+        }
+        .allowsHitTesting(false)
     }
 }
 

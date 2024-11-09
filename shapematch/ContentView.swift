@@ -191,6 +191,7 @@ struct ContentView: View {
                             .fixedSize()
                             .offset(y: -(deviceWidth / 2))
                     }
+                    CelebrateLineup()
                 }
                 .offset(x: appModel.showGame == true ? 0 : deviceWidth)
             if appModel.showQuitView {
