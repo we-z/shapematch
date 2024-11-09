@@ -31,6 +31,7 @@
 		7639F9CE2C759A2E00E2B371 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639F9CD2C759A2E00E2B371 /* AudioManager.swift */; };
 		7639F9D02C759B2100E2B371 /* ShapeMatchMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */; };
 		763F94F02CDEC7CC001633D2 /* QuitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F94EF2CDEC7CC001633D2 /* QuitView.swift */; };
+		765836542CDFFDE100CE44F2 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765836532CDFFDE100CE44F2 /* GameView.swift */; };
 		7669B74E2CB96BC400EBA34F /* HomeButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7669B74D2CB96BC400EBA34F /* HomeButtonsView.swift */; };
 		766EF08D2C7E2EEA00B2C380 /* RandomGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766EF08C2C7E2EEA00B2C380 /* RandomGradientView.swift */; };
 		766EF08F2C7EB1C500B2C380 /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766EF08E2C7EB1C500B2C380 /* InstructionView.swift */; };
@@ -84,6 +85,7 @@
 		7639F9CD2C759A2E00E2B371 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		7639F9CF2C759B2100E2B371 /* ShapeMatchMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = ShapeMatchMusic.mp3; path = ../../../../Downloads/ShapeMatchMusic.mp3; sourceTree = "<group>"; };
 		763F94EF2CDEC7CC001633D2 /* QuitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitView.swift; sourceTree = "<group>"; };
+		765836532CDFFDE100CE44F2 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		7669B74D2CB96BC400EBA34F /* HomeButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtonsView.swift; sourceTree = "<group>"; };
 		766EF08C2C7E2EEA00B2C380 /* RandomGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGradientView.swift; sourceTree = "<group>"; };
 		766EF08E2C7EB1C500B2C380 /* InstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionView.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				76B7740E2C9AA20F0053B72B /* ButtonsView.swift */,
 				7639F9602C713D8100E2B371 /* ContentView.swift */,
 				76B774062C968EF70053B72B /* Extensions.swift */,
+				765836532CDFFDE100CE44F2 /* GameView.swift */,
 				761A44452C7841A30017B53B /* GemMenuView.swift */,
 				7669B74D2CB96BC400EBA34F /* HomeButtonsView.swift */,
 				7677131D2C86DCF800C9E2C9 /* iconview.swift */,
@@ -342,6 +345,7 @@
 				76ADAF042C76A92C006B2844 /* OverlaysView.swift in Sources */,
 				761A444B2C78E8320017B53B /* StoreKitManager.swift in Sources */,
 				7639F9CA2C7587C800E2B371 /* NoMoreSwipesView.swift in Sources */,
+				765836542CDFFDE100CE44F2 /* GameView.swift in Sources */,
 				76B285122CCC12E900A45ADB /* SkinsMenuView.swift in Sources */,
 				76B774072C968EF70053B72B /* Extensions.swift in Sources */,
 				7669B74E2CB96BC400EBA34F /* HomeButtonsView.swift in Sources */,
