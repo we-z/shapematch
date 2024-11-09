@@ -176,10 +176,9 @@ class AppModel: ObservableObject {
             }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
-            let temp = grid[start.row][start.col]
-            grid[start.row][start.col] = grid[end.row][end.col]
-            grid[end.row][end.col] = temp
-             
+         
+            grid.swapAt((row: start.row, col: start.col), (row: end.row, col: end.col))
+            
             offsets[start.row][start.col] = .zero
             offsets[end.row][end.col] = .zero
             swaping = false

@@ -148,7 +148,7 @@ struct LevelsView: View {
                                 withAnimation {
                                     appModel.showGame = true
                                 }
-                                appModel.showNewLevelAnimation = true
+//                                appModel.showNewLevelAnimation = true
 //                            }
 //                        }
                     } label: {

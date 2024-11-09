@@ -131,10 +131,9 @@ struct ContentView: View {
                                                 .frame(width: appModel.shapeWidth, height: appModel.shapeWidth)
                                                 .scaleEffect(appModel.shapeScale)
                                                 .scaleEffect(idiom == .pad ? 0.54 : 1)
-                                                .background(.white.opacity(0.001))
-                                                .offset(appModel.offsets[row][column])
                                                 .scaleEffect((tappedRow == row && tappedColumn == column) ? playingShapeScale : 1)
-                                                .animation(.easeInOut(duration: 0.1), value: playingShapeScale)
+                                                .offset(appModel.offsets[row][column])
+                                                .background(Color.white.opacity(0.001))
                                                 .gesture(
                                                     DragGesture(minimumDistance: 1)
                                                         .onChanged { gesture in
@@ -164,6 +163,8 @@ struct ContentView: View {
                                                             firstChange = false
                                                         }
                                                 )
+                                                .animation(.easeInOut(duration: 0.1), value: playingShapeScale)
+
                                         }
                                     }
                                 }
