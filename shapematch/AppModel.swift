@@ -414,11 +414,11 @@ class AppModel: ObservableObject {
             print("Level failed")
         } else {
             if alignedRows(grid: grid) > rowsAligned || alignedColumns(grid: grid) > columnsAligned {
-                rowsAligned = alignedRows(grid: grid)
-                columnsAligned = alignedColumns(grid: grid)
                 celebrateLineup.toggle()
                 print("celebrate line up")
             }
+            rowsAligned = alignedRows(grid: grid)
+            columnsAligned = alignedColumns(grid: grid)
         }
     }
     
@@ -758,9 +758,6 @@ class AppModel: ObservableObject {
         return targetGrid
     }
     
-    func hintMove() {
-        
-    }
     
     func persistData() {
         // The grid now requires exactly `swapsNeeded` swaps to solve
