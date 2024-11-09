@@ -108,9 +108,10 @@ class AppModel: ObservableObject {
         Skin(SkinID: "fruits", cost: 10),
         Skin(SkinID: "animals", cost: 30),
         Skin(SkinID: "sweets", cost: 50),
+        Skin(SkinID: "birds", cost: 80),
         Skin(SkinID: "halloween", cost: 100)
         // christmas: 🎄🎅❄️⛄️☕️
-        // birds: 🕊️🦜🐥🦉🦅
+        // birds: 🕊️🦜🦆🦩🦅
     ]
         
     init() {

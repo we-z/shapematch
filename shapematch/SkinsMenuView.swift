@@ -167,6 +167,10 @@ struct ShapesView: View {
                         Text("🎃")
                             .customTextStroke()
                             .scaleEffect(1.5)
+                    case "birds":
+                        Text("🕊️")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
                     default:
                         Text("🔵")
                             .customTextStroke()
@@ -194,6 +198,10 @@ struct ShapesView: View {
                         Text("👻")
                             .customTextStroke()
                             .scaleEffect(1.5)
+                    case "birds":
+                        Text("🦜")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
                     default:
                         Text("🟩")
                             .customTextStroke()
@@ -219,6 +227,10 @@ struct ShapesView: View {
                             .scaleEffect(1.5)
                     case "halloween":
                         Text("🧛‍♂️")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "birds":
+                        Text("🦆")
                             .customTextStroke()
                             .scaleEffect(1.5)
                     default:
@@ -249,6 +261,10 @@ struct ShapesView: View {
                         Text("👹")
                             .customTextStroke()
                             .scaleEffect(1.5)
+                    case "birds":
+                        Text("🦩")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
                     default:
                         Text("⭐️")
                             .customTextStroke()
@@ -275,6 +291,10 @@ struct ShapesView: View {
                             .scaleEffect(1.5)
                     case "halloween":
                         Text("🩸")
+                            .customTextStroke()
+                            .scaleEffect(1.5)
+                    case "birds":
+                        Text("🦅")
                             .customTextStroke()
                             .scaleEffect(1.5)
                     default:
