@@ -20,7 +20,7 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+            LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 .ignoresSafeArea()
                 ZStack {
                     RotatingSunView()
@@ -29,7 +29,7 @@ struct ContentView: View {
                     LevelsView()
                 }
                 ZStack{
-                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                         .ignoresSafeArea()
                     VStack {
                         Group {
@@ -117,7 +117,7 @@ struct ContentView: View {
                                 .cornerRadius(30)
                                 .overlay {
                                     RoundedRectangle(cornerRadius: 30)
-                                        .stroke(Color.yellow, lineWidth: idiom == .pad ? 11 : 7)
+                                        .stroke(Color.blue, lineWidth: idiom == .pad ? 11 : 9)
                                         .padding(1)
                                         .shadow(radius: 3)
                                 }

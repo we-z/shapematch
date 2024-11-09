@@ -13,7 +13,7 @@ struct HomeButtonsView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @State var showLevelsMenu = false
     var body: some View {
-        HStack(spacing: idiom == .pad ? 39 : 9){
+        HStack(spacing: idiom == .pad ? 39 : 12){
             Button {
                 appModel.showGemMenu = true
             } label: {

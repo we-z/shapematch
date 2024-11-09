@@ -172,6 +172,7 @@ struct LevelsView: View {
                         
                     }
                     .buttonStyle(.roundedAndShadow6)
+                    .shadow(color: .green, radius: 6)
                 }
             }
         }

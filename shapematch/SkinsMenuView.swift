@@ -47,7 +47,7 @@ struct SkinsMenuView: View {
             }
             HStack {
                 Text("Customize!")
-                    .italic()
+//                    .italic()
                     .bold()
                     .font(.system(size: deviceWidth / 9))
                     .customTextStroke(width: 2.1)
@@ -129,11 +129,11 @@ struct SkinsMenuView: View {
         }
         .background{
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                     .ignoresSafeArea()
-                RotatingSunView()
-                    .frame(width: 1, height: 1)
-                    .offset(y: -(deviceHeight / 1.8))
+//                RotatingSunView()
+//                    .frame(width: 1, height: 1)
+//                    .offset(y: -(deviceHeight / 1.8))
             }
         }
     }
