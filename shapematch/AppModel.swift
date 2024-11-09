@@ -81,6 +81,8 @@ class AppModel: ObservableObject {
     @Published var swapsNeeded = 1
     @Published var undosLeft = 3
     @Published var amountBought = 5
+    @Published var rowsAligned = 0
+    @Published var columnsAligned = 0
     @Published var shapes: [ShapeType] = [] {
         didSet {
             self.winningGrids = generateAllWinningGrids(shapes: shapes)
@@ -304,6 +306,32 @@ class AppModel: ObservableObject {
         }
         return true
     }
+    
+    func alignedRows(grid: [[ShapeType]]) -> Int {
+        var total = 0
+        for row in grid {
+            if Set(row).count == 1 {
+                total += 1
+            }
+        }
+        return total
+    }
+
+    func alignedColumns(grid: [[ShapeType]]) -> Int {
+        var total = 0
+        let columnCount = grid[0].count
+        for col in 0..<columnCount {
+            var columnShapes = [ShapeType]()
+            for row in grid {
+                columnShapes.append(row[col])
+            }
+            if Set(columnShapes).count == 1 {
+                total += 1
+            }
+        }
+        return total
+    }
+    
 
     func isWinningGrid(grid: [[ShapeType]]) -> Bool {
         return isAlignedHorizontally(grid: grid) || isAlignedVertically(grid: grid)
@@ -383,6 +411,12 @@ class AppModel: ObservableObject {
                 AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
             }
             print("Level failed")
+        } else {
+            if alignedRows(grid: grid) > rowsAligned || alignedColumns(grid: grid) > columnsAligned {
+                rowsAligned = alignedRows(grid: grid)
+                columnsAligned = alignedColumns(grid: grid)
+                print("celebrate line up")
+            }
         }
     }
     

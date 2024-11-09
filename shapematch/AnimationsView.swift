@@ -81,7 +81,7 @@ struct CelebrationEffect: View {
     var body: some View {
         ZStack{
             if showAnimation {
-                Color.gray.opacity(0.7)
+                Color.black.opacity(0.6)
                     .ignoresSafeArea()
             }
             VStack{
@@ -168,7 +168,7 @@ struct NewLevelAnimation: View {
     var body: some View {
         ZStack{
             if showAnimation {
-                Color.gray.opacity(0.7)
+                Color.black.opacity(0.6)
                     .ignoresSafeArea()
                     
             }
