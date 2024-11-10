@@ -60,6 +60,10 @@ struct SettingsView: View {
                                 .customTextStroke()
                             Spacer()
                             Button {
+                                if userPersistedData.hapticsOn {
+                                    impactLight.impactOccurred()
+                                }
+
                                 quit()
                             } label: {
                                 Text("❌")

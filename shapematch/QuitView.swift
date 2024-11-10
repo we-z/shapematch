@@ -43,6 +43,9 @@ struct QuitView: View {
     }
     
     func cancel() {
+        if userPersistedData.hapticsOn {
+            impactLight.impactOccurred()
+        }
         DispatchQueue.main.async { [self] in
             withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                 cardOffset = deviceWidth * 2
