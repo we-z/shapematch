@@ -95,7 +95,6 @@ struct QuitView: View {
                     Text("💔")
                         .font(.system(size: deviceWidth / 4))
                         .customTextStroke(width: 2.7)
-                        .padding()
                     
                     .padding(1)
                     Button {
@@ -127,7 +126,7 @@ struct QuitView: View {
                     .shadow(color: .red, radius: 6)
                 }
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    LinearGradient(gradient: Gradient(colors: [.red, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
                 .cornerRadius(39)
                 .overlay {

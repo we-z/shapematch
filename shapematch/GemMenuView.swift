@@ -86,7 +86,7 @@ struct GemMenuView: View {
                         Text("Gem Shop")
                             .bold()
                             .font(.system(size: deviceWidth/9))
-                            .customTextStroke(width: 3)
+                            .customTextStroke(width: 2.7)
                         ForEach(0..<GemPacks.count, id: \.self) { index in
                             Button {
                                 isProcessingPurchase = true
@@ -128,13 +128,14 @@ struct GemMenuView: View {
                                     RoundedRectangle(cornerRadius: 21)
                                         .stroke(Color.black, lineWidth: 6)
                                         .padding(1)
-//                                        .shadow(color: .blue, radius: 3)
+//                                        .shadow(color: .black, radius: 3)
                                 }
 //                                .shadow(color: .blue, radius: 3)
                                 .padding(.horizontal, 27)
                                 .padding(.vertical, 3)
                             }
                             .buttonStyle(.roundedAndShadow6)
+                            .shadow(color: .blue, radius: 6)
                         }
 
                             Button {
@@ -148,6 +149,7 @@ struct GemMenuView: View {
                                     .bold()
                                     .font(.system(size: deviceWidth/18))
                                     .customTextStroke(width:1.5)
+                                    .shadow(color: .blue, radius: 6)
                             }
                     }
                     .padding(.vertical, 27)
@@ -155,7 +157,7 @@ struct GemMenuView: View {
                 }
                 .background{
                     ZStack {
-                        LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                        LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                         RotatingSunView()
                             .frame(width: 1, height: 1)
                             .offset(y: -(deviceWidth/1.4))
@@ -164,10 +166,10 @@ struct GemMenuView: View {
                 .cornerRadius(39)
                 .overlay{
                     RoundedRectangle(cornerRadius: 30)
-                        .stroke(Color.black, lineWidth: 9)
-//                        .shadow(color: .blue, radius: 6)
+                        .stroke(Color.blue, lineWidth: 6)
+                        .shadow(color: .black, radius: 3)
                 }
-//                .shadow(color: .purple, radius: 6)
+                .shadow(color: .black, radius: 3)
                 .padding()
                 .offset(y: cardOffset)
                 
