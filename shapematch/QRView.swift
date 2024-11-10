@@ -25,7 +25,7 @@ struct QRView: View {
                         .frame(width: 300, height: 300)
                         .cornerRadius(45)
                 }
-                Text("Shape Swap")
+                Text("Shape Shuffle")
                     .font(.system(size: 45))
                     .bold()
                     .customTextStroke(width: 2.7)

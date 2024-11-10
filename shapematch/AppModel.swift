@@ -372,7 +372,7 @@ class AppModel: ObservableObject {
     
     func checkWinCondition() {
         if isWinningGrid(grid: grid) {
-            showSetupSwaps = false
+            self.showSetupSwaps = false
             userPersistedData.firstGamePlayed = true
             // 1335, 1114
             if userPersistedData.soundOn {

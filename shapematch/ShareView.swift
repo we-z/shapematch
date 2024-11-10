@@ -30,7 +30,7 @@ class ActivityItemProvider: NSObject, UIActivityItemSource {
         let metadata = LPLinkMetadata()
         metadata.originalURL = url
         metadata.url = url
-        metadata.title = "Shape Swap!"
+        metadata.title = "Shape Shuffle"
         return metadata
     }
 }

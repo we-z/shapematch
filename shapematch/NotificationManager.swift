@@ -50,7 +50,7 @@ class NotificationManager: ObservableObject {
         let randomBodyIndex = Int.random(in: 0..<bodies.count)
         
         let content = UNMutableNotificationContent()
-        content.title = "Shape Swap"
+        content.title = "Shape Shuffle"
         content.body = bodies[randomBodyIndex]
         content.categoryIdentifier = "alarm"
         content.userInfo = ["customData": "fizzbuzz"]
