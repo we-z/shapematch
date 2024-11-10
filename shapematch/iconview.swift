@@ -56,7 +56,6 @@ struct iconview: View {
                                     .scaleEffect(appModel.shapeScale)
                                     .scaleEffect(idiom == .pad ? 0.54 : 1)
                                     .scaleEffect((tappedRow == row && tappedColumn == column) ? playingShapeScale : 1)
-                                    .offset(appModel.offsets[row][column])
                                     .background(Color.white.opacity(0.001))
                                     .gesture(
                                         DragGesture(minimumDistance: 1)

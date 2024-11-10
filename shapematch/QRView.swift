@@ -10,20 +10,24 @@ import SwiftUI
 struct QRView: View {
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+            LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
             VStack {
                 ZStack{
                     RotatingSunView()
                         .scaleEffect(1.8)
                         .frame(width: 1, height: 1)
-                    Rectangle()
-                        .foregroundColor(.black)
-                        .frame(width: 315, height: 315)
-                        .cornerRadius(54)
+                    
                     Image("qrcode")
                         .resizable()
                         .frame(width: 300, height: 300)
-                        .cornerRadius(45)
+                        .cornerRadius(30)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 30)
+                                .stroke(Color.yellow, lineWidth: idiom == .pad ? 11 : 9)
+                                .padding(1)
+                                .shadow(color: .blue, radius: 6)
+                        }
+                        .shadow(color: .blue, radius: 6)
                 }
                 Text("Shape Shuffle")
                     .font(.system(size: 45))

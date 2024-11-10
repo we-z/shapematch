@@ -16,9 +16,11 @@ struct GemMenuView: View {
     @State var cardOffset: CGFloat = deviceWidth * 2
     @State private var sheetPresented : Bool = false
     
-    @State var GemPack10: GemPack = GemPack(amount: 10, cost: "1.99", packID: "GemPack10")
-    @State var GemPack100: GemPack = GemPack(amount: 100, cost: "14.99", packID: "GemPack100")
-    @State var GemPack1000: GemPack = GemPack(amount: 1000, cost: "99.99", packID: "GemPack1000")
+    @State var GemPacks: [GemPack] = [
+        GemPack(amount: 10, cost: "1.99", packID: "GemPack10"),
+        GemPack(amount: 100, cost: "14.99", packID: "GemPack100"),
+        GemPack(amount: 1000, cost: "99.99", packID: "GemPack1000")
+    ]
     
     @MainActor
     func buyGems(pack: GemPack) async {
@@ -80,150 +82,61 @@ struct GemMenuView: View {
             VStack {
                 Spacer()
                 VStack {
-                    Capsule()
-                        .foregroundColor(.blue)
-                        .frame(width: 45, height: 9)
-                        .padding(.top, 21)
-                        .customTextStroke()
-                    Text("Gem Shop")
-                        .bold()
-                        .font(.system(size: deviceWidth/9))
-                        .customTextStroke(width: 3)
-                    
                     VStack(spacing: 21) {
-                        Button {
-                            isProcessingPurchase = true
-                            Task {
-                                await buyGems(pack: GemPack10)
+                        Text("Gem Shop")
+                            .bold()
+                            .font(.system(size: deviceWidth/9))
+                            .customTextStroke(width: 3)
+                        ForEach(0..<GemPacks.count, id: \.self) { index in
+                            Button {
+                                isProcessingPurchase = true
+                                Task {
+                                    await buyGems(pack: GemPacks[index])
+                                }
+                            } label: {
+                                HStack{
+                                    Text("💎 \(GemPacks[index].amount)")
+                                        .bold()
+                                        .font(.system(size: deviceWidth/15))
+                                        .fixedSize()
+                                        .scaleEffect(1.2)
+                                        .customTextStroke(width: 2.4)
+                                        .padding(12)
+                                        .padding(.horizontal, idiom == .pad ? 30 : 0)
+                                    Spacer()
+                                    Text("$\(GemPacks[index].cost)")
+                                        .bold()
+                                        .font(.system(size: deviceWidth/21))
+                                        .customTextStroke(width:1.2)
+                                        .padding(9)
+                                        .background(.green)
+                                        .cornerRadius(15)
+                                        .overlay{
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .stroke(Color.black, lineWidth: 3)
+                                                .padding(1)
+                                        }
+                                        .padding(.trailing, 3)
+                                        .fixedSize()
+                                }
+                                .padding()
+                                .background{
+                                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                                }
+                                .cornerRadius(21)
+                                .overlay{
+                                    RoundedRectangle(cornerRadius: 21)
+                                        .stroke(Color.black, lineWidth: 6)
+                                        .padding(1)
+//                                        .shadow(color: .blue, radius: 3)
+                                }
+//                                .shadow(color: .blue, radius: 3)
+                                .padding(.horizontal, 27)
+                                .padding(.vertical, 3)
                             }
-                        } label: {
-                            HStack{
-                                Text("💎 10")
-                                    .bold()
-                                    .font(.system(size: deviceWidth/15))
-                                    .fixedSize()
-                                    .scaleEffect(1.2)
-                                    .customTextStroke(width: 2.4)
-                                    .padding(12)
-                                    .padding(.horizontal, idiom == .pad ? 30 : 0)
-                                Spacer()
-                                Text("$1.99")
-                                    .bold()
-                                    .font(.system(size: deviceWidth/21))
-                                    .customTextStroke(width:1.2)
-                                    .padding(9)
-                                    .background(.green)
-                                    .cornerRadius(15)
-                                    .overlay{
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .stroke(Color.black, lineWidth: 3)
-                                            .padding(1)
-                                    }
-                                    .padding(.trailing, 3)
-                                    .fixedSize()
-                            }
-                            .padding()
-                            .background{
-                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                            }
-                            .cornerRadius(21)
-                            .overlay{
-                                RoundedRectangle(cornerRadius: 21)
-                                    .stroke(Color.black, lineWidth: 6)
-                                    .padding(1)
-                            }
-                            .padding(.horizontal, 30)
+                            .buttonStyle(.roundedAndShadow6)
                         }
-                        .buttonStyle(.roundedAndShadow6)
-                        Button {
-                            isProcessingPurchase = true
-                            Task {
-                                await buyGems(pack: GemPack100)
-                            }
-                        } label: {
-                            HStack{
-                                Text("💎 100")
-                                    .bold()
-                                    .font(.system(size: deviceWidth/15))
-                                    .fixedSize()
-                                    .scaleEffect(1.2)
-                                    .customTextStroke(width: 2.4)
-                                    .padding(12)
-                                    .padding(.horizontal, idiom == .pad ? 30 : 0)
-                                
-                                Spacer()
-                                Text("$14.99")
-                                    .bold()
-                                    .font(.system(size: deviceWidth/21))
-                                    .customTextStroke(width:1.2)
-                                    .fixedSize()
-                                    .padding(9)
-                                    .background(.green)
-                                    .cornerRadius(15)
-                                    .overlay{
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .stroke(Color.black, lineWidth: 3)
-                                            .padding(1)
-                                    }
-                                    .padding(.trailing, 3)
-                            }
-                            .padding()
-                            .background{
-                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                            }
-                            .cornerRadius(21)
-                            .overlay{
-                                RoundedRectangle(cornerRadius: 21)
-                                    .stroke(Color.black, lineWidth: 6)
-                                    .padding(1)
-                            }
-                            .padding(.horizontal, 30)
-                        }
-                        .buttonStyle(.roundedAndShadow6)
-                        Button {
-                            isProcessingPurchase = true
-                            Task {
-                                await buyGems(pack: GemPack1000)
-                            }
-                        } label: {
-                            HStack{
-                                Text("💎 1,000")
-                                    .bold()
-                                    .font(.system(size: deviceWidth/15))
-                                    .fixedSize()
-                                    .scaleEffect(1.2)
-                                    .customTextStroke(width: 2.4)
-                                    .padding(12)
-                                    .padding(.horizontal, idiom == .pad ? 30 : 0)
-                                Spacer()
-                                Text("$99.99")
-                                    .bold()
-                                    .font(.system(size: deviceWidth/21))
-                                    .customTextStroke(width:1.2)
-                                    .fixedSize()
-                                    .padding(9)
-                                    .background(.green)
-                                    .cornerRadius(15)
-                                    .overlay{
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .stroke(Color.black, lineWidth: 3)
-                                            .padding(1)
-                                    }
-                                    .padding(.trailing, 3)
-                            }
-                            .padding()
-                            .background{
-                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                            }
-                            .cornerRadius(21)
-                            .overlay{
-                                RoundedRectangle(cornerRadius: 21)
-                                    .stroke(Color.black, lineWidth: 6)
-                                    .padding(1)
-                            }
-                            .padding(.horizontal, 30)
-                        }
-                        .buttonStyle(.roundedAndShadow6)
+
                             Button {
                                 if userPersistedData.hapticsOn {
                                     impactLight.impactOccurred()
@@ -235,10 +148,10 @@ struct GemMenuView: View {
                                     .bold()
                                     .font(.system(size: deviceWidth/18))
                                     .customTextStroke(width:1.5)
-                                    .padding(.top, 3)
                             }
                     }
-                    .padding(.bottom, 30)
+                    .padding(.vertical, 27)
+                    
                 }
                 .background{
                     ZStack {
@@ -250,10 +163,11 @@ struct GemMenuView: View {
                 }
                 .cornerRadius(39)
                 .overlay{
-                    RoundedRectangle(cornerRadius: 39)
+                    RoundedRectangle(cornerRadius: 30)
                         .stroke(Color.black, lineWidth: 9)
-                        .padding(1)
+//                        .shadow(color: .blue, radius: 6)
                 }
+//                .shadow(color: .purple, radius: 6)
                 .padding()
                 .offset(y: cardOffset)
                 

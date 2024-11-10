@@ -489,11 +489,6 @@ class AppModel: ObservableObject {
             shapes =  [.circle, .square, .triangle, .star, .heart]
         }
         
-//        offsets = Array(
-//            repeating: Array(repeating: .zero, count: shapes.count),
-//            count: shapes.count
-//        )
-        
         return (swapsNeeded, shapes)
     }
     

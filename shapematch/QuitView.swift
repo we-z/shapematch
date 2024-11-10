@@ -120,13 +120,14 @@ struct QuitView: View {
                                 .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                 .padding(1)
                         }
-                        .padding(idiom == .pad ? 60 : 39)
+                        .padding(idiom == .pad ? 60 : 45)
                         
                     }
                     .buttonStyle(.roundedAndShadow6)
+                    .shadow(color: .red, radius: 6)
                 }
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.blue, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.6))
+                    LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
                 .cornerRadius(39)
                 .overlay {
