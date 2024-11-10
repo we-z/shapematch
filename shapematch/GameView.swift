@@ -98,18 +98,18 @@ struct GameView: View {
                         .overlay{
                             ZStack{
                                 Color.white
-                                Color.blue.opacity(0.6)
+                                Color.blue.opacity(0.75)
                             }
                         }
                         .aspectRatio(1.0, contentMode: .fill)
                         .cornerRadius(30)
                         .overlay {
                             RoundedRectangle(cornerRadius: 30)
-                                .stroke(Color.blue, lineWidth: idiom == .pad ? 11 : 9)
+                                .stroke(Color.yellow, lineWidth: idiom == .pad ? 11 : 9)
                                 .padding(1)
-                                .shadow(radius: 3)
+                                .shadow(color: .blue, radius: 6)
                         }
-                        .shadow(radius: 3)
+                        .shadow(color: .blue, radius: 6)
                         .padding()
                     VStack {
                         ForEach(0..<appModel.grid.count, id: \.self) { row in

@@ -195,7 +195,7 @@ struct NewLevelAnimation: View {
                             
                             // Ensure particles are emitting before the burst
                             proxy.particleSystem?.isEmitting = true
-                            proxy.burst()
+//                            proxy.burst()
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
                                 if userPersistedData.hapticsOn {

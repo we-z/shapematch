@@ -17,26 +17,26 @@ struct iconview: View {
     @Environment(\.scenePhase) var scenePhase
     var body: some View {
         ZStack{
-            LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+            LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 .frame(height: deviceWidth)
             ZStack{
-                Rectangle()
-                    .overlay{
-                        ZStack{
-                            Color.white
-                            Color.blue.opacity(0.6)
-                        }
-                    }
-                    .aspectRatio(1.0, contentMode: .fit)
-                    .cornerRadius(30)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 30)
-                            .stroke(Color.blue, lineWidth: idiom == .pad ? 11 : 9)
-                            .padding(1)
-                            .shadow(radius: 3)
-                    }
-                    .shadow(radius: 3)
-                    .padding()
+//                Rectangle()
+//                    .overlay{
+//                        ZStack{
+//                            Color.white
+//                            Color.blue.opacity(0.6)
+//                        }
+//                    }
+//                    .aspectRatio(1.0, contentMode: .fit)
+//                    .cornerRadius(30)
+//                    .overlay {
+//                        RoundedRectangle(cornerRadius: 30)
+//                            .stroke(Color.yellow, lineWidth: idiom == .pad ? 11 : 9)
+//                            .padding(1)
+//                            .shadow(radius: 3)
+//                    }
+//                    .shadow(radius: 3)
+//                    .padding()
                 VStack {
                     ForEach(0..<appModel.grid.count, id: \.self) { row in
                         HStack {
@@ -92,7 +92,7 @@ struct iconview: View {
             }
             .frame(width: deviceWidth)
             .zIndex(0)
-            .scaleEffect(0.8)
+//            .scaleEffect(0.9)
                 
         }
         .onChange(of: scenePhase) { newScenePhase in
