@@ -81,7 +81,7 @@ struct CelebrationEffect: View {
     var body: some View {
         ZStack{
             if showAnimation {
-                Color.black.opacity(0.6)
+                Color.black.opacity(0.001)
                     .ignoresSafeArea()
             }
             VStack{
@@ -149,7 +149,9 @@ struct CelebrationEffect: View {
         .onTapGesture {
             print("tapped Celebration")
             appModel.showCelebration = false
-            appModel.showLevelComplete = true
+            withAnimation {
+                appModel.showLevelComplete = true
+            }
         }
     }
 }

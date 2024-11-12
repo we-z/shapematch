@@ -390,7 +390,9 @@ class AppModel: ObservableObject {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
                 if showGame == true && !showLevelComplete && isWinningGrid(grid: grid) {
-                    showLevelComplete = true
+                    withAnimation {
+                        showLevelComplete = true
+                    }
                 }
             }
             if userPersistedData.level == 6 {
