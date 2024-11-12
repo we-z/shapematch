@@ -30,7 +30,7 @@ struct GameView: View {
                         HStack {
                             Text("🙋‍♂️")
                                 .bold()
-                                .font(.system(size: deviceWidth / 12))
+                                .font(.system(size: idiom == .pad ? deviceWidth / 21 : deviceWidth / 12))
                                 .customTextStroke()
                                 .fixedSize()
                                 .padding(.leading)
@@ -38,20 +38,15 @@ struct GameView: View {
                             Spacer()
                             Text("Level: \(userPersistedData.level)")
                                 .bold()
-                                .font(.system(size: deviceWidth/12))
+                                .font(.system(size: idiom == .pad ? deviceWidth / 15 : deviceWidth/12))
                                 .customTextStroke(width: 2.1)
                                 .fixedSize()
                             Spacer()
                             if idiom == .pad {
                                 HStack {
-                                    Text("Moves:")
+                                    Text("Moves: \(appModel.swipesLeft)")
                                         .bold()
-                                        .font(.system(size: deviceWidth/12))
-                                        .customTextStroke(width: 2.1)
-                                        .fixedSize()
-                                    Text(" \(appModel.swipesLeft)")
-                                        .bold()
-                                        .font(.system(size: deviceWidth/12))
+                                        .font(.system(size: idiom == .pad ? deviceWidth / 15 : deviceWidth/12))
                                         .customTextStroke(width: 2.1)
                                         .fixedSize()
                                 }
@@ -65,12 +60,13 @@ struct GameView: View {
                             } label: {
                                 Text("🙋‍♂️")
                                     .bold()
-                                    .font(.system(size: deviceWidth / 12))
+                                    .font(.system(size: idiom == .pad ? deviceWidth / 21 : deviceWidth / 12))
                                     .customTextStroke()
                                     .fixedSize()
                                     .padding(.trailing)
                             }
                         }
+                        .padding(.horizontal, idiom == .pad ? 30 : 0)
                         Spacer()
                         if idiom != .pad {
                             Text("Moves:")
@@ -105,12 +101,13 @@ struct GameView: View {
                         .cornerRadius(30)
                         .overlay {
                             RoundedRectangle(cornerRadius: 30)
-                                .stroke(Color.yellow, lineWidth: idiom == .pad ? 11 : 9)
+                                .stroke(Color.yellow, lineWidth: idiom == .pad ? 15 : 9)
                                 .padding(1)
                                 .shadow(color: .blue, radius: 6)
                         }
                         .shadow(color: .blue, radius: 6)
                         .padding()
+                        .padding(idiom == .pad ? 30 : 0)
                     VStack {
                         ForEach(0..<appModel.grid.count, id: \.self) { row in
                             HStack {
@@ -157,7 +154,7 @@ struct GameView: View {
                             }
                         }
                     }
-                    .scaleEffect(idiom == .pad ? 1.2 : 1)
+                    .scaleEffect(idiom == .pad ? 1.1 : 1)
                     if userPersistedData.level == 1 && !appModel.showLevelComplete && !appModel.showCelebration {
                         HandSwipeView()
                             .fixedSize()
