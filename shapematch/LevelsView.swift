@@ -135,18 +135,14 @@ struct LevelsView: View {
                     }
                     Spacer()
                     Button {
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                            if userPersistedData.level != userPersistedData.highestLevel {
-                                userPersistedData.level = userPersistedData.highestLevel
-                                appModel.setupLevel()
-                            }
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
-                                withAnimation {
-                                    appModel.showGame = true
-                                }
-//                                appModel.showNewLevelAnimation = true
-//                            }
-//                        }
+                        if userPersistedData.level != userPersistedData.highestLevel {
+                            userPersistedData.level = userPersistedData.highestLevel
+                            appModel.setupLevel()
+                            appModel.showNewLevelAnimation = true
+                        }
+                        withAnimation {
+                            appModel.showGame = true
+                        }
                     } label: {
                         HStack{
                             Spacer()

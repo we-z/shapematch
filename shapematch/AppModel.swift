@@ -372,6 +372,9 @@ class AppModel: ObservableObject {
     
     func checkWinCondition() {
         if isWinningGrid(grid: grid) {
+            DispatchQueue.main.async { [self] in
+                showCelebration = true
+            }
             self.showSetupSwaps = false
             userPersistedData.firstGamePlayed = true
             // 1335, 1114
@@ -382,8 +385,8 @@ class AppModel: ObservableObject {
                 userPersistedData.highestLevel += 1
             }
             updateStars()
-            DispatchQueue.main.async { [self] in
-                showCelebration = true
+            if userPersistedData.level == userPersistedData.highestLevel {
+                userPersistedData.highestLevel += 1
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
                 if showGame == true && !showLevelComplete && isWinningGrid(grid: grid) {

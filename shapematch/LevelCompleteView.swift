@@ -53,21 +53,19 @@ struct LevelCompleteView: View {
     func continueNextLevel() {
         leftScreen = true
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
-            withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+        DispatchQueue.main.async { [self] in
+            withAnimation() {
                 animateAwayButtonsAndBanner()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-                    appModel.showLevelComplete = false
-                    userPersistedData.level += 1
-                    appModel.setupLevel()
-                    appModel.showNewLevelAnimation = true
-                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                self.appModel.showLevelComplete = false
+                self.appModel.showGame = false
             }
         }
     }
     
     func rewardGem() {
-        withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 21.0, initialVelocity: 0.0)) {
+        withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 27.0, initialVelocity: 0.0)) {
             gemYoffset = -(deviceWidth / 2)
         }
         if userPersistedData.hapticsOn {
@@ -114,44 +112,46 @@ struct LevelCompleteView: View {
                     .fixedSize()
                     .scaleEffect(0.75)
                 Text("💎")
-                    .font(.system(size: idiom == .pad ?  deviceWidth / 6 : deviceWidth / 3))
+                    .font(.system(size: idiom == .pad ?  deviceWidth / 6 : deviceWidth / 4))
                     .customTextStroke(width: 4)
                     
             }
             .scaleEffect(gemScale)
             .offset(x: gemXoffset, y: gemYoffset)
             VStack{
-                HStack {
-                    Button {
-                        appModel.showGemMenu = true
-                    } label: {
-                        HStack{
-                            Text("💎 \(userPersistedData.gemBalance)")
-                                .bold()
-                                .font(.system(size: deviceWidth/15))
-                                .lineLimit(1)
-                                .customTextStroke(width: 1.8)
-                                .fixedSize()
-                                .padding(.horizontal, idiom == .pad ? 30 : 21)
-                            
+                
+                    HStack {
+                        Button {
+                            appModel.showGemMenu = true
+                        } label: {
+                            HStack{
+                                Text("💎 \(userPersistedData.gemBalance)")
+                                    .bold()
+                                    .font(.system(size: deviceWidth/15))
+                                    .lineLimit(1)
+                                    .customTextStroke(width: 1.8)
+                                    .fixedSize()
+                                    .padding(.horizontal, idiom == .pad ? 30 : 21)
+                                
+                            }
+                            .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
+                            .background{
+                                LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                            }
+                            .cornerRadius(idiom == .pad ? 30 : 15)
+                            .overlay{
+                                RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
+                                    .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                    .padding(1)
+                            }
+                            .padding(3)
+                            .padding(.horizontal, idiom == .pad ? 30 : 15)
+//                            .opacity(appModel.shouldRewardGem ? 1 : 0)
                         }
-                        .frame(height: idiom == .pad ? deviceWidth/9 : deviceWidth/7)
-                        .background{
-                            LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                        }
-                        .cornerRadius(idiom == .pad ? 30 : 15)
-                        .overlay{
-                            RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
-                                .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                .padding(1)
-                        }
-                        .padding(3)
-                        .padding(.horizontal, idiom == .pad ? 30 : 15)
+                        .buttonStyle(.roundedAndShadow6)
+                        Spacer()
                     }
-                    .buttonStyle(.roundedAndShadow6)
-                    Spacer()
-                }
-                .offset(y: bannerOffset)
+                    .offset(y: bannerOffset)
                 Spacer()
                 
                 VStack{
@@ -197,6 +197,7 @@ struct LevelCompleteView: View {
                             if show1Star {
                                 Text("⭐️")
                                     .customTextStroke(width: 2.7)
+                                    .shadow(color: .yellow, radius: 3)
                                     .scaleEffect(star1Size)
                                     .rotationEffect(.degrees((star1Size - 1) * 300))
                             }
@@ -208,6 +209,7 @@ struct LevelCompleteView: View {
                             if show2Stars {
                                 Text("⭐️")
                                     .customTextStroke(width: 2.7)
+                                    .shadow(color: .yellow, radius: 3)
                                     .scaleEffect(star2Size)
                                     .rotationEffect(.degrees((star2Size - 1) * 300))
                             }
@@ -221,6 +223,7 @@ struct LevelCompleteView: View {
                             if show3Stars {
                                 Text("⭐️")
                                     .customTextStroke(width: 2.7)
+                                    .shadow(color: .yellow, radius: 3)
                                     .scaleEffect(star3Size)
                                     .rotationEffect(.degrees((star3Size - 1) * 300))
                             }
@@ -253,13 +256,14 @@ struct LevelCompleteView: View {
                                 .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                 .padding(1)
                         }
-                        .padding(idiom == .pad ? 60 : 39)
+                        .padding(idiom == .pad ? 60 : 42)
                         
                     }
                     .buttonStyle(.roundedAndShadow6)
+                    .shadow(color: .green, radius: 6)
                 }
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.blue, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 0.6))
+                    LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
                 .cornerRadius(39)
                 .overlay {
