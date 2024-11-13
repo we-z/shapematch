@@ -60,6 +60,8 @@ struct LevelCompleteView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
                 self.appModel.showLevelComplete = false
                 self.appModel.showGame = false
+                userPersistedData.level = userPersistedData.highestLevel
+                appModel.setupLevel()
             }
         }
     }

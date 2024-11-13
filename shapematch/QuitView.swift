@@ -27,7 +27,12 @@ struct QuitView: View {
                 appModel.showQuitView = false
                 appModel.showGame = false
             }
-            appModel.resetLevel()
+            if userPersistedData.level != userPersistedData.highestLevel {
+                userPersistedData.level = userPersistedData.highestLevel
+                appModel.setupLevel()
+            } else {
+                appModel.resetLevel()
+            }
         }
     }
     
