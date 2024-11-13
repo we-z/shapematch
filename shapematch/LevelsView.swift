@@ -105,11 +105,6 @@ struct LevelsView: View {
                         proxy.scrollTo(userPersistedData.level, anchor: .center)
                         self.scrollProxy = proxy
                     }
-                    .onChange(of: appModel.showGame) { showGame in
-                        if showGame == false {
-                            proxy.scrollTo(userPersistedData.level, anchor: .center)
-                        }
-                    }
                     .frame(width: deviceWidth)
                 }
                 VStack {

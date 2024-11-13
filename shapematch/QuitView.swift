@@ -23,7 +23,12 @@ struct QuitView: View {
             }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
-            withAnimation() {
+            if userPersistedData.level == userPersistedData.highestLevel {
+                withAnimation() {
+                    appModel.showQuitView = false
+                    appModel.showGame = false
+                }
+            } else {
                 appModel.showQuitView = false
                 appModel.showGame = false
             }
