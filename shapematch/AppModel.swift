@@ -782,7 +782,9 @@ class AppModel: ObservableObject {
         swapsMade = []
         undosLeft = 3
         if startGrid.isEmpty {
-            grid = generateTargetGrid(from: shapes, with: swapsNeeded)
+            DispatchQueue.global(qos: .userInitiated).async { [self] in
+                grid = generateTargetGrid(from: shapes, with: swapsNeeded)
+            }
         } else {
             grid = startGrid
         }

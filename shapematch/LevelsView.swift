@@ -91,8 +91,14 @@ struct LevelsView: View {
                                         } else {
                                             appModel.previewLevel = level
                                             (appModel.previewMoves, appModel.previewShapes) = appModel.determineLevelSettings(level: level)
-                                            appModel.previewGrid = appModel.generateTargetGrid(from: appModel.previewShapes, with: appModel.previewMoves)
-                                            appModel.showLevelDetails = true
+                                            // Run generateTargetGrid in the background
+                                            DispatchQueue.global(qos: .userInitiated).async {
+                                                let newGrid = self.appModel.generateTargetGrid(from: self.appModel.previewShapes, with: self.appModel.previewMoves)
+                                                DispatchQueue.main.async {
+                                                    self.appModel.previewGrid = newGrid
+                                                    self.appModel.showLevelDetails = true
+                                                }
+                                            }
                                         }
                                         if userPersistedData.hapticsOn {
                                             impactLight.impactOccurred()
