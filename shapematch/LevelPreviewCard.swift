@@ -80,16 +80,6 @@ struct LevelPreviewCard: View {
                 Spacer()
                 ZStack {
                     VStack(spacing: 0){
-                        Capsule()
-                            .overlay {
-                                ZStack{
-                                    Color.teal
-                                }
-                            }
-                            .frame(width: 45, height: 9)
-                            .cornerRadius(15)
-                            .padding()
-                            .customTextStroke()
                         HStack {
                             Spacer()
                             Text("Level: \(appModel.previewLevel)")
@@ -106,6 +96,7 @@ struct LevelPreviewCard: View {
                                 .customTextStroke(width: 1.5)
                             Spacer()
                         }
+                        .padding(.top)
                         VStack{
                             VStack{
                                 ForEach(0..<appModel.previewShapes.count, id: \.self) { row in
@@ -161,26 +152,30 @@ struct LevelPreviewCard: View {
                                         .padding(1)
                                 }
                                 .padding()
-                                .padding(idiom == .pad ? 30 : 0)
+                                .padding(idiom == .pad ? 30 : 15)
                                 
                             }
                             .buttonStyle(.roundedAndShadow6)
+                            .shadow(color: .green, radius: 6)
                         }
                     }
                 }
                 .padding()
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.blue, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
-                .cornerRadius(30)
+                .cornerRadius(39)
                 .overlay{
                     RoundedRectangle(cornerRadius: 30)
-                        .stroke(Color.black, lineWidth: 9)
-                        .padding(1)
+                        .stroke(Color.yellow, lineWidth: 9)
+                        .padding()
+                        .shadow(radius: 3)
                 }
+                .shadow(radius: 3)
                 .padding()
 //                .scaleEffect(idiom == .pad ? 0.6 : 1)
                 .offset(y: cardOffset)
+                .shadow(color: .blue, radius: 6)
                 .onAppear{
                     DispatchQueue.main.async {
                         cardOffset = deviceHeight
