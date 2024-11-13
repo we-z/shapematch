@@ -152,7 +152,7 @@ struct LevelPreviewCard: View {
                                         .padding(1)
                                 }
                                 .padding()
-                                .padding(idiom == .pad ? 30 : 15)
+                                .padding(idiom == .pad ? 30 : 0)
                                 
                             }
                             .buttonStyle(.roundedAndShadow6)
@@ -167,15 +167,15 @@ struct LevelPreviewCard: View {
                 .cornerRadius(39)
                 .overlay{
                     RoundedRectangle(cornerRadius: 30)
-                        .stroke(Color.yellow, lineWidth: 9)
-                        .padding()
+                        .stroke(Color.blue, lineWidth: 9)
+//                        .padding()
                         .shadow(radius: 3)
                 }
                 .shadow(radius: 3)
                 .padding()
 //                .scaleEffect(idiom == .pad ? 0.6 : 1)
                 .offset(y: cardOffset)
-                .shadow(color: .blue, radius: 6)
+                .shadow( radius: 6)
                 .onAppear{
                     DispatchQueue.main.async {
                         cardOffset = deviceHeight
