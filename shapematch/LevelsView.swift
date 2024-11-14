@@ -128,6 +128,21 @@ struct LevelsView: View {
                 VStack {
                     HomeButtonsView()
                     HStack{
+                        Button {
+                            if userPersistedData.hapticsOn {
+                                impactLight.impactOccurred()
+                            }
+                            withAnimation {
+                                appModel.showSkinsMenu = true
+                            }
+                        } label: {
+                            Text("🛍️")
+                                .bold()
+                                .font(.system(size: idiom == .pad ? deviceWidth / 15 : deviceWidth / 9))
+                                .customTextStroke()
+                                .fixedSize()
+                                
+                        }
                         Spacer()
                         Button {
                             if userPersistedData.hapticsOn {
@@ -139,13 +154,14 @@ struct LevelsView: View {
                         } label: {
                             Text("⬆️")
                                 .bold()
-                                .font(.system(size: idiom == .pad ? deviceWidth / 15 : deviceWidth / 12))
+                                .font(.system(size: idiom == .pad ? deviceWidth / 15 : deviceWidth / 9))
                                 .customTextStroke()
                                 .fixedSize()
-                                .padding()
-                                .padding(idiom == .pad ? 30 : 0)
+                                
                         }
                     }
+                    .padding()
+                    .padding(idiom == .pad ? 30 : 0)
                     Spacer()
                     Button {
                         play()

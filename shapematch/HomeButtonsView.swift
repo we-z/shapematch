@@ -44,17 +44,14 @@ struct HomeButtonsView: View {
 
             ZStack{
                 Button {
-                    withAnimation {
-                        appModel.showSkinsMenu = true
-                    }
+                    
                 } label: {
                     HStack{
                         Spacer()
-                        Text("🛍️")
+                        Text("❤️ 5")
                             .bold()
-                            .customTextStroke(width: 1.2)
-                            .font(.system(size: deviceWidth/21))
-                            .scaleEffect(idiom == .pad ? 1 : 1.3)
+                            .customTextStroke(width: 1.8)
+                            .font(.system(size: deviceWidth/15))
                             .fixedSize()
                         Spacer()
                         
