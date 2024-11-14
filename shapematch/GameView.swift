@@ -28,13 +28,20 @@ struct GameView: View {
                         .padding(.vertical, idiom == .pad ? 21 : 3)
                         Spacer()
                         HStack {
-                            Text("🙋‍♂️")
-                                .bold()
-                                .font(.system(size: idiom == .pad ? deviceWidth / 21 : deviceWidth / 12))
-                                .customTextStroke()
-                                .fixedSize()
-                                .padding(.leading)
-                                .opacity(0)
+                            Button {
+                                if userPersistedData.hapticsOn {
+                                    impactLight.impactOccurred()
+                                }
+                                withAnimation {
+                                    appModel.showSkinsMenu = true
+                                }
+                            } label: {
+                                Text("🛍️")
+                                    .bold()
+                                    .font(.system(size: idiom == .pad ? deviceWidth / 21 : deviceWidth / 12))
+                                    .customTextStroke()
+                                    .fixedSize()
+                            }
                             Spacer()
                             Text("Level: \(userPersistedData.level)")
                                 .bold()
@@ -63,10 +70,9 @@ struct GameView: View {
                                     .font(.system(size: idiom == .pad ? deviceWidth / 21 : deviceWidth / 12))
                                     .customTextStroke()
                                     .fixedSize()
-                                    .padding(.trailing)
                             }
                         }
-                        .padding(.horizontal, idiom == .pad ? 30 : 0)
+                        .padding(.horizontal, idiom == .pad ? 30 : 21)
                         Spacer()
                         if idiom != .pad {
                             Text("Moves:")
