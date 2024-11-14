@@ -41,6 +41,19 @@ struct LevelsView: View {
         system.sizeVariation = 0.5
         return system
     }
+    
+    func play() {
+        if userPersistedData.level != userPersistedData.highestLevel {
+            userPersistedData.level = userPersistedData.highestLevel
+            appModel.setupLevel()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+            withAnimation {
+                appModel.showNewLevelAnimation = true
+                appModel.showGame = true
+            }
+        }
+    }
 
     var body: some View {
         ZStack {
@@ -135,14 +148,7 @@ struct LevelsView: View {
                     }
                     Spacer()
                     Button {
-                        if userPersistedData.level != userPersistedData.highestLevel {
-                            userPersistedData.level = userPersistedData.highestLevel
-                            appModel.setupLevel()
-                        }
-                        withAnimation {
-                            appModel.showNewLevelAnimation = true
-                            appModel.showGame = true
-                        }
+                        play()
                     } label: {
                         HStack{
                             Spacer()
