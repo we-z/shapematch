@@ -90,13 +90,16 @@ struct QuitView: View {
                                .padding(.top)
                        }
                    }
-                   .padding(.horizontal, 30)
-                   .padding()
+                   .padding(.horizontal, 36)
+                   .padding(.top)
                     Text("💔")
                         .font(.system(size: deviceWidth / 4))
                         .customTextStroke(width: 2.7)
-                    
-                    .padding(1)
+                    Text("You will lose a life!")
+                        .bold()
+                        .font(.system(size: deviceWidth / 15))
+                        .customTextStroke(width: 1.8)
+                        .fixedSize()
                     Button {
                         quit()
                     } label: {
@@ -119,7 +122,7 @@ struct QuitView: View {
                                 .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                 .padding(1)
                         }
-                        .padding(idiom == .pad ? 60 : 45)
+                        .padding([.horizontal, .bottom], idiom == .pad ? 60 : 45)
                         
                     }
                     .buttonStyle(.roundedAndShadow6)
