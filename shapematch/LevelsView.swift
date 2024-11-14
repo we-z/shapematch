@@ -138,7 +138,7 @@ struct LevelsView: View {
                         } label: {
                             Text("🛍️")
                                 .bold()
-                                .font(.system(size: idiom == .pad ? deviceWidth / 15 : deviceWidth / 9))
+                                .font(.system(size: idiom == .pad ? deviceWidth / 15 : deviceWidth / 10))
                                 .customTextStroke()
                                 .fixedSize()
                                 
@@ -154,13 +154,13 @@ struct LevelsView: View {
                         } label: {
                             Text("⬆️")
                                 .bold()
-                                .font(.system(size: idiom == .pad ? deviceWidth / 15 : deviceWidth / 9))
+                                .font(.system(size: idiom == .pad ? deviceWidth / 15 : deviceWidth / 10))
                                 .customTextStroke()
                                 .fixedSize()
                                 
                         }
                     }
-                    .padding()
+                    .padding(21)
                     .padding(idiom == .pad ? 30 : 0)
                     Spacer()
                     Button {

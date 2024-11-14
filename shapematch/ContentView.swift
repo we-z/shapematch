@@ -25,7 +25,7 @@ struct ContentView: View {
                 LevelsView()
             }
             GameView()
-                .offset(x: appModel.showGame == true ? 0 : deviceWidth)
+                .offset(x: appModel.showGame ? 0 : deviceWidth)
             SkinsMenuView()
                 .offset(x: appModel.showSkinsMenu ? 0 : deviceWidth)
             if appModel.showQuitView {

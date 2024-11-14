@@ -13,38 +13,7 @@ struct SkinsMenuView: View {
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         VStack{
-            HStack {
-                Button{
-                        withAnimation {
-                            appModel.showSkinsMenu = false
-                        }
-                } label: {
-                    HStack{
-                        Text("⬅️")
-                            .bold()
-                            .italic()
-                            .customTextStroke(width: 1.2)
-                            .fixedSize()
-                            .font(.system(size: deviceWidth/21))
-                            .scaleEffect(idiom == .pad ? 1 : 1.2)
-                            .padding(.horizontal, idiom == .pad ? 60 : 39)
-                            .padding(.vertical, idiom == .pad ? 21 : 15)
-                    }
-                    .background{
-                        LinearGradient(gradient: Gradient(colors: [.red, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                    }
-                    .cornerRadius(idiom == .pad ? 30 : 15)
-                    .overlay{
-                        RoundedRectangle(cornerRadius: idiom == .pad ? 30 : 15)
-                            .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                            .padding(1)
-                    }
-                    .padding(3)
-                }
-                .buttonStyle(.roundedAndShadow6)
-                .padding([.leading], idiom == .pad ? 30 : 15)
-                Spacer()
-            }
+            SkinsButtonsView()
             HStack {
                 Text("Customize!")
 //                    .italic()
@@ -70,9 +39,9 @@ struct SkinsMenuView: View {
                                     userPersistedData.purchasedSkins += ","
                                     userPersistedData.chosenSkin = skinPack.SkinID
                                 } else {
-                                    withAnimation {
-                                        appModel.showSkinsMenu = false
-                                    }
+//                                    withAnimation {
+//                                        appModel.showSkinsMenu = false
+//                                    }
                                     appModel.showGemMenu = true
                                 }
                             }
