@@ -145,6 +145,11 @@ class AppModel: ObservableObject {
         }
     }
     
+    func checkLivesRenewal() {
+        
+        
+    }
+    
     func handleSwipeGesture(gesture: DragGesture.Value, row: Int, col: Int) {
         print("handleSwipeGesture called")
         let direction: SwipeDirection
