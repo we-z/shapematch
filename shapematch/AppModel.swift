@@ -145,9 +145,10 @@ class AppModel: ObservableObject {
         }
     }
     
+    let openToday = NSDate().formatted
+    
     func checkLivesRenewal() {
-        
-        
+        print("openToday: \(openToday)")
     }
     
     func handleSwipeGesture(gesture: DragGesture.Value, row: Int, col: Int) {

@@ -374,3 +374,11 @@ struct Position: Hashable, Comparable {
         }
     }
 }
+
+extension NSDate {
+    var formatted: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy HH:mm:ss" // Includes hours, minutes, and seconds
+        return formatter.string(from: self as Date)
+    }
+}
