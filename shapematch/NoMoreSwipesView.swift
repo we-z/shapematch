@@ -141,8 +141,13 @@ struct NoMoreSwipesView: View {
                         .buttonStyle(.roundedAndShadow6)
                     HStack(spacing: idiom == .pad ? 18 : 9){
                         Button {
-                            animateAwayButtonsAndBanner()
-                            resetGame()
+                            if userPersistedData.lives > 0 {
+                                animateAwayButtonsAndBanner()
+                                userPersistedData.lives -= 1
+                                resetGame()
+                            } else {
+                                appModel.showLivesView = true
+                            }
                         } label: {
                             HStack{
                                 Text("Try Again")
