@@ -45,6 +45,7 @@ struct RotatingSunView: View {
                 }
             }
         }
+        .allowsHitTesting(false)
     }
 }
 
