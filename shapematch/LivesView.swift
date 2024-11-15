@@ -64,13 +64,18 @@ struct LivesView: View {
             VStack {
                 Spacer()
                 VStack{
-                   Text("Lives!")
-                       .bold()
-                       .font(.system(size: deviceWidth / 9))
-                       .customTextStroke(width: 2.7)
-                       .fixedSize()
-                       .padding(.top, 30)
-                       .zIndex(1)
+                    HStack{
+                        Spacer()
+                        Text(userPersistedData.lives < 5 ? "More Lives!" : "Lives Full!")
+                            .bold()
+                            .font(.system(size: deviceWidth / 9))
+                            .customTextStroke(width: 2.7)
+                            .fixedSize()
+                            .padding(.top, 30)
+                            
+                        Spacer()
+                    }
+                    .zIndex(1)
                     ZStack {
                         RotatingSunView()
                             .frame(width: 1, height: 1)
@@ -82,59 +87,65 @@ struct LivesView: View {
                             .font(.system(size: deviceWidth / 9))
                             .customTextStroke(width: 2.7)
                     }
+                    .padding(.bottom, userPersistedData.lives < 5 ? 0 : 75)
                     .zIndex(0)
-                    Text("Time to next life:")
-                        .bold()
-                        .font(.system(size: deviceWidth / 15))
-                        .customTextStroke(width: 1.8)
-                        .fixedSize()
-                    Text(timeLeft)
-                        .bold()
-                        .font(.system(size: deviceWidth / 15))
-                        .customTextStroke(width: 1.8)
-                        .fixedSize()
-                        .padding(12)
-                        .frame(width: deviceWidth / 2)
-                        .background{
-                            Color.white.opacity(0.3)
-                        }
-                        .cornerRadius(18)
-                        .padding(.bottom)
-                    Button {
-                        refill()
-                    } label: {
-                        HStack{
-                            Text("Refill")
+                    if userPersistedData.lives < 5 {
+                        Group {
+                            
+                            Text("Time to next life:")
                                 .bold()
-                                .font(.system(size: deviceWidth/9))
+                                .font(.system(size: deviceWidth / 15))
+                                .customTextStroke(width: 1.8)
                                 .fixedSize()
-                                .customTextStroke(width: 2.4)
-                            Spacer()
-                            Text("💎 9")
+                            Text(timeLeft)
                                 .bold()
-                                .font(.system(size: deviceWidth/9))
+                                .font(.system(size: deviceWidth / 15))
+                                .customTextStroke(width: 1.8)
                                 .fixedSize()
-                                .customTextStroke(width: 2.4)
+                                .padding(12)
+                                .frame(width: deviceWidth / 2)
+                                .background{
+                                    Color.white.opacity(0.3)
+                                }
+                                .cornerRadius(18)
+                                .padding(.bottom)
+                            Button {
+                                refill()
+                            } label: {
+                                HStack{
+                                    Text("Refill")
+                                        .bold()
+                                        .font(.system(size: deviceWidth/9))
+                                        .fixedSize()
+                                        .customTextStroke(width: 2.4)
+                                    Spacer()
+                                    Text("💎 9")
+                                        .bold()
+                                        .font(.system(size: deviceWidth/9))
+                                        .fixedSize()
+                                        .customTextStroke(width: 2.4)
+                                }
+                                .padding()
+                                .padding(.horizontal)
+                                .background{
+                                    LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                                }
+                                .cornerRadius(27)
+                                .overlay{
+                                    RoundedRectangle(cornerRadius: 27)
+                                        .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
+                                        .padding(1)
+                                }
+                                .padding([.horizontal, .bottom], idiom == .pad ? 60 : 45)
+                                
+                            }
+                            .buttonStyle(.roundedAndShadow6)
+                            .shadow(color: .blue, radius: 6)
                         }
-                        .padding()
-                        .padding(.horizontal)
-                        .background{
-                            LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                        }
-                        .cornerRadius(27)
-                        .overlay{
-                            RoundedRectangle(cornerRadius: 27)
-                                .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
-                                .padding(1)
-                        }
-                        .padding([.horizontal, .bottom], idiom == .pad ? 60 : 45)
-                        
                     }
-                    .buttonStyle(.roundedAndShadow6)
-                    .shadow(color: .blue, radius: 6)
                 }
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    LinearGradient(gradient: Gradient(colors: [.red, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
                 .cornerRadius(39)
                 .overlay {
