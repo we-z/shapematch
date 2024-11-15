@@ -24,7 +24,7 @@ struct LivesView: View {
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
             withAnimation() {
-                appModel.showQuitView = false
+                appModel.showNewLivesView = false
                 appModel.showGame = false
             }
             appModel.resetLevel()
@@ -49,7 +49,7 @@ struct LivesView: View {
             }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
-            appModel.showQuitView = false
+            appModel.showNewLivesView = false
         }
     }
     

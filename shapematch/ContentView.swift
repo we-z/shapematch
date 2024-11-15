@@ -37,6 +37,9 @@ struct ContentView: View {
             if appModel.showNewLevelAnimation {
                 NewLevelAnimation()
             }
+            if appModel.showNewLivesView {
+                LivesView()
+            }
             if appModel.showLevelComplete {
                 LevelCompleteView()
             }

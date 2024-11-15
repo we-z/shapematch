@@ -44,7 +44,7 @@ struct HomeButtonsView: View {
 
             ZStack{
                 Button {
-                    
+                    appModel.showNewLivesView = true
                 } label: {
                     HStack{
                         Spacer()

@@ -72,6 +72,7 @@ class AppModel: ObservableObject {
     @Published var showLevelComplete = false
     @Published var showCelebration = false
     @Published var showNewLevelAnimation = false
+    @Published var showNewLivesView = false
     @Published var shouldRewardGem = false
     @Published var showLevelDetails = false
     @Published var showSkinsMenu = false
