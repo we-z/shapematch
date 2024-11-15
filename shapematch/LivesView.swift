@@ -11,9 +11,9 @@ struct LivesView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @State var cardOffset = deviceWidth * 2
-    @State var timeLeft = ""
+    @State var timeLeft = "⏰ 27:00"
     
-    func quit() {
+    func refill() {
         DispatchQueue.main.async { [self] in
             withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
                 animateAwayCard()
@@ -23,11 +23,12 @@ struct LivesView: View {
             }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
+            userPersistedData.lives = 5
+            userPersistedData.decrementBalance(amount: 9)
             withAnimation() {
-                appModel.showNewLivesView = false
+                appModel.showLivesView = false
                 appModel.showGame = false
             }
-            appModel.resetLevel()
         }
     }
     
@@ -49,7 +50,7 @@ struct LivesView: View {
             }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
-            appModel.showNewLivesView = false
+            appModel.showLivesView = false
         }
     }
     
@@ -63,41 +64,22 @@ struct LivesView: View {
             VStack {
                 Spacer()
                 VStack{
-                    HStack{
-//                       Text("❌")
-//                           .bold()
-//                           .font(.system(size: deviceWidth / 12))
-//                           .customTextStroke(width: 1.5)
-//                           .fixedSize()
-//                           .padding(.top)
-//                           .opacity(0)
-                       Spacer()
-                       Text("More Lives!")
-                           .bold()
-                           .font(.system(size: deviceWidth / 12))
-                           .customTextStroke(width: 2.1)
-                           .fixedSize()
-                           .padding(.top)
-                       Spacer()
-//                       Button {
-//                           cancel()
-//                       } label: {
-//                           Text("❌")
-//                               .bold()
-//                               .font(.system(size: deviceWidth / 12))
-//                               .customTextStroke(width: 1.8)
-//                               .fixedSize()
-//                               .padding(.top)
-//                       }
-                   }
-                   .padding(.horizontal, 36)
-                   .padding(.top)
-                   .zIndex(1)
+                   Text("Lives!")
+                       .bold()
+                       .font(.system(size: deviceWidth / 9))
+                       .customTextStroke(width: 2.7)
+                       .fixedSize()
+                       .padding(.top, 30)
+                       .zIndex(1)
                     ZStack {
                         RotatingSunView()
                             .frame(width: 1, height: 1)
                         Text("❤️")
                             .font(.system(size: deviceWidth / 4))
+                            .customTextStroke(width: 2.7)
+                        Text("\(userPersistedData.lives)")
+                            .bold()
+                            .font(.system(size: deviceWidth / 9))
                             .customTextStroke(width: 2.7)
                     }
                     .zIndex(0)
@@ -111,8 +93,15 @@ struct LivesView: View {
                         .font(.system(size: deviceWidth / 15))
                         .customTextStroke(width: 1.8)
                         .fixedSize()
+                        .padding(12)
+                        .frame(width: deviceWidth / 2)
+                        .background{
+                            Color.white.opacity(0.3)
+                        }
+                        .cornerRadius(18)
+                        .padding(.bottom)
                     Button {
-                        quit()
+                        refill()
                     } label: {
                         HStack{
                             Text("Refill")
@@ -145,7 +134,7 @@ struct LivesView: View {
                     .shadow(color: .blue, radius: 6)
                 }
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.red, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
                 .cornerRadius(39)
                 .overlay {

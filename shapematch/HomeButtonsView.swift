@@ -44,11 +44,11 @@ struct HomeButtonsView: View {
 
             ZStack{
                 Button {
-                    appModel.showNewLivesView = true
+                    appModel.showLivesView = true
                 } label: {
                     HStack{
                         Spacer()
-                        Text("❤️ 5")
+                        Text("❤️ \(userPersistedData.lives)")
                             .bold()
                             .customTextStroke(width: 1.8)
                             .font(.system(size: deviceWidth/15))
