@@ -110,7 +110,12 @@ struct LivesView: View {
                                 .cornerRadius(18)
                                 .padding(.bottom)
                             Button {
-                                refill()
+                                if userPersistedData.gemBalance >= 9 {
+                                    refill()
+                                } else {
+                                    cancel()
+                                    appModel.showGemMenu = true
+                                }
                             } label: {
                                 HStack{
                                     Text("Refill")
