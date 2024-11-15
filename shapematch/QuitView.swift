@@ -27,6 +27,7 @@ struct QuitView: View {
                 appModel.showQuitView = false
                 appModel.showGame = false
             }
+            userPersistedData.lives -= 1
             appModel.resetLevel()
         }
     }
