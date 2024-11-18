@@ -160,11 +160,23 @@ class AppModel: ObservableObject {
             return "Invalid date"
         }
 
+        // Calculate the elapsed time
         if nextLifeIncrementDate <= now {
-            if userPersistedData.lives < 5 {
-                userPersistedData.lives += 1
-                let futureDate = Calendar.current.date(byAdding: .minute, value: 30, to: Date())!
-                userPersistedData.updateNextLifeIncrement(date: ISO8601DateFormatter().string(from: futureDate))
+            let elapsedTime = now.timeIntervalSince(nextLifeIncrementDate)
+            let additionalLives = Int(elapsedTime / (30 * 60)) // 30 minutes in seconds
+            
+            if additionalLives > 0 {
+                // Add lives, but cap at 5
+                userPersistedData.lives = min(userPersistedData.lives + additionalLives, 5)
+                
+                // Update nextLifeIncrement to reflect the remaining time after lives have been added
+                if userPersistedData.lives < 5 {
+                    let remainingTime = elapsedTime.truncatingRemainder(dividingBy: 30 * 60)
+                    let futureDate = now.addingTimeInterval(30 * 60 - remainingTime)
+                    userPersistedData.updateNextLifeIncrement(date: ISO8601DateFormatter().string(from: futureDate))
+                } else {
+                    userPersistedData.updateNextLifeIncrement(date: "")
+                }
             }
         }
 
@@ -181,10 +193,12 @@ class AppModel: ObservableObject {
         }
         
         if minutes > 0 {
-            formattedTime += "\(minutes):"
+            formattedTime += "\(minutes)"
+        } else {
+            formattedTime += "00"
         }
         
-        formattedTime += "\(seconds % 60)"
+        formattedTime += " : \(seconds % 60)"
         
         return formattedTime
     }
