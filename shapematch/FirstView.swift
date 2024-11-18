@@ -56,7 +56,6 @@ struct FirstView: View {
                     .bold()
                     .font(.system(size: deviceWidth / 9))
                     .customTextStroke()
-                    .shadow(color: .blue, radius: 4)
                 Spacer()
                 Spacer()
                 Spacer()
@@ -64,7 +63,6 @@ struct FirstView: View {
                     .bold()
                     .font(.system(size: deviceWidth / 15))
                     .customTextStroke()
-                    .shadow(color: .blue, radius: 3)
                 Spacer()
             }
                 

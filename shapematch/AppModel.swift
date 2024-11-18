@@ -157,6 +157,7 @@ class AppModel: ObservableObject {
     
     func formatTimeUntilNextRefill() -> String {
         let now = Date()
+//        print("date stored: \(userPersistedData.nextLifeIncrement)")
         guard let nextLifeIncrementDate = ISO8601DateFormatter().date(from: userPersistedData.nextLifeIncrement) else {
             return "Invalid date"
         }
@@ -209,7 +210,7 @@ class AppModel: ObservableObject {
     }
     
     func loseLife() {
-        if userPersistedData.level == 5 {
+        if userPersistedData.lives == 5 {
             
             let futureDate = Calendar.current.date(byAdding: .minute, value: 30, to: Date())!
             userPersistedData.updateNextLifeIncrement(date: ISO8601DateFormatter().string(from: futureDate))
