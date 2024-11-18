@@ -11,7 +11,45 @@ struct LivesView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @State var cardOffset = deviceWidth * 2
-    @State var timeLeft = "⏰ 27:00"
+    @State var timeLeft = ""
+    
+    func startTimer() {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            timeLeft = formatTimeUntilNextRefill()
+        }
+    }
+    
+    func formatTimeUntilNextRefill() -> String {
+            let now = Date()
+            guard let nextLifeIncrementDate = ISO8601DateFormatter().date(from: userPersistedData.nextLifeIncrement) else {
+                return "Invalid date"
+            }
+
+            if nextLifeIncrementDate <= now {
+                return "Ready!"
+            }
+
+            let duration = nextLifeIncrementDate.timeIntervalSince(now)
+            
+            let seconds = Int(duration)
+            let minutes = (seconds / 60) % 60
+            let hours = (seconds / 3600)
+            
+            var formattedTime = ""
+            
+            if hours > 0 {
+                formattedTime += "\(hours)"
+            }
+            
+            if minutes > 0 {
+                formattedTime += "\(minutes):"
+            }
+            
+            formattedTime += "\(seconds % 60)"
+            
+            return formattedTime
+        }
+
     
     func refill() {
         DispatchQueue.main.async { [self] in
@@ -150,7 +188,7 @@ struct LivesView: View {
                     }
                 }
                 .background{
-                    LinearGradient(gradient: Gradient(colors: [.red, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    LinearGradient(gradient: Gradient(colors: [.red, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                 }
                 .cornerRadius(39)
                 .overlay {
@@ -187,6 +225,7 @@ struct LivesView: View {
             }
         }
         .onAppear {
+            startTimer()
             DispatchQueue.main.async { [self] in
                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 24.0, initialVelocity: 0.0)) {
                     cardOffset = 0

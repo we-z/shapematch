@@ -12,23 +12,24 @@ struct TempView: View {
     @State private var animate = false
 
         var body: some View {
-            VStack {
-                Text("Smooth SwiftUI Animation")
-                    .font(.title)
-                    .padding()
+            VStack(spacing: 12) {
 
-                RoundedRectangle(cornerRadius: 25)
-                    .fill(animate ? Color.green : Color.blue)
-                    .frame(width: animate ? 200 : 100, height: animate ? 200 : 100)
-                    .animation(
-                        .linear(duration: 0.6), // Longer, smooth animation to reduce perceived lag
-                        value: animate
-                    )
-
-                Button("Toggle Animation") {
-                    animate.toggle()
-                }
-                .padding()
+                Text("🌁 🌉 San Francisco")
+                    .italic()
+                    .bold()
+                    .customTextStroke(width: 1.8)
+                    .font(.system(size: 36))
+                
+                Text("🏎️ 💨 Swifty Fridays")
+                    .italic()
+                    .bold()
+                    .customTextStroke(width: 1.8)
+                    .font(.system(size: 36))
+            }
+            .padding(30)
+            .padding(.vertical, 100)
+            .background{
+                LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
             }
         }
     

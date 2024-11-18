@@ -143,7 +143,7 @@ struct NoMoreSwipesView: View {
                         Button {
                             if userPersistedData.lives > 0 {
                                 animateAwayButtonsAndBanner()
-                                userPersistedData.lives -= 1
+                                appModel.loseLife()
                                 resetGame()
                             } else {
                                 appModel.showLivesView = true

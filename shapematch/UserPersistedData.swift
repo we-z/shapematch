@@ -22,7 +22,7 @@ class UserPersistedData: ObservableObject {
     @CloudStorage("gridData") var gridData: String = ""
     @CloudStorage("highestLevel") var highestLevel: Int = 1
     @CloudStorage("lives") var lives: Int = 5
-    @CloudStorage("lastLifeIncrement") var lastLifeIncrement: String = ""
+    @CloudStorage("nextLifeIncrement") var nextLifeIncrement: String = ""
     @CloudStorage(wrappedValue: "{}", "levelStars") var levelStarsString: String
     @CloudStorage("level") var level: Int = 1 {
         didSet {
@@ -32,8 +32,8 @@ class UserPersistedData: ObservableObject {
         }
     }
     
-    func updateLastLifeIncrement(date: String) {
-        lastLifeIncrement = date
+    func updateNextLifeIncrement(date: String) {
+        nextLifeIncrement = date
     }
     
     var levelStars: [String: Int] {
