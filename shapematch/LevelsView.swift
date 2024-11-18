@@ -58,6 +58,11 @@ struct LevelsView: View {
     var body: some View {
         ZStack {
             ZStack {
+                LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
+                    .ignoresSafeArea()
+                RotatingSunView()
+                    .frame(width: 1, height: 1)
+                    .offset(y: -(deviceHeight / 1.8))
                 VortexView(createBubbles()) {
                     Circle()
                         .fill(.blue)

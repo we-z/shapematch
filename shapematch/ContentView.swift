@@ -15,14 +15,7 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
-                .ignoresSafeArea()
-            ZStack {
-                RotatingSunView()
-                    .frame(width: 1, height: 1)
-                    .offset(y: -(deviceHeight / 1.8))
-                LevelsView()
-            }
+            LevelsView()
             GameView()
                 .offset(x: appModel.showGame ? 0 : deviceWidth)
             SkinsMenuView()
@@ -58,8 +51,8 @@ struct ContentView: View {
             if appModel.showSettings {
                 SettingsView()
             }
-            FirstView()
-                .opacity(appModel.showLoading ? 1 : 0)
+//            FirstView()
+//                .opacity(appModel.showLoading ? 1 : 0)
         }
         .onAppear {
             appModel.initialGrid = appModel.grid
