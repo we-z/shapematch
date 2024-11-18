@@ -180,27 +180,26 @@ class AppModel: ObservableObject {
             }
         }
 
-        let duration = nextLifeIncrementDate.timeIntervalSince(now)
-        
-        let seconds = Int(duration)
-        let minutes = (seconds / 60) % 60
-        let hours = (seconds / 3600)
-        
-        var formattedTime = "⏰ "
-        
-        if hours > 0 {
-            formattedTime += "\(hours)"
-        }
-        
-        if minutes > 0 {
-            formattedTime += "\(minutes)"
-        } else {
-            formattedTime += "00"
-        }
-        
-        formattedTime += " : \(seconds % 60)"
-        
-        return formattedTime
+        // Calculate time remaining for the next life
+            guard let updatedNextLifeIncrementDate = ISO8601DateFormatter().date(from: userPersistedData.nextLifeIncrement) else {
+                return userPersistedData.lives == 5 ? "Full!" : "Calculating..."
+            }
+
+            let duration = updatedNextLifeIncrementDate.timeIntervalSince(now)
+
+            let seconds = Int(duration)
+            let minutes = (seconds / 60) % 60
+            let hours = (seconds / 3600)
+
+            var formattedTime = "⏰ "
+
+            if hours > 0 {
+                formattedTime += "\(hours):"
+            }
+
+            formattedTime += String(format: "%02d:%02d", minutes, seconds % 60)
+
+            return formattedTime
     }
     
     func checkLivesRenewal() {
