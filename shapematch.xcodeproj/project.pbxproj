@@ -38,6 +38,7 @@
 		7677131E2C86DCF800C9E2C9 /* iconview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7677131D2C86DCF800C9E2C9 /* iconview.swift */; };
 		76960A6D2CE654AB006D3BBD /* SkinsButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76960A6C2CE654AB006D3BBD /* SkinsButtonsView.swift */; };
 		76960A6F2CE6713F006D3BBD /* LivesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76960A6E2CE6713F006D3BBD /* LivesView.swift */; };
+		76960A712CEAEC22006D3BBD /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76960A702CEAEC22006D3BBD /* FirstView.swift */; };
 		76ADAF042C76A92C006B2844 /* OverlaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ADAF032C76A92B006B2844 /* OverlaysView.swift */; };
 		76B285122CCC12E900A45ADB /* SkinsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B285112CCC12E900A45ADB /* SkinsMenuView.swift */; };
 		76B774072C968EF70053B72B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B774062C968EF70053B72B /* Extensions.swift */; };
@@ -94,6 +95,7 @@
 		7677131D2C86DCF800C9E2C9 /* iconview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iconview.swift; sourceTree = "<group>"; };
 		76960A6C2CE654AB006D3BBD /* SkinsButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinsButtonsView.swift; sourceTree = "<group>"; };
 		76960A6E2CE6713F006D3BBD /* LivesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivesView.swift; sourceTree = "<group>"; };
+		76960A702CEAEC22006D3BBD /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
 		76ADAF032C76A92B006B2844 /* OverlaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlaysView.swift; sourceTree = "<group>"; };
 		76B285112CCC12E900A45ADB /* SkinsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinsMenuView.swift; sourceTree = "<group>"; };
 		76B774062C968EF70053B72B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				76B7740E2C9AA20F0053B72B /* ButtonsView.swift */,
 				7639F9602C713D8100E2B371 /* ContentView.swift */,
 				76B774062C968EF70053B72B /* Extensions.swift */,
+				76960A702CEAEC22006D3BBD /* FirstView.swift */,
 				765836532CDFFDE100CE44F2 /* GameView.swift */,
 				761A44452C7841A30017B53B /* GemMenuView.swift */,
 				7669B74D2CB96BC400EBA34F /* HomeButtonsView.swift */,
@@ -346,6 +349,7 @@
 				761107422CB9C4B6001C2607 /* SettingsView.swift in Sources */,
 				76960A6F2CE6713F006D3BBD /* LivesView.swift in Sources */,
 				76B774092C96B6F50053B72B /* NotificationManager.swift in Sources */,
+				76960A712CEAEC22006D3BBD /* FirstView.swift in Sources */,
 				7639F95F2C713D8100E2B371 /* shapematchApp.swift in Sources */,
 				7630FCC42CCA8820001586E7 /* LevelPreviewCard.swift in Sources */,
 				76D489792CA72557004060FA /* BackgroundView.swift in Sources */,

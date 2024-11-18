@@ -29,23 +29,6 @@ struct iconview: View {
             RotatingSunView()
                 .frame(width: 1, height: 1)
             ZStack{
-//                Rectangle()
-//                    .overlay{
-//                        ZStack{
-//                            Color.white
-//                            Color.blue.opacity(0.6)
-//                        }
-//                    }
-//                    .aspectRatio(1.0, contentMode: .fit)
-//                    .cornerRadius(30)
-//                    .overlay {
-//                        RoundedRectangle(cornerRadius: 30)
-//                            .stroke(Color.yellow, lineWidth: idiom == .pad ? 11 : 9)
-//                            .padding(1)
-//                            .shadow(radius: 3)
-//                    }
-//                    .shadow(radius: 3)
-//                    .padding()
                 
                 VStack {
                     ForEach(0..<appModel.grid.count, id: \.self) { row in
