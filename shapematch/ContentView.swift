@@ -11,7 +11,6 @@ struct ContentView: View {
     @StateObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @ObservedObject var notificationManager = NotificationManager()
-    
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
@@ -59,12 +58,18 @@ struct ContentView: View {
             if appModel.showSettings {
                 SettingsView()
             }
-
+            FirstView()
+                .opacity(appModel.showLoading ? 1 : 0)
         }
         .onAppear {
             appModel.initialGrid = appModel.grid
             self.notificationManager.registerLocal()
             appModel.checkLivesRenewal()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [self] in
+                withAnimation(.linear) {
+                    appModel.showLoading = false
+                }
+            }
             // 1054, 1109, 1054, 1057, 1114, 1115, 1159, 1166, 1300, 1308, 1313, 1322, 1334
 //            AudioServicesPlaySystemSound(1105)
         }

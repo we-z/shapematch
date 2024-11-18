@@ -61,7 +61,9 @@ class AudioManager: ObservableObject {
                 self.musicPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: music))
                 self.musicPlayer.numberOfLoops = -1
                 self.musicPlayer.enableRate = true
-                self.musicPlayer.play()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [self] in
+                    self.musicPlayer.play()
+                }
             } catch {
                 print("Error playing audio: \(error)")
             }

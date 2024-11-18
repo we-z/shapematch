@@ -29,27 +29,44 @@ struct FirstView: View {
                 startRadius: 0,
                 endRadius: deviceWidth
             )
-            RotatingSunView()
+            SunView()
                 .frame(width: 1, height: 1)
                 .scaleEffect(1.2)
-            ZStack{
-                
-                VStack {
-                    ForEach(0..<grid.count, id: \.self) { row in
-                        HStack {
-                            ForEach(0..<grid.count, id: \.self) { column in
-                                ShapesView(shapeType: grid[row][column], skinType: "shapes")
-                                    .frame(width: deviceWidth / 4.0, height: deviceWidth / 4.0)
-                                    .scaleEffect(1.1)
-                                    .scaleEffect(idiom == .pad ? 0.54 : 1)
-
+            
+                ZStack{
+                    VStack {
+                        ForEach(0..<grid.count, id: \.self) { row in
+                            HStack {
+                                ForEach(0..<grid.count, id: \.self) { column in
+                                    ShapesView(shapeType: grid[row][column], skinType: "shapes")
+                                        .frame(width: deviceWidth / 4.0, height: deviceWidth / 4.0)
+                                        .scaleEffect(1.1)
+                                        .scaleEffect(idiom == .pad ? 0.54 : 1)
+                                    
+                                }
                             }
                         }
                     }
+                    .scaleEffect(idiom == .pad ? 1.2 : 1)
                 }
-                .scaleEffect(idiom == .pad ? 1.2 : 1)
+                .frame(width: deviceWidth)
+            VStack {
+                Spacer()
+                Text("Shape Shuffle")
+                    .bold()
+                    .font(.system(size: deviceWidth / 9))
+                    .customTextStroke()
+                    .shadow(color: .blue, radius: 4)
+                Spacer()
+                Spacer()
+                Spacer()
+                Text("Loading...")
+                    .bold()
+                    .font(.system(size: deviceWidth / 15))
+                    .customTextStroke()
+                    .shadow(color: .blue, radius: 3)
+                Spacer()
             }
-            .frame(width: deviceWidth)
                 
         }
         .ignoresSafeArea()

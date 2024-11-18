@@ -15,19 +15,15 @@ struct LivesView: View {
     
     func refill() {
         DispatchQueue.main.async { [self] in
-            withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 18.0, initialVelocity: 0.0)) {
+            if userPersistedData.gemBalance >= 9 {
                 animateAwayCard()
-                if userPersistedData.hapticsOn {
-                    impactLight.impactOccurred()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
+                    appModel.showLivesView = false
+                    userPersistedData.lives = 5
+                    userPersistedData.decrementBalance(amount: 9)
                 }
-            }
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
-            userPersistedData.lives = 5
-            userPersistedData.decrementBalance(amount: 9)
-            withAnimation() {
-                appModel.showLivesView = false
-                appModel.showGame = false
+            } else {
+                appModel.showGemMenu = true
             }
         }
     }
