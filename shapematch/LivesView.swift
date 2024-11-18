@@ -78,6 +78,7 @@ struct LivesView: View {
                         Text("❤️")
                             .font(.system(size: deviceWidth / 4))
                             .customTextStroke(width: 2.7)
+                            .scaleEffect(1.2)
                         Text("\(userPersistedData.lives)")
                             .bold()
                             .font(.system(size: deviceWidth / 9))
@@ -131,9 +132,9 @@ struct LivesView: View {
                                 .background{
                                     LinearGradient(gradient: Gradient(colors: [.teal, .blue]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                                 }
-                                .cornerRadius(27)
+                                .cornerRadius(21)
                                 .overlay{
-                                    RoundedRectangle(cornerRadius: 27)
+                                    RoundedRectangle(cornerRadius: 21)
                                         .stroke(Color.black, lineWidth: idiom == .pad ? 9 : 5)
                                         .padding(1)
                                 }
@@ -151,10 +152,10 @@ struct LivesView: View {
                 .cornerRadius(39)
                 .overlay {
                     RoundedRectangle(cornerRadius: 30)
-                        .stroke(Color.yellow, lineWidth: idiom == .pad ? 12 : 9)
+                        .stroke(Color.red, lineWidth: idiom == .pad ? 12 : 9)
                         .padding(1)
                         .shadow(radius: 3)
-                        .padding()
+//                        .padding()
                 }
                 .shadow(radius: 3)
                 .padding()
