@@ -51,8 +51,8 @@ struct ContentView: View {
             if appModel.showSettings {
                 SettingsView()
             }
-//            FirstView()
-//                .opacity(appModel.showLoading ? 1 : 0)
+            FirstView()
+                .opacity(appModel.showLoading ? 1 : 0)
         }
         .onAppear {
             appModel.initialGrid = appModel.grid

@@ -165,8 +165,8 @@ class AppModel: ObservableObject {
         // Calculate the elapsed time
         if nextLifeIncrementDate <= now {
             let elapsedTime = now.timeIntervalSince(nextLifeIncrementDate)
-            let additionalLives = Int(elapsedTime / (30 * 60)) // 30 minutes in seconds
-            
+            let additionalLives = Int(elapsedTime / (30 * 60)) + 1 // 30 minutes in seconds
+            print("additionalLives: \(additionalLives)")
             if additionalLives > 0 {
                 // Add lives, but cap at 5
                 userPersistedData.lives = min(userPersistedData.lives + additionalLives, 5)
