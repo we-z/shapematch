@@ -161,7 +161,11 @@ class AppModel: ObservableObject {
         }
 
         if nextLifeIncrementDate <= now {
-            return "Ready!"
+            if userPersistedData.lives < 5 {
+                userPersistedData.lives += 1
+                let futureDate = Calendar.current.date(byAdding: .minute, value: 30, to: Date())!
+                userPersistedData.updateNextLifeIncrement(date: ISO8601DateFormatter().string(from: futureDate))
+            }
         }
 
         let duration = nextLifeIncrementDate.timeIntervalSince(now)
