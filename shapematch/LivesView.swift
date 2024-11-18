@@ -11,44 +11,6 @@ struct LivesView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @State var cardOffset = deviceWidth * 2
-    @State var timeLeft = ""
-    
-    func startTimer() {
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            timeLeft = formatTimeUntilNextRefill()
-        }
-    }
-    
-    func formatTimeUntilNextRefill() -> String {
-        let now = Date()
-        guard let nextLifeIncrementDate = ISO8601DateFormatter().date(from: userPersistedData.nextLifeIncrement) else {
-            return "Invalid date"
-        }
-
-        if nextLifeIncrementDate <= now {
-            return "Ready!"
-        }
-
-        let duration = nextLifeIncrementDate.timeIntervalSince(now)
-        
-        let seconds = Int(duration)
-        let minutes = (seconds / 60) % 60
-        let hours = (seconds / 3600)
-        
-        var formattedTime = "⏰"
-        
-        if hours > 0 {
-            formattedTime += "\(hours)"
-        }
-        
-        if minutes > 0 {
-            formattedTime += "\(minutes):"
-        }
-        
-        formattedTime += "\(seconds % 60)"
-        
-        return formattedTime
-    }
 
     
     func refill() {
@@ -135,7 +97,7 @@ struct LivesView: View {
                                 .font(.system(size: deviceWidth / 15))
                                 .customTextStroke(width: 1.8)
                                 .fixedSize()
-                            Text(timeLeft)
+                            Text(appModel.timeTillNextHeart)
                                 .bold()
                                 .font(.system(size: deviceWidth / 15))
                                 .customTextStroke(width: 1.8)
@@ -225,7 +187,6 @@ struct LivesView: View {
             }
         }
         .onAppear {
-            startTimer()
             DispatchQueue.main.async { [self] in
                 withAnimation(.interpolatingSpring(mass: 3.0, stiffness: 100.0, damping: 24.0, initialVelocity: 0.0)) {
                     cardOffset = 0

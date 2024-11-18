@@ -85,6 +85,7 @@ class AppModel: ObservableObject {
     @Published var amountBought = 5
     @Published var rowsAligned = 0
     @Published var columnsAligned = 0
+    @Published var timeTillNextHeart = ""
     @Published var shapes: [ShapeType] = [] {
         didSet {
             self.winningGrids = generateAllWinningGrids(shapes: shapes)
@@ -120,7 +121,7 @@ class AppModel: ObservableObject {
 //        selectedTab = userPersistedData.selectedTab
         // Initialize the grids from persisted data
         (swapsNeeded, shapes) = determineLevelSettings(level: userPersistedData.level)
-        
+        startTimer()
         grid = userPersistedData.grid.isEmpty ? [
             [.triangle, .triangle, .triangle],
             [.circle, .square, .circle],
@@ -147,7 +148,42 @@ class AppModel: ObservableObject {
     
     let currentTime = NSDate().formatted
     
+    func startTimer() {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] _ in
+            timeTillNextHeart = formatTimeUntilNextRefill()
+        }
+    }
     
+    func formatTimeUntilNextRefill() -> String {
+        let now = Date()
+        guard let nextLifeIncrementDate = ISO8601DateFormatter().date(from: userPersistedData.nextLifeIncrement) else {
+            return "Invalid date"
+        }
+
+        if nextLifeIncrementDate <= now {
+            return "Ready!"
+        }
+
+        let duration = nextLifeIncrementDate.timeIntervalSince(now)
+        
+        let seconds = Int(duration)
+        let minutes = (seconds / 60) % 60
+        let hours = (seconds / 3600)
+        
+        var formattedTime = "⏰ "
+        
+        if hours > 0 {
+            formattedTime += "\(hours)"
+        }
+        
+        if minutes > 0 {
+            formattedTime += "\(minutes):"
+        }
+        
+        formattedTime += "\(seconds % 60)"
+        
+        return formattedTime
+    }
     
     func checkLivesRenewal() {
         print("currentTime: \(currentTime)")
