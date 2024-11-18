@@ -20,35 +20,35 @@ struct LivesView: View {
     }
     
     func formatTimeUntilNextRefill() -> String {
-            let now = Date()
-            guard let nextLifeIncrementDate = ISO8601DateFormatter().date(from: userPersistedData.nextLifeIncrement) else {
-                return "Invalid date"
-            }
-
-            if nextLifeIncrementDate <= now {
-                return "Ready!"
-            }
-
-            let duration = nextLifeIncrementDate.timeIntervalSince(now)
-            
-            let seconds = Int(duration)
-            let minutes = (seconds / 60) % 60
-            let hours = (seconds / 3600)
-            
-            var formattedTime = ""
-            
-            if hours > 0 {
-                formattedTime += "\(hours)"
-            }
-            
-            if minutes > 0 {
-                formattedTime += "\(minutes):"
-            }
-            
-            formattedTime += "\(seconds % 60)"
-            
-            return formattedTime
+        let now = Date()
+        guard let nextLifeIncrementDate = ISO8601DateFormatter().date(from: userPersistedData.nextLifeIncrement) else {
+            return "Invalid date"
         }
+
+        if nextLifeIncrementDate <= now {
+            return "Ready!"
+        }
+
+        let duration = nextLifeIncrementDate.timeIntervalSince(now)
+        
+        let seconds = Int(duration)
+        let minutes = (seconds / 60) % 60
+        let hours = (seconds / 3600)
+        
+        var formattedTime = "⏰"
+        
+        if hours > 0 {
+            formattedTime += "\(hours)"
+        }
+        
+        if minutes > 0 {
+            formattedTime += "\(minutes):"
+        }
+        
+        formattedTime += "\(seconds % 60)"
+        
+        return formattedTime
+    }
 
     
     func refill() {

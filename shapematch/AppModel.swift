@@ -151,13 +151,12 @@ class AppModel: ObservableObject {
     
     func checkLivesRenewal() {
         print("currentTime: \(currentTime)")
-        let futureDate = Calendar.current.date(byAdding: .minute, value: 30, to: Date())!
-        userPersistedData.updateNextLifeIncrement(date: ISO8601DateFormatter().string(from: futureDate))
-        print("next life increment: \(userPersistedData.nextLifeIncrement)")
+        
     }
     
     func loseLife() {
         if userPersistedData.level == 5 {
+            
             let futureDate = Calendar.current.date(byAdding: .minute, value: 30, to: Date())!
             userPersistedData.updateNextLifeIncrement(date: ISO8601DateFormatter().string(from: futureDate))
 
