@@ -13,7 +13,7 @@ struct MovesView: View {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     var body: some View {
         ZStack{
-            Color.gray.opacity(0.5)
+            Color.black.opacity(0.6)
                 .ignoresSafeArea()
                 .onTapGesture {
                     DispatchQueue.main.async { [self] in
@@ -110,9 +110,11 @@ struct MovesView: View {
                 .cornerRadius(30)
                 .overlay{
                     RoundedRectangle(cornerRadius: 30)
-                        .stroke(Color.black, lineWidth: 9)
+                        .stroke(Color.orange, lineWidth: 9)
                         .padding(1)
+                        .shadow(radius: 6)
                 }
+                .shadow(radius: 6)
                 .offset(y: cardOffset)
                 .gesture(
                     DragGesture()
