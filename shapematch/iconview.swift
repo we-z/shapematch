@@ -14,7 +14,6 @@ struct iconview: View {
     @State var playingShapeScale = 1.0
     @State var tappedRow = 0
     @State var tappedColumn = 0
-    @Environment(\.scenePhase) var scenePhase
     var body: some View {
         ZStack{
 //            LinearGradient(gradient: Gradient(colors: [.teal, .blue, .purple]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
@@ -86,11 +85,6 @@ struct iconview: View {
             .zIndex(0)
             .scaleEffect(0.85)
                 
-        }
-        .onChange(of: scenePhase) { newScenePhase in
-            DispatchQueue.main.async { [self] in
-                self.playingShapeScale = 1.0
-            }
         }
     }
 }

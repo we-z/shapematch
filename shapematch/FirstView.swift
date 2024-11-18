@@ -12,7 +12,6 @@ struct FirstView: View {
     @State var playingShapeScale = 1.0
     @State var tappedRow = 0
     @State var tappedColumn = 0
-    @Environment(\.scenePhase) var scenePhase
     
     let grid: [[ShapeType]] = [
         [.triangle, .triangle, .triangle],

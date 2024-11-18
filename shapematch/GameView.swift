@@ -189,6 +189,13 @@ struct GameView: View {
                 self.playingShapeScale = 1.0
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willTerminateNotification), perform: { output in
+                // Code to run on will terminate
+            print("terminating")
+            if appModel.showGame {
+                appModel.loseLife()
+            }
+        })
     }
 }
 
