@@ -333,7 +333,6 @@ struct CelebrateLineup: View {
 struct CelebrateGems: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @State var bannerOffset = -(deviceWidth/2)
-    @StateObject var audioController = AudioManager.sharedAudioManager
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     
     // State to hold the current message
@@ -360,7 +359,6 @@ struct CelebrateGems: View {
                             .tag("circle")
                     }
                     .onChange(of: appModel.boughtGems) { newValue in
-                        audioController.musicPlayer.setVolume(0, fadeDuration: 1)
                         AudioServicesPlaySystemSound(1335)
                         DispatchQueue.main.async {
                             showMessage = true
@@ -385,7 +383,6 @@ struct CelebrateGems: View {
                                     bannerOffset = -(deviceWidth/2)
                                 }
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
-                                    audioController.musicPlayer.setVolume(1, fadeDuration: 1)
                                     showMessage = false
                                 }
                             }

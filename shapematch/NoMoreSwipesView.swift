@@ -146,6 +146,8 @@ struct NoMoreSwipesView: View {
                                 appModel.loseLife()
                                 resetGame()
                             } else {
+                                appModel.showNoMoreSwipesView = false
+                                appModel.showGame = false
                                 appModel.showLivesView = true
                             }
                         } label: {
