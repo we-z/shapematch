@@ -80,6 +80,7 @@ struct LivesView: View {
                             .customTextStroke(width: 2.7)
                             .scaleEffect(1.2)
                         Text("\(userPersistedData.lives)")
+                            .italic()
                             .bold()
                             .font(.system(size: deviceWidth / 9))
                             .customTextStroke(width: 2.7)
