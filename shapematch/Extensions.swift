@@ -382,3 +382,10 @@ extension NSDate {
         return formatter.string(from: self as Date)
     }
 }
+
+extension Date {
+    func iso8601String() -> String {
+        let formatter = ISO8601DateFormatter()
+        return formatter.string(from: self)
+    }
+}

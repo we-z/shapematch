@@ -165,43 +165,46 @@ class AppModel: ObservableObject {
         // Calculate the elapsed time
         if nextLifeIncrementDate <= now {
             let elapsedTime = now.timeIntervalSince(nextLifeIncrementDate)
-            let additionalLives = Int(elapsedTime / (30 * 60)) + 1 // 30 minutes in seconds
-            print("additionalLives: \(additionalLives)")
+            
+            // Calculate additional lives directly
+            let additionalLives = Int(elapsedTime / 1800) + 1 // 30 minutes in seconds
             if additionalLives > 0 {
-                // Add lives, but cap at 5
+                // Update the number of lives, capped at 5
                 userPersistedData.lives = min(userPersistedData.lives + additionalLives, 5)
                 
-                // Update nextLifeIncrement to reflect the remaining time after lives have been added
+                // Update nextLifeIncrementDate if lives are not maxed out
                 if userPersistedData.lives < 5 {
-                    let remainingTime = elapsedTime.truncatingRemainder(dividingBy: 30 * 60)
-                    let futureDate = now.addingTimeInterval(30 * 60 - remainingTime)
-                    userPersistedData.updateNextLifeIncrement(date: ISO8601DateFormatter().string(from: futureDate))
+                    let remainingTime = elapsedTime.truncatingRemainder(dividingBy: 1800)
+                    userPersistedData.updateNextLifeIncrement(
+                        date: now.addingTimeInterval(1800 - remainingTime).iso8601String()
+                    )
                 } else {
                     userPersistedData.updateNextLifeIncrement(date: "")
                 }
             }
         }
 
+
         // Calculate time remaining for the next life
-            guard let updatedNextLifeIncrementDate = ISO8601DateFormatter().date(from: userPersistedData.nextLifeIncrement) else {
-                return userPersistedData.lives == 5 ? "Full!" : "Calculating..."
-            }
+        guard let updatedNextLifeIncrementDate = ISO8601DateFormatter().date(from: userPersistedData.nextLifeIncrement) else {
+            return userPersistedData.lives == 5 ? "Full!" : "Calculating..."
+        }
 
-            let duration = updatedNextLifeIncrementDate.timeIntervalSince(now)
+        let duration = updatedNextLifeIncrementDate.timeIntervalSince(now)
 
-            let seconds = Int(duration)
-            let minutes = (seconds / 60) % 60
-            let hours = (seconds / 3600)
+        let seconds = Int(duration)
+        let minutes = (seconds / 60) % 60
+        let hours = (seconds / 3600)
 
-            var formattedTime = "⏰ "
+        var formattedTime = "⏰ "
 
-            if hours > 0 {
-                formattedTime += "\(hours):"
-            }
+        if hours > 0 {
+            formattedTime += "\(hours):"
+        }
 
-            formattedTime += String(format: "%02d:%02d", minutes, seconds % 60)
+        formattedTime += String(format: "%02d:%02d", minutes, seconds % 60)
 
-            return formattedTime
+        return formattedTime
     }
     
     func checkLivesRenewal() {

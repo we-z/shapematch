@@ -30,14 +30,18 @@ struct LevelPreviewCard: View {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-            appModel.showLevelDetails = false
-            userPersistedData.level = appModel.previewLevel
-            appModel.setupLevel(startGrid: appModel.previewGrid)
-            withAnimation {
-                appModel.showGame = true
-                
+            if userPersistedData.lives <= 0 {
+                appModel.showLivesView = true
+            } else {
+                appModel.showLevelDetails = false
+                userPersistedData.level = appModel.previewLevel
+                appModel.setupLevel(startGrid: appModel.previewGrid)
+                withAnimation {
+                    appModel.showGame = true
+                    
+                }
+                appModel.showNewLevelAnimation = true
             }
-            appModel.showNewLevelAnimation = true
         }
     }
     

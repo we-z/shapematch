@@ -43,14 +43,18 @@ struct LevelsView: View {
     }
     
     func play() {
-        if userPersistedData.level != userPersistedData.highestLevel {
-            userPersistedData.level = userPersistedData.highestLevel
-            appModel.setupLevel()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-            withAnimation {
-                appModel.showNewLevelAnimation = true
-                appModel.showGame = true
+        if userPersistedData.lives <= 0 {
+            appModel.showLivesView = true
+        } else {
+            if userPersistedData.level != userPersistedData.highestLevel {
+                userPersistedData.level = userPersistedData.highestLevel
+                appModel.setupLevel()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                withAnimation {
+                    appModel.showNewLevelAnimation = true
+                    appModel.showGame = true
+                }
             }
         }
     }
