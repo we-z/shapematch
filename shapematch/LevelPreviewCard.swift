@@ -31,6 +31,7 @@ struct LevelPreviewCard: View {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
             if userPersistedData.lives <= 0 {
+                appModel.showLevelDetails = false
                 appModel.showLivesView = true
             } else {
                 appModel.showLevelDetails = false
