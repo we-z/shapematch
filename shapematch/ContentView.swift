@@ -57,7 +57,6 @@ struct ContentView: View {
         .onAppear {
             appModel.initialGrid = appModel.grid
             self.notificationManager.registerLocal()
-            appModel.checkLivesRenewal()
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [self] in
                 withAnimation(.linear) {
                     appModel.showLoading = false

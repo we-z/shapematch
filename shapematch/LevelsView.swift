@@ -67,28 +67,28 @@ struct LevelsView: View {
                 RotatingSunView()
                     .frame(width: 1, height: 1)
                     .offset(y: -(deviceHeight / 1.8))
-                VortexView(createBubbles()) {
-                    Circle()
-                        .fill(.blue)
-                        .blendMode(.plusLighter)
-                        .blur(radius: 0)
-                        .frame(width: 50)
-                        .padding(90)
-                        .tag("circle")
-                }
-                .rotationEffect(.degrees(180))
-                VortexView(createEmojis()) {
-                    ForEach(0...emojis.count - 1, id: \.self) { i in
-                        Text(emojis[i])
-                            .font(.system(size: idiom == .pad ? deviceWidth/8 : deviceWidth/4))
-                            .blur(radius: 0)
-                            .frame(width: 300, height: 300)
-                            .rotationEffect(.degrees(180))
-                            .tag(emojis[i])
-                    }
-                }
-                .rotationEffect(.degrees(180))
-                .opacity(0.3)
+//                VortexView(createBubbles()) {
+//                    Circle()
+//                        .fill(.blue)
+//                        .blendMode(.plusLighter)
+//                        .blur(radius: 0)
+//                        .frame(width: 50)
+//                        .padding(90)
+//                        .tag("circle")
+//                }
+//                .rotationEffect(.degrees(180))
+//                VortexView(createEmojis()) {
+//                    ForEach(0...emojis.count - 1, id: \.self) { i in
+//                        Text(emojis[i])
+//                            .font(.system(size: idiom == .pad ? deviceWidth/8 : deviceWidth/4))
+//                            .blur(radius: 0)
+//                            .frame(width: 300, height: 300)
+//                            .rotationEffect(.degrees(180))
+//                            .tag(emojis[i])
+//                    }
+//                }
+//                .rotationEffect(.degrees(180))
+//                .opacity(0.3)
                 
             }
             .ignoresSafeArea()
@@ -98,12 +98,12 @@ struct LevelsView: View {
                     ScrollView {
                         LazyVStack {
                             ForEach(1...9999, id: \.self) { level in
-                                LevelRow(level: level)
+                                LevelRow(level: level, highestLevel: userPersistedData.highestLevel, levelStars: userPersistedData.levelStars)
                                     .id(level)
                                     .padding(.top, level == 1 ? deviceHeight / 4 : 0)
                                     .opacity( level <= userPersistedData.highestLevel ? 1.0 : 0.4)
                                     .offset(x: sin(CGFloat(level) * .pi / 6) * (deviceWidth / 3))
-                                    .onTapGesture{
+                                    .onTapGesture {
                                         if level == 1 {
                                             withAnimation {
                                                 userPersistedData.level = 1
@@ -213,14 +213,15 @@ struct LevelsView: View {
 
 // LevelRow to display individual level information
 struct LevelRow: View {
-    @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     var level: Int
+    var highestLevel: Int
+    var levelStars: [String: Int]
 
     var body: some View {
         ZStack {
             VStack {
                 ZStack {
-                    if level == userPersistedData.highestLevel {
+                    if level == highestLevel {
                         RotatingSunView()
                             .frame(width: 1, height: 1)
                             .foregroundColor(.white)
@@ -229,7 +230,7 @@ struct LevelRow: View {
                     Circle()
                         .frame(width: idiom == .pad ? deviceWidth / 12 : deviceWidth / 7)
                         .overlay{
-                            if userPersistedData.levelStars[String(level)] ?? 0 > 2 {
+                            if levelStars[String(level)] ?? 0 > 2 {
                                 LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                                     .mask(Circle())
                             } else {
@@ -247,17 +248,17 @@ struct LevelRow: View {
                 }
                 
                 HStack {
-                    if level <= userPersistedData.highestLevel {
+                    if level <= highestLevel {
                         Text("⭐️")
                             .offset(y: -12)
                             .rotationEffect(.degrees(21))
-                            .opacity(userPersistedData.levelStars[String(level)] ?? 0 > 0 ? 1 : 0.3)
+                            .opacity(levelStars[String(level)] ?? 0 > 0 ? 1 : 0.3)
                         Text("⭐️")
-                            .opacity(userPersistedData.levelStars[String(level)] ?? 0 > 1 ? 1 : 0.3)
+                            .opacity(levelStars[String(level)] ?? 0 > 1 ? 1 : 0.3)
                         Text("⭐️")
                             .offset(y: -12)
                             .rotationEffect(.degrees(-21))
-                            .opacity(userPersistedData.levelStars[String(level)] ?? 0 > 2 ? 1 : 0.3)
+                            .opacity(levelStars[String(level)] ?? 0 > 2 ? 1 : 0.3)
                     }
                 }
                 .customTextStroke(width:1)
@@ -265,7 +266,7 @@ struct LevelRow: View {
                 .font(.system(size: idiom == .pad ? deviceWidth / 33 : deviceWidth / 21))
                 .frame(height: deviceWidth / 27)
             }
-            if userPersistedData.levelStars[String(level)] ?? 0 > 2 {
+            if levelStars[String(level)] ?? 0 > 2 {
                 Text("💎")
                     .customTextStroke(width:1.2)
                     .font(.system(size: idiom == .pad ? deviceWidth / 33 : deviceWidth / 18))

@@ -10,7 +10,6 @@ import SwiftUI
 struct SkinsMenuView: View {
     @ObservedObject private var appModel = AppModel.sharedAppModel
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
-    @Environment(\.dismiss) private var dismiss
     var body: some View {
         VStack{
             SkinsButtonsView()
@@ -28,20 +27,18 @@ struct SkinsMenuView: View {
                         let skinPack = appModel.skins[index]
                         Button {
                             if userPersistedData.hapticsOn {
-                                impactHeavy.impactOccurred()
+                                impactLight.impactOccurred()
                             }
                             if userPersistedData.purchasedSkins.contains(skinPack.SkinID) {
+                                print("Purcahsed")
                                 userPersistedData.chosenSkin = skinPack.SkinID
                             } else {
                                 if skinPack.cost <= userPersistedData.gemBalance {
                                     userPersistedData.decrementBalance(amount: skinPack.cost)
                                     userPersistedData.purchasedSkins += skinPack.SkinID
                                     userPersistedData.purchasedSkins += ","
-                                    userPersistedData.chosenSkin = skinPack.SkinID
+                                    userPersistedData.setSkin(skinID: skinPack.SkinID)
                                 } else {
-//                                    withAnimation {
-//                                        appModel.showSkinsMenu = false
-//                                    }
                                     appModel.showGemMenu = true
                                 }
                             }
@@ -100,9 +97,6 @@ struct SkinsMenuView: View {
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: UnitPoint(x: 0.5, y: 0), endPoint: UnitPoint(x: 0.5, y: 1))
                     .ignoresSafeArea()
-//                RotatingSunView()
-//                    .frame(width: 1, height: 1)
-//                    .offset(y: -(deviceHeight / 1.8))
             }
         }
     }

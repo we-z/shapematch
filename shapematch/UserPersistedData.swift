@@ -100,6 +100,10 @@ class UserPersistedData: ObservableObject {
         gemBalance -= amount
     }
     
+    func setSkin(skinID: String) {
+        chosenSkin = skinID
+    }
+    
 //    func updateLastLaunch(date: String) {
 //        lastLaunch = date
 //    }
