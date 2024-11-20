@@ -107,15 +107,101 @@ class AppModel: ObservableObject {
     @ObservedObject var userPersistedData = UserPersistedData.sharedUserPersistedData
     
     @Published var skins: [Skin] = [
-        Skin(SkinID: "shapes", cost: 0),
-        Skin(SkinID: "fruits", cost: 10),
-        Skin(SkinID: "animals", cost: 30),
-        Skin(SkinID: "sweets", cost: 50),
-        Skin(SkinID: "birds", cost: 80),
-        Skin(SkinID: "halloween", cost: 100)
-        // christmas: 🎄🎅❄️⛄️☕️
-        // birds: 🕊️🦜🦆🦩🦅
+        Skin(
+            SkinID: "shapes",
+            cost: 0,
+            symbols: [
+                .circle: "🔵", .square: "🟩", .triangle: "🔻", .star: "⭐️", .heart: "💜"
+            ],
+            scaleEffects: [
+                .circle: 1.5, .square: 1.5, .triangle: 2.4, .star: 1.7, .heart: 1.6
+            ],
+            strokeWidths: [
+                .circle: 2.1, .square: 2.1, .triangle: 1, .star: 2.1, .heart: 2.1
+            ]
+        ),
+        Skin(
+            SkinID: "fruits",
+            cost: 10,
+            symbols: [
+                .circle: "🍎", .square: "🍌", .triangle: "🍊", .star: "🍉", .heart: "🥭"
+            ],
+            scaleEffects: [
+                .circle: 1.5, .square: 1.5, .triangle: 1.5, .star: 1.5, .heart: 1.5
+            ],
+            strokeWidths: [
+                .circle: 1.8, .square: 1.8, .triangle: 1.8, .star: 1.8, .heart: 1.8
+            ]
+        ),
+        Skin(
+            SkinID: "animals",
+            cost: 30,
+            symbols: [
+                .circle: "🐶", .square: "🐱", .triangle: "🦊", .star: "🐵", .heart: "🦁"
+            ],
+            scaleEffects: [
+                .circle: 1.5, .square: 1.5, .triangle: 1.5, .star: 1.5, .heart: 1.5
+            ],
+            strokeWidths: [
+                .circle: 1.8, .square: 1.8, .triangle: 1.8, .star: 1.8, .heart: 1.8
+            ]
+        ),
+        Skin(
+            SkinID: "sweets",
+            cost: 50,
+            symbols: [
+                .circle: "🍬", .square: "🍭", .triangle: "🧁", .star: "🍩", .heart: "🍡"
+            ],
+            scaleEffects: [
+                .circle: 1.5, .square: 1.5, .triangle: 1.5, .star: 1.5, .heart: 1.5
+            ],
+            strokeWidths: [
+                .circle: 1.8, .square: 1.8, .triangle: 1.8, .star: 1.8, .heart: 1.8
+            ]
+        ),
+        Skin(
+            SkinID: "fish",
+            cost: 60,
+            symbols: [
+                .circle: "🐬", .square: "🐠", .triangle: "🐳", .star: "🐙", .heart: "🐡"
+            ],
+            scaleEffects: [
+                .circle: 1.5, .square: 1.5, .triangle: 1.5, .star: 1.5, .heart: 1.5
+            ],
+            strokeWidths: [
+                .circle: 1.8, .square: 1.8, .triangle: 1.8, .star: 1.8, .heart: 1.8
+            ]
+        ),
+        Skin(
+            SkinID: "birds",
+            cost: 80,
+            symbols: [
+                .circle: "🕊️", .square: "🦜", .triangle: "🦆", .star: "🦩", .heart: "🦅"
+            ],
+            scaleEffects: [
+                .circle: 1.5, .square: 1.5, .triangle: 1.5, .star: 1.5, .heart: 1.5
+            ],
+            strokeWidths: [
+                .circle: 1.8, .square: 1.8, .triangle: 1.8, .star: 1.8, .heart: 1.8
+            ]
+        ),
+        Skin(
+            SkinID: "halloween",
+            cost: 100,
+            symbols: [
+                .circle: "🎃", .square: "👻", .triangle: "🧛‍♂️", .star: "👹", .heart: "🩸"
+            ],
+            scaleEffects: [
+                .circle: 1.5, .square: 1.5, .triangle: 1.5, .star: 1.5, .heart: 1.5
+            ],
+            strokeWidths: [
+                .circle: 2.0, .square: 2.0, .triangle: 2.0, .star: 2.0, .heart: 2.0
+            ]
+        )
     ]
+
+
+        // christmas: 🎄🎅❄️⛄️☕️
         
     init() {
         

@@ -115,169 +115,27 @@ struct SkinsMenuView: View {
 struct ShapesView: View {
     let shapeType: ShapeType
     let skinType: String
-    var body: some View {
-        switch shapeType {
-            case .circle:
-                ZStack {
-                    switch skinType {
-                    case "fruits":
-                        Text("🍎")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "animals":
-                        Text("🐶")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "sweets":
-                        Text("🍬")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "halloween":
-                        Text("🎃")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "birds":
-                        Text("🕊️")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    default:
-                        Text("🔵")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    }
-                }
-                .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-                .font(.system(size: idiom == .pad ? 90 : 53))
-            case .square:
-                ZStack {
-                    switch skinType {
-                    case "fruits":
-                        Text("🍌")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "animals":
-                        Text("🐱")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "sweets":
-                        Text("🍭")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "halloween":
-                        Text("👻")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "birds":
-                        Text("🦜")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    default:
-                        Text("🟩")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    }
-                }
-                .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-                .font(.system(size: idiom == .pad ? 90 : 53))
-            case .triangle:
-                ZStack {
-                    switch skinType {
-                    case "fruits":
-                        Text("🍊")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "animals":
-                        Text("🦊")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "sweets":
-                        Text("🧁")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "halloween":
-                        Text("🧛‍♂️")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "birds":
-                        Text("🦆")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    default:
-                        Text("🔻")
-                            .customTextStroke(width: 1)
-                            .scaleEffect(2.4)
-                    }
-                }
-                .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-                .font(.system(size: idiom == .pad ? 90 : 53))
-                
-            case .star:
-                ZStack {
-                    switch skinType {
-                    case "fruits":
-                        Text("🍉")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "animals":
-                        Text("🐵")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "sweets":
-                        Text("🍩")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "halloween":
-                        Text("👹")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "birds":
-                        Text("🦩")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    default:
-                        Text("⭐️")
-                            .customTextStroke()
-                            .scaleEffect(1.7)
-                    }
-                }
-                .frame(width: deviceWidth / 6, height: deviceWidth / 6)
-                .font(.system(size: idiom == .pad ? 90 : 53))
 
-            case .heart:
-                ZStack {
-                    switch skinType {
-                    case "fruits":
-                        Text("🥭")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "animals":
-                        Text("🦁")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "sweets":
-                        Text("🍡")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "halloween":
-                        Text("🩸")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    case "birds":
-                        Text("🦅")
-                            .customTextStroke()
-                            .scaleEffect(1.5)
-                    default:
-                        Text("💜")
-                            .customTextStroke()
-                            .scaleEffect(1.6)
-                    }
-                    
-                }
+    var body: some View {
+        if let skin = AppModel.sharedAppModel.skins.first(where: { $0.SkinID == skinType }),
+           let symbol = skin.symbols[shapeType],
+           let scaleEffect = skin.scaleEffects[shapeType],
+           let strokeWidth = skin.strokeWidths[shapeType] {
+            Text(symbol)
+                .customTextStroke(width: strokeWidth)
+                .scaleEffect(scaleEffect)
+                .frame(width: deviceWidth / 6, height: deviceWidth / 6)
+                .font(.system(size: idiom == .pad ? 90 : 53))
+        } else {
+            Text("?") // Fallback for unknown skin or shape
+                .customTextStroke()
+                .scaleEffect(1.5)
                 .frame(width: deviceWidth / 6, height: deviceWidth / 6)
                 .font(.system(size: idiom == .pad ? 90 : 53))
         }
     }
 }
+
 
 enum ShapeType: Int, Identifiable, Equatable, CaseIterable {
     case circle, square, triangle, star, heart
@@ -294,14 +152,15 @@ enum SkinType: Int, Identifiable, Equatable, CaseIterable {
 struct Skin: Hashable {
     let SkinID: String
     let cost: Int
-    
+    let symbols: [ShapeType: String] // Symbols for each ShapeType
+    let scaleEffects: [ShapeType: CGFloat] // Scale effect for each ShapeType
+    let strokeWidths: [ShapeType: CGFloat] // Stroke width for each ShapeType
+
     func hash(into hasher: inout Hasher) {
-        // Implement a custom hash function that combines the hash values of properties that uniquely identify a character
         hasher.combine(SkinID)
     }
 
-    static func ==(lhs: Skin, rhs: Skin) -> Bool {
-        // Implement the equality operator to compare characters based on their unique identifier
+    static func == (lhs: Skin, rhs: Skin) -> Bool {
         return lhs.SkinID == rhs.SkinID
     }
 }
